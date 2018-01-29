@@ -1,0 +1,28 @@
+{
+  "name": "amodestlearningjourney",
+  "version": "0.1.0",
+  "description": "A Modest Learning Journey is a personal website that will serve as a code laboratory on which I, wauquier dot sebastien at gmail dot com, will publish my various tech projects. It may diverge and include other type of projects later on.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fellowseb/a-modest-learning-journey.git"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "codelab",
+    "portfolio"
+  ],
+  "author": "Sébastien Wauquier",
+  "maintainers": [
+    "wauquier.sebastien@gmail.com"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fellowseb/a-modest-learning-journey/issues"
+  },
+  "homepage": "https://github.com/fellowseb/a-modest-learning-journey#readme"
+}
