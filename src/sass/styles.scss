@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'alex_brushregular';
+    src: url('../fonts/alexbrush-regular.woff2?#iefix') format('woff2'),
+         url('../fonts/alexbrush-regular.woff') format('woff'),
+         url('../fonts/alexbrush-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body > header {
+    font: 4em "alex_brushregular";
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+    > span {
+        font-size: 0.5em;
+        position: relative;
+        left: -12em;
+        top: 1em;
+    }
+}
+
+article {
+    background-color: #ECDDC8;
+    float: left;
+    width: 45%;
+    margin: 10px;
+}
