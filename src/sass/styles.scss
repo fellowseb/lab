@@ -1,3 +1,14 @@
+//
+// Global styling
+//
+$backgroundColor: rgb(231, 230, 229);
+$fontColor: #333333;
+$darkBackgroundColor: rgb(117, 111, 105);
+$lightFontColor: #FEFEFE;
+$accentuationBgColor: #ed8c8c;
+$accentuationFontColor: #FEFEFE;
+$experimentBgColor: #f6cb47;
+
 @font-face {
     font-family: 'alex_brushregular';
     src: url('../fonts/alexbrush-regular.woff2?#iefix') format('woff2'),
@@ -10,77 +21,179 @@
 body {
     font-family: arial, sans-serif;
     line-height: 1.5;
-    background: rgba(117, 111, 105, 0.16862745098039217);
+    background: $backgroundColor;
+    color: $fontColor;
+    margin: 0;
 }
 
-.logo {
-    font: 4em "alex_brushregular";
-    text-align: center;
-    margin-bottom: 20px;
-    color: #756f69;
+ul {
+    list-style: square;
 }
 
-.experiment-container {
-    margin: 10px;
-    padding: 0;
-}
-
-.experiment-container::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-
-.experiment-header {
-    background: #756f69;
-    color: #FDFDFD;
-    padding-left: 10px;
-    h1 {
-        font-size: 1.5rem;
-        font-family: Palatino,"Palatino Linotype", serif;
-        margin: 0;
+//
+// Banner
+//
+.masthead {
+    position: sticky;
+    top: 0;
+    height: 100px;
+    .logo {
+        font: 4em "alex_brushregular";
+        text-align: center;
+        margin-bottom: 20px;
+        color: $lightFontColor;
+        background: $darkBackgroundColor;
+        //border-left: 8px solid #ed8c8c;
     }
 }
 
-.experiment-content {
-    float: left;
+// .brain {
+//     background: url(../images/brain.svg) 0% 30% no-repeat;
+//     background-size: 100%;
+//     float: left;
+//     height: 300px;
+//     width: 300px;
+// }
+
+// .masthead {
+//     //height: 100%;
+// }
+
+//
+// Main container
+//
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-aside.experiment-resources {
-    float: right;
+.page {
+    height: calc(100vh + (-100px));
 }
 
-.experiment-content,
-.experiment-resources {
-    padding: 4px;
-}
-
-.experiment-tags {
-    clear: both;
-    background: #756f69;
-    > ul {
-        background: rgba(117, 111, 105, 0.16862745098039217);
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        > li {
-            background-color: rgb(149, 216, 236);
+//
+// Purpose article
+//
+.purpose {
+    &-container {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        header {
             float: left;
-            padding: 4px;
-            margin: 2px;
-            line-height: 1;
-            font-style: italic;
-            font-size: 0.9em;
         }
     }
+    &-title {
+        font-weight: bold;
+        font-size: 1.1em;
+        padding: 0 10px;
+        background: $accentuationBgColor;
+        color: $accentuationFontColor;
+        float: right;
+    }
+    &-desc {
+        float: left;
+        width: 350px;
+        padding: 0 12px;
+    }
 }
 
-.experiment-tags::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-
-.experiment-section-title {
-    margin: 0;
+//
+// Experiment article
+//
+.experiment {
+    &-container {
+        margin: 10px;
+        padding: 0;
+        background: rgba($experimentBgColor, .80);
+        border-radius: 0 0 20px 0;
+        border: 1px solid $experimentBgColor;
+        border-left: 8px solid rgba($accentuationBgColor, .5);
+        > * {
+            padding: 12px;
+        }
+        ::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+    &-header {
+        background: $darkBackgroundColor;
+        color: $lightFontColor;
+        padding: 2px 12px;
+        h1 {
+            font-size: 1.5rem;
+            font-family: Palatino,"Palatino Linotype", serif;
+            margin: 0;
+        }
+    }
+    &-content {
+        float: left;
+    }
+    &-resources {
+        float: right;
+        &-container {
+            list-style: none;
+        }
+    }
+    &-results {
+        float: left;
+        clear: left;
+        > ul {
+            list-style: none;
+            display: inline-flex;
+            flex-direction: row;
+            padding: 0;
+            margin: 0;
+            vertical-align: bottom;
+            > li {
+                margin-right: 2px;
+                padding: 0 4px;
+                text-decoration: underline;
+                border-right: 1px solid $fontColor;
+            }
+            > li:last-of-type {
+                border-right: none;
+            }
+        }
+    }
+    &-results, &-tags {
+        .experiment-section-title {
+            display: inline-block;
+            min-width: 100px;
+        }
+    }
+    &-tags {
+        clear: both;
+        > ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            vertical-align: bottom;
+            > li {
+                background-color: $accentuationBgColor;
+                float: left;
+                padding: 4px;
+                margin: 0 2px 0 0;
+                line-height: 1;
+                font-style: italic;
+                font-size: 0.9em;
+                color: $accentuationFontColor;            
+            }
+        }
+        ::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+    &-section-title {
+        margin: 0;
+        font-weight: bold;
+    }
 }
