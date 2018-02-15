@@ -1,12 +1,15 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var del = require('del');
+var svgmin = require('gulp-svgmin');
+var gap = require('gulp-append-prepend');
 
 // Configuration
 var configuration = {
     paths: {
         src: {
             html: './src/*.html',
+            scripts: './src/scripts/*.js',
             fonts: [ './src/fonts/*.ttf',
                 './src/fonts/*.woff',
                 './src/fonts/*.woff2' ],
@@ -21,14 +24,32 @@ var configuration = {
 function htmlTask(done) {
     gulp.src(configuration.paths.src.html)
         .pipe(gulp.dest(configuration.paths.dist));
+    gulp.src(configuration.paths.src.scripts)
+        .pipe(gulp.dest(configuration.paths.dist + '/scripts'));
     gulp.src(configuration.paths.src.fonts)
         .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
-    gulp.src(configuration.paths.src.images)
-        .pipe(gulp.dest(configuration.paths.dist + '/images'));
     done();
 }
 htmlTask.description = 'Copy HTML files to output';
 gulp.task('html', htmlTask);
+
+// Gulp task to clean SVG sprites
+function svgSpritesTask(done) {
+    gulp.src('./src/images/sprites.svg')
+        .pipe(svgmin({
+            js2svg: {
+                pretty: true
+            }
+        }))
+        .pipe(gap.prependText([
+            '<?xml version="1.0" standalone="no"?>',
+            '<?xml-stylesheet type="text/css" href="../css/styles.css"?>'
+        ]))
+        .pipe(gulp.dest(configuration.paths.dist + '/images'));
+    done();
+}
+htmlTask.description = 'Clean SVG sprites and copy to output';
+gulp.task('svgSprites', svgSpritesTask);
 
 // Gulp task to generate CSS from SCSS files
 function sassTask() {
@@ -51,4 +72,4 @@ cleanTask.description = 'Clean dist folder';
 gulp.task('clean', cleanTask);
 
 // Gulp build task
-gulp.task('build', gulp.series('html', 'sass'));
+gulp.task('build', gulp.series('html', 'svgSprites', 'sass'));
