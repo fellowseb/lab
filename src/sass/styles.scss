@@ -66,6 +66,9 @@ svg {
     .icon-purpose {
         fill: #ddd;
     }
+    .icon-logo {
+        fill: #edc711;
+    }
 }
 
 //
@@ -93,7 +96,13 @@ svg {
         text-align: left;
         padding: 0 0.8em;
         color: $lightFontColor;
-        display: inline-block;     
+        display: inline-block; 
+    }
+    #logo-umbrella {
+        display: inline-block;  
+        width: 1em;
+        height: 1em;
+        vertical-align: sub;
     }
     .seb {
         color: #edc712;

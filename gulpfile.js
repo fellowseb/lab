@@ -24,6 +24,8 @@ var configuration = {
 function htmlTask(done) {
     gulp.src(configuration.paths.src.html)
         .pipe(gulp.dest(configuration.paths.dist));
+    gulp.src('./src/favicon.ico')
+        .pipe(gulp.dest(configuration.paths.dist));
     gulp.src(configuration.paths.src.scripts)
         .pipe(gulp.dest(configuration.paths.dist + '/scripts'));
     gulp.src(configuration.paths.src.fonts)
