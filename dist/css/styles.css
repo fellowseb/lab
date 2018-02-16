@@ -41,6 +41,9 @@ svg .icon-links:hover, svg .icon-menubtn:hover {
 svg .icon-purpose {
   fill: #ddd; }
 
+svg .icon-logo {
+  fill: #edc711; }
+
 .masthead {
   display: flex;
   flex-direction: row;
@@ -64,6 +67,11 @@ svg .icon-purpose {
     @media screen and (min-width: 48em) {
       .masthead .logo {
         font-size: 3em; } }
+  .masthead #logo-umbrella {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: sub; }
   .masthead .seb {
     color: #edc712; }
   .masthead .menu-button {
