@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var del = require('del');
 var svgmin = require('gulp-svgmin');
 var gap = require('gulp-append-prepend');
+const autoprefixer = require('gulp-autoprefixer');
 
 // Configuration
 var configuration = {
@@ -57,6 +58,10 @@ gulp.task('svgSprites', svgSpritesTask);
 function sassTask() {
     return gulp.src(configuration.paths.src.scss)
         .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
         .pipe(gulp.dest(configuration.paths.dist + '/css'));
 };
 sassTask.description = 'Preprocess scss files';

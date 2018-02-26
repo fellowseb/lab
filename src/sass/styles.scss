@@ -144,6 +144,7 @@ svg {
         }
     }
     nav {
+        z-index: 99999999999;
         position: fixed;
         top: 2.1em;
         bottom: 0;
