@@ -1,127 +1,175 @@
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>fellowseb's code lab</title>
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900" rel="stylesheet">
-        <link href="./css/styles.css" rel="stylesheet"></link>
-        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-        <link rel="icon" href="./favicon.ico" type="image/x-icon">
-        <script lang="text/javascript" src="./scripts/main.js"></script>
-    </head>
-    <body>
-        <header class="masthead" role="banner">
-            <button id="menu-button" class="menu-button">
-                <object id="menu-button-svg-open" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(730, 0, 145, 130))">menu</object>
-                <object id="menu-button-svg-close" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(888, 0, 113, 130))">close</object>
-            </button>
-            <div class="logo"><object id="logo-umbrella" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(1015, 0, 115, 130))"></object>fellow<span class="seb">seb</span></div>
-            <nav id="menu-nav" role="navigation">
-                <ul>
-                    <li><a href="#about" class="menu-nav-link">About</a></li>
-                    <li><a href="#lab" class="menu-nav-link">Experiments</a></li>
-                    <li>
-                        <a href="https://github.com/fellowseb" class="menu-nav-link menu-nav-link-github">
-                            <object type="image/svg+xml" style="width: 22px; height: 21px" data="images/sprites.svg#svgView(viewBox(580, 0, 116, 130))">github</object>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/in/sebastienwauquier" class="menu-nav-link menu-nav-link-linkedin">
-                            <object type="image/svg+xml" style="width: 22px; height: 21px" data="images/sprites.svg#svgView(viewBox(110, 0, 135, 130))">linkedin</object>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main class="main-container" role="main">
-            <section class="page purpose-container">
-                <a name="about" class="anchor"></a>             
-                <div class="purpose-container-who">                    
-                    <header><p class="purpose-title">Who am I ?</p></header>
-                    <figure>
-                        <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(412, 0, 156, 130))">menu</object>
-                    </figure>
-                    <p class="purpose-desc">My name is <strong>S&eacute;bastien Wauquier</strong>.<br/> 
-                    I'm a Software Engineer.
-                    In the past years I've dealt with real-time 3D apps on desktop (in C++) or in the browser (JavaScript).
-                    </p>
-                </div>
-                <div class="purpose-container-what">
-                    <header><p class="purpose-title">What is this ?</p></header>
-                    <figure>
-                        <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(0, 0, 90, 130))">menu</object>
-                    </figure>
-                    <p class="purpose-desc">This is my <strong>virtual laboratory</strong>.<br/>I intend to experiment cool tech stuff and maybe later extend it to art and life in general.</p>
-                </div>
-                <div class="purpose-container-why">                    
-                    <header><p class="purpose-title">What's the point ?</p></header>
-                    <figure>
-                        <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(246, 0, 157, 130))">menu</object>
-                    </figure>
-                    <p class="purpose-desc">I believe one should always <strong>keep on learning</strong>.<br/>There are so many things to discover, to read, to share!</p>
-                </div>                
-            </section>
-            <section class="page">                
-                <div class="filter-experiments-container">
-                    <p>There's a total of <strong>1 experiment(s)</strong>, wow!</p>
-                </div>
-                <div class="experiments-container">
-                    <article class="experiment-container">
-                        <section class="experiment-header">
-                            <header><h1>Build a static website for my code lab</h1></header>
-                        </section>
-                        <section class="experiment-content">
-                            <p class="experiment-section-title typicons-spanner">I used...</p>
-                            <ul>
-                                <li>Flexbox layout, media-queries, RWD techniques</li>
-                                <li>A CSS preprocessing tool</li>
-                                <li>A CSS auto-prefixer to handle old browsers</li>
-                                <li>Semantic HTML5 tags and ARIA roles for accessibility</li>
-                                <li>SVG sprites and fragments</li>
-                                <li>Web &amp; icon fonts</li>
-                            </ul>                    
-                        </section>
-                        <section class="experiment-resources">
-                            <p class="experiment-section-title typicons-anchor">Resources</p>
-                            <ul class="experiment-resources-container">
-                                <li class="experiment-resource experiment-resource-book">
-                                    <p><a href="https://lire.amazon.fr/kp/embed?asin=B012GGB7OI&amp;preview=newtab&amp;linkCode=kpe&amp;ref_=cm_sw_r_kb_dp_azgEAbST4WP3A">Mastering Responsive Web Design</a>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Sébastien Wauquier (a.k.a. fellowseb)'s personal code lab">
+    <meta name="keywords" content="codelab,Sébastien,Wauquier,fellowseb,experiment,software,engineer">
+    <meta name="author" content="Sébastien Wauquier">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fellowseb's code lab</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet"></link>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <script lang="text/javascript" src="./scripts/main.js"></script>
+</head>
+
+<body>
+    <header class="masthead" role="banner">
+        <button id="menu-button" class="menu-button">
+            <object id="menu-button-svg-open" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(730, 0, 145, 130))">menu</object>
+            <object id="menu-button-svg-close" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(888, 0, 113, 130))">close</object>
+        </button>
+        <div class="logo">
+            <object id="logo-umbrella" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(1015, 0, 115, 130))"></object>fellow<span class="seb">seb</span>
+        </div>
+        <nav id="menu-nav" role="navigation">
+            <ul>
+                <li>
+                    <a href="#about" class="menu-nav-link">About</a>
+                </li>
+                <li>
+                    <a href="#lab" class="menu-nav-link">Experiments</a>
+                </li>
+                <li>
+                    <a href="https://github.com/fellowseb" class="menu-nav-link menu-nav-link-github">
+                        <object type="image/svg+xml" style="width: 22px; height: 21px" data="images/sprites.svg#svgView(viewBox(580, 0, 116, 130))">github</object>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/sebastienwauquier" class="menu-nav-link menu-nav-link-linkedin">
+                        <object type="image/svg+xml" style="width: 22px; height: 21px" data="images/sprites.svg#svgView(viewBox(110, 0, 135, 130))">linkedin</object>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container" role="main">
+        <section class="page purpose-container">
+            <a name="about" class="anchor"></a>
+            <div class="purpose-container-who">
+                <header>
+                    <p class="purpose-title">Who am I ?</p>
+                </header>
+                <figure>
+                    <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(412, 0, 156, 130))">menu</object>
+                </figure>
+                <p class="purpose-desc">My name is
+                    <strong>S&eacute;bastien Wauquier</strong>.
+                    <br/> I'm a Software Engineer. In the past years I've dealt with real-time 3D apps on desktop (in C++) or
+                    in the browser (JavaScript).
+                </p>
+            </div>
+            <div class="purpose-container-what">
+                <header>
+                    <p class="purpose-title">What is this ?</p>
+                </header>
+                <figure>
+                    <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(0, 0, 90, 130))">menu</object>
+                </figure>
+                <p class="purpose-desc">This is my
+                    <strong>virtual laboratory</strong>.
+                    <br/>I intend to experiment cool tech stuff and maybe later extend it to art and life in general.
+                </p>
+            </div>
+            <div class="purpose-container-why">
+                <header>
+                    <p class="purpose-title">What's the point ?</p>
+                </header>
+                <figure>
+                    <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(246, 0, 157, 130))">menu</object>
+                </figure>
+                <p class="purpose-desc">I believe one should always
+                    <strong>keep on learning</strong>.
+                    <br/>There are so many things to discover, to read, to share!
+                </p>
+            </div>
+        </section>
+        <section class="page">
+            <div class="filter-experiments-container">
+                <p>There's a total of
+                    <strong>1 experiment(s)</strong>, wow!
+                </p>
+            </div>
+            <div class="experiments-container">
+                <article class="experiment-container">
+                    <section class="experiment-header">
+                        <header>
+                            <h1>Build a static website for my code lab</h1>
+                        </header>
+                    </section>
+                    <section class="experiment-content">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tasks" title="Tasks"></span>I used...
+                        </p>
+                        <ul>
+                            <li>Flexbox layout, media-queries, RWD techniques</li>
+                            <li>A CSS preprocessing tool</li>
+                            <li>A CSS auto-prefixer to handle old browsers</li>
+                            <li>Semantic HTML5 tags and ARIA roles for accessibility</li>
+                            <li>SVG sprites and fragments</li>
+                            <li>Web &amp; icon fonts</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-resources">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-link" title="Resources"></span>Resources
+                        </p>
+                        <ul class="experiment-resources-container">
+                            <li class="experiment-resource experiment-resource-book">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-book" title="Book"></span>
+                                    <a href="https://lire.amazon.fr/kp/embed?asin=B012GGB7OI&amp;preview=newtab&amp;linkCode=kpe&amp;ref_=cm_sw_r_kb_dp_azgEAbST4WP3A">Mastering Responsive Web Design</a>
                                     <br/>ed Packt Publishing, ISBN978-1783550234
-                                    <br/>by Ricardo Zea</p>
-                                </li>
-                                <li class="experiment-resource experiment-resource-article">
-                                    <p><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a>
+                                    <br/>by Ricardo Zea
+                                </p>
+                            </li>
+                            <li class="experiment-resource experiment-resource-article">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-bookmark" title="Article"></span>
+                                    <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a>
                                     <br/>by Chris Coyier
-                                </li>
-                                <li class="experiment-resource experiment-resource-article">
-                                    <p><a href="https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/">An Overview of SVG Sprite Creation Techniques</a>
+                                </p>
+                            </li>
+                            <li class="experiment-resource experiment-resource-article">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-bookmark" title="Article"></span>
+                                    <a href="https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/">An Overview of SVG Sprite Creation Techniques</a>
                                     <br/>by Sara Soueidan
-                                </li>
-                            </ul>
-                        </section>
-                        <section class="experiment-results">
-                            <p class="experiment-section-title typicons-lineChart">Results</p>
-                            <ul>
-                                <li>This site !</li>
-                                <li>GitHub repo</li>
-                            </ul>                    
-                        </section>                
-                        <section class="experiment-tags">
-                            <p class="experiment-section-title typicons-tag">Tags</p>
-                            <ul>
-                                <li>RWD</li>
-                                <li>accessibility</li>
-                                <li>HTML5</li>
-                                <li>CSS3</li>
-                                <li>Sass</li>
-                                <li>SVG</li>
-                            </ul>
-                        </section>
-                    </article>
-                </div>                
-                <a name="lab" class="anchor"></a>
-            </section>
-        </main>
-    </body>
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="experiment-results">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-chart-line" title="Results"></span>Results
+                        </p>
+                        <ul>
+                            <li>This site !</li>
+                            <li>GitHub repo</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-tags">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tags" title="Tags"></span>Tags
+                        </p>
+                        <ul>
+                            <li>RWD</li>
+                            <li>accessibility</li>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>Sass</li>
+                            <li>SVG</li>
+                        </ul>
+                    </section>
+                </article>
+            </div>
+            <a name="lab" class="anchor"></a>
+        </section>
+    </main>
+</body>
+
 </html>
