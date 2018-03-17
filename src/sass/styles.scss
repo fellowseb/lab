@@ -26,8 +26,8 @@ $headerHeightLarge768: 5.4em;
 
 body {
     font-family: "Lato", arial, sans-serif;
-    background: $backgroundColor;
-    color: $fontColor;
+    background: #bfad9b;
+    color: #333333;
     margin: 0;
     font-feature-settings: "kern" 1;
     font-kerning: normal;
@@ -64,7 +64,7 @@ svg {
         fill: #5c5c5c;
     }
     .icon-purpose {
-        fill: #ddd;
+        fill: #333333;
     }
     .icon-logo {
         fill: #edc711;
@@ -83,7 +83,7 @@ svg {
     top: 0;
     z-index: 99999999999;
     background: $darkBackgroundColor;
-    border-bottom: 3px solid #958557;
+    border-bottom: 1px solid #f6cb47;
     .logo {        
         font-family: "alex_brushregular";
         font-size: 1.4em;
@@ -91,7 +91,7 @@ svg {
             font-size: 2em;
         }
         @include forLargeScreens(768) {
-            font-size: 3em;
+            font-size: 2.2em;
         }
         text-align: left;
         padding: 0 0.8em;
@@ -109,8 +109,8 @@ svg {
     }
     .menu-button {
         background: none;
-        height: 2.6em;
-        width: 2.6em;
+        height: 3em;
+        width: 3em;
         cursor: pointer;
         border: none;
         outline: none;
@@ -198,15 +198,16 @@ svg {
             margin: 0.25em;            
             padding: 0.25em 0.5em;
             color: #edc711;
-            border-radius: 20px;
-            background: #5c5c5c;
+            // border-radius: 20px;
+            // background: #5c5c5c;
             display: inline-block;
             width: 93%;
             box-sizing: border-box;            
         }
         li a:hover { 
-            background: #CCC;
-            color: #333;            
+            // background: #CCC;
+            // color: #333;
+            text-decoration: underline;       
         }
         .menu-nav-link-github,
         .menu-nav-link-linkedin,
@@ -244,6 +245,9 @@ $purposeSVGSizeLarge: 6em;
 .purpose {
     &-container {        
         padding: 1em;
+        @include forLargeScreens(640) {
+            padding: 2em 1em 2em 1em;
+        }
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -264,6 +268,7 @@ $purposeSVGSizeLarge: 6em;
         figure > object {
             width: 100%;
             height: 100%;
+            filter: drop-shadow(6px 6px 1px rgba(149,133,87,1));
         }
         div:nth-of-type(odd) {
             align-self: flex-start;
@@ -283,24 +288,17 @@ $purposeSVGSizeLarge: 6em;
     &-title {
         font-weight: bold;
         font-size: 1.1em;
-        margin: 0;
-        border-bottom: 3px solid #958557;
+        background: linear-gradient(to right, rgba(149,133,87,1) 0%,rgba(149,133,87,0) 70%);
         margin: 0;
         color: #edc712;
+        padding: 0 0 0 4px;
+        border-radius: 6px;
     }
 }
 
 //
 // Experiment article
 //
-@import url(http://weloveiconfonts.com/api/?family=typicons);
-
-/* typicons */
-[class*="typicons-"]:before {
-  font-family: 'typicons', sans-serif;
-  padding-right: 0.5em;
-  vertical-align: bottom;
-}
 
 .experiment {
     &-container {
@@ -308,6 +306,7 @@ $purposeSVGSizeLarge: 6em;
         border-radius: 10px 10px 0 0;
         border: 1px solid #a39f9c;
         background: rgb(51, 51, 51);
+        color: #ddd;
         flex-direction: row;
         flex-wrap: wrap;
         margin: 2px;
@@ -358,6 +357,7 @@ $purposeSVGSizeLarge: 6em;
     &-results, &-tags {
         display: flex;
         flex-direction: column;
+        margin: 0;
     }
     &-tags {
         > ul {
@@ -388,6 +388,9 @@ $purposeSVGSizeLarge: 6em;
         font-weight: bold;
         padding: 0.25em 0.5em;
         background: #3f3f3f;
+    }
+    &-section-icon {
+        margin-right: 0.25em;
     }
 }
 
