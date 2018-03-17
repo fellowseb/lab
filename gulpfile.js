@@ -1,9 +1,11 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var del = require('del');
-var svgmin = require('gulp-svgmin');
-var gap = require('gulp-append-prepend');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const del = require('del');
+const svgmin = require('gulp-svgmin');
+const gap = require('gulp-append-prepend');
 const autoprefixer = require('gulp-autoprefixer');
+const uglifycss = require('gulp-uglifycss');
+const uglify = require('gulp-uglify');
 
 // Configuration
 var configuration = {
@@ -28,6 +30,7 @@ function htmlTask(done) {
     gulp.src('./src/favicon.ico')
         .pipe(gulp.dest(configuration.paths.dist));
     gulp.src(configuration.paths.src.scripts)
+        .pipe(uglify())
         .pipe(gulp.dest(configuration.paths.dist + '/scripts'));
     gulp.src(configuration.paths.src.fonts)
         .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
@@ -59,9 +62,9 @@ function sassTask() {
     return gulp.src(configuration.paths.src.scss)
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
             cascade: false
         }))
+        .pipe(uglifycss({ maxLineLen: 80, expandVars: true }))
         .pipe(gulp.dest(configuration.paths.dist + '/css'));
 };
 sassTask.description = 'Preprocess scss files';

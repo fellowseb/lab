@@ -37,7 +37,13 @@
     "gulp-append-prepend": "^1.0.4",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-sass": "^3.1.0",
-    "gulp-svgmin": "^1.2.4"
+    "gulp-svgmin": "^1.2.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uglifycss": "^1.0.9"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
