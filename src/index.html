@@ -12,9 +12,10 @@
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" rel="stylesheet">
     <link href="./css/styles.css" rel="stylesheet"></link>
+    <link href="./css/loader.css" rel="stylesheet"></link>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <script lang="text/javascript" src="./scripts/main.js"></script>
+    <script lang="text/javascript" src="./scripts/menu.js"></script>
 </head>
 
 <body>
@@ -41,6 +42,9 @@
                     <a href="#about" class="menu-nav-link">About</a>
                 </li>
                 <li>
+                    <a href="#brainfuel" class="menu-nav-link">Resources</a>
+                </li>
+                <li>
                     <a href="#lab" class="menu-nav-link">Experiments</a>
                 </li>
                 <li>
@@ -61,53 +65,57 @@
         </nav>
     </header>
     <main class="main-container" role="main">
-        <section class="page purpose-container">
-            <a name="about" class="anchor"></a>
-            <div class="purpose-container-who">
-                <header>
-                    <p class="purpose-title">Who am I ?</p>
-                </header>
-                <figure>
-                    <svg class="icon-purpose">
-                        <use xlink:href="#code" href="#code"/>
-                    </svg>
-                </figure>
-                <p class="purpose-desc">My name is
-                    <strong>S&eacute;bastien Wauquier</strong>.
-                    <br/> I'm a Software Engineer. In the past years I've dealt with real-time 3D apps on desktop (in C++) or
-                    in the browser (JavaScript).
-                </p>
-            </div>
-            <div class="purpose-container-what">
-                <header>
-                    <p class="purpose-title">What is this ?</p>
-                </header>
-                <figure>
-                    <svg class="icon-purpose">
-                        <use xlink:href="#lab" href="#lab"/>
-                    </svg>
-                </figure>
-                <p class="purpose-desc">This is my
-                    <strong>virtual laboratory</strong>.
-                    <br/>I intend to experiment cool tech stuff and maybe later extend it to art and life in general.
-                </p>
-            </div>
-            <div class="purpose-container-why">
-                <header>
-                    <p class="purpose-title">What's the point ?</p>
-                </header>
-                <figure>
-                    <svg class="icon-purpose">
-                        <use xlink:href="#books" href="#books"/>
-                    </svg>
-                </figure>
-                <p class="purpose-desc">I believe one should always
-                    <strong>keep on learning</strong>.
-                    <br/>There are so many things to discover, to read, to share!
-                </p>
+        <section class="page page-purpose">
+            <div class="purpose-container">
+                <a name="about" class="anchor"></a>
+                <div class="purpose-container-who">
+                    <header>
+                        <p class="purpose-title">Who am I ?</p>
+                    </header>
+                    <figure>
+                        <svg class="icon-purpose">
+                            <use xlink:href="#code" href="#code"/>
+                        </svg>
+                    </figure>
+                    <p class="purpose-desc">My name is
+                        <strong>S&eacute;bastien Wauquier</strong>.
+                        <br/> I'm a Software Engineer. In the past years I've dealt with real-time 3D apps on desktop (in C++)
+                        or in the browser (JavaScript).
+                    </p>
+                </div>
+                <div class="purpose-container-what">
+                    <header>
+                        <p class="purpose-title">What is this ?</p>
+                    </header>
+                    <figure>
+                        <svg class="icon-purpose">
+                            <use xlink:href="#lab" href="#lab"/>
+                        </svg>
+                    </figure>
+                    <p class="purpose-desc">This is my
+                        <strong>virtual laboratory</strong>.
+                        <br/>I intend to experiment cool tech stuff and maybe later extend it to art and life in general.
+                    </p>
+                </div>
+                <div class="purpose-container-why">
+                    <header>
+                        <p class="purpose-title">What's the point ?</p>
+                    </header>
+                    <figure>
+                        <svg class="icon-purpose">
+                            <use xlink:href="#books" href="#books"/>
+                        </svg>
+                    </figure>
+                    <p class="purpose-desc">I believe one should always
+                        <strong>keep on learning</strong>.
+                        <br/>There are so many things to discover, to read, to share!
+                    </p>
+                </div>
             </div>
         </section>
-        <section class="page">
+        <section id="page-brainfuel" class="page page-brainfuel">
+        </section>
+        <section class="page page-experiments">
             <div class="filter-experiments-container">
                 <p>There's a total of
                     <strong>1 experiment(s)</strong>, wow!
@@ -189,6 +197,7 @@
             <a name="lab" class="anchor"></a>
         </section>
     </main>
+    <script lang="text/javascript" src="./bundle.js"></script>
 </body>
 
 </html>

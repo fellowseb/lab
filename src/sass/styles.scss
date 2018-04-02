@@ -26,13 +26,13 @@ $headerHeightLarge768: 5.4em;
 
 body {
     font-family: "Lato", arial, sans-serif;
-    background: #bfad9b;
+    background: #dbd0b0;
     color: #333333;
     margin: 0;
     font-feature-settings: "kern" 1;
     font-kerning: normal;
     font-size: 21px;
-    font-weight: 300;
+    //font-weight: 300;
 }
 
 ul {
@@ -74,6 +74,16 @@ p {
     fill: #edc711;
 }
 
+select {
+    background: #786b49;
+    border: 1px solid #c1b79a;
+    height: 2em;
+    border-radius: 4px;
+    width: 150px;
+    cursor: pointer;
+    color: #DDDDDD;
+}
+
 //
 // Banner
 //
@@ -86,18 +96,18 @@ p {
     top: 0;
     z-index: 99999999999;
     background: $darkBackgroundColor;
-    border-bottom: 1px solid #f6cb47;
+    border-bottom: 1px solid #c1b79a;
     .logo {        
         font-family: "alex_brushregular";
-        font-size: 1.4em;
-        @include forLargeScreens(640) {
+        font-size: 1.6em;
+        @include forLargeScreens(700) {
             font-size: 2em;
         }
         @include forLargeScreens(768) {
             font-size: 2.2em;
         }
         text-align: left;
-        padding: 0 0.8em;
+        padding: 0 0.4em;
         color: $lightFontColor;
         display: inline-block; 
     }
@@ -118,7 +128,7 @@ p {
         border: none;
         outline: none;
         margin-left: 0.5em;
-        @include forLargeScreens(640) {
+        @include forLargeScreens(700) {
             visibility: hidden;
             width: 0;
             height: 0;
@@ -149,13 +159,13 @@ p {
     nav {
         z-index: 99999999999;
         position: fixed;
-        top: 2.1em;
+        top: 2.4em;
         bottom: 0;
         width: 100%;
         background: rgba( #333, 0.95 );
         visibility: hidden;
         padding-top: 5px;
-        @include forLargeScreens(640) {
+        @include forLargeScreens(700) {
             float: right;
             position: unset;
             top: unset;
@@ -184,7 +194,7 @@ p {
         display: inline-flex;
         list-style: none;
         flex-direction: column;
-        @include forLargeScreens(640) {
+        @include forLargeScreens(700) {
             flex-direction: row;
         }
         justify-content: flex-start;
@@ -200,7 +210,7 @@ p {
             text-decoration: none;
             margin: 0.25em;            
             padding: 0.25em 0.5em;
-            color: #edc711;
+            color: #c1b79a;
             // border-radius: 20px;
             // background: #5c5c5c;
             display: inline-block;
@@ -227,11 +237,18 @@ p {
 .main-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 
 .page {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    @include forLargeScreens(700) {
+        padding: 3em 1em 3em 1em;
+    }
     .anchor {
         position: absolute;
         top: $headerHeight;
@@ -247,10 +264,6 @@ $purposeSVGSizeLarge: 6em;
 
 .purpose {
     &-container {        
-        padding: 1em;
-        @include forLargeScreens(640) {
-            padding: 2em 1em 2em 1em;
-        }
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -261,7 +274,7 @@ $purposeSVGSizeLarge: 6em;
         figure {
             width: $purposeSVGSize;
             height: $purposeSVGSize;
-            @include forLargeScreens(640) {
+            @include forLargeScreens(700) {
                 width: $purposeSVGSizeLarge;
                 height: $purposeSVGSizeLarge;
             }
@@ -297,6 +310,13 @@ $purposeSVGSizeLarge: 6em;
         padding: 0 0 0 4px;
         border-radius: 6px;
     }
+}
+
+//
+// Brain fuel section
+//
+.page-brainfuel {
+    background: #96865b;
 }
 
 //
@@ -409,3 +429,4 @@ $purposeSVGSizeLarge: 6em;
     max-width: 800px;
     width: 100%;
 }
+@import "brainfuel.scss";
