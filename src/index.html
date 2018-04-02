@@ -18,13 +18,22 @@
 </head>
 
 <body>
+    <div id="svg-sprites-symbols">
+        <!-- SVG SPRITES -->
+    </div>
     <header class="masthead" role="banner">
         <button id="menu-button" class="menu-button">
-            <object id="menu-button-svg-open" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(730, 0, 145, 130))">menu</object>
-            <object id="menu-button-svg-close" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(888, 0, 113, 130))">close</object>
+            <svg id="menu-button-svg-open" class="icon-menubtn">
+                <use xlink:href="#menu" href="#menu"/>
+            </svg>
+            <svg id="menu-button-svg-close" class="icon-menubtn">
+                <use xlink:href="#menuclose" href="#menuclose"/>
+            </svg>
         </button>
         <div class="logo">
-            <object id="logo-umbrella" type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(1015, 0, 115, 130))"></object>fellow<span class="seb">seb</span>
+            <svg id="logo-umbrella" class="icon-logo">
+                <use xlink:href="#umbrella" href="#umbrella"/>
+            </svg>fellow<span class="seb">seb</span>
         </div>
         <nav id="menu-nav" role="navigation">
             <ul>
@@ -36,12 +45,16 @@
                 </li>
                 <li>
                     <a href="https://github.com/fellowseb" class="menu-nav-link menu-nav-link-github">
-                        <object type="image/svg+xml" style="width: 22px; height: 21px" data="images/sprites.svg#svgView(viewBox(580, 0, 116, 130))">github</object>
+                        <svg class="icon-links">
+                            <use xlink:href="#github" href="#github"/>
+                        </svg>
                     </a>
                 </li>
                 <li>
                     <a href="https://www.linkedin.com/in/sebastienwauquier" class="menu-nav-link menu-nav-link-linkedin">
-                        <object type="image/svg+xml" style="width: 22px; height: 21px" data="images/sprites.svg#svgView(viewBox(110, 0, 135, 130))">linkedin</object>
+                        <svg class="icon-links">
+                            <use xlink:href="#linkedin" href="#linkedin"/>
+                        </svg>
                     </a>
                 </li>
             </ul>
@@ -55,7 +68,9 @@
                     <p class="purpose-title">Who am I ?</p>
                 </header>
                 <figure>
-                    <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(412, 0, 156, 130))">menu</object>
+                    <svg class="icon-purpose">
+                        <use xlink:href="#code" href="#code"/>
+                    </svg>
                 </figure>
                 <p class="purpose-desc">My name is
                     <strong>S&eacute;bastien Wauquier</strong>.
@@ -68,7 +83,9 @@
                     <p class="purpose-title">What is this ?</p>
                 </header>
                 <figure>
-                    <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(0, 0, 90, 130))">menu</object>
+                    <svg class="icon-purpose">
+                        <use xlink:href="#lab" href="#lab"/>
+                    </svg>
                 </figure>
                 <p class="purpose-desc">This is my
                     <strong>virtual laboratory</strong>.
@@ -80,7 +97,9 @@
                     <p class="purpose-title">What's the point ?</p>
                 </header>
                 <figure>
-                    <object type="image/svg+xml" data="images/sprites.svg#svgView(viewBox(246, 0, 157, 130))">menu</object>
+                    <svg class="icon-purpose">
+                        <use xlink:href="#books" href="#books"/>
+                    </svg>
                 </figure>
                 <p class="purpose-desc">I believe one should always
                     <strong>keep on learning</strong>.

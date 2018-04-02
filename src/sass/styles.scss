@@ -51,24 +51,27 @@ p {
     margin-bottom: 0.5em;
 }
 
-object{
-    pointer-events: none;
-    display: block;
+#svg-sprites-symbols {
+    display: none;
 }
 
-svg {
-    .icon-links, .icon-menubtn {
-        fill: #edc711;
-    }
-    .icon-links:hover, .icon-menubtn:hover {
-        fill: #5c5c5c;
-    }
-    .icon-purpose {
-        fill: #333333;
-    }
-    .icon-logo {
-        fill: #edc711;
-    }
+.icon-links {
+    fill: #edc711;
+    width: 22px;
+    height: 21px
+}
+.icon-menubtn {
+    fill: #c1b79a;
+}
+.icon-links:hover, .icon-menubtn:hover {
+    fill: #5c5c5c;
+    cursor: pointer;
+}
+.icon-purpose {
+    fill: #333333;
+}
+.icon-logo {
+    fill: #edc711;
 }
 
 //
@@ -265,7 +268,7 @@ $purposeSVGSizeLarge: 6em;
             margin: .5em;
             float: left;
         }
-        figure > object {
+        figure > svg {
             width: 100%;
             height: 100%;
             filter: drop-shadow(6px 6px 1px rgba(149,133,87,1));

@@ -1,15 +1,16 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const del = require('del');
-const svgmin = require('gulp-svgmin');
-const gap = require('gulp-append-prepend');
+const svgsprite = require('gulp-svg-sprite');
 const autoprefixer = require('gulp-autoprefixer');
 const uglifycss = require('gulp-uglifycss');
 const uglify = require('gulp-uglify');
+const inject = require('gulp-inject-string');
 
 // Configuration
 var configuration = {
     paths: {
+        entry: './src/index.js',
         src: {
             html: './src/*.html',
             scripts: './src/scripts/*.js',
@@ -17,7 +18,9 @@ var configuration = {
                 './src/fonts/*.woff',
                 './src/fonts/*.woff2' ],
             images: './src/images/*.*',
-            scss: './src/sass/*.scss'
+            svgs: '.src/images/svg/*.svg',
+            scss: ['./src/sass/*.scss',
+                './src/sass/*css']
         },
         dist: './dist'
     }
@@ -25,36 +28,46 @@ var configuration = {
 
 // Gulp task to copy HTML files to output directory
 function htmlTask(done) {
-    gulp.src(configuration.paths.src.html)
-        .pipe(gulp.dest(configuration.paths.dist));
-    gulp.src('./src/favicon.ico')
-        .pipe(gulp.dest(configuration.paths.dist));
-    gulp.src(configuration.paths.src.scripts)
-        .pipe(uglify())
-        .pipe(gulp.dest(configuration.paths.dist + '/scripts'));
-    gulp.src(configuration.paths.src.fonts)
-        .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
-    done();
+    gulp.src('build/images/symbol/svg/sprite.symbol.svg')
+        .on('data', (data, error) => {
+            const svgString = data.contents
+                .toString();
+            gulp.src(configuration.paths.src.html)
+                .pipe(inject.replace('<!-- SVG SPRITES -->', svgString))
+                .pipe(gulp.dest(configuration.paths.dist));
+            gulp.src('./src/favicon.ico')
+                .pipe(gulp.dest(configuration.paths.dist));
+            gulp.src(configuration.paths.src.scripts)
+                .pipe(uglify())
+                .pipe(gulp.dest(configuration.paths.dist + '/scripts'));
+            gulp.src(configuration.paths.src.fonts)
+                .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
+            done();
+        });
 }
 htmlTask.description = 'Copy HTML files to output';
 gulp.task('html', htmlTask);
 
-// Gulp task to clean SVG sprites
+// Gulp task to create SVG sprites
 function svgSpritesTask(done) {
-    gulp.src('./src/images/sprites.svg')
-        .pipe(svgmin({
-            js2svg: {
-                pretty: true
-            }
-        }))
-        .pipe(gap.prependText([
-            '<?xml version="1.0" standalone="no"?>',
-            '<?xml-stylesheet type="text/css" href="../css/styles.css"?>'
-        ]))
-        .pipe(gulp.dest(configuration.paths.dist + '/images'));
+    const svgConfig = {
+        mode: {
+            symbol: true,
+            inline: true
+        },
+        svg: {
+            xmlDeclaration: false,
+            doctypeDeclaration: false,
+            namespaceIDs: false,
+            namespaceClassnames: false
+        }
+    };
+    gulp.src('src/images/svg/*.svg')
+        .pipe(svgsprite(svgConfig))
+        .pipe(gulp.dest('build/images'));
     done();
 }
-htmlTask.description = 'Clean SVG sprites and copy to output';
+svgSpritesTask.description = 'Create SVG sprites';
 gulp.task('svgSprites', svgSpritesTask);
 
 // Gulp task to generate CSS from SCSS files
@@ -82,4 +95,4 @@ cleanTask.description = 'Clean dist folder';
 gulp.task('clean', cleanTask);
 
 // Gulp build task
-gulp.task('build', gulp.series('html', 'svgSprites', 'sass'));
+gulp.task('build', gulp.series(['svgSprites', 'html', 'sass']));
