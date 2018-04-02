@@ -6,6 +6,8 @@ const autoprefixer = require('gulp-autoprefixer');
 const uglifycss = require('gulp-uglifycss');
 const uglify = require('gulp-uglify');
 const inject = require('gulp-inject-string');
+const webpack = require('webpack');
+const gulpWebpack = require('webpack-stream');
 
 // Configuration
 var configuration = {
@@ -27,8 +29,8 @@ var configuration = {
 };
 
 // Gulp task to copy HTML files to output directory
-function htmlTask(done) {
-    gulp.src('build/images/symbol/svg/sprite.symbol.svg')
+function htmlTask() {
+    return gulp.src('build/images/symbol/svg/sprite.symbol.svg')
         .on('data', (data, error) => {
             const svgString = data.contents
                 .toString();
@@ -42,14 +44,13 @@ function htmlTask(done) {
                 .pipe(gulp.dest(configuration.paths.dist + '/scripts'));
             gulp.src(configuration.paths.src.fonts)
                 .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
-            done();
         });
 }
 htmlTask.description = 'Copy HTML files to output';
 gulp.task('html', htmlTask);
 
 // Gulp task to create SVG sprites
-function svgSpritesTask(done) {
+function svgSpritesTask() {
     const svgConfig = {
         mode: {
             symbol: true,
@@ -62,10 +63,9 @@ function svgSpritesTask(done) {
             namespaceClassnames: false
         }
     };
-    gulp.src('src/images/svg/*.svg')
+    return gulp.src('src/images/svg/*.svg')
         .pipe(svgsprite(svgConfig))
         .pipe(gulp.dest('build/images'));
-    done();
 }
 svgSpritesTask.description = 'Create SVG sprites';
 gulp.task('svgSprites', svgSpritesTask);
@@ -94,5 +94,14 @@ function cleanTask() {
 cleanTask.description = 'Clean dist folder';
 gulp.task('clean', cleanTask);
 
+// Gulp build components task
+function buildComponents() {
+    return gulp.src(configuration.paths.entry)
+        .pipe(gulpWebpack(require('./webpack.dev.js'), webpack))
+        .pipe(gulp.dest(configuration.paths.dist));
+}
+buildComponents.description = 'Build components';
+gulp.task('components', buildComponents);
+
 // Gulp build task
-gulp.task('build', gulp.series(['svgSprites', 'html', 'sass']));
+gulp.task('build', gulp.series('svgSprites', 'html', 'sass', 'components'));

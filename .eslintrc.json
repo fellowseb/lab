@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "plugin:react/recommended"
+  ],
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
@@ -17,7 +20,8 @@
     "import",
     "node",
     "promise",
-    "standard"
+    "standard",
+    "react"
   ],
 
   "globals": {
@@ -151,6 +155,8 @@
     "padded-blocks": ["error", { "blocks": "never", "switches": "never", "classes": "never" }],
     "prefer-promise-reject-errors": "error",
     "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "rest-spread-spacing": ["error", "never"],
     "semi": ["error", "always"],
     "semi-spacing": ["error", { "before": false, "after": true }],
