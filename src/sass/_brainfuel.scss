@@ -8,16 +8,23 @@
 }
 
 .resources-filters-container {
+    background: #c1b79a;
     flex: 2 1 100%;
-    background: #786b49;
     height: 1.5em;
     margin-bottom: 1em;
-    color: #DDD;
+    color: #333;
     padding: 2px 10px;
     vertical-align: bottom;
     border-radius: 10px;
 }
 
+.resources-talks-container {
+    margin-left: 4px;
+}
+.resources-articles-container {
+    margin-right: 4px;
+}
+ 
 .resources-talks-container,
 .resources-articles-container {
     flex: 1 1 40%;
@@ -30,15 +37,19 @@
 }
 
 .articles-list {
+    border-top: 1px solid #c1b79a;
+    border-bottom: 1px solid #c1b79a;
     list-style: none;
     margin: 0;
     padding: 0;
+    background: #c1b79a;
+    border: 1px solid #aba288;
 }
 
 .articles-title {
     margin: 0;
     width: 100%;
-    border-bottom: 1px solid #786b49;
+    //border-bottom: 1px solid #786b49;
 }
 
 .articles-title-count {
@@ -46,9 +57,10 @@
 }
 
 .article-item {
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-    //border-bottom: 1px solid #c1b79a;
+    margin-top: .25em;
+    margin-bottom: .25em;
+    /* border-top: 1px solid #c1b79a; */
+    padding: 0 4px;
 }
 
 .article-item:last-child {
@@ -73,8 +85,8 @@
         width: 6rem;
         float: left;
         //border: 1px solid #867751;
-        background: rgb(120, 107, 73);
-        margin: 0 1rem 0 0;
+        //background: rgb(120, 107, 73);
+        margin: 0 2px 0 0;
         > img {
             max-width: 100%;
             max-height: 100%;
@@ -82,11 +94,8 @@
     }
 }
 
-.article-title, .article-url {
-    display: block;
-}
-
 .article-title {
+    display: block;
     text-decoration: none;
     font-weight: bold;
     max-height: 2.5em;
@@ -97,8 +106,14 @@
     }
 }
 
-.article-url {
+.article-urlandauthors {
+    display: block;
     font-size: 70%;
+    //color: #c1b79a;
+}
+.article-authors {
+    display: inline-block;
+    padding-left: 0.5em;
 }
 
 .article-tags {
@@ -115,7 +130,7 @@
     padding: 0 4px 0 4px;
     //border: 1px solid #edc730;
     color: #333333;
-    background: #3ccc72;
+    background: #edc711;
 }
 
 .articles-filtered-tags {
@@ -161,18 +176,22 @@
     align-items: center;
 }
 
+.disabled {
+    cursor: default;
+}
+
 .hidden {
     visibility: hidden;
 }
 
 .articles-prevpage:hover,
 .articles-nextpage:hover {
-    filter: drop-shadow(2px 4px #786b49);
+    //filter: drop-shadow(2px 4px #786b49);
     cursor: pointer;
 }
 
 .icon-arrows {
-    fill: #c1b79a;
+    fill: #333;
     height: 20px;
     width: 70px;
     pointer-events: none;
@@ -180,6 +199,11 @@
 
 .resources-books-container {
     flex: 1 1 100%;
+}
+
+.bookcarousel-container {
+    background: #c1b79a;
+    border: 1px solid #b0a78c;
 }
 
 .bookcarousel-list {
@@ -190,9 +214,10 @@
 
 .bookcarousel-item {
     list-style: none;
-    border: 1px solid #786b49;
     display: block;
     height: 180px;
     width: 150px;
-    background: #786b49;
+    background: #333333;
+    color: #ddd;
+    padding: 4px;
 }

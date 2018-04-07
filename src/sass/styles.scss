@@ -31,7 +31,10 @@ body {
     margin: 0;
     font-feature-settings: "kern" 1;
     font-kerning: normal;
-    font-size: 21px;
+    font-size: 18px;
+    @include forLargeScreens(700) {
+        font-size: 21px;
+    }
     //font-weight: 300;
 }
 
@@ -42,7 +45,7 @@ ul {
 }
 
 a {
-    color: $fontColor;
+    color: inherit;
     text-decoration: underline;
 }
 
@@ -75,7 +78,7 @@ p {
 }
 
 select {
-    background: #786b49;
+    background: #333;
     border: 1px solid #c1b79a;
     height: 2em;
     border-radius: 4px;
@@ -241,6 +244,7 @@ select {
 }
 
 .page {
+    border-bottom: 10px solid #c1b79a;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -304,19 +308,26 @@ $purposeSVGSizeLarge: 6em;
     &-title {
         font-weight: bold;
         font-size: 1.1em;
-        background: linear-gradient(to right, rgba(149,133,87,1) 0%,rgba(149,133,87,0) 70%);
+        background: #c1b79a;
         margin: 0;
-        color: #edc712;
+        color: #786b49;
         padding: 0 0 0 4px;
         border-radius: 6px;
+        border: 1px solid #beb598;
     }
+}
+
+strong {
+    color: #dbd0b0;
+    padding: 0 4px;
+    background: #333333;
 }
 
 //
 // Brain fuel section
 //
 .page-brainfuel {
-    background: #96865b;
+    //background: #96865b;
 }
 
 //
@@ -342,14 +353,14 @@ $purposeSVGSizeLarge: 6em;
         }
     }
     &-header {
-        background: #ddd;
-        border-radius: 10px 10px 0 0;
-        line-height: 2;
-        color: #333333;
-        padding: 2px 12px;
+        background: #c1b79a;
+    border-radius: 10px 10px 0 0;
+    line-height: 2;
+    color: #333;
+    padding: 2px 12px;
         h1 {
             font-size: 1.2rem;
-            font-family: Palatino,"Palatino Linotype", serif;
+            //font-family: Palatino,"Palatino Linotype", serif;
             margin: 0;
         }
     }
