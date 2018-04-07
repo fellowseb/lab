@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ResourceItem = ({ title = '[untitled article]', url = '', tags = [], thumbnailUrl = '', defaultThumbnailClass = 'fa-bookmark' }) => {
+const ResourceItem = ({ title = '[untitled article]', url = '', tags = [], thumbnailUrl = '', authors = [], defaultThumbnailClass = 'fa-bookmark' }) => {
     const defaultThumbnailClasses = 'fas fa-4x ' + defaultThumbnailClass;
+    const authorsStr = authors.length ? authors[0] : '';
     return (<li className='article-item clear'>
         <picture className={defaultThumbnailClasses}></picture>
         <a className="article-title" href={url}>{title}</a>
-        <a className="article-url" href={url}>{domainFromURL(url)}</a>
+        <div className="article-urlandauthors"><a className="article-url" href={url}>{domainFromURL(url)}</a>{authorsStr ? <span className="article-authors"> by {authors}</span> : null }</div>
         <ul className="article-tags">
             {tags.map((tag, tagIndex) => <li key={tagIndex}>{tag}</li>)}
         </ul>
@@ -25,7 +26,8 @@ ResourceItem.propTypes = {
     ),
     tags: PropTypes.array,
     thumbnailUrl: PropTypes.string,
-    defaultThumbnailClass: PropTypes.string
+    defaultThumbnailClass: PropTypes.string,
+    authors: PropTypes.array
 };
 
 function domainFromURL(url) {
