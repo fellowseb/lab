@@ -65,16 +65,19 @@ function onMenuBtnClick(event) {
  */
 function onNavItemClick(event) {
     closeMenu();
-    if (window.scrollBy) {
-        event.preventDefault();
-        var anchorID = event.target.href.substr(
-            event.target.href.indexOf('#') + 1);
-        var anchorElem = document.querySelectorAll('a[name=' + anchorID + ']')[0];
-        window.scrollBy({
-            top: anchorElem.offsetTop - window.pageYOffset,
-            left: 0,
-            behavior: 'smooth'
-        });
+    if (window.scrollBy && event.target.tagName.toUpperCase() === 'A') {
+        var hashPos = event.target.href.indexOf('#');
+        if (hashPos >= 0) {
+            event.preventDefault();
+            var anchorID = event.target.href.substr(
+                event.target.href.indexOf('#') + 1);
+            var anchorElem = document.querySelectorAll('a[name=' + anchorID + ']')[0];
+            window.scrollBy({
+                top: anchorElem.offsetTop - window.pageYOffset,
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
     }
     event.stopPropagation();
 }
@@ -122,7 +125,7 @@ function onNavBgdTouchMove(event) {
         $menunav.addEventListener('click', onNavBgdClick);
         $menunav.addEventListener('touchmove', onNavBgdTouchMove, false);
         var $menunavlinks = $menunav.querySelectorAll('.menu-nav-link');
-        Array.prototype.forEach.call($menunavlinks, function($menunavlink, i) {
+        Array.prototype.forEach.call($menunavlinks, function ($menunavlink, i) {
             $menunavlink.addEventListener('click', onNavItemClick);
         });
     }
