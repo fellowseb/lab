@@ -6,8 +6,8 @@ const ResourceItem = ({ title = '[untitled article]', url = '', tags = [], thumb
     const authorsStr = authors.length ? authors[0] : '';
     return (<li className='article-item clear'>
         <picture className={defaultThumbnailClasses}></picture>
-        <a className="article-title" href={url}>{title}</a>
-        <div className="article-urlandauthors"><a className="article-url" href={url}>{domainFromURL(url)}</a>{authorsStr ? <span className="article-authors"> by {authors}</span> : null }</div>
+        <a className="article-title" href={url} target="_blank">{title}</a>
+        <div className="article-urlandauthors"><a className="article-url" href={url} target="_blank">{domainFromURL(url)}</a>{authorsStr ? <span className="article-authors"> by {authors}</span> : null }</div>
         <ul className="article-tags">
             {tags.map((tag, tagIndex) => <li key={tagIndex}>{tag}</li>)}
         </ul>
