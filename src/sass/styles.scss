@@ -100,7 +100,8 @@ select {
     z-index: 99999999999;
     background: $darkBackgroundColor;
     border-bottom: 1px solid #c1b79a;
-    .logo {        
+    .logo {
+        cursor: default;
         font-family: "alex_brushregular";
         font-size: 1.8em;
         @include forLargeScreens(700) {
@@ -245,7 +246,13 @@ select {
 
 .anchor {
     position: relative;
-    top: -3em;
+    top: -2.4em;
+    @include forLargeScreens(700) {
+        top: -2.8em;
+    }
+    @include forLargeScreens(768) {
+        top: -3em;
+    }
 }
 
 .page {
