@@ -102,7 +102,7 @@ select {
     border-bottom: 1px solid #c1b79a;
     .logo {        
         font-family: "alex_brushregular";
-        font-size: 1.6em;
+        font-size: 1.8em;
         @include forLargeScreens(700) {
             font-size: 2em;
         }
@@ -110,7 +110,7 @@ select {
             font-size: 2.2em;
         }
         text-align: left;
-        padding: 0 0.4em;
+        padding: 0 0.2em;
         color: $lightFontColor;
         display: inline-block; 
     }
@@ -243,13 +243,18 @@ select {
     align-items: stretch;
 }
 
+.anchor {
+    position: relative;
+    top: -3em;
+}
+
 .page {
-    border-bottom: 10px solid #c1b79a;
+    border-bottom: 1px solid #c1b79a;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1em;
+    padding: 2em 1em 2em 1em;
     @include forLargeScreens(700) {
         padding: 3em 1em 3em 1em;
     }

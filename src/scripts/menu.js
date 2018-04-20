@@ -65,6 +65,17 @@ function onMenuBtnClick(event) {
  */
 function onNavItemClick(event) {
     closeMenu();
+    if (window.scrollBy) {
+        event.preventDefault();
+        var anchorID = event.target.href.substr(
+            event.target.href.indexOf('#') + 1);
+        var anchorElem = document.querySelectorAll('a[name=' + anchorID + ']')[0];
+        window.scrollBy({
+            top: anchorElem.offsetTop - window.pageYOffset,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
     event.stopPropagation();
 }
 
