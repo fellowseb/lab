@@ -123,6 +123,7 @@
     list-style: none;
     margin: 3px 0;
     padding: 0;
+    flex-wrap: wrap;
 }
 
 .article-tags li {
@@ -212,6 +213,7 @@
 .bookcarousel-container {
     background: #c1b79a;
     border: 1px solid #b0a78c;
+    padding: 10px;
 }
 
 .bookcarousel-list {
@@ -221,6 +223,8 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .bookcarousel-item {
@@ -233,6 +237,8 @@
     flex: 0 0 140px;
     margin-right: 2px;
     margin-left: 2px;
+    max-width: 140px;
+    overflow: hidden;
 }
 
 .bookcarousel-item-desc {
@@ -247,6 +253,8 @@
 .bookcarousel-item-title {
     font-size: 80%;
     text-decoration: underline;
+    max-height: 6em;
+    overflow: hidden;
 }
 
 a.bookcarousel-item-overlay {

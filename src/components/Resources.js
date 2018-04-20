@@ -62,7 +62,7 @@ class Resources extends React.Component {
                         filteredTag={filteredTag}
                         apiUrl={apiUrl}
                         apiEndpoint='/books'
-                        count={4}
+                        count={30}
                         title='Books'
                         ResourceFeedDisplayComp={BookCarousel}/>
                 </div>
