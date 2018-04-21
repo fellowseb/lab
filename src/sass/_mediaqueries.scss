@@ -1,6 +1,0 @@
-// Mobile-first
-@mixin forLargeScreens($media) {
-    @media screen and (min-width: $media/16+em) {
-        @content;
-    }
-}
