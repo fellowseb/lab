@@ -11,13 +11,25 @@ import Loader from './Loader';
  * @extends React.Component
  */
 class ResourceFeed extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            resources: [],
+            error: null,
+            loading: false,
+            totalCount: 0,
+            filteredCount: 0,
+            next: null,
+            prev: null
+        };
+    }
     componentWillReceiveProps(nextProps) {
         updateComponentState(this, nextProps);
     }
     shouldComponentUpdate(nextProps, nextState) {
         return true;
     }
-    componentWillMount() {
+    componentDidMount() {
         updateComponentState(this, this.props);
     }
     render() {
@@ -45,7 +57,7 @@ class ResourceFeed extends React.Component {
                 .toArray(children)
                 .filter(c => c.type === child)[0];
 
-        const ResourceFeedContentSelect = ({error = null, loading = false, children}) =>
+        const ResourceFeedContentSelect = ({ error = null, loading = false, children }) =>
             loading
                 ? findChild(children, Loader)
                 : (
@@ -55,16 +67,16 @@ class ResourceFeed extends React.Component {
                 );
         return (
             <div className='articles-container'>
-                <ResourceFeedHeader title={title} totalCount={totalCount} filteredCount={filteredCount}/>
+                <ResourceFeedHeader title={title} totalCount={totalCount} filteredCount={filteredCount} />
                 <ResourceFeedContentSelect error={error} loading={loading}>
                     <Loader />
-                    <ErrorDisplay error={error}/>
+                    <ErrorDisplay error={error} />
                     <ResourceFeedDisplayComp
                         resources={resources}
                         hasNextPage={!!next}
                         hasPrevPage={!!prev}
                         onNextPage={onNextPage}
-                        onPrevPage={onPrevPage}/>
+                        onPrevPage={onPrevPage} />
                 </ResourceFeedContentSelect>
             </div>
         );
@@ -88,9 +100,9 @@ ResourceFeed.defaultProps = {
     title: 'Resources'
 };
 
-const ResourceFeedHeader = ({title = 'Resources',
+const ResourceFeedHeader = ({ title = 'Resources',
     totalCount = 0,
-    filteredCount = 0}) => {
+    filteredCount = 0 }) => {
     const totalStr = totalCount === filteredCount
         ? ` (${totalCount})`
         : ` (${filteredCount} of ${totalCount})`;
@@ -105,7 +117,7 @@ ResourceFeedHeader.propTypes = {
 
 // Helper functions
 
-const updateComponentState = (component, {filteredTag, count, apiUrl, apiEndpoint}, link) => {
+const updateComponentState = (component, { filteredTag, count, apiUrl, apiEndpoint }, link) => {
     component.setState({ loading: true });
     retrieveResources(apiUrl, apiEndpoint, filteredTag, count, link)
         .then(resources => {
