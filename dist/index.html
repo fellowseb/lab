@@ -1,0 +1,269 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Sébastien Wauquier (a.k.a. fellowseb)'s personal code lab">
+    <meta name="keywords" content="codelab,Sébastien,Wauquier,fellowseb,experiment,software,engineer">
+    <meta name="author" content="Sébastien Wauquier">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fellowseb's code lab</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet"></link>
+    <link href="./css/loader.css" rel="stylesheet"></link>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <script lang="text/javascript" src="./scripts/menu.js"></script>
+</head>
+
+<body>
+    <div id="svg-sprites-symbols">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol viewBox="0 0 8.204 4.106" preserveAspectRatio="none" id="arrowdown" xmlns="http://www.w3.org/2000/svg"><path class="icon-arrows" d="M6.155 2.057l-2.053 2.05-2.049-2.054L0 0h2.065l1.02 1.02 1.017 1.021 1.025-1.02L6.147 0l1.029.004 1.028.004z" fill="#aba288"/><path d="M2.065 0l2.037 2.041L6.147 0z" fill="#333"/></symbol><symbol viewBox="0 0 8.204 4.106" preserveAspectRatio="none" id="arrowup" xmlns="http://www.w3.org/2000/svg"><path class="icon-arrows" d="M2.05 2.049L4.101 0l2.05 2.053 2.052 2.053H6.14l-1.02-1.02-1.017-1.02-1.025 1.02-1.02 1.02-1.029-.004L0 4.098z" fill="#aba288"/><path d="M4.098 2.065L6.14 4.106H2.057z" fill="#333"/></symbol><symbol viewBox="0 0 11.037 8.83" id="books" xmlns="http://www.w3.org/2000/svg"><path d="M2.54 8.156C1.443 7.788.5 7.46.441 7.429c-.3-.165-.52-.99-.413-1.542.031-.157.1-.35.155-.43.128-.183.128-.184-.058-.222C-.03 5.203-.03 5.2.065 5.106c.053-.053.228-.142.39-.197.339-.116.39-.213.34-.646-.04-.337-.165-.543-.411-.672-.273-.143-.269-.28.01-.357.296-.081.296-.081.164-.315-.249-.44-.29-1.223-.085-1.634C.633.963.797.892 1.66.77L4.738.33 7.055 0 8.47.437c2.47.764 2.372.729 2.372.84 0 .065-.056.124-.16.168a.933.933 0 0 0-.27.19c-.13.142-.225.59-.182.856.028.171.05.193.284.271.32.107.524.213.524.27 0 .024-.116.072-.257.106a2.545 2.545 0 0 0-.293.082c-.018.011.015.105.074.208.093.16.108.26.105.692-.003.543-.094.856-.317 1.085-.088.09-.096.12-.042.156a.286.286 0 0 0 .124.044c.096.001.113.14.026.213a1.042 1.042 0 0 1-.215.129.562.562 0 0 0-.21.18c-.1.157-.167.582-.129.822.028.176.046.192.335.292.333.114.526.26.403.302-.171.06-6.001 1.492-6.052 1.487a91.998 91.998 0 0 1-2.05-.674zm2.114-.606c0-.656-.003-.676-.11-.708-.061-.019-.956-.317-1.99-.663C1.521 5.833.637 5.563.59 5.58.276 5.68.25 6.724.553 7.018c.08.077.456.209 1.236.432.617.177 1.497.432 1.956.567.46.135.852.236.872.226.02-.011.037-.324.037-.694zm4.869-.483l.18-.049.02-.49c.01-.27.037-.533.06-.583.033-.076.02-.086-.078-.063-.064.014-.768.164-1.565.331-.796.167-1.587.351-1.757.409-.17.057-.337.093-.37.08-.035-.014-.305.025-.6.086l-.538.11-.014.685-.013.686 2.247-.577c1.237-.317 2.33-.598 2.428-.625zm-3.69-1.623l-.025-.668-.639-.137C2.58 4.084.906 3.741.887 3.76c-.012.013.006.076.04.141.038.07.064.299.064.561.001.403.01.445.101.468l2.334.598c1.23.315 2.279.576 2.333.579.094.005.097-.019.073-.663zm2.242.118c1.049-.303 1.94-.565 1.983-.582.158-.065.261-.343.282-.762.024-.46-.057-.706-.249-.755-.067-.017-.66.157-1.533.45-.784.262-1.673.56-1.977.66l-.552.184v.52c0 .546.035.835.1.835.022 0 .898-.248 1.946-.55zM4.967 3.836c.017-.087.03-.392.03-.678v-.521L3.04 1.979C1.963 1.617 1.035 1.32.977 1.32c-.174 0-.3.274-.3.65 0 .387.076.673.215.806.068.064.77.292 2.019.654a96.44 96.44 0 0 0 1.97.559c.03.002.069-.067.086-.154zm2.684-.45l2.383-.609.004-.438c.001-.241.028-.5.058-.577.03-.076.036-.139.012-.139-.112 0-4.845 1.02-4.873 1.05-.056.058-.071 1.32-.016 1.322.027 0 1.121-.273 2.432-.609z"/></symbol><symbol viewBox="0 0 10.53 8.424" id="code" xmlns="http://www.w3.org/2000/svg"><g style="line-height:1.25;-inkscape-font-specification:'Poplar Std'" aria-label="{ }" font-weight="400" font-size="69.573" font-family="Gill Sans Ultra Bold" letter-spacing="0" word-spacing="0"><path style="-inkscape-font-specification:'Gill Sans Ultra Bold, '" d="M0 4.955V3.47q.481 0 .7-.224.224-.228.224-.724v-.754q0-.978.429-1.372Q1.78 0 2.786 0h.772v1.438H3.38q-.428 0-.58.198-.148.197-.148.771v.242q0 1.355-.862 1.552v.022q.862.197.862 1.552v.241q0 .575.147.772.153.198.581.198h.177v1.438h-.772q-1.029 0-1.448-.404-.414-.403-.414-1.363v-.755q0-.49-.22-.719Q.487 4.955 0 4.955zM10.53 3.469v1.486q-.486 0-.71.228-.219.224-.219.72v.754q0 .978-.428 1.372-.424.395-1.434.395h-.772V6.986h.177q.428 0 .58-.198.153-.197.153-.772v-.24q0-1.356.857-1.553V4.2q-.857-.197-.857-1.552v-.242q0-.56-.152-.763-.148-.206-.581-.206h-.177V0h.772q1.033 0 1.448.403.414.404.414 1.364v.754q0 .492.22.72.223.228.709.228z"/></g></symbol><symbol viewBox="0 0 8.087 8.72" id="github" xmlns="http://www.w3.org/2000/svg"><path d="M2.903 7.476C.829 8.098.829 6.439 0 6.232M5.806 8.72V7.115a1.398 1.398 0 0 0-.39-1.082c1.302-.145 2.67-.639 2.67-2.903a2.256 2.256 0 0 0-.621-1.555A2.103 2.103 0 0 0 7.427.01s-.489-.145-1.621.614a5.549 5.549 0 0 0-2.903 0C1.771-.134 1.281.01 1.281.01a2.103 2.103 0 0 0-.037 1.564 2.256 2.256 0 0 0-.622 1.567c0 2.248 1.369 2.741 2.67 2.903a1.398 1.398 0 0 0-.389 1.07V8.72"/></symbol><symbol viewBox="0 0 7.308 8.995" id="lab" xmlns="http://www.w3.org/2000/svg"><path d="M1.168 8.964C.37 8.795-.157 8.036.042 7.341c.03-.104.502-.929 1.05-1.832l.995-1.642.004-1.4.003-1.4-.37-.02c-.356-.02-.374-.026-.524-.17-.126-.121-.156-.182-.155-.32 0-.22.138-.419.34-.493.231-.085 4.311-.085 4.543 0A.49.49 0 0 1 6.092.9c-.131.116-.173.128-.508.146l-.366.02.004 1.4.003 1.4.996 1.643c.547.903 1.02 1.728 1.05 1.832.08.283.029.63-.138.93-.158.282-.397.48-.755.625-.223.09-.232.091-2.63.098-1.325.004-2.486-.01-2.58-.03zm5.127-.424c.402-.19.634-.561.601-.962-.018-.21-.108-.378-1.039-1.911l-1.02-1.68-.022-1.46-.023-1.46H2.52l-.023 1.46-.023 1.46-1.019 1.68C.574 7.12.434 7.375.417 7.557c-.046.492.272.907.809 1.053.062.018 1.187.028 2.498.024 2.36-.007 2.387-.008 2.571-.094zm-5.114-.327C.962 8.11.802 7.838.838 7.63c.016-.09.342-.674.764-1.37l.736-1.214h2.637l.746 1.23c.826 1.362.855 1.44.646 1.739-.194.276-.144.271-2.718.271-2.164 0-2.32-.005-2.468-.074zm3.863-1.187c.426-.194.534-.723.212-1.046-.553-.555-1.548-.104-1.344.61a.787.787 0 0 0 .505.494c.178.047.451.022.627-.058zM3.275 4.33c-.342-.282-.045-.785.419-.708.231.038.371.193.371.41 0 .153-.022.198-.148.297a.487.487 0 0 1-.642 0zm.72-2.026c-.154-.145-.146-.36.018-.484.327-.247.783.038.619.388-.068.145-.168.198-.374.198a.358.358 0 0 1-.262-.102z"/></symbol><symbol viewBox="0 0 9.106 8.651" id="linkedin" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.91 -.91) scale(.45531)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle r="2" cy="4" cx="4"/></g></symbol><symbol viewBox="0 0 9.924 7.167" id="menu" xmlns="http://www.w3.org/2000/svg"><g color="#000" font-weight="400" font-family="sans-serif" white-space="normal"><path d="M0 3.13v.887h9.924v-.888zM0 0v.901h9.924V0zM0 6.266v.901h9.924v-.901z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal" overflow="visible"/></g></symbol><symbol viewBox="0 0 7.854 7.854" id="menuclose" xmlns="http://www.w3.org/2000/svg"><g color="#000" font-weight="400" font-family="sans-serif" white-space="normal"><path d="M7.347 0L0 7.347l.507.507L7.854.507z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal" overflow="visible"/><path d="M.507 0L0 .507l7.347 7.347.507-.507z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal" overflow="visible"/></g></symbol><symbol viewBox="0 0 7.98 7.601" id="umbrella" xmlns="http://www.w3.org/2000/svg"><path class="icon-logo" d="M6.907 7.584c.183-.041.326-.11.472-.226.377-.3.486-.824.25-1.205-.035-.055-.032-.056-.188.047-.05.032-.095.06-.102.063-.008.003-.004.016.007.03a.63.63 0 0 1 .09.2c.01.04.012.106.008.177a.465.465 0 0 1-.062.226.728.728 0 0 1-.649.412c-.254 0-.42-.103-.577-.358l-.072-.115a102.156 102.156 0 0 1-.39-.625l-.103-.166a93.788 93.788 0 0 1-.352-.566 83.544 83.544 0 0 1-.387-.62 120.859 120.859 0 0 1-.513-.825l-.045-.068.016-.112c.021-.152.065-.287.136-.42.075-.141.139-.224.26-.337a1.232 1.232 0 0 1 1.503-.113c.042.029.079.05.082.046a.255.255 0 0 0-.008-.08c-.04-.215.01-.516.121-.727a1.38 1.38 0 0 1 .379-.446 1.254 1.254 0 0 1 1.096-.169c.052.018.098.03.101.027.007-.006-.24-.259-.34-.35A4.59 4.59 0 0 0 5.7.258 4.142 4.142 0 0 0 4.58.123c-.336.001-.523.016-.787.063-.46.081-.881.223-1.3.437-.2.102-.211.106-.227.083A27.892 27.892 0 0 0 1.84.163L1.71 0l-.034.02a.822.822 0 0 0-.063.043l-.03.022.03.063c.016.034.053.106.082.159a21.115 21.115 0 0 1 .259.485L2.01.9l-.03.023c-.017.014-.068.051-.113.084a4.938 4.938 0 0 0-.77.714 4.604 4.604 0 0 0-.77 4.681l.024.06.015-.124c.027-.228.124-.467.257-.633a1.233 1.233 0 0 1 1.632-.27c.048.032.09.055.093.053a.366.366 0 0 0-.008-.081c-.06-.366.09-.794.37-1.059.142-.133.302-.229.475-.281.255-.078.487-.08.728-.007.087.027.096.034.127.087.018.031.063.104.099.16a20.82 20.82 0 0 1 .351.563c.028.042.066.103.085.134a78.641 78.641 0 0 1 .567.909 1416.08 1416.08 0 0 1 .764 1.222c.145.231.286.348.51.424.128.043.36.055.49.025z"/></symbol></svg>
+    </div>
+    <header class="masthead" role="banner">
+        <button id="menu-button" class="menu-button">
+            <svg id="menu-button-svg-open" class="icon-menubtn">
+                <use xlink:href="#menu" href="#menu" />
+            </svg>
+            <svg id="menu-button-svg-close" class="icon-menubtn">
+                <use xlink:href="#menuclose" href="#menuclose" />
+            </svg>
+        </button>
+        <div class="logo">
+            <svg id="logo-umbrella" class="icon-logo">
+                <use xlink:href="#umbrella" href="#umbrella" />
+            </svg>fellow<span class="seb">seb</span>
+        </div>
+        <nav id="menu-nav" role="navigation">
+            <ul>
+                <li>
+                    <a href="#about" id="menu-nav-link-about" class="menu-nav-link">About</a>
+                </li>
+                <li>
+                    <a href="#brainfuel" id="menu-nav-link-brainfuel" class="menu-nav-link">Resources</a>
+                </li>
+                <li>
+                    <a href="#labo" id="menu-nav-link-labo" class="menu-nav-link">Experiments</a>
+                </li>
+                <li>
+                    <a href="https://github.com/fellowseb" target="_blank" class="menu-nav-link menu-nav-link-github">
+                        <svg class="icon-links">
+                            <use xlink:href="#github" href="#github" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/sebastienwauquier" target="_blank" class="menu-nav-link menu-nav-link-linkedin">
+                        <svg class="icon-links">
+                            <use xlink:href="#linkedin" href="#linkedin" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container" role="main">
+        <a name="about" class="anchor"></a>
+        <section class="page page-purpose">
+            <div class="purpose-container">
+                <div class="purpose-container-who">
+                    <header>
+                        <p class="purpose-title">Who am I ?</p>
+                    </header>
+                    <figure>
+                        <svg class="icon-purpose">
+                            <use xlink:href="#code" href="#code" />
+                        </svg>
+                    </figure>
+                    <p class="purpose-desc">My name is
+                        <strong>S&eacute;bastien Wauquier</strong>.
+                        <br/> I'm a Software Engineer. In the past years I've dealt with real-time 3D apps on desktop (in C++)
+                        or in the browser (JavaScript).
+                    </p>
+                </div>
+                <div class="purpose-container-what">
+                    <header>
+                        <p class="purpose-title">What is this ?</p>
+                    </header>
+                    <figure>
+                        <svg class="icon-purpose">
+                            <use xlink:href="#lab" href="#lab" />
+                        </svg>
+                    </figure>
+                    <p class="purpose-desc">This is my
+                        <strong>virtual laboratory</strong>.
+                        <br/>I intend to experiment cool tech stuff and maybe later extend it to art and life in general.
+                    </p>
+                </div>
+                <div class="purpose-container-why">
+                    <header>
+                        <p class="purpose-title">What's the point ?</p>
+                    </header>
+                    <figure>
+                        <svg class="icon-purpose">
+                            <use xlink:href="#books" href="#books" />
+                        </svg>
+                    </figure>
+                    <p class="purpose-desc">I believe one should always
+                        <strong>keep on learning</strong>.
+                        <br/>There are so many things to discover, to read, to share!
+                    </p>
+                </div>
+            </div>
+        </section>
+        <a name="brainfuel" class="anchor"></a>
+        <section id="page-brainfuel" class="page page-brainfuel"></section>
+        <a name="labo" class="anchor"></a>
+        <section class="page page-experiments">
+            <div class="filter-experiments-container">
+                <p>There's a total of
+                    <strong>2 experiment(s)</strong>, wow!
+                </p>
+            </div>
+            <div class="experiments-container">
+                <article class="experiment-container">
+                    <section class="experiment-header">
+                        <header>
+                            <h1>2 - Display a selection of articles, talks and books that fuel my brain</h1>
+                        </header>
+                    </section>
+                    <section class="experiment-content">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tasks" title="Tasks"></span>I used...
+                        </p>
+                        <ul>
+                            <li>A NoSQL DB to store the data (DynamoDB)</li>
+                            <li>A serverless architecture to serve
+                                <br/> my APIs (AWS API Gateway, Lambda, S3...)</li>
+                            <li>React.JS components (and Babel) to render the feeds</li>
+                            <li>High-Order components to get code reusability</li>
+                            <li>Functional JavaScript</li>
+                            <li>React Native to build a back-end app</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-resources">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-link" title="Resources"></span>Resources
+                        </p>
+                        <ul class="experiment-resources-container">
+                            <li class="experiment-resource experiment-resource-book">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-book" title="Book"></span>
+                                    <a target="_blank" href="https://www.amazon.com/Learning-React-Functional-Development-Redux/dp/1491954620">Learning React: Functional Web Development with React and Redux</a>
+                                    <br/>ed O'Reilly, ISBN978-1491954621
+                                    <br/>by Alex Banks &amp; Eve Porcello
+                                </p>
+                            </li>
+                            <li class="experiment-resource experiment-resource-book">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-book" title="Book"></span>
+                                    <a target="_blank" href="https://www.amazon.com/Functional-Light-JavaScript-Balanced-Pragmatic-FP/dp/1981672346">Functional-Light JavaScript</a>
+                                    <br/>ed CreateSpace Independent Publishing Platform, ISBN978-1981672349
+                                    <br/>by Kyle Simpson
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="experiment-results">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-chart-line" title="Results"></span>Results
+                        </p>
+                        <ul>
+                            <li>The 'Resources' section</li>
+                            <li>GitHub repo</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-tags">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tags" title="Tags"></span>Tags
+                        </p>
+                        <ul>
+                            <li>NoSQL</li>
+                            <li>DynamoDB</li>
+                            <li>Serverless</li>
+                            <li>React.JS</li>
+                            <li>React Native</li>
+                            <li>Functional Programming</li>
+                        </ul>
+                    </section>
+                </article>
+                <article class="experiment-container">
+                    <section class="experiment-header">
+                        <header>
+                            <h1>1 - Build a static website for my code lab</h1>
+                        </header>
+                    </section>
+                    <section class="experiment-content">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tasks" title="Tasks"></span>I used...
+                        </p>
+                        <ul>
+                            <li>Flexbox layout, media-queries, RWD techniques</li>
+                            <li>A CSS preprocessing tool</li>
+                            <li>A CSS auto-prefixer to handle old browsers</li>
+                            <li>Semantic HTML5 tags and ARIA roles for accessibility</li>
+                            <li>SVG sprites and fragments</li>
+                            <li>Web &amp; icon fonts</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-resources">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-link" title="Resources"></span>Resources
+                        </p>
+                        <ul class="experiment-resources-container">
+                            <li class="experiment-resource experiment-resource-book">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-book" title="Book"></span>
+                                    <a target="_blank" href="https://lire.amazon.fr/kp/embed?asin=B012GGB7OI&amp;preview=newtab&amp;linkCode=kpe&amp;ref_=cm_sw_r_kb_dp_azgEAbST4WP3A">Mastering Responsive Web Design</a>
+                                    <br/>ed Packt Publishing, ISBN978-1783550234
+                                    <br/>by Ricardo Zea
+                                </p>
+                            </li>
+                            <li class="experiment-resource experiment-resource-article">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-bookmark" title="Article"></span>
+                                    <a target="_blank" href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a>
+                                    <br/>by Chris Coyier
+                                </p>
+                            </li>
+                            <li class="experiment-resource experiment-resource-article">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-bookmark" title="Article"></span>
+                                    <a target="_blank" href="https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/">An Overview of SVG Sprite Creation Techniques</a>
+                                    <br/>by Sara Soueidan
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="experiment-results">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-chart-line" title="Results"></span>Results
+                        </p>
+                        <ul>
+                            <li>This site !</li>
+                            <li>GitHub repo</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-tags">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tags" title="Tags"></span>Tags
+                        </p>
+                        <ul>
+                            <li>RWD</li>
+                            <li>accessibility</li>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>Sass</li>
+                            <li>SVG</li>
+                        </ul>
+                    </section>
+                </article>
+            </div>
+        </section>
+    </main>
+    <script lang="text/javascript" src="./bundle.js"></script>
+</body>
+
+</html>
