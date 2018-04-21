@@ -83,6 +83,18 @@ function sassTask() {
 sassTask.description = 'Preprocess scss files';
 gulp.task('sass', sassTask);
 
+// Gulp task to generate CSS from SCSS files
+function sassTaskDev() {
+    return gulp.src(configuration.paths.src.scss)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer({
+            cascade: false
+        }))
+        .pipe(gulp.dest(configuration.paths.dist + '/css'));
+};
+sassTask.description = 'Preprocess scss files (dev)';
+gulp.task('sass-dev', sassTaskDev);
+
 gulp.task('sass:watch', function() {
     gulp.watch('./sass/**/*.scss', ['sass']);
 });
@@ -95,13 +107,15 @@ cleanTask.description = 'Clean dist folder';
 gulp.task('clean', cleanTask);
 
 // Gulp build components task
-function buildComponents() {
+function buildComponents(webpackFile) {
     return gulp.src(configuration.paths.entry)
-        .pipe(gulpWebpack(require('./webpack.dev.js'), webpack))
+        .pipe(gulpWebpack(require(webpackFile), webpack))
         .pipe(gulp.dest(configuration.paths.dist));
 }
 buildComponents.description = 'Build components';
-gulp.task('components', buildComponents);
+gulp.task('components', buildComponents.bind(this, './webpack.prod.js'));
+gulp.task('components-dev', buildComponents.bind(this, './webpack.dev.js'));
 
 // Gulp build task
 gulp.task('build', gulp.series('svgSprites', 'html', 'sass', 'components'));
+gulp.task('build-dev', gulp.series('svgSprites', 'html', 'sass-dev', 'components-dev'));
