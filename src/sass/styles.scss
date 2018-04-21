@@ -210,21 +210,20 @@ select {
             margin: 0;
             padding: 0;
         }
-        li a {
+        li a.menu-nav-link {
             text-decoration: none;
             margin: 0.25em;            
             padding: 0.25em 0.5em;
             color: #c1b79a;
-            // border-radius: 20px;
-            // background: #5c5c5c;
             display: inline-block;
             width: 93%;
             box-sizing: border-box;            
         }
-        li a:hover { 
-            // background: #CCC;
-            // color: #333;
+        li a.menu-nav-link:hover {
             text-decoration: underline;       
+        }
+        li a.menu-nav-link-current {
+            color: #ddd;
         }
         .menu-nav-link-github,
         .menu-nav-link-linkedin,
@@ -262,9 +261,9 @@ select {
     flex-direction: column;
     align-items: center;
     padding: 2em 1em 2em 1em;
-    @include forLargeScreens(700) {
-        padding: 3em 1em 3em 1em;
-    }
+    // @include forLargeScreens(700) {
+    //     padding: 3em 1em 3em 1em;
+    // }
     .anchor {
         position: absolute;
         top: $headerHeight;
@@ -336,40 +335,45 @@ strong {
 }
 
 //
-// Brain fuel section
-//
-.page-brainfuel {
-    //background: #96865b;
-}
-
-//
 // Experiment article
 //
+
+.experiments-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    > * {
+        flex: 1 1 50%;
+    }
+}
 
 .experiment {
     &-container {
         padding: 0;
         border-radius: 10px 10px 0 0;
         border: 1px solid #a39f9c;
-        background: rgb(51, 51, 51);
-        color: #ddd;
+        background: #c1b79a;
         flex-direction: row;
         flex-wrap: wrap;
         margin: 2px;
-        > * {
+        max-width: 1400px;
+        display: flex;
+        > section {
             padding: 0;
-            flex: 1 100%;
         }
         section > ul {
-            padding: 0 1em;
+            padding: 0 0 0 1em;
         }
     }
     &-header {
-        background: #c1b79a;
-    border-radius: 10px 10px 0 0;
-    line-height: 2;
-    color: #333;
-    padding: 2px 12px;
+        background: #333;
+        border-radius: 10px 10px 0 0;
+        line-height: 2;
+        color: #ddd;
+        padding: 2px 12px;
+        flex: 2 2 100%;
         h1 {
             font-size: 1.2rem;
             //font-family: Palatino,"Palatino Linotype", serif;
@@ -400,7 +404,14 @@ strong {
             }
         }
     }
+    &-content, &-resources {
+        flex: 2 2 100%;
+        @include forLargeScreens(768) {
+            flex: 1 50%;
+        }
+    }
     &-results, &-tags {
+        flex: 2 2 100%;
         display: flex;
         flex-direction: column;
         margin: 0;
@@ -433,19 +444,11 @@ strong {
         margin: 0;
         font-weight: bold;
         padding: 0.25em 0.5em;
-        background: #3f3f3f;
+        background: #b4aa8f;
     }
     &-section-icon {
         margin-right: 0.25em;
     }
-}
-
-.experiments-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: center;
 }
 
 .filter-experiments-container {

@@ -5,6 +5,7 @@
     display: flex;
     flex-flow: row wrap;
     width: 100%;
+    max-width: 1400px;
 }
 
 .resources-filters-container {
@@ -19,10 +20,16 @@
 }
 
 .resources-talks-container {
-    margin-left: 4px;
+    margin: 0;
+    @include forLargeScreens(700) {
+        margin-left: 4px;
+    }
 }
 .resources-articles-container {
-    margin-right: 4px;
+    margin: 0;
+    @include forLargeScreens(700) {
+        margin-right: 4px;
+    }
 }
  
 .resources-talks-container,
@@ -177,6 +184,16 @@
     align-items: center;
 }
 
+.resourcelist-container {
+    position: relative;
+}
+
+.articles-prevpage {
+    position: absolute;
+    top: -20px;
+    left: calc(50% - 35px);
+}
+
 .disabled {
     cursor: default;
 }
@@ -200,10 +217,13 @@
 }
 
 .icon-arrows {
-    fill: #333;
     height: 20px;
     width: 70px;
-    pointer-events: none;
+    //pointer-events: none;
+}
+
+.icon-arrows:hover {
+    fill: #333;
 }
 
 .resources-books-container {
@@ -259,6 +279,12 @@
 
 a.bookcarousel-item-overlay {
     text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 .bookcarousel-item-authors {
