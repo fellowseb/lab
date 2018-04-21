@@ -360,19 +360,21 @@ strong {
         margin: 2px;
         max-width: 1400px;
         display: flex;
-        > section {
-            padding: 0;
-        }
-        section > ul {
-            padding: 0 0 0 1em;
-        }
+    }
+    &-container > section {
+        padding: 0;
+    }
+    &-container > section.experiment-header {
+        padding: 2px 12px;
+    }
+    &-container > section > ul {
+        padding: 0 0 0 1em;
     }
     &-header {
         background: #333;
         border-radius: 10px 10px 0 0;
         line-height: 2;
         color: #ddd;
-        padding: 2px 12px;
         flex: 2 2 100%;
         h1 {
             font-size: 1.2rem;
