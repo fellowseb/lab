@@ -25,39 +25,39 @@
     <header class="masthead" role="banner">
         <button id="menu-button" class="menu-button">
             <svg id="menu-button-svg-open" class="icon-menubtn">
-                <use xlink:href="#menu" href="#menu"/>
+                <use xlink:href="#menu" href="#menu" />
             </svg>
             <svg id="menu-button-svg-close" class="icon-menubtn">
-                <use xlink:href="#menuclose" href="#menuclose"/>
+                <use xlink:href="#menuclose" href="#menuclose" />
             </svg>
         </button>
         <div class="logo">
             <svg id="logo-umbrella" class="icon-logo">
-                <use xlink:href="#umbrella" href="#umbrella"/>
+                <use xlink:href="#umbrella" href="#umbrella" />
             </svg>fellow<span class="seb">seb</span>
         </div>
         <nav id="menu-nav" role="navigation">
             <ul>
                 <li>
-                    <a href="#about" class="menu-nav-link">About</a>
+                    <a href="#about" id="menu-nav-link-about" class="menu-nav-link">About</a>
                 </li>
                 <li>
-                    <a href="#brainfuel" class="menu-nav-link">Resources</a>
+                    <a href="#brainfuel" id="menu-nav-link-brainfuel" class="menu-nav-link">Resources</a>
                 </li>
                 <li>
-                    <a href="#labo" class="menu-nav-link">Experiments</a>
+                    <a href="#labo" id="menu-nav-link-labo" class="menu-nav-link">Experiments</a>
                 </li>
                 <li>
                     <a href="https://github.com/fellowseb" target="_blank" class="menu-nav-link menu-nav-link-github">
                         <svg class="icon-links">
-                            <use xlink:href="#github" href="#github"/>
+                            <use xlink:href="#github" href="#github" />
                         </svg>
                     </a>
                 </li>
                 <li>
                     <a href="https://www.linkedin.com/in/sebastienwauquier" target="_blank" class="menu-nav-link menu-nav-link-linkedin">
                         <svg class="icon-links">
-                            <use xlink:href="#linkedin" href="#linkedin"/>
+                            <use xlink:href="#linkedin" href="#linkedin" />
                         </svg>
                     </a>
                 </li>
@@ -74,7 +74,7 @@
                     </header>
                     <figure>
                         <svg class="icon-purpose">
-                            <use xlink:href="#code" href="#code"/>
+                            <use xlink:href="#code" href="#code" />
                         </svg>
                     </figure>
                     <p class="purpose-desc">My name is
@@ -89,7 +89,7 @@
                     </header>
                     <figure>
                         <svg class="icon-purpose">
-                            <use xlink:href="#lab" href="#lab"/>
+                            <use xlink:href="#lab" href="#lab" />
                         </svg>
                     </figure>
                     <p class="purpose-desc">This is my
@@ -103,7 +103,7 @@
                     </header>
                     <figure>
                         <svg class="icon-purpose">
-                            <use xlink:href="#books" href="#books"/>
+                            <use xlink:href="#books" href="#books" />
                         </svg>
                     </figure>
                     <p class="purpose-desc">I believe one should always
@@ -119,14 +119,80 @@
         <section class="page page-experiments">
             <div class="filter-experiments-container">
                 <p>There's a total of
-                    <strong>1 experiment(s)</strong>, wow!
+                    <strong>2 experiment(s)</strong>, wow!
                 </p>
             </div>
             <div class="experiments-container">
                 <article class="experiment-container">
                     <section class="experiment-header">
                         <header>
-                            <h1>Build a static website for my code lab</h1>
+                            <h1>2 - Display a selection of articles, talks and books that fuel my brain</h1>
+                        </header>
+                    </section>
+                    <section class="experiment-content">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tasks" title="Tasks"></span>I used...
+                        </p>
+                        <ul>
+                            <li>A NoSQL DB to store the data (DynamoDB)</li>
+                            <li>A serverless architecture to serve
+                                <br/> my APIs (AWS API Gateway, Lambda, S3...)</li>
+                            <li>React.JS components (and Babel) to render the feeds</li>
+                            <li>High-Order components to get code reusability</li>
+                            <li>Functional JavaScript</li>
+                            <li>React Native to build a back-end app</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-resources">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-link" title="Resources"></span>Resources
+                        </p>
+                        <ul class="experiment-resources-container">
+                            <li class="experiment-resource experiment-resource-book">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-book" title="Book"></span>
+                                    <a target="_blank" href="https://www.amazon.com/Learning-React-Functional-Development-Redux/dp/1491954620">Learning React: Functional Web Development with React and Redux</a>
+                                    <br/>ed O'Reilly, ISBN978-1491954621
+                                    <br/>by Alex Banks &amp; Eve Porcello
+                                </p>
+                            </li>
+                            <li class="experiment-resource experiment-resource-book">
+                                <p>
+                                    <span class="experiment-section-icon fas fa-book" title="Book"></span>
+                                    <a target="_blank" href="https://www.amazon.com/Functional-Light-JavaScript-Balanced-Pragmatic-FP/dp/1981672346">Functional-Light JavaScript</a>
+                                    <br/>ed CreateSpace Independent Publishing Platform, ISBN978-1981672349
+                                    <br/>by Kyle Simpson
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="experiment-results">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-chart-line" title="Results"></span>Results
+                        </p>
+                        <ul>
+                            <li>The 'Resources' section</li>
+                            <li>GitHub repo</li>
+                        </ul>
+                    </section>
+                    <section class="experiment-tags">
+                        <p class="experiment-section-title">
+                            <span class="experiment-section-icon fas fa-tags" title="Tags"></span>Tags
+                        </p>
+                        <ul>
+                            <li>NoSQL</li>
+                            <li>DynamoDB</li>
+                            <li>Serverless</li>
+                            <li>React.JS</li>
+                            <li>React Native</li>
+                            <li>Functional Programming</li>
+                        </ul>
+                    </section>
+                </article>
+                <article class="experiment-container">
+                    <section class="experiment-header">
+                        <header>
+                            <h1>1 - Build a static website for my code lab</h1>
                         </header>
                     </section>
                     <section class="experiment-content">
