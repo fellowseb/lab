@@ -74,7 +74,7 @@ strong{color:#dbd0b0;padding:0 4px;background:#333}.experiments-container{displa
 .bookcarousel-container{background:#c1b79a;border:1px solid #b0a78c;padding:10px}
 .bookcarousel-list{list-style:none;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:nowrap;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;margin:0;padding:0}
 .bookcarousel-item{list-style:none;display:block;height:180px;background:#333;color:#ddd;padding:4px;-webkit-box-flex:0;-ms-flex:0 0 140px;flex:0 0 140px;margin-right:2px;margin-left:2px;max-width:140px;overflow:hidden}
-.bookcarousel-item-desc{height:100%}.bookcarousel-item-thumbnail{width:100%;height:100%}
+.bookcarousel-item-desc{height:100%}.bookcarousel-item-thumbnail>img{width:100%;height:100%}
 .bookcarousel-item-title{font-size:80%;text-decoration:underline;max-height:6em;overflow:hidden}
 a.bookcarousel-item-overlay{text-decoration:none;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;width:100%}
 .bookcarousel-item-authors{font-size:60%}.book-tags{font-size:70%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;list-style:none;margin:3px 0;padding:0}
