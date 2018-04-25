@@ -20,7 +20,10 @@ const renderBooks = (books) => {
                     : null;
                 const thumbnailURL = book.thumbnailHREF
                     ? apiUrl + book.thumbnailHREF
-                    : '/images/nothumbnail.png';
+                    : '/images/nothumbnail';
+                const thumbnailURLPNG = thumbnailURL + '?type=.png';
+                const thumbnailURLWebP = thumbnailURL + '?type=.webp';
+                const thumbnailURLJP2 = thumbnailURL + '?type=.jp2';
                 let contElem = null;
                 const onMouseLeaveItem = event => {
                     var descElem = contElem.querySelector('.bookcarousel-item-desc');
@@ -38,7 +41,7 @@ const renderBooks = (books) => {
                 };
                 return <li key={book.resourceId}
                     className='bookcarousel-item'>
-                    <a className='bookcarousel-item-overlay' href={book.url} target="_blank" onMouseLeave={onMouseLeaveItem} ref={elem => { contElem = elem; }}>
+                    <a className='bookcarousel-item-overlay' href={book.url} target="_blank" rel="noopener" onMouseLeave={onMouseLeaveItem} ref={elem => { contElem = elem; }}>
                         <div className='bookcarousel-item-desc nodisplay'>
                             <p className='bookcarousel-item-title'>{book.title}</p>
                             {authorsStr}
@@ -46,7 +49,11 @@ const renderBooks = (books) => {
                                 {book.tags.map((tag, tagIndex) => <li key={tagIndex}>{tag}</li>)}
                             </ul>
                         </div>
-                        <img className='bookcarousel-item-thumbnail' src={thumbnailURL} onMouseEnter={onMouseEnterItem} />
+                        <picture className='bookcarousel-item-thumbnail' onMouseEnter={onMouseEnterItem}>
+                            <source srcSet={thumbnailURLWebP} type='image/webp'/>
+                            <source srcSet={thumbnailURLJP2} type='image/jp2'/>
+                            <img src={thumbnailURLPNG} />
+                        </picture>
                     </a>
                 </li>;
             })

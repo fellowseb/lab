@@ -199,14 +199,18 @@ function onNavBgdTouchMove(event) {
     var $menunav = document.getElementById('menu-nav');
     if ($menunav) {
         $menunav.addEventListener('click', onNavBgdClick);
-        $menunav.addEventListener('touchmove', onNavBgdTouchMove, false);
+        $menunav.addEventListener('touchmove', onNavBgdTouchMove, {
+            passive: false
+        });
         var $menunavlinks = $menunav.querySelectorAll('.menu-nav-link');
         Array.prototype.forEach.call($menunavlinks, function addListenerMenuLink($menunavlink, i) {
             $menunavlink.addEventListener('click', onNavItemClick);
         });
     }
     window.addEventListener('popstate', onPopState);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, {
+        passive: true
+    });
     if (window.pageYOffset === 0) {
         updateCurrentNav();
     }
