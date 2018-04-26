@@ -4,7 +4,6 @@ const del = require('del');
 const svgsprite = require('gulp-svg-sprite');
 const autoprefixer = require('gulp-autoprefixer');
 const uglifycss = require('gulp-uglifycss');
-const uglify = require('gulp-uglify');
 const inject = require('gulp-inject-string');
 const webpack = require('webpack');
 const gulpWebpack = require('webpack-stream');
@@ -39,9 +38,6 @@ function htmlTask() {
                 .pipe(gulp.dest(configuration.paths.dist));
             gulp.src('./src/favicon.ico')
                 .pipe(gulp.dest(configuration.paths.dist));
-            gulp.src(configuration.paths.src.scripts)
-                .pipe(uglify())
-                .pipe(gulp.dest(configuration.paths.dist + '/scripts'));
             gulp.src(configuration.paths.src.fonts)
                 .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
         });
