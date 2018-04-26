@@ -75,35 +75,34 @@ function setCurrentNav(menuLinkID) {
  */
 function onNavItemClick(event) {
     closeMenu();
-    if (window.scrollBy && event.target.tagName.toUpperCase() === 'A') {
-        var hashPos = event.target.href.indexOf('#');
-        if (hashPos >= 0) {
-            event.preventDefault();
-            var anchorID = event.target.href.substr(
-                event.target.href.indexOf('#') + 1);
-            var urlShardPos = window.location.href.lastIndexOf('#');
-            if (urlShardPos) {
-                window.history.pushState({
-                    currentMenuLink: event.target.id
-                },
-                document.title,
-                window.location.href.substr(0, urlShardPos) + '#' + anchorID);
-            } else {
-                window.history.pushState({
-                    currentMenuLink: event.target.id
-                },
-                document.title,
-                window.location.href + '#' + anchorID);
-            }
-            setCurrentNav(event.target.id);
-            event.target.classList.add('menu-nav-link-current');
-            var anchorElem = document.querySelectorAll('a[name=' + anchorID + ']')[0];
-            window.scrollBy({
-                top: anchorElem.offsetTop - window.pageYOffset,
-                left: 0,
-                behavior: 'smooth'
-            });
+    var linkElem = event.currentTarget;
+    var hashPos = linkElem.href.indexOf('#');
+    if (hashPos >= 0) {
+        event.preventDefault();
+        var anchorID = linkElem.href.substr(
+            linkElem.href.indexOf('#') + 1);
+        var urlShardPos = window.location.href.lastIndexOf('#');
+        if (urlShardPos) {
+            window.history.pushState({
+                currentMenuLink: linkElem.id
+            },
+            document.title,
+            window.location.href.substr(0, urlShardPos) + '#' + anchorID);
+        } else {
+            window.history.pushState({
+                currentMenuLink: linkElem.id
+            },
+            document.title,
+            window.location.href + '#' + anchorID);
         }
+        setCurrentNav(linkElem.id);
+        linkElem.classList.add('menu-nav-link-current');
+        var anchorElem = document.querySelectorAll('a[name=' + anchorID + ']')[0];
+        window.scrollBy({
+            top: anchorElem.offsetTop - window.pageYOffset,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
     event.stopPropagation();
 }
