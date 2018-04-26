@@ -35,7 +35,6 @@ body {
     @include forLargeScreens(700) {
         font-size: 21px;
     }
-    //font-weight: 300;
 }
 
 ul {
@@ -52,6 +51,10 @@ a {
 p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+}
+
+h1 {
+    font-weight: normal;
 }
 
 #svg-sprites-symbols {
@@ -261,9 +264,6 @@ select {
     flex-direction: column;
     align-items: center;
     padding: 2em 1em 2em 1em;
-    // @include forLargeScreens(700) {
-    //     padding: 3em 1em 3em 1em;
-    // }
     .anchor {
         position: absolute;
         top: $headerHeight;
@@ -355,40 +355,86 @@ strong {
         border-radius: 10px 10px 0 0;
         border: 1px solid #a39f9c;
         background: #c1b79a;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
         margin: 2px;
         max-width: 1400px;
         display: flex;
     }
-    &-container > section {
+    &-body {
+        flex-direction: row;
+        flex-wrap: wrap;
+        display: flex;
+        overflow-y: hidden;
+    }
+    @keyframes uncollapsebody {
+        from {
+            max-height: 0;
+        }
+        to {
+            max-height: 1000px;
+        }
+      }
+    &-body-uncollapsed {
+        animation-duration: 300ms;
+        animation-name: uncollapsebody;
+        animation-iteration-count: 1;
+        animation-direction: normal;
+    }
+    @keyframes collapsebody {
+        from {
+          max-height: 1000px;
+        }
+        to {
+          max-height: 0;
+        }
+      }
+    &-body-collapsed {
+        animation-duration: 300ms;
+        animation-name: collapsebody;
+        animation-iteration-count: 1;
+        animation-direction: normal;
+        max-height: 0;
+    }
+    &-container > * {
         padding: 0;
     }
     &-container > section.experiment-header {
         padding: 2px 12px;
     }
-    &-container > section > ul {
-        padding: 0 0 0 1em;
+    &-body > section {        
+        > ul {
+            padding: 0 0 0 1em;
+        }
     }
     &-header {
+        cursor: pointer;
         background: #333;
         border-radius: 10px 10px 0 0;
         line-height: 2;
         color: #ddd;
-        flex: 2 2 100%;
         h1 {
             font-size: 1.2rem;
-            //font-family: Palatino,"Palatino Linotype", serif;
             margin: 0;
         }
     }
+    &-header-uncollapsed h1 {
+        font-weight: bold;
+    }
+    &-header-collapsed {
+        color: #c1b79a;
+    }
+    &-header-collapsed:hover {
+        color: #DDD;
+    }
     &-resources {
+        padding: 0;
         &-container {
             list-style: none;
         }
     }
     &-results {
         display: flex;
+        padding: 0;
         > ul {
             list-style: none;
             display: inline-flex;
@@ -407,21 +453,27 @@ strong {
         }
     }
     &-content, &-resources {
+        padding: 0;
         flex: 2 2 100%;
         @include forLargeScreens(768) {
             flex: 1 50%;
         }
     }
-    &-results, &-tags {
+    &-results {
         flex: 2 2 100%;
+    }
+    &-results {
         display: flex;
         flex-direction: column;
         margin: 0;
     }
     &-tags {
+        background: #b4aa8f;
+        padding: 0.25em 0.5em;
         > ul {
             list-style: none;
             padding: 0;
+            margin: 0;
             display: inline-block;
             vertical-align: bottom;
             > li {
@@ -435,11 +487,6 @@ strong {
                 color: #333;
                 font-weight: bold;            
             }
-        }
-        ::after {
-            content: "";
-            display: block;
-            clear: both;
         }
     }
     &-section-title {
@@ -456,5 +503,6 @@ strong {
 .filter-experiments-container {
     max-width: 800px;
     width: 100%;
+    text-align: center;
 }
 @import "brainfuel.scss";
