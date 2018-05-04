@@ -103,6 +103,13 @@ select {
     z-index: 99999999999;
     background: $darkBackgroundColor;
     border-bottom: 1px solid #c1b79a;
+    .menu-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
     .logo {
         cursor: default;
         font-family: "alex_brushregular";
@@ -117,6 +124,7 @@ select {
         padding: 0 0.2em;
         color: $lightFontColor;
         display: inline-block; 
+        margin-left: -1em;
     }
     #logo-umbrella {
         display: inline-block;  
@@ -168,6 +176,7 @@ select {
         position: fixed;
         top: 2.4em;
         bottom: 0;
+        left: 0;
         width: 100%;
         background: rgba( #333, 0.95 );
         visibility: hidden;
@@ -233,7 +242,7 @@ select {
         .menu-nav-link-github:hover,
         .menu-nav-link-linkedin:hover {
             background: none;
-        }        
+        }
     }
 }
 
@@ -263,7 +272,10 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2em 1em 2em 1em;
+    padding: 2em 1em;
+    @include forLargeScreens(700) {
+        padding: 3em 1em;
+    }
     .anchor {
         position: absolute;
         top: $headerHeight;
