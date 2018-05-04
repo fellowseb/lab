@@ -12,7 +12,7 @@ const Experiment = props => {
     const headerClasses = 'experiment-header experiment-header' + collapsedSuffix;
     const bodyClasses = 'experiment-body experiment-body' + collapsedSuffix;
     return <article className="experiment-container">
-        <section className={headerClasses}>
+        <section className={headerClasses} onClick={onExperimentHeaderClick}>
             <header>
                 <h1>{props.num} - {props.title}</h1>
             </header>
@@ -103,5 +103,22 @@ const renderExperimentTags = tags =>
     <ul>
         {tags.map((tag, i) => <li key={i}>{tag}</li>)}
     </ul>;
+
+const onExperimentHeaderClick = event => {
+    var headerElem = event.currentTarget;
+    var isCollapsed = headerElem.classList.contains('experiment-header-collapsed');
+    var containerElem = headerElem.parentElement;
+    var bodyElem = containerElem.getElementsByClassName('experiment-body')[0];
+    var classToAddSuffix = isCollapsed
+        ? '-uncollapsed'
+        : '-collapsed';
+    var classToRemoveSuffix = isCollapsed
+        ? '-collapsed'
+        : '-uncollapsed';
+    bodyElem.classList.add('experiment-body' + classToAddSuffix);
+    bodyElem.classList.remove('experiment-body' + classToRemoveSuffix);
+    headerElem.classList.add('experiment-header' + classToAddSuffix);
+    headerElem.classList.remove('experiment-header' + classToRemoveSuffix);
+};
 
 module.exports = Experiment;
