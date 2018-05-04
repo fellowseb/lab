@@ -1,9 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Resources from './components/Resources';
-import Experiments from './components/Experiments';
-import {} from './scripts/experiments';
+import App from './components/App';
 import {} from './scripts/menu';
 
-render(<Resources />, document.getElementById('page-brainfuel'));
-render(<Experiments />, document.getElementById('page-experiments'));
+render(<App />, document.getElementById('app-container'));
