@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Experiment = props => {
-    const renderedTasks = renderExperimentTasks(props.tasks);
-    const renderedResources = renderExperimentResources(props.resources);
-    const renderedReults = renderExperimentResults(props.results);
-    const renderedTags = renderExperimentTags(props.tags);
-    const collapsedSuffix = props.collapsed
+const Experiment = ({ tasks = [], resources = [], results = [], tags = [], collapsed = true, num = 0, title = '[Unknown experiment]' }) => {
+    const renderedTasks = renderExperimentTasks(tasks);
+    const renderedResources = renderExperimentResources(resources);
+    const renderedReults = renderExperimentResults(results);
+    const renderedTags = renderExperimentTags(tags);
+    const collapsedSuffix = collapsed
         ? '-collapsed'
         : '-uncollapsed';
     const headerClasses = 'experiment-header experiment-header' + collapsedSuffix;
@@ -14,7 +14,7 @@ const Experiment = props => {
     return <article className="experiment-container">
         <section className={headerClasses} onClick={onExperimentHeaderClick}>
             <header>
-                <h1>{props.num} - {props.title}</h1>
+                <h1>{num} - {title}</h1>
             </header>
         </section>
         <div className={bodyClasses}>

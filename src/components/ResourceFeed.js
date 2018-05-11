@@ -13,28 +13,38 @@ import Loader from './Loader';
 class ResourceFeed extends React.Component {
     constructor(props) {
         super(props);
+        this.resources = [];
         this.state = {
-            resources: [],
             error: null,
             loading: false,
             totalCount: 0,
             filteredCount: 0,
-            next: null,
-            prev: null
+            offset: null
         };
     }
     componentWillReceiveProps(nextProps) {
-        updateComponentState(this, nextProps);
+        //const { offset } = this.state;
+        //updateComponentState(this, nextProps, offset);
     }
     shouldComponentUpdate(nextProps, nextState) {
-        return true;
+        return nextState.error !== this.state.error ||
+            nextState.loading !== this.state.loading ||
+            nextState.totalCount !== this.state.totalCount ||
+            nextState.filteredCount !== this.state.filteredCount ||
+            nextState.offset !== this.state.offset ||
+            nextProps.apiUrl !== this.props.apiUrl ||
+            nextProps.apiEndpoint !== this.props.apiEndpoint ||
+            nextProps.filteredTag !== this.props.filteredTag ||
+            nextProps.count !== this.props.count ||
+            nextProps.title !== this.props.title;
     }
     componentDidMount() {
-        updateComponentState(this, this.props);
+        const { offset } = this.state;
+        updateComponentState(this, this.props, offset);
     }
     render() {
-        const { resources,
-            error,
+        const { resources } = this;
+        const { error,
             loading,
             totalCount,
             filteredCount,
@@ -42,14 +52,16 @@ class ResourceFeed extends React.Component {
             prev } = this.state;
         const { title, ResourceFeedDisplayComp } = this.props;
 
+        const extractOffset = href => 0;
+
         const onPrevPage = e => {
             e.preventDefault();
-            updateComponentState(this, this.props, prev);
+            updateComponentState(this, this.props, extractOffset(prev));
         };
 
         const onNextPage = e => {
             e.preventDefault();
-            updateComponentState(this, this.props, next);
+            updateComponentState(this, this.props, extractOffset(next));
         };
 
         const findChild = (children, child) =>
@@ -117,31 +129,25 @@ ResourceFeedHeader.propTypes = {
 
 // Helper functions
 
-const updateComponentState = (component, { filteredTag, count, apiUrl, apiEndpoint }, link) => {
+const updateComponentState = (component, { filteredTag, count, apiUrl, apiEndpoint }, offset) => {
     component.setState({ loading: true });
-    retrieveResources(apiUrl, apiEndpoint, filteredTag, count, link)
+    retrieveResources(apiUrl, apiEndpoint, filteredTag, count, offset)
         .then(resources => {
+            component.resources = resources.resources;
             component.setState({
-                ...component.state,
                 loading: false,
                 error: null,
-                resources: resources.resources,
                 totalCount: resources.totalCount,
                 filteredCount: resources.filteredCount,
                 next: resources.next,
-                prev: resources.prev
+                prev: resources.prev,
+                offset: offset
             });
         })
         .catch(error => {
             component.setState({
-                ...component.state,
                 loading: false,
-                error: error,
-                resources: [],
-                totalCount: 0,
-                filteredCount: 0,
-                next: '',
-                prev: ''
+                error: error
             });
         });
 };
@@ -149,24 +155,23 @@ const updateComponentState = (component, { filteredTag, count, apiUrl, apiEndpoi
 /**
  * Fetch Pocket data
  */
-const retrieveResources = (apiUrl, apiEndpoint, filteredTag, count, link) => {
+const retrieveResources = (apiUrl, apiEndpoint, filteredTag, count, offset) => {
     let url = apiUrl.substr(0);
-    if (link) {
-        url += link;
-    } else {
-        const paramString = json => Object.keys(json)
-            .reduce((paramstr, key) =>
-                (json[key]
-                    ? paramstr.concat(key, '=', json[key], '&')
-                    : paramstr),
-            '')
-            .slice(0, -1);
-        const params = {
-            'tag': filteredTag,
-            'count': count
-        };
-        url += apiEndpoint + '?' + paramString(params);
+    const paramString = json => Object.keys(json)
+        .reduce((paramstr, key) =>
+            (json[key]
+                ? paramstr.concat(key, '=', json[key], '&')
+                : paramstr),
+        '')
+        .slice(0, -1);
+    const params = {
+        'tag': filteredTag,
+        'count': count
+    };
+    if (offset) {
+        params['offset'] = offset;
     }
+    url += apiEndpoint + '?' + paramString(params);
 
     return fetch(url, {
         method: 'GET',
