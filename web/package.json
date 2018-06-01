@@ -1,0 +1,65 @@
+{
+  "name": "fellowseblab",
+  "version": "0.2.0",
+  "description": "FellowSeb's lab is a personal website that will serve as a code laboratory on which I, wauquier dot sebastien at gmail dot com, will publish my various tech projects. It may diverge and include other type of projects later on.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "offline:start": "http-server dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fellowseb/lab.git"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "codelab",
+    "portfolio"
+  ],
+  "author": "Sébastien Wauquier",
+  "maintainers": [
+    "wauquier.sebastien@gmail.com"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fellowseb/a-modest-learning-journey/issues"
+  },
+  "homepage": "https://github.com/fellowseb/a-modest-learning-journey#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "del": "^3.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "^7.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-inject-string": "^1.1.1",
+    "gulp-sass": "^3.2.1",
+    "gulp-svg-sprite": "^1.4.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uglifycss": "^1.0.9",
+    "webpack": "^4.8.2",
+    "webpack-merge": "^4.1.2",
+    "webpack-stream": "^4.0.3"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "prop-types": "^15.6.1",
+    "ramda": "^0.25.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}

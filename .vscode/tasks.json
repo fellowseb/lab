@@ -1,24 +1,35 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "web:install",
+            "type": "npm",
+            "script": "install",
+            "path": "web/",
+            "problemMatcher": []
+        },
+        {
+            "label": "web:build",
             "type": "shell",
             "command": "gulp",
             "args": [
                 "build"
             ],
+            "options": {
+                "cwd": "web"
+            },
             "problemMatcher": []
         },
         {
-            "label": "build-dev",
+            "label": "web:build-dev",
             "type": "shell",
             "command": "gulp",
             "args": [
                 "build-dev"
             ],
+            "options": {
+                "cwd": "web"
+            },
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -26,57 +37,83 @@
             }
         },
         {
-            "label": "clean",
+            "label": "web:clean",
             "type": "shell",
             "command": "gulp",
             "args": [
                 "clean"
             ],
+            "options": {
+                "cwd": "web"
+            },
             "problemMatcher": []
         },
         {
-            "label": "components",
-            "type": "shell",
-            "command": "gulp",
-            "args": [
-                "components"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "label": "html",
-            "type": "shell",
-            "command": "gulp",
-            "args": [
-                "html"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "label": "sass",
-            "type": "shell",
-            "command": "gulp",
-            "args": [
-                "sass"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "label": "sass:watch",
+            "label": "web:sass-watch",
             "type": "shell",
             "command": "gulp",
             "args": [
                 "sass:watch"
             ],
+            "options": {
+                "cwd": "web"
+            },
             "problemMatcher": []
         },
         {
-            "label": "svgSprites",
-            "type": "shell",
-            "command": "gulp",
-            "args": [
-                "svgSprites"
-            ],
+            "label": "web:offline-start",
+            "type": "npm",
+            "script": "offline:start",
+            "path": "web/",
+            "problemMatcher": []
+        },
+        {
+            "label": "web:test",
+            "type": "npm",
+            "script": "test",
+            "path": "web/",
+            "problemMatcher": []
+        },
+        {
+            "label": "back-resources:install",
+            "type": "npm",
+            "script": "install",
+            "path": "fellowseblab-resources/",
+            "problemMatcher": []
+        },
+        {
+            "label": "back-resources:dump",
+            "type": "npm",
+            "script": "dump",
+            "path": "fellowseblab-resources/",
+            "problemMatcher": []
+        },
+        {
+            "label": "back-resources:dev-offline-start",
+            "type": "npm",
+            "script": "dev-offline-start",
+            "path": "fellowseblab-resources/",
+            "problemMatcher": []
+        },
+        {
+            "label": "back-resources:dev-offline-start-noseed",
+            "type": "npm",
+            "script": "dev-offline-start-noseed",
+            "path": "fellowseblab-resources/",
+            "problemMatcher": []
+        },
+        {
+            "label": "back-resources:dev-offline-start-debug",
+            "type": "npm",
+            "script": "dev-offline-start-debug",
+            "path": "fellowseblab-resources/",
+            "problemMatcher": []
+        },
+        {
+            "label": "back-resources:test",
+            "type": "npm",
+            "script": "test",
+            "path": "fellowseblab-resources/",
             "problemMatcher": []
         }
     ]

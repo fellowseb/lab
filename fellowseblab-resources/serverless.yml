@@ -1,0 +1,214 @@
+#
+# Stack description
+# See https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/
+#
+
+#
+# FellowSeb's lab resources (articles, talks, books)
+#
+service: fellowseblab-resources
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${opt:stage, 'dev'}
+  profile: fellowseb-lab-serverless
+  region: eu-west-1
+  endpointType: regional
+  environment:
+    STAGE: ${self:provider.stage}
+  deploymentBucket:
+    name: fellowseb-lab-${self:provider.stage}-deployment
+  versionFunctions: false
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:BatchWriteItem
+      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resources/*'
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:PutItem
+      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resourceTags'
+#
+# Files excluded from uploaded package
+#
+package:
+  exclude:
+    - data/**/*
+    - .build/**/*
+
+functions:
+  #
+  # Function: Import resources from my Pocket account
+  #
+  importFromPocket:
+    handler: src/importFromPocket.importFromPocket
+    name: fellowseb-lab-${self:provider.stage}-importFromPocket
+    description: Import articles, books and talks from a Pocket account
+    environment:
+      POCKET_CONSUMER_KEY: ${ssm:/fellowseb-lab/POCKET_CONSUMER_KEY}
+      POCKET_ACCESS_TOKEN: ${ssm:/fellowseb-lab/POCKET_ACCESS_TOKEN}
+    events:
+      - schedule: cron(0 0 * * ? *) # Triggers the event everyday at midnight
+      - http:
+          path: importFromPocket
+          method: get
+  #
+  # Function: List resource tags
+  #
+  listResourceTags:
+    handler: src/listResourceTags.listResourceTags
+    name: fellowseb-lab-${self:provider.stage}-listResourceTags
+    description: FellowSeb's lab API, handle /resourcetags GET requests
+    events:
+      - http:
+          path: resourcetags
+          method: get
+          cors: true
+  #
+  # Function: List Article resources
+  #
+  listArticles:
+    handler: src/listArticles.listArticles
+    name: fellowseb-lab-${self:provider.stage}-listArticles
+    description: FellowSeb's lab API, handle /articles GET requests
+    events:
+      - http:
+          path: articles
+          method: get
+          cors: true
+  #
+  # Function: List Book resources
+  #
+  listBooks:
+    handler: src/listBooks.listBooks
+    name: fellowseb-lab-${self:provider.stage}-listBooks
+    description: FellowSeb's lab API, handle /books GET requests
+    events:
+      - http:
+          path: books
+          method: get
+          cors: true
+  #
+  # Function: Get book thumbnail
+  #
+  getBookThumbnail:
+    handler: src/getBookThumbnail.getBookThumbnail
+    name: fellowseb-lab-${self:provider.stage}-getBookThumbnail
+    description: FellowSeb's lab API, handle /books/resourceId/thumbnail GET requests
+    events:
+      - http:
+          path: books/{resourceId}/thumbnail
+          method: get
+          cors: true
+          contentHandling: CONVERT_TO_BINARY
+  #
+  # Function: List Talk resources
+  #
+  listTalks:
+    handler: src/listTalks.listTalks
+    name: fellowseb-lab-${self:provider.stage}-listTalks
+    description: FellowSeb's lab API, handle /talks GET requests
+    events:
+      - http:
+          path: talks
+          method: get
+          cors: true
+resources:
+  Resources:
+    #
+    # DynamoDB table: resources
+    #
+    fellowsebLabResourcesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: fellowseb-lab-${self:provider.stage}-resources
+        AttributeDefinitions:
+          - AttributeName: added_time
+            AttributeType: N
+          - AttributeName: read_time
+            AttributeType: N
+          - AttributeName: resourceId
+            AttributeType: S
+          - AttributeName: resourceType
+            AttributeType: S
+        KeySchema:
+          - AttributeName: resourceId
+            KeyType: HASH
+          - AttributeName: added_time
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: resourceType-index
+            KeySchema:
+              - AttributeName: resourceType
+                KeyType: HASH
+              - AttributeName: read_time
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 5
+              WriteCapacityUnits: 1
+        ProvisionedThroughput:
+          ReadCapacityUnits: 2
+          WriteCapacityUnits: 1
+    #
+    # DynamoDB table: resource tags
+    #
+    fellowsebLabResourceTagsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: fellowseb-lab-${self:provider.stage}-resourceTags
+        AttributeDefinitions:
+          - AttributeName: tag
+            AttributeType: S
+        KeySchema:
+          - AttributeName: tag
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 3
+          WriteCapacityUnits: 1
+#
+# Plugins for offline dev
+#
+plugins:
+  - serverless-dynamodb-local
+  - serverless-apigw-binary
+  - serverless-apigwy-binary
+  - serverless-s3-local
+  - serverless-offline
+  - serverless-stack-output
+  - serverless-domain-manager
+
+custom:
+  accountId: 414312231171
+  output:
+      file: .build/stack.yml
+  dynamodb:
+    seed:
+      resources:
+        sources:
+          - table: fellowseb-lab-${self:provider.stage}-resources
+            sources: [./data/resources.json]
+          - table: fellowseb-lab-${self:provider.stage}-resourceTags
+            sources: [./data/resourceTags.json]
+  s3:
+    host: localhost
+    port: 8001
+    directory: ./data/s3
+  apigwBinary:
+    types:
+      - 'image/png'
+      - 'image/webp'
+  domain:
+    dev: api-dev.lab.fellowseb.me
+    prod: api.lab.fellowseb.me
+  customDomain:
+    basePath: ''
+    createRoute53Record: false
+    domainName:  ${self:custom.domain.${self:provider.stage}}
+    stage: ${self:provider.stage}
+    endpointType: 'regional'
+    enabled: true

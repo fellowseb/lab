@@ -1,17 +1,79 @@
 {
-    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
-    // Pointez pour afficher la description des attributs existants.
-    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
             "type": "node",
             "request": "launch",
-            "name": "Gulp html",
-            "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
+            "name": "Invoke Local importFromPocket",
+            "runtimeExecutable": "node",
             "args": [
-                "html"
+                "./node_modules/.bin/sls",
+                "invoke",
+                "local",
+                "-f",
+                "importFromPocket"
             ],
+            "useWSL": true,
+            "cwd": "${workspaceFolder}/fellowseblab-resources"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "back-resources:offline-debug",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "dev-offline-start-debug"
+            ],
+            "cwd": "${workspaceFolder}/fellowseblab-resources",
+            "sourceMaps": true,
+            "port": 9229,
+            "useWSL": true,
+            "autoAttachChildProcesses": true,
+            "trace": "verbose"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "back-resources:offline-debug 2",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "bla"
+            ],
+            "cwd": "${workspaceFolder}/fellowseblab-resources",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "/mnt/c/Users/wauqu/Repositories/lab/*": "${workspaceRoot}/*",
+            },
+            "port": 9229,
+            "useWSL": true,
+            "autoAttachChildProcesses": true
+        },
+        
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch via NPM",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "dump"
+            ],
+            "cwd": "${workspaceFolder}/fellowseblab-resources",
+            "port": 9229,
+            "sourceMaps": true,
+            "stopOnEntry": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Gulp build-dev",
+            "program": "${workspaceFolder}/web/node_modules/gulp/bin/gulp.js",
+            "args": [
+                "build-dev"
+            ],
+            "cwd": "${workspaceFolder}/web",
             "useWSL": true
         },
         {
@@ -32,17 +94,17 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome",
+            "name": "Web launch Chrome",
             "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}/web"
         },
         {
             "type": "chrome",
             "request": "attach",
-            "name": "Attach to localhost:8080",
+            "name": "Web attach localhost",
             "port": 9222,
             "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}/web"
         }
     ]
 }
