@@ -15,7 +15,7 @@ module.exports = (apiUrl) => merge(common, {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development'),
             'FELLOWSEBLAB_API_URL': apiUrl
-                ? apiUrl
+                ? JSON.stringify(apiUrl)
                 : JSON.stringify('https://api-dev.lab.fellowseb.me')
         })
     ]

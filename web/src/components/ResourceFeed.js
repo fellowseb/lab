@@ -53,7 +53,7 @@ class ResourceFeed extends React.Component {
             filteredCount,
             next,
             prev } = this.state;
-        const { title, ResourceFeedDisplayComp } = this.props;
+        const { title, ResourceFeedDisplayComp, apiUrl } = this.props;
 
         const extractOffset = href => {
             let regexResults = /offset=([0-9]+)/.exec(href);
@@ -81,7 +81,8 @@ class ResourceFeed extends React.Component {
                         onNextPage={onNextPage}
                         onPrevPage={onPrevPage}
                         error={error}
-                        loading={loading}/>
+                        loading={loading}
+                        apiUrl={apiUrl} />
                 </div>
             </div>
         );
@@ -122,35 +123,35 @@ ResourceFeedHeader.propTypes = {
 
 // Helper functions
 
-const updateComponentState = (component, { filteredTag, count, apiUrl, apiEndpoint }, offset) => {
+const updateComponentState = async (component, { filteredTag, count, apiUrl, apiEndpoint }, offset) => {
     component.setState({ ...component.state, loading: true });
-    retrieveResources(apiUrl, apiEndpoint, filteredTag, count, offset)
-        .then(resources => {
-            component.resources = resources.resources;
-            component.setState({
-                ...component.state,
-                loading: false,
-                error: null,
-                totalCount: resources.totalCount,
-                filteredCount: resources.filteredCount,
-                next: resources.next,
-                prev: resources.prev,
-                offset: offset
-            });
-        })
-        .catch(error => {
-            component.setState({
-                ...component.state,
-                loading: false,
-                error: error
-            });
+    try {
+        let resources = await retrieveResources(apiUrl, apiEndpoint, filteredTag, count, offset)
+        component.resources = resources.resources;
+        component.setState({
+            ...component.state,
+            loading: false,
+            error: null,
+            totalCount: resources.totalCount,
+            filteredCount: resources.filteredCount,
+            next: resources.next,
+            prev: resources.prev,
+            offset
         });
+    } catch (err) {
+        console.error(err);
+        component.setState({
+            ...component.state,
+            loading: false,
+            error: err
+        });
+    }
 };
 
 /**
  * Fetch Pocket data
  */
-const retrieveResources = (apiUrl, apiEndpoint, filteredTag, count, offset) => {
+const retrieveResources = async (apiUrl, apiEndpoint, filteredTag, count, offset) => {
     let url = apiUrl.substr(0);
     const paramString = json => Object.keys(json)
         .reduce((paramstr, key) =>
@@ -168,15 +169,18 @@ const retrieveResources = (apiUrl, apiEndpoint, filteredTag, count, offset) => {
     }
     url += apiEndpoint + '?' + paramString(params);
 
-    return fetch(url, {
+    let response = await fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
         mode: 'cors'
-    }).then(response => {
-        return response.json();
     });
+    let json = await response.json();
+    if (response.status < 200 || response.status >= 300) {
+        throw new Error(`${json.error ? json.error : response.statusText}`);
+    }
+    return json;
 };
 
 export default ResourceFeed;

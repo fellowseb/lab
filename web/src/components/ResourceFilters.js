@@ -12,26 +12,25 @@ class ResourceFilters extends React.Component {
             filteredTag: null
         };
     }
-    componentWillMount() {
+    async componentWillMount() {
         this.setState({ loading: true });
-        const { apiUrl } = this.props;
-        retrieveFilterTags(apiUrl)
-            .then(tags => {
-                this.setState({
-                    ...this.state,
-                    loading: false,
-                    error: null,
-                    tags
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    ...this.state,
-                    loading: false,
-                    error: error,
-                    tags: []
-                });
+        try {
+            const { apiUrl } = this.props;
+            let tags = await retrieveFilterTags(apiUrl);
+            this.setState({
+                ...this.state,
+                loading: false,
+                error: null,
+                tags
             });
+        } catch (err) {
+            this.setState({
+                ...this.state,
+                loading: false,
+                error: err,
+                tags: []
+            });
+        }
     }
     render() {
         const { tags, filteredTag } = this.state;
@@ -52,7 +51,7 @@ class ResourceFilters extends React.Component {
                     onChange={changeFilter}>
                     <option value=''>Show all</option>
                     {nonFilteredTags.map((tagItem, i) =>
-                        <option value={tagItem.tag} key={i}>{tagItem.displayName.en}</option>)}
+                        <option value={tagItem.tag} key={i}>{tagItem.displayName ? tagItem.displayName.en : tagItem.tag}</option>)}
                 </select>
             </section>
         );
@@ -72,22 +71,19 @@ ResourceFilters.defaultProps = {
 /**
  * Fetch Pocket data
  */
-const retrieveFilterTags = (apiUrl) => {
-    return fetch(apiUrl + '/resourcetags', {
+const retrieveFilterTags = async (apiUrl) => {
+    let response = await fetch(apiUrl + '/resourcetags', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
         mode: 'cors'
-    })
-    .then(function handleReponse(response) {
-        if (response.status >= 200 && response.status < 300) {
-            return response.json();
-        } else {
-            throw new Error(`${response.statusText} (${response.status})`);
-        }
-    })
-    .then(json => json.tags);
+    });
+    if (response.status < 200 || response.status >= 300) {
+        throw new Error(`${json.error ? json.error : response.statusText}`);
+    }
+    let json = await response.json();
+    return json.tags;
 };
 
 export default ResourceFilters;

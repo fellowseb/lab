@@ -115,6 +115,14 @@
             "script": "test",
             "path": "fellowseblab-resources/",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "web:build:dev:offline",
+            "path": "web/",
+            "problemMatcher": [
+                "$eslint-stylish"
+            ]
         }
     ]
 }
