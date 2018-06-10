@@ -44,12 +44,14 @@ functions:
   # Function: Import resources from my Pocket account
   #
   importFromPocket:
-    handler: src/importFromPocket.importFromPocket
+    handler: src/handlers/importFromPocket.handler
     name: fellowseb-lab-${self:provider.stage}-importFromPocket
     description: Import articles, books and talks from a Pocket account
     environment:
       POCKET_CONSUMER_KEY: ${ssm:/fellowseb-lab/POCKET_CONSUMER_KEY}
       POCKET_ACCESS_TOKEN: ${ssm:/fellowseb-lab/POCKET_ACCESS_TOKEN}
+      POCKET_FAVORITE: 1
+      POCKET_STATE: 'archive'
     events:
       - schedule: cron(0 0 * * ? *) # Triggers the event everyday at midnight
       - http:
@@ -59,7 +61,7 @@ functions:
   # Function: List resource tags
   #
   listResourceTags:
-    handler: src/listResourceTags.listResourceTags
+    handler: src/handlers/listResourceTags.handler
     name: fellowseb-lab-${self:provider.stage}-listResourceTags
     description: FellowSeb's lab API, handle /resourcetags GET requests
     events:
@@ -71,7 +73,7 @@ functions:
   # Function: List Article resources
   #
   listArticles:
-    handler: src/listArticles.listArticles
+    handler: src/handlers/listArticles.handler
     name: fellowseb-lab-${self:provider.stage}-listArticles
     description: FellowSeb's lab API, handle /articles GET requests
     events:
@@ -83,7 +85,7 @@ functions:
   # Function: List Book resources
   #
   listBooks:
-    handler: src/listBooks.listBooks
+    handler: src/handlers/listBooks.handler
     name: fellowseb-lab-${self:provider.stage}-listBooks
     description: FellowSeb's lab API, handle /books GET requests
     events:
@@ -95,7 +97,7 @@ functions:
   # Function: Get book thumbnail
   #
   getBookThumbnail:
-    handler: src/getBookThumbnail.getBookThumbnail
+    handler: src/handlers/getBookThumbnail.handler
     name: fellowseb-lab-${self:provider.stage}-getBookThumbnail
     description: FellowSeb's lab API, handle /books/resourceId/thumbnail GET requests
     events:
@@ -103,12 +105,12 @@ functions:
           path: books/{resourceId}/thumbnail
           method: get
           cors: true
-          contentHandling: CONVERT_TO_BINARY
+          
   #
   # Function: List Talk resources
   #
   listTalks:
-    handler: src/listTalks.listTalks
+    handler: src/handlers/listTalks.handler
     name: fellowseb-lab-${self:provider.stage}-listTalks
     description: FellowSeb's lab API, handle /talks GET requests
     events:

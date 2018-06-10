@@ -1,0 +1,155 @@
+'use strict';
+
+const PocketClient = require('../../src/classes/PocketClient');
+const FellowsebLabResource = require('../../src/classes/FellowsebLabResource');
+const FellowsebLabResourceTag = require('../../src/classes/FellowsebLabResourceTag');
+const FellowsebLabDB = require('../../src/classes/FellowsebLabDB');
+
+const readOptions = () => {
+    let consumerKey = process.env.POCKET_CONSUMER_KEY;
+    let accessToken = process.env.POCKET_ACCESS_TOKEN;
+    let since = process.env.POCKET_SINCE
+        ? parseInt(process.env.POCKET_SINCE, 10)
+        : undefined;
+    let state = process.env.POCKET_STATE;
+    let favorite = process.env.POCKET_FAVORITE
+        ? parseInt(process.env.POCKET_FAVORITE, 10)
+        : undefined;
+    process.argv.forEach((val, index) => {
+        if (val === '--pocket-consumer-key' && process.argv.length >= index + 1) {
+            consumerKey = process.argv[index + 1];
+        }
+        if (val === '--pocket-access-token' && process.argv.length >= index + 1) {
+            accessToken = process.argv[index + 1];
+        }
+        if (val === '--since' && process.argv.length >= index + 1) {
+            since = parseInt(process.argv[index + 1], 10);
+        }
+        if (val === '--state' && process.argv.length >= index + 1) {
+            state = process.argv[index + 1];
+        }
+        if (val === '--favorite' && process.argv.length >= index + 1) {
+            favorite = parseInt(process.argv[index + 1], 10);
+        }
+    });
+    return {
+        consumerKey,
+        accessToken,
+        since,
+        state,
+        favorite
+    };
+};
+
+const resourceFromPocketEntry = pocketEntry => {
+    let tags = pocketEntry.tags
+        ? Object.keys(pocketEntry.tags)
+        : [];
+    let isTalk = tags.indexOf('talk') != -1 ||
+        pocketEntry.resolved_url.indexOf('youtube.com');
+
+    return new FellowsebLabResource({
+        type: isTalk
+            ? 'talk'
+            : 'article',
+        url: pocketEntry.resolved_url,
+        time_added: pocketEntry.time_added
+            ? parseInt(pocketEntry.time_added, 10)
+            : undefined,
+        time_read: pocketEntry.time_read
+            ? parseInt(pocketEntry.time_read, 10)
+            : undefined,
+        title: pocketEntry.resolved_title,
+        tags,
+        authors: pocketEntry.authors
+            ? Object.keys(pocketEntry.authors).map(authorId =>
+                pocketEntry.authors[authorId].name)
+            : []
+    });
+}
+
+const resourceTagsFromPocketEntry = pocketEntry => {
+    if (pocketEntry.tags) {
+        return Object.keys(pocketEntry.tags).map(tag =>
+            new FellowsebLabResourceTag({ tag })
+        );
+    }
+    return [];
+};
+
+const createResourcesFromPocketEntries = pocketEntries =>
+    pocketEntries.reduce((obj, entry) => {
+        obj.resources = [
+            ...obj.resources,
+            resourceFromPocketEntry(entry)
+        ];
+        obj.resourceTags = [
+            ...obj.resourceTags,
+            ...resourceTagsFromPocketEntry(entry)
+        ]
+        return obj;
+    },
+        { resources: [], resourceTags: [] }
+    );
+
+const prepareRetrieveOptions = ({ state, since, favorite }, queryStringParameters) => {
+    // Look in query string
+    if (queryStringParameters) {
+        if ('since' in queryStringParameters) {
+            since = parseInt(queryStringParameters['since'], 10);
+        }
+        if ('state' in queryStringParameters) {
+            state = queryStringParameters['state'];
+        }
+        if ('favorite' in queryStringParameters) {
+            favorite = queryStringParameters['favorite'];
+        }
+    }
+    // Default values
+    if (since === undefined) since = parseInt(Date.now()/1000, 10) - 60 * 60 * 24;
+    if (state === undefined) state = 'archive';
+    if (favorite === undefined) favorite = 0;
+    return {
+        detailType: 'complete',
+        sort: 'oldest',
+        state,
+        since,
+        favorite
+    };
+};
+
+module.exports = {
+    handler: async (event) => {
+        let response = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true
+            }
+        };
+        try {
+            let { consumerKey, accessToken, since, state, favorite } = readOptions();
+            let pocketClient = new PocketClient({ consumerKey, accessToken });
+            let retrieveOptions = prepareRetrieveOptions({ since, state, favorite },
+                event.queryStringParameters);
+            let pocketEntries = await pocketClient.retrieve(retrieveOptions);
+            if (pocketEntries.length) {
+                let { resources, resourceTags } = createResourcesFromPocketEntries(pocketEntries);
+                let db = new FellowsebLabDB();
+                await db.batchWriteResources(resources);
+                console.log(`Inserted ${resources.length} resources.`);
+                let insertedTagCnt = await db.putResourceTags(resourceTags);
+                console.log(`Inserted ${insertedTagCnt} tags.`);
+            } else {
+                console.log(`Nothing to import.`);
+            }
+            response.statusCode = 200;
+            response.body = 'OK';
+            response.headers['Content-Type'] = 'text/plain';
+        } catch (err) {
+            response.statusCode = err.statusCode || 501;
+            response.body = err.toString();
+            response.headers['Content-Type'] = 'text/plain';
+        }
+        return response;
+    }
+}

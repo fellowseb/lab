@@ -3,9 +3,13 @@
   "description": "",
   "version": "0.1.0",
   "dependencies": {
-    "aws-sdk": "^2.249.1"
+    "aws-sdk": "^2.249.1",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "serverless": "^1.27.3",
     "serverless-apigw-binary": "^0.4.4",
     "serverless-apigwy-binary": "^0.1.0",
@@ -20,6 +24,7 @@
     "dump": "node dump.js > test.data.json",
     "dev-offline-start": "serverless offline start --stage=dev --dontPrintOutput --migrate --seed=resources",
     "dev-offline-start-noseed": "serverless offline start --stage=dev --dontPrintOutput --migrate",
+    "dev-offline-start-nomigrate": "serverless offline start --stage=dev --dontPrintOutput --migrate=0",
     "dev-offline-start-debug": "export SLS_DEBUG=* && node --inspect /usr/bin/serverless offline start --stage=dev",
     "prod-offline-start": "serverless offline start --stage=prod --dontPrintOutput"
   }
