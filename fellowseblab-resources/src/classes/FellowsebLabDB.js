@@ -146,7 +146,7 @@ class FellowsebLabDB {
                 throw err;
             });
         }));
-        return resultArr.reduce((cnt, b) => b ? ++cnt : cnt);
+        return resultArr.reduce((cnt, b) => b ? ++cnt : cnt, 0);
     }
 };
 
