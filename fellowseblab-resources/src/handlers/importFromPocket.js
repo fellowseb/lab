@@ -46,7 +46,7 @@ const resourceFromPocketEntry = pocketEntry => {
         ? Object.keys(pocketEntry.tags)
         : [];
     let isTalk = tags.indexOf('talk') != -1 ||
-        pocketEntry.resolved_url.indexOf('youtube.com');
+        pocketEntry.resolved_url.indexOf('youtube.com') != -1;
 
     return new FellowsebLabResource({
         type: isTalk
