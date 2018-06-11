@@ -24,8 +24,11 @@ provider:
     - Effect: Allow
       Action:
         - dynamodb:Query
-        - dynamodb:BatchWriteItem
       Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resources/*'
+    - Effect: Allow
+      Action:
+        - dynamodb:BatchWriteItem
+      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resources'
     - Effect: Allow
       Action:
         - dynamodb:Scan
