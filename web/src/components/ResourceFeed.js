@@ -5,7 +5,6 @@ import fetch from 'isomorphic-fetch';
 /**
  * React component listing articles from a Pocket account.
  * Possibility to filter the articles based on the tags.
- *
  * @extends React.Component
  */
 class ResourceFeed extends React.Component {
@@ -19,13 +18,18 @@ class ResourceFeed extends React.Component {
             filteredCount: 0,
             offset: null
         };
+        this.onPrevPage = this.onPrevPage.bind(this);
+        this.onNextPage = this.onNextPage.bind(this);
+        this.extractOffset = this.extractOffset.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.apiUrl != nextProps.apiUrl ||
             this.props.apiEndpoint != nextProps.apiEndpoint ||
             this.props.filteredTag != nextProps.filteredTag ||
             this.props.count != nextProps.count) {
-            updateComponentState(this, nextProps, this.state.offset);
+            let { offset } = this.state;
+            offset = 0;
+            updateComponentState(this, nextProps, offset);
         }
 
     }
@@ -46,7 +50,9 @@ class ResourceFeed extends React.Component {
         updateComponentState(this, this.props, offset);
     }
     render() {
-        const { resources } = this;
+        const { resources,
+            onNextPage,
+            onPrevPage } = this;
         const { error,
             loading,
             totalCount,
@@ -54,21 +60,6 @@ class ResourceFeed extends React.Component {
             next,
             prev } = this.state;
         const { title, ResourceFeedDisplayComp, apiUrl } = this.props;
-
-        const extractOffset = href => {
-            let regexResults = /offset=([0-9]+)/.exec(href);
-            return regexResults ? regexResults[1] : 0;
-        };
-
-        const onPrevPage = e => {
-            e.preventDefault();
-            updateComponentState(this, this.props, extractOffset(prev));
-        };
-
-        const onNextPage = e => {
-            e.preventDefault();
-            updateComponentState(this, this.props, extractOffset(next));
-        };
 
         return (
             <div className='articles-container'>
@@ -86,6 +77,29 @@ class ResourceFeed extends React.Component {
                 </div>
             </div>
         );
+    }
+    /**
+     * @private
+     */
+    extractOffset(href) {
+        let regexResults = /offset=([0-9]+)/.exec(href);
+        return regexResults ? regexResults[1] : 0;
+    }
+    /**
+     * @private
+     */
+    onPrevPage(event) {
+        let { prev } = this.state;
+        event.preventDefault();
+        updateComponentState(this, this.props, this.extractOffset(prev));
+    }
+    /**
+     * @private
+     */
+    onNextPage(event) {
+        let { next } = this.state;
+        event.preventDefault();
+        updateComponentState(this, this.props, this.extractOffset(next));
     }
 }
 

@@ -4,20 +4,18 @@ import PropTypes from 'prop-types';
 import Loader from './Loader';
 import ErrorDisplay from './ErrorDisplay';
 
-const findChild = (children, child) =>
-    React.Children
-        .toArray(children)
-        .filter(c => c.type === child)[0];
-
-const ResourceFeedContentSelect = ({ error = null, loading = false, children }) =>
-    loading
-        ? findChild(children, Loader)
-        : (
-            error
-                ? findChild(children, ErrorDisplay)
-                : null
-        );
-
+/**
+ * State-less component displaying a list of resources in a column.
+ * @param {object} props Properties.
+ * @param {FellowsebLabResource[]} [props.resources=[]] Resources to display.
+ * @param {bool} [props.hasNextPage=false] A next page is available.
+ * @param {bool} [props.hasPrevPage=false] A previous page is available.
+ * @param {Function} [props.onPrevPage] Callback called when previous page button is hit.
+ * @param {Function} [props.onNextPage] Callback called when next page button is hit.
+ * @param {string} [props.defaultThumbnailClass='fa-bookmark'] CSS thumbnail class.
+ * @param {Error} [props.error=null] An error to display. Will appear in front of existing resources.
+ * @param {bool} [props.loading=false] Set if the data is currently loading.
+ */
 const ResourceList = ({ resources = [],
     hasNextPage = false,
     hasPrevPage = false,
@@ -84,5 +82,19 @@ ResourceListItems.propTypes = {
     resources: PropTypes.array,
     defaultThumbnailClass: PropTypes.string
 };
+
+const findChild = (children, child) =>
+    React.Children
+        .toArray(children)
+        .filter(c => c.type === child)[0];
+
+const ResourceFeedContentSelect = ({ error = null, loading = false, children }) =>
+    loading
+        ? findChild(children, Loader)
+        : (
+            error
+                ? findChild(children, ErrorDisplay)
+                : null
+        );
 
 export default ResourceList;

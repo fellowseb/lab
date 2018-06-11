@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Experiment = ({ tasks = [], resources = [], results = [], tags = [], collapsed = true, num = 0, title = '[Unknown experiment]' }) => {
-    const renderedTasks = renderExperimentTasks(tasks);
-    const renderedResources = renderExperimentResources(resources);
-    const renderedReults = renderExperimentResults(results);
-    const renderedTags = renderExperimentTags(tags);
+/**
+ * Stateless component displaying a Fellowseb'lab Experiment.
+ * @param {object} props Properties.
+ */
+const Experiment = ({ tasks = [], resources = [], results = [], tags = [],
+    collapsed = true, num = 0, title = '[Unknown experiment]' }) => {
     const collapsedSuffix = collapsed
         ? '-collapsed'
         : '-uncollapsed';
@@ -22,24 +23,24 @@ const Experiment = ({ tasks = [], resources = [], results = [], tags = [], colla
                 <p className="experiment-section-title">
                     <span className="experiment-section-icon fas fa-tasks" title="Tasks"></span>I used...
                 </p>
-                {renderedTasks}
+                {renderExperimentTasks(tasks)}
             </section>
             <section className="experiment-resources">
                 <p className="experiment-section-title">
                     <span className="experiment-section-icon fas fa-link" title="Resources"></span>Resources
                 </p>
-                {renderedResources}
+                {renderExperimentResources(resources)}
             </section>
             <section className="experiment-results">
                 <p className="experiment-section-title">
                     <span className="experiment-section-icon fas fa-chart-line" title="Results"></span>Results
                 </p>
-                {renderedReults}
+                {renderExperimentResults(results)}
             </section>
         </div>
         <section className="experiment-tags">
             <span className="experiment-section-icon fas fa-tags" title="Tags"></span>
-            {renderedTags}
+            {renderExperimentTags(tags)}
         </section>
     </article>;
 };

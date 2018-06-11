@@ -2,6 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-fetch';
 
+/**
+ * Component displaying a combo enabling the filtering
+ * of resources.
+ * State:
+ * - loading {bool}
+ * - error {Error}
+ * - tags {string[]}
+ * - filteringTag {string}
+ */
 class ResourceFilters extends React.Component {
     constructor(props) {
         super(props);
@@ -34,21 +43,18 @@ class ResourceFilters extends React.Component {
     }
     render() {
         const { tags, filteredTag } = this.state;
-        const { onChangeFilter } = this.props;
         const nonFilteredTags = tags.filter(tagItem => tagItem.tag !== filteredTag);
-        let _select;
-        const changeFilter = e => {
-            e.preventDefault();
-            onChangeFilter(_select.options[_select.selectedIndex].value || null);
-            _select = null;
+        let refs = {
+            select: null
         };
+
         return (
             <section className='articles-filters'>
                 <label>Filter by category : </label>
                 <select className='articles-filters-select'
                     disabled={nonFilteredTags.length === 0}
-                    ref={input => (_select = input)}
-                    onChange={changeFilter}>
+                    ref={input => (refs.select = input)}
+                    onChange={this.changeFilter.bind(this, refs)}>
                     <option value=''>Show all</option>
                     {nonFilteredTags.map((tagItem, i) =>
                         <option value={tagItem.tag} key={i}>{tagItem.displayName ? tagItem.displayName.en : tagItem.tag}</option>)}
@@ -56,6 +62,14 @@ class ResourceFilters extends React.Component {
             </section>
         );
     }
+    /**
+     * @private
+     */
+    changeFilter({ select }, event) {
+        const { onChangeFilter } = this.props;
+        event.preventDefault();
+        onChangeFilter(select.options[select.selectedIndex].value || null);
+    };
 }
 
 ResourceFilters.propTypes = {

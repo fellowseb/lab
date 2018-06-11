@@ -3,7 +3,16 @@ import domUtils from '../scripts/domutils';
 import PropTypes from 'prop-types';
 import * as R from 'ramda';
 
-const Menu = ({ menuIsOpen = false, openMenu = v => v, currentSection = '', changeSection = v => v, sectionNavLinkMounted = v => v }) => {
+/**
+ * Presentational component displaying the top menu.
+ * Becomes a closable overlay when viewing mobile version.
+ * @param {object} props Properties.
+ */
+const Menu = ({ menuIsOpen = false,
+    openMenu = v => v,
+    currentSection = '',
+    changeSection = v => v,
+    sectionNavLinkMounted = v => v }) => {
     const menuBtnClasses = menuIsOpen
         ? 'menu-button menu-button-open'
         : 'menu-button';
@@ -37,7 +46,8 @@ const Menu = ({ menuIsOpen = false, openMenu = v => v, currentSection = '', chan
                         <use href="#umbrella" />
                     </svg>fellow<span className="seb">seb</span>
                 </div>
-                <nav id="menu-nav" role="navigation" className={menuNavClasses} onClick={closeMenu} onTouchMove={domUtils.eventPreventDefault}>
+                <nav id="menu-nav" role="navigation" className={menuNavClasses}
+                    onClick={closeMenu} onTouchMove={domUtils.eventPreventDefault}>
                     <ul>
                         <NavLink
                             label='About'
@@ -58,14 +68,16 @@ const Menu = ({ menuIsOpen = false, openMenu = v => v, currentSection = '', chan
                             onNavItemClick={onNavItemClick}
                             sectionNavLinkMounted={sectionNavLinkMounted} />
                         <li>
-                            <a href="https://github.com/fellowseb" target="_blank" rel="noopener noreferrer" className="menu-nav-link menu-nav-link-github">
+                            <a href="https://github.com/fellowseb" target="_blank" rel="noopener noreferrer"
+                                className="menu-nav-link menu-nav-link-github">
                                 <svg className="icon-links">
                                     <use href="#github" />
                                 </svg>
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/sebastienwauquier" target="_blank" rel="noopener noreferrer" className="menu-nav-link menu-nav-link-linkedin">
+                            <a href="https://www.linkedin.com/in/sebastienwauquier" target="_blank"
+                                rel="noopener noreferrer" className="menu-nav-link menu-nav-link-linkedin">
                                 <svg className="icon-links">
                                     <use href="#linkedin" />
                                 </svg>
@@ -86,12 +98,17 @@ Menu.propTypes = {
     sectionNavLinkMounted: PropTypes.func
 };
 
-const NavLink = ({ label = '[Missing label]', sectionAnchor = '', onNavItemClick = v => v, isCurrent = false, sectionNavLinkMounted = v => v }) => {
+const NavLink = ({ label = '[Missing label]',
+    sectionAnchor = '',
+    onNavItemClick = v => v,
+    isCurrent = false,
+    sectionNavLinkMounted = v => v }) => {
     const classes = 'menu-nav-link'.concat(isCurrent ? ' menu-nav-link-current' : '');
     const href = '#' + sectionAnchor;
     return (
         <li>
-            <a href={href} data-section={sectionAnchor} className={classes} onClick={onNavItemClick} ref={R.partial(sectionNavLinkMounted, sectionAnchor)}>{label}</a>
+            <a href={href} data-section={sectionAnchor} className={classes}
+                onClick={onNavItemClick} ref={R.partial(sectionNavLinkMounted, sectionAnchor)}>{label}</a>
         </li>
     );
 };

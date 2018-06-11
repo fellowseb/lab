@@ -7,8 +7,18 @@ import Experiments from '../components/Experiments';
 import Menu from '../components/Menu';
 import PropTypes from 'prop-types';
 import * as R from 'ramda';
-const experimentData = require('../../data/experiments.json');
 
+/**
+ * Main component.
+ * Is composed of a menu and three main sections:
+ * About, Resources and Lab.
+ * Keeps track of the current section.
+ * State:
+ * - menuIsOpen {bool}
+ * - currentSection {string}
+ * - filteredTag {string}
+ * @extends React.Component
+ */
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -16,7 +26,6 @@ class App extends React.Component {
             menuIsOpen: false,
             currentSection: 'about',
             filteredTag: null,
-            experiments: experimentData
         };
         this.sectionAnchors = {};
         this.sectionLinks = {};
@@ -51,9 +60,9 @@ class App extends React.Component {
         };
     }
     componentDidMount() {
-        const onWindowResize = event => this.openMenu(false);
+        const onWindowResize = () => this.openMenu(false);
         window.addEventListener('resize', onWindowResize);
-        const onPopState = event => {
+        const onPopState = () => {
             var currentState = window.history.state;
             if (currentState.currentSection) {
                 this.setState({
@@ -173,10 +182,9 @@ class App extends React.Component {
         );
     }
     renderLabSection() {
-        const { experiments } = this.state;
         return (
             <section id="page-experiments" className="page page-experiments">
-                <Experiments experiments={experiments} />
+                <Experiments />
             </section>
         );
     }
