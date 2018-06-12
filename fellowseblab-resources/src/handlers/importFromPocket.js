@@ -49,6 +49,7 @@ const resourceFromPocketEntry = pocketEntry => {
         pocketEntry.resolved_url.indexOf('youtube.com') != -1;
 
     return new FellowsebLabResource({
+        pocket_id: pocketEntry.resolved_id,
         type: isTalk
             ? 'talk'
             : 'article',
