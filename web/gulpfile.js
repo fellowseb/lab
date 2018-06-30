@@ -36,11 +36,9 @@ function htmlTask() {
             gulp.src(configuration.paths.src.html)
                 .pipe(inject.replace('<!-- SVG SPRITES -->', svgString))
                 .pipe(gulp.dest(configuration.paths.dist));
-            gulp.src('./src/favicon.ico')
-                .pipe(gulp.dest(configuration.paths.dist));
             gulp.src(configuration.paths.src.fonts)
                 .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
-	    gulp.src('./src/keybase.txt')
+	    gulp.src(['./src/keybase.txt', './src/favicon.ico', './src/CNAME'])
 		.pipe(gulp.dest(configuration.paths.dist));
         });
 }
