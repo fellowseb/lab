@@ -197,22 +197,24 @@ class App extends React.Component {
             changeSection } = this;
         const { menuIsOpen, currentSection } = this.state;
         return (
-            <div id="app">
-                <Menu
-                    menuIsOpen={menuIsOpen}
-                    openMenu={openMenu}
-                    currentSection={currentSection}
-                    changeSection={changeSection}
-                    sectionNavLinkMounted={sectionNavLinkMounted} />
-                <main className="main-container" role="main">
-                    <a name="about" className="anchor" ref={sectionAnchorMountedAbout}></a>
-                    {this.renderAboutSection()}
-                    <a name="brainfuel" className="anchor" ref={sectionAnchorMountedBrainfuel}></a>
-                    {this.renderResourcesSection()}
-                    <a name="labo" className="anchor" ref={sectionAnchorMountedLabo}></a>
-                    {this.renderLabSection()}
-                </main>
-            </div>
+            <React.StrictMode>
+                <div id="app">
+                    <Menu
+                        menuIsOpen={menuIsOpen}
+                        openMenu={openMenu}
+                        currentSection={currentSection}
+                        changeSection={changeSection}
+                        sectionNavLinkMounted={sectionNavLinkMounted} />
+                    <main className="main-container" role="main">
+                        <a name="about" className="anchor" ref={sectionAnchorMountedAbout}></a>
+                        {this.renderAboutSection()}
+                        <a name="brainfuel" className="anchor" ref={sectionAnchorMountedBrainfuel}></a>
+                        {this.renderResourcesSection()}
+                        <a name="labo" className="anchor" ref={sectionAnchorMountedLabo}></a>
+                        {this.renderLabSection()}
+                    </main>
+                </div>
+            </React.StrictMode>
         );
     }
 }
