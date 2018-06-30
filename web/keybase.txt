@@ -1,0 +1,74 @@
+==================================================================
+https://keybase.io/fellowseb
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://fellowseb.me
+  * I am fellowseb (https://keybase.io/fellowseb) on keybase.
+  * I have a public key with fingerprint ED75 1E2A 4984 3757 0B00  01BE F338 8B63 59C2 0291
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120a35879dac828c268e59c0ab0506a20dd2ae6784a63658098fb751bd13560ea7d0a",
+      "fingerprint": "ed751e2a498437570b0001bef3388b6359c20291",
+      "host": "keybase.io",
+      "key_id": "f3388b6359c20291",
+      "kid": "0101c79ccc9a48f212be25113fc3555fe36e9d9bbe348ebdc6933fa1f5c009617a350a",
+      "uid": "6748ce34b2959192a3e534139a665219",
+      "username": "fellowseb"
+    },
+    "service": {
+      "hostname": "fellowseb.me",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1530367847,
+  "expire_in": 157680000,
+  "prev": "497b7699f31ce2f32612c66187e9e86a25f21a3b8028e99872b0d47f940ac21d",
+  "seqno": 8,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owFtUmtQVGUYXjZwYJEgDdMGzU6OiG5w7ud8O4SVTjBrrQhSCjh4Lt+BnYXddc8K
+EuCMeSnTZEUwgSzlYlxUCGSGmBwZ0IhLoQYNQkIZqDEMCMbNwOkcJv80/frmfb/n
+ed7nvbh8ntPo3ArnsLwPIl+74tb+J6+JY1xeGQhvE9MRQwZigQsPTBah7EywmEXE
+gKAYjnIExTJA5AQWZwWcZiEFBJTjUQqlORwVRZyDNMOSHE3QFIsCVuIZCuNFjKBo
+FHKMiHKIHpHM1kTosDvMVqciC0UFAnGOBCxJMBSD8iiKYjyUCIJleZpQKuAoDjCF
+mGSTVYZijudkGGy2KTklSFiw9z/4Z75RTGCAIAiAI1kJx3Ae4hSGEZJAUBQlQYKG
+QAQ8DwmShbwo0IAgJA6TKAFFAY0xStMLvvcuyNEMyQoKlMcBBTCAcwSkCBIjAEfT
+FI4BFShDh5VLgaormJxsS5Mhj2TpESWdahagOlm1lf9CgpVQj9gdNqdNsCUrP0lO
+p92gEp3pdhWZBvmEfzUSeLNVVOaoEFKhQzbbrIgBU5CC06yKYhSBEuomGD0C99nN
+DphgVhEUQ7PKeFG1DExVJEnA8AwNdgCJwASISwROY7hA0xjLQABZZauUMjGO4FkU
+ZyEALIPzqEgyEiBRTsAxEVHb2mO1IQZW8cklKpqyOdHKOfc6IJKlO6ol3DVuOs3K
+Za+6N7g/LjIK+W3bh+789Oz2PLTq4Wl0Xn7PMh15vvPLHnqn18p8ZdG3vlVuxf1l
+1xs1tStMm+5PtM4dP1d2kml/6UZsZ093X8DlzhwLdyWuZjRkeHCGuRa9J/uPnc//
+UBd2PC2o9ESB/cbkkCa26daF6LJBr6HNxo8WLcddAYtnQqJXGbUTIYaa0aSL+2GF
+dnVJE+COLdHoIgavBs2H70qajjWWnyenAodfDpwaC88+2F8793v4vbOza2O2RDHT
+kweDo+rPNJFr2qhPLHL8h3c3+Lu+XrF8nLDzW98vfftAaO+Ot06vBH1Rs62hHfyv
+hsHE6Wb/jtoHmicpnesGx86MxWwbzWZWey9py1gvl1zv+rkvp73nwkzSTGOY/svM
+ub/PeSbvahkI1pZNeeoyyw/nv2D8/GRDurUoKKcOed1p6i8feNJbFzo9/9SjYeJo
+6LDv2jvu71be290IHxcdKKj33KeNO9LzWXG8xftuTqWtaOOj0fsBG5rFyLyOd0In
+tukLyOrGyYirxbmHlj70DZcmsiJLht/c9ErFV6XkuoHNLc3vdVsrZn95seeRI+5y
+a9V2GFHDjGbmNl9z5d+KafLzC4tbepOWPUymwounvnij3N9HNIxsCXf5fHrT5NF1
+afeaiI+bhnK7eplFZbdHzh5CN952pjzNXmwyRI7Ug/2rWvoDqg+P//hd1V+WwtjT
+R0rO73wQ+M14ybFL60e2GotdJ77vrj4V/1v2Pw==
+=BGgL
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/fellowseb
+
+==================================================================
+
