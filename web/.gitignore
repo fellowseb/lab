@@ -3,4 +3,5 @@ node_modules
 # Distributed files
 dist
 build
-data
+#data
+
