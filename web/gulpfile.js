@@ -40,6 +40,8 @@ function htmlTask() {
                 .pipe(gulp.dest(configuration.paths.dist));
             gulp.src(configuration.paths.src.fonts)
                 .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
+	    gulp.src('./src/keybase.txt')
+		.pipe(gulp.dest(configuration.paths.dist));
         });
 }
 htmlTask.description = 'Copy HTML files to output';
