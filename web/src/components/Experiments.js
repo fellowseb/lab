@@ -18,6 +18,7 @@ class Experiments extends React.Component {
     }
     render() {
         let { experiments } = this.state;
+	let {renderExperimentList } = this;
         return (
             <div>
                 <div className="filter-experiments-container">
