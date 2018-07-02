@@ -16,7 +16,7 @@
                 "build"
             ],
             "options": {
-                "cwd": "web"
+                "cwd": "${workspaceFolder}/web"
             },
             "problemMatcher": []
         },
@@ -28,7 +28,7 @@
                 "build-dev"
             ],
             "options": {
-                "cwd": "web"
+                "cwd": "${workspaceFolder}/web"
             },
             "problemMatcher": [],
             "group": {
@@ -44,7 +44,7 @@
                 "clean"
             ],
             "options": {
-                "cwd": "web"
+                "cwd": "${workspaceFolder}/web"
             },
             "problemMatcher": []
         },
@@ -56,7 +56,7 @@
                 "sass:watch"
             ],
             "options": {
-                "cwd": "web"
+                "cwd": "${workspaceFolder}/web"
             },
             "problemMatcher": []
         },
@@ -71,6 +71,13 @@
             "label": "web:test",
             "type": "npm",
             "script": "test",
+            "path": "web/",
+            "problemMatcher": []
+        },
+        {
+            "label": "web:deploy",
+            "type": "npm",
+            "script": "deploy",
             "path": "web/",
             "problemMatcher": []
         },

@@ -4,6 +4,7 @@
   "description": "FellowSeb's lab is a personal website that will serve as a code laboratory on which I, wauquier dot sebastien at gmail dot com, will publish my various tech projects. It may diverge and include other type of projects later on.",
   "main": "index.html",
   "scripts": {
+    "deploy": "bash deploy.sh dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "offline:start": "http-server dist",
     "web:build:dev:offline": "export FELLOWSEB_LAB_APIURL='http://localhost:3000' && gulp build-dev"
@@ -50,6 +51,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.9",
     "http-server": "^0.11.1",
+    "touch": "^3.1.0",
     "webpack": "^4.8.2",
     "webpack-merge": "^4.1.2",
     "webpack-stream": "^4.0.3"

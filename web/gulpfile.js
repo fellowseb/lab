@@ -7,6 +7,8 @@ const uglifycss = require('gulp-uglifycss');
 const inject = require('gulp-inject-string');
 const webpack = require('webpack');
 const gulpWebpack = require('webpack-stream');
+const touch = require("touch");
+const fs = require('fs');
 
 // Configuration
 var configuration = {
@@ -15,9 +17,9 @@ var configuration = {
         src: {
             html: './src/*.html',
             scripts: './src/scripts/*.js',
-            fonts: [ './src/fonts/*.ttf',
+            fonts: ['./src/fonts/*.ttf',
                 './src/fonts/*.woff',
-                './src/fonts/*.woff2' ],
+                './src/fonts/*.woff2'],
             images: './src/images/*.*',
             svgs: '.src/images/svg/*.svg',
             scss: ['./src/sass/*.scss',
@@ -38,8 +40,8 @@ function htmlTask() {
                 .pipe(gulp.dest(configuration.paths.dist));
             gulp.src(configuration.paths.src.fonts)
                 .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
-	    gulp.src(['./src/keybase.txt', './src/favicon.ico', './src/CNAME'])
-		.pipe(gulp.dest(configuration.paths.dist));
+            gulp.src(['./src/keybase.txt', './src/favicon.ico', './src/CNAME'])
+                .pipe(gulp.dest(configuration.paths.dist));
         });
 }
 htmlTask.description = 'Copy HTML files to output';
@@ -91,13 +93,13 @@ function sassTaskDev() {
 sassTask.description = 'Preprocess scss files (dev)';
 gulp.task('sass-dev', sassTaskDev);
 
-gulp.task('sass:watch', function() {
+gulp.task('sass:watch', function () {
     gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
 // Gulp clean task
 function cleanTask() {
-    return del([configuration.paths.dist.slice(2) + '/**/*']);
+    return del([configuration.paths.dist.slice(2)]);
 }
 cleanTask.description = 'Clean dist folder';
 gulp.task('clean', cleanTask);
@@ -112,6 +114,21 @@ buildComponents.description = 'Build components';
 gulp.task('components', buildComponents.bind(this, './webpack.prod.js'));
 gulp.task('components-dev', buildComponents.bind(this, './webpack.dev.js'));
 
+// Create dist dir
+const mkdist = () => {
+    if (!fs.existsSync(configuration.paths.dist)) {
+        fs.mkdirSync(configuration.paths.dist);
+    }
+};
+
+// Create an empty .dev file in dist.
+// Forbids the deployment.
+const touchDev = () => {
+    mkdist();
+    touch(configuration.paths.dist + '/.dev');
+    return Promise.resolve();
+};
+
 // Gulp build task
 gulp.task('build', gulp.series('clean', 'svgSprites', 'html', 'sass', 'components'));
-gulp.task('build-dev', gulp.series('clean', 'svgSprites', 'html', 'sass-dev', 'components-dev'));
+gulp.task('build-dev', gulp.series('clean', touchDev, 'svgSprites', 'html', 'sass-dev', 'components-dev'));
