@@ -1,0 +1,27 @@
+{
+    "Table": {
+        "TableSizeBytes": 1418,
+        "KeySchema": [
+            {
+                "AttributeName": "tag",
+                "KeyType": "HASH"
+            }
+        ],
+        "TableArn": "arn:aws:dynamodb:eu-west-1:414312231171:table/fellowseb-lab-resourceTags",
+        "ItemCount": 42,
+        "TableStatus": "ACTIVE",
+        "ProvisionedThroughput": {
+            "NumberOfDecreasesToday": 0,
+            "ReadCapacityUnits": 5,
+            "WriteCapacityUnits": 5
+        },
+        "TableName": "fellowseb-lab-resourceTags",
+        "AttributeDefinitions": [
+            {
+                "AttributeName": "tag",
+                "AttributeType": "S"
+            }
+        ],
+        "CreationDateTime": 1521993873.729
+    }
+}

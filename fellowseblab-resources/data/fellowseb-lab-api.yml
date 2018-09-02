@@ -1,0 +1,456 @@
+---
+swagger: "2.0"
+info:
+  version: "2018-03-16T17:00:24Z"
+  title: "FellowsebLab"
+host: "szkg4s33n0.execute-api.eu-west-1.amazonaws.com"
+basePath: "/prod"
+schemes:
+- "https"
+paths:
+  /articles:
+    get:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tag"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "count"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        credentials: "arn:aws:iam::414312231171:role/role-fellowseb-lab-dynamodb"
+        uri: "arn:aws:apigateway:eu-west-1:dynamodb:action/Query"
+        responses:
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: "#set($inputRoot = $input.path('$'))\n#set($count\
+                \ = 9999)\n#set($offset = 0)\n#if($input.params('offset')!=\"\")\n\
+                #set($offset = $offset.parseInt($input.params('offset')))\n#end\n\
+                #if($input.params('count')!=\"\")\n#set($count = $count.parseInt($input.params('count')))\n\
+                #set($countParamValue = \"&count=$count\")\n#end\n#if($offset - $count\
+                \ >= 0)\n#set($prevOffset = $offset - $count)\n#end\n#if($inputRoot.Count\
+                \ > $offset + $count)\n#set($nextOffset = $offset + $count)\n#end\n\
+                #set($countItems = 0)\n#set($i = 0)\n{\n    \"resources\": [\n#foreach($article\
+                \ in $inputRoot.Items)\n#if((($i+1)>$offset) && $i<($offset+$count))\n\
+                #set($countItems = $countItems + 1)\n\n        {\n            \"title\"\
+                : \"$util.escapeJavaScript($article.title.S).replaceAll(\"\\\\'\"\
+                ,\"'\")\",\n            \"url\": \"$util.escapeJavaScript($article.url.S).replaceAll(\"\
+                \\\\'\",\"'\")\",\n#if(${article.image}!=\"\")\n            \"thumbnail\"\
+                : {\n                \"width\": $!{article.image.M.width.N},\n   \
+                \             \"height\": $!{article.image.M.height.N},\n        \
+                \        \"url\": \"$util.escapeJavaScript($!{article.image.M.url.S}).replaceAll(\"\
+                \\\\'\",\"'\")\"\n            },\n#end\n            \"resourceId\"\
+                : \"$article.resourceId.S\",\n            \"tags\": #if(${article.tags.SS}!=\"\
+                \")${article.tags.SS}#else[]#end,\n            \"authors\": #if(${article.authors.SS}!=\"\
+                \")${article.authors.SS}#else[]#end\n\n        }#if($foreach.hasNext\
+                \ && (($i+2)>$offset) && ($i+1)<($offset+$count)),#end\n#end\n#set($i\
+                \ = $i + 1)\n#end\n    ],\n    \"totalCount\": $!{inputRoot.ScannedCount},\n\
+                \    \"filteredCount\": $!{inputRoot.Count},\n    \"count\": ${countItems}#if($nextOffset!=''),\n\
+                \    \"next\": \"/articles?offset=$!{nextOffset}$!{countParamValue}\"\
+                #end#if($prevOffset!=''),\n    \"prev\": \"/articles?offset=$!{prevOffset}$!{countParamValue}\"\
+                #end\n}"
+        passthroughBehavior: "when_no_templates"
+        httpMethod: "POST"
+        requestTemplates:
+          application/json: "#set($tag = $input.params('tag'))\n{\n    \"TableName\"\
+            : \"fellowseb-lab-resources\",\n    \"IndexName\": \"resourceType-index\"\
+            ,\n    \"KeyConditionExpression\": \"#resourceType = :vtalk\",\n    \"\
+            ScanIndexForward\": false,\n    \"ExpressionAttributeNames\": {\n    \
+            \    \"#resourceType\": \"resourceType\"\n    },\n    \"ExpressionAttributeValues\"\
+            : {\n        \":vtalk\": {\"S\": \"article\"}#if($tag!=\"\"),\n      \
+            \  \":vtag\": {\"S\": \"${tag}\"}#end\n    }#if($tag!=\"\"),\n    \"FilterExpression\"\
+            : \"contains(tags, :vtag)\"#end\n}"
+        type: "aws"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'POST,GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+  /books:
+    get:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tag"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "count"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        credentials: "arn:aws:iam::414312231171:role/role-fellowseb-lab-dynamodb"
+        uri: "arn:aws:apigateway:eu-west-1:dynamodb:action/Query"
+        responses:
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: "#set($inputRoot = $input.path('$'))\n#set($count\
+                \ = 9999)\n#set($offset = 0)\n#if($input.params('offset')!=\"\")\n\
+                #set($offset = $offset.parseInt($input.params('offset')))\n#end\n\
+                #if($input.params('count')!=\"\")\n#set($count = $count.parseInt($input.params('count')))\n\
+                #set($countParamValue = \"&count=$count\")\n#end\n#if($offset - $count\
+                \ >= 0)\n#set($prevOffset = $offset - $count)\n#end\n#if($inputRoot.Count\
+                \ > $offset + $count)\n#set($nextOffset = $offset + $count)\n#end\n\
+                #set($countItems = 0)\n#set($i = 0)\n{\n    \"resources\": [\n#foreach($article\
+                \ in $inputRoot.Items)\n#if((($i+1)>$offset) && $i<($offset+$count))\n\
+                #set($countItems = $countItems + 1)\n\n        {\n            \"title\"\
+                : \"$util.escapeJavaScript($article.title.S).replaceAll(\"\\\\'\"\
+                ,\"'\")\",\n            \"url\": \"$util.escapeJavaScript($article.url.S).replaceAll(\"\
+                \\\\'\",\"'\")\",\n#if(${article.hasThumbnail}!=\"\" && ${article.hasThumbnail.BOOL})\n\
+                \            \"thumbnailHREF\": \"/books/$article.resourceId.S/thumbnail\"\
+                ,\n#end\n            \"resourceId\": \"$article.resourceId.S\",\n\
+                \            \"tags\": #if(${article.tags.SS}!=\"\")${article.tags.SS}#else[]#end,\n\
+                \            \"authors\": #if(${article.authors.SS}!=\"\")${article.authors.SS}#else[]#end\n\
+                \n        }#if($foreach.hasNext && (($i+2)>$offset) && ($i+1)<($offset+$count)),#end\n\
+                #end\n#set($i = $i + 1)\n#end\n    ],\n    \"totalCount\": $!{inputRoot.ScannedCount},\n\
+                \    \"filteredCount\": $!{inputRoot.Count},\n    \"count\": ${countItems}#if($nextOffset!=''),\n\
+                \    \"next\": \"/articles?offset=$!{nextOffset}$!{countParamValue}\"\
+                #end#if($prevOffset!=''),\n    \"prev\": \"/articles?offset=$!{prevOffset}$!{countParamValue}\"\
+                #end\n}"
+        passthroughBehavior: "when_no_templates"
+        httpMethod: "POST"
+        requestTemplates:
+          application/json: "#set($tag = $input.params('tag'))\n{\n    \"TableName\"\
+            : \"fellowseb-lab-resources\",\n    \"IndexName\": \"resourceType-index\"\
+            ,\n    \"KeyConditionExpression\": \"#resourceType = :vbook\",\n    \"\
+            ScanIndexForward\": false,\n    \"ExpressionAttributeNames\": {\n    \
+            \    \"#resourceType\": \"resourceType\"\n    },\n    \"ExpressionAttributeValues\"\
+            : {\n        \":vbook\": {\"S\": \"book\"}#if($tag!=\"\"),\n        \"\
+            :vtag\": {\"S\": \"${tag}\"}#end\n    }#if($tag!=\"\"),\n    \"FilterExpression\"\
+            : \"contains(tags, :vtag)\"#end\n}"
+        type: "aws"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+  /books/{resourceId}/thumbnail:
+    get:
+      produces:
+      - "application/json"
+      - "image/png"
+      parameters:
+      - name: "resourceId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "Accept"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/ThumbnailModel"
+          headers:
+            Content-Type:
+              type: "string"
+        500:
+          description: "500 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        credentials: "arn:aws:iam::414312231171:role/role-fellowseb-lab-dynamodb"
+        uri: "arn:aws:apigateway:eu-west-1:fellowseb-lab.s3:path/resources/{resourceId}/thumbnail{imageExtension}"
+        responses:
+          4|5\d{2}:
+            statusCode: "500"
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Content-Type: "integration.response.header.Content-Type"
+            contentHandling: "CONVERT_TO_BINARY"
+        requestParameters:
+          integration.request.path.resourceId: "method.request.path.resourceId"
+          integration.request.header.Accept: "method.request.header.Accept"
+          integration.request.path.imageExtension: "method.request.querystring.type"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "GET"
+        type: "aws"
+  /resourcetags:
+    get:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/ResourcesTags"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      x-amazon-apigateway-integration:
+        credentials: "arn:aws:iam::414312231171:role/role-fellowseb-lab-dynamodb"
+        uri: "arn:aws:apigateway:eu-west-1:dynamodb:action/Scan"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: "#set($inputRoot = $input.path('$'))\n{\n    \"tags\"\
+                : [\n#foreach($tag in $inputRoot.Items)\n        {\n            \"\
+                tag\": \"$tag.tag.S\",\n            \"displayName\": {\n#foreach($lang\
+                \ in $tag.displayName.M.keySet())\n                \"$lang\": \"$util.escapeJavaScript($tag.displayName.M.get($lang).S).replaceAll(\"\
+                \\\\'\",\"'\")\"#if($foreach.hasNext),#end\n                #end\n\
+                \    }\n        }#if($foreach.hasNext),#end\n#end\n    ]\n}"
+        passthroughBehavior: "when_no_templates"
+        httpMethod: "POST"
+        requestTemplates:
+          application/json: "{\n    \"TableName\": \"fellowseb-lab-resourceTags\"\n\
+            }"
+        type: "aws"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+  /talks:
+    get:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tag"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "count"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+        500:
+          description: "500 response"
+      x-amazon-apigateway-integration:
+        credentials: "arn:aws:iam::414312231171:role/role-fellowseb-lab-dynamodb"
+        uri: "arn:aws:apigateway:eu-west-1:dynamodb:action/Query"
+        responses:
+          (5|4)\d{2}:
+            statusCode: "500"
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: "#set($inputRoot = $input.path('$'))\n#set($count\
+                \ = 9999)\n#set($offset = 0)\n#if($input.params('offset')!=\"\")\n\
+                #set($offset = $offset.parseInt($input.params('offset')))\n#end\n\
+                #if($input.params('count')!=\"\")\n#set($count = $count.parseInt($input.params('count')))\n\
+                #set($countParamValue = \"&count=$count\")\n#end\n#if($offset - $count\
+                \ >= 0)\n#set($prevOffset = $offset - $count)\n#end\n#if($inputRoot.Count\
+                \ > $offset + $count)\n#set($nextOffset = $offset + $count)\n#end\n\
+                #set($countItems = 0)\n#set($i = 0)\n{\n    \"resources\": [\n#foreach($article\
+                \ in $inputRoot.Items)\n#if((($i+1)>$offset) && $i<($offset+$count))\n\
+                #set($countItems = $countItems + 1)\n\n        {\n            \"title\"\
+                : \"$util.escapeJavaScript($article.title.S).replaceAll(\"\\\\'\"\
+                ,\"'\")\",\n            \"url\": \"$util.escapeJavaScript($article.url.S).replaceAll(\"\
+                \\\\'\",\"'\")\",\n#if(${article.image}!=\"\")\n            \"thumbnail\"\
+                : {\n                \"width\": $!{article.image.M.width.N},\n   \
+                \             \"height\": $!{article.image.M.height.N},\n        \
+                \        \"url\": \"$util.escapeJavaScript($article.image.M.url.S).replaceAll(\"\
+                \\\\'\",\"'\")\"\n            },\n#end\n            \"resourceId\"\
+                : \"$article.resourceId.S\",\n            \"tags\": #if(${article.tags.SS}!=\"\
+                \")${article.tags.SS}#else[]#end,\n            \"authors\": #if(${article.authors.SS}!=\"\
+                \")${article.authors.SS}#else[]#end\n\n        }#if($foreach.hasNext\
+                \ && (($i+2)>$offset) && ($i+1)<($offset+$count)),#end\n#end\n#set($i\
+                \ = $i + 1)\n#end\n    ],\n    \"totalCount\": $!{inputRoot.ScannedCount},\n\
+                \    \"filteredCount\": $!{inputRoot.Count},\n    \"count\": ${countItems}#if($nextOffset!=''),\n\
+                \    \"next\": \"/articles?offset=$!{nextOffset}$!{countParamValue}\"\
+                #end#if($prevOffset!=''),\n    \"prev\": \"/articles?offset=$!{prevOffset}$!{countParamValue}\"\
+                #end\n}"
+        passthroughBehavior: "when_no_templates"
+        httpMethod: "POST"
+        requestTemplates:
+          application/json: "#set($tag = $input.params('tag'))\n{\n    \"TableName\"\
+            : \"fellowseb-lab-resources\",\n    \"IndexName\": \"resourceType-index\"\
+            ,\n    \"KeyConditionExpression\": \"resourceType = :vtalk\",\n    \"\
+            ScanIndexForward\": false,\n    \"ExpressionAttributeValues\": {\n   \
+            \     \":vtalk\": {\"S\": \"talk\"}#if($tag!=\"\"),\n        \":vtag\"\
+            : {\"S\": \"${tag}\"}#end\n    }#if($tag!=\"\"),\n    \"FilterExpression\"\
+            : \"contains(tags, :vtag)\"#end\n}"
+        type: "aws"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        type: "mock"
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
+  ResourcesTags:
+    type: "object"
+    required:
+    - "tags"
+    properties:
+      tags:
+        type: "array"
+        items:
+          type: "string"
+    title: "Resource tags"
+    description: "Resource tags list"
+  ThumbnailModel: {}
+x-amazon-apigateway-binary-media-types:
+- "image/png"
+- "image/jpg"
+- "application/octet-stream"
+- "image/gif"
+- "image/x-icon"
+- "image/webp"

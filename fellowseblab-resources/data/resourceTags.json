@@ -1,0 +1,254 @@
+[
+    {
+        "tag": "tools",
+        "displayName": {
+            "en": "tools"
+        }
+    },
+    {
+        "tag": "devops",
+        "displayName": {
+            "en": "devops"
+        }
+    },
+    {
+        "tag": "productivity",
+        "displayName": {
+            "en": "Productivity"
+        }
+    },
+    {
+        "tag": "health",
+        "displayName": {
+            "en": "health"
+        }
+    },
+    {
+        "tag": "api",
+        "displayName": {
+            "en": "API"
+        }
+    },
+    {
+        "tag": "it",
+        "displayName": {
+            "en": "it"
+        }
+    },
+    {
+        "tag": "learn",
+        "displayName": {
+            "en": "learn"
+        }
+    },
+    {
+        "tag": "html",
+        "displayName": {
+            "en": "html"
+        }
+    },
+    {
+        "tag": "philosophy",
+        "displayName": {
+            "en": "philosophy"
+        }
+    },
+    {
+        "tag": "functional",
+        "displayName": {
+            "en": "functional"
+        }
+    },
+    {
+        "tag": "blockchain",
+        "displayName": {
+            "en": "blockchain"
+        }
+    },
+    {
+        "tag": "ux",
+        "displayName": {
+            "en": "ux"
+        }
+    },
+    {
+        "tag": "english-language",
+        "displayName": {
+            "en": "english-language"
+        }
+    },
+    {
+        "tag": "books",
+        "displayName": {
+            "en": "books"
+        }
+    },
+    {
+        "tag": "css",
+        "displayName": {
+            "en": "css"
+        }
+    },
+    {
+        "tag": "jobs",
+        "displayName": {
+            "en": "jobs"
+        }
+    },
+    {
+        "tag": "privacy",
+        "displayName": {
+            "en": "privacy"
+        }
+    },
+    {
+        "tag": "ai",
+        "displayName": {
+            "en": "ai"
+        }
+    },
+    {
+        "tag": "videos",
+        "displayName": {
+            "en": "videos"
+        }
+    },
+    {
+        "tag": "management",
+        "displayName": {
+            "en": "management"
+        }
+    },
+    {
+        "tag": "test",
+        "displayName": {
+            "en": "test"
+        }
+    },
+    {
+        "tag": "algorithms",
+        "displayName": {
+            "en": "Algorithms"
+        }
+    },
+    {
+        "tag": "art",
+        "displayName": {
+            "en": "art"
+        }
+    },
+    {
+        "tag": "javascript",
+        "displayName": {
+            "en": "JavaScript"
+        }
+    },
+    {
+        "tag": "gaming",
+        "displayName": {
+            "en": "gaming"
+        }
+    },
+    {
+        "tag": "dev",
+        "displayName": {
+            "en": "Development"
+        }
+    },
+    {
+        "tag": "3d",
+        "displayName": {
+            "en": "3d"
+        }
+    },
+    {
+        "tag": "story",
+        "displayName": {
+            "en": "story"
+        }
+    },
+    {
+        "tag": "web",
+        "displayName": {
+            "en": "web"
+        }
+    },
+    {
+        "tag": "tech",
+        "displayName": {
+            "en": "tech"
+        }
+    },
+    {
+        "tag": "quality",
+        "displayName": {
+            "en": "quality"
+        }
+    },
+    {
+        "tag": "frontend",
+        "displayName": {
+            "en": "frontend"
+        }
+    },
+    {
+        "tag": "async",
+        "displayName": {
+            "en": "async"
+        }
+    },
+    {
+        "tag": "bitcoin",
+        "displayName": {
+            "en": "bitcoin"
+        }
+    },
+    {
+        "tag": "security",
+        "displayName": {
+            "en": "security"
+        }
+    },
+    {
+        "tag": "environment",
+        "displayName": {
+            "en": "environment"
+        }
+    },
+    {
+        "tag": "entrepreneurship",
+        "displayName": {
+            "en": "entrepreneurship"
+        }
+    },
+    {
+        "tag": "accessibility",
+        "displayName": {
+            "en": "accessibility"
+        }
+    },
+    {
+        "tag": "cryptocurrencies",
+        "displayName": {
+            "en": "cryptocurrencies"
+        }
+    },
+    {
+        "tag": "svg",
+        "displayName": {
+            "en": "svg"
+        }
+    },
+    {
+        "tag": "lifestyle",
+        "displayName": {
+            "en": "lifestyle"
+        }
+    },
+    {
+        "tag": "perf",
+        "displayName": {
+            "en": "perf"
+        }
+    }
+]

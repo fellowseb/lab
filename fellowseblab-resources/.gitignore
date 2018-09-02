@@ -8,4 +8,4 @@ jspm_packages
 # Others
 .build
 
-data
+data/s3

@@ -1,0 +1,70 @@
+{
+    "Table": {
+        "TableName": "fellowseb-lab-resources",
+        "TableArn": "arn:aws:dynamodb:eu-west-1:414312231171:table/fellowseb-lab-resources",
+        "ProvisionedThroughput": {
+            "WriteCapacityUnits": 5,
+            "ReadCapacityUnits": 5,
+            "NumberOfDecreasesToday": 0
+        },
+        "AttributeDefinitions": [
+            {
+                "AttributeType": "N",
+                "AttributeName": "added_time"
+            },
+            {
+                "AttributeType": "N",
+                "AttributeName": "read_time"
+            },
+            {
+                "AttributeType": "S",
+                "AttributeName": "resourceId"
+            },
+            {
+                "AttributeType": "S",
+                "AttributeName": "resourceType"
+            }
+        ],
+        "TableSizeBytes": 97680,
+        "GlobalSecondaryIndexes": [
+            {
+                "IndexName": "resourceType-index",
+                "ProvisionedThroughput": {
+                    "WriteCapacityUnits": 5,
+                    "ReadCapacityUnits": 5,
+                    "NumberOfDecreasesToday": 0
+                },
+                "ItemCount": 291,
+                "IndexStatus": "ACTIVE",
+                "Projection": {
+                    "ProjectionType": "ALL"
+                },
+                "IndexSizeBytes": 97493,
+                "IndexArn": "arn:aws:dynamodb:eu-west-1:414312231171:table/fellowseb-lab-resources/index/resourceType-index",
+                "KeySchema": [
+                    {
+                        "AttributeName": "resourceType",
+                        "KeyType": "HASH"
+                    },
+                    {
+                        "AttributeName": "read_time",
+                        "KeyType": "RANGE"
+                    }
+                ]
+            }
+        ],
+        "CreationDateTime": 1521823110.185,
+        "TableStatus": "ACTIVE",
+        "ItemCount": 292,
+        "KeySchema": [
+            {
+                "AttributeName": "resourceId",
+                "KeyType": "HASH"
+            },
+            {
+                "AttributeName": "added_time",
+                "KeyType": "RANGE"
+            }
+        ]
+    }
+}
