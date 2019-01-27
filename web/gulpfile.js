@@ -40,7 +40,7 @@ function htmlTask() {
                 .pipe(gulp.dest(configuration.paths.dist));
             gulp.src(configuration.paths.src.fonts)
                 .pipe(gulp.dest(configuration.paths.dist + '/fonts'));
-            gulp.src(['./src/keybase.txt', './src/favicon.ico', './src/CNAME'])
+            gulp.src(['./src/keybase.txt', './src/favicon.ico', './src/CNAME', './src/robots.txt'])
                 .pipe(gulp.dest(configuration.paths.dist));
         });
 }
