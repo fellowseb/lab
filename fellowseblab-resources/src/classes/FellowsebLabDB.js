@@ -30,24 +30,6 @@ const batchWriteAddPutItems = (batchWriteInput, tableName, dataArr) => {
     }
 };
 
-// const batchWriteAddDeleteItems = (batchWriteInput, tableName, dataArr) => {
-//     if (dataArr && dataArr.length) {
-//         let newBatchWriteInput = batchWriteAddRequestItemsEntry(batchWriteInput, tableName);
-//         newBatchWriteInput.RequestItems[tableName] = [
-//             ...newBatchWriteInput.RequestItems[tableName],
-//             ...dataArr.map(dataObj => ({
-//                 DeleteRequest: {
-//                     Item: getPrimaryKey(dataObj)
-//                 }
-//             }))
-//         ];
-//         return newBatchWriteInput;
-//     }
-//     else {
-//         return batchWriteInput;
-//     }
-// };
-
 const extractFirst25Requests = (originaryBatchWriteInput) => {
     const MAX_REQUEST_PER_BATCH = 25;
     let currentBatch = {};
@@ -89,19 +71,23 @@ const batchWrite = async (dynamoDB, batchWriteInput) => {
 };
 
 class FellowsebLabDB {
-    constructor() {
-        const isOffline = process.env.IS_OFFLINE || false;
-        const stage = process.env.STAGE || 'dev';
+    constructor({ isOffline, stage, resourcesTable, resourceTagsTable }) {
+        isOffline = isOffline || false;
+        stage = stage|| 'dev';
         const region = isOffline ? 'localhost' : 'eu-west-1';
-        const endpoint = isOffline ? 'http://localhost:8000' : undefined;
 
-        this.dynamoDB = new AWS.DynamoDB.DocumentClient({
-            apiVersion: '2012-08-10',
-            region,
-            endpoint
-        });
-        this.resourcesTable = `fellowseb-lab-${stage}-resources`;
-        this.resourceTagsTable = `fellowseb-lab-${stage}-resourceTags`;
+        let options = {
+          apiVersion: 'latest',
+          region,
+          convertReponseTypes: true
+        }
+        if (isOffline) {
+          options.endpoint = 'http://localhost:8000';
+        }
+
+        this.dynamoDB = new AWS.DynamoDB.DocumentClient(options);
+        this.resourcesTable = resourcesTable || `fellowseb-lab-${stage}-resources`;
+        this.resourceTagsTable = resourceTagsTable || `fellowseb-lab-${stage}-resourceTags`;
     }
     async queryResources({ resourceType = 'article', tag = null }) {
         let queryInput = {

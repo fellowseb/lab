@@ -67,6 +67,8 @@ function buildResponseBody(endpoint, requestEvent, integrationResponse) {
 
 module.exports = {
     getListHandler: (resourceType, endpoint) => async (event) => {
+        const isOffline = process.env.IS_OFFLINE || false;
+        const stage = process.env.STAGE || 'dev';
         const tag = event.queryStringParameters
             ? event.queryStringParameters['tag']
             : null;
@@ -78,8 +80,8 @@ module.exports = {
             }
         };
         try {
-            let db = new FellowsebLabDB();
-            var integrationResponse = await db.queryResources({ resourceType, tag });
+            let db = new FellowsebLabDB({ isOffline, stage });
+            let integrationResponse = await db.queryResources({ resourceType, tag });
             response.statusCode = 200;
             response.body = buildResponseBody(endpoint, event, integrationResponse);
         } catch (err) {

@@ -121,6 +121,8 @@ const prepareRetrieveOptions = ({ state, since, favorite }, queryStringParameter
 
 module.exports = {
     handler: async (event) => {
+        const isOffline = process.env.IS_OFFLINE;
+        const stage = process.env.STAGE;
         let response = {
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -135,7 +137,7 @@ module.exports = {
             let pocketEntries = await pocketClient.retrieve(retrieveOptions);
             if (pocketEntries.length) {
                 let { resources, resourceTags } = createResourcesFromPocketEntries(pocketEntries);
-                let db = new FellowsebLabDB();
+                let db = new FellowsebLabDB({ isOffline, stage });
                 await db.batchWriteResources(resources);
                 console.log(`Inserted ${resources.length} resources.`);
                 let insertedTagCnt = await db.putResourceTags(resourceTags);

@@ -2,7 +2,6 @@ const AWS = require('aws-sdk');
 
 module.exports = {
     handler: async (event) => {
-        console.log('test');
         const resourceId = event.pathParameters.resourceId;
         const imageExtension = event.queryStringParameters &&
             event.queryStringParameters.type
@@ -15,13 +14,14 @@ module.exports = {
             }
         };
         try {
-            var s3options = {
+            let s3options = {
                 s3BucketEndpoint: false,
                 s3ForcePathStyle: true
             };
             if (process.env.IS_OFFLINE) {
                 s3options.endpoint = 'http://localhost:8001';
             }
+            const stage = process.env.STAGE || 'dev';
             const S3 = new AWS.S3(s3options);
             let Key = `resources/${resourceId}/thumbnail${imageExtension}`;
             let Bucket = `fellowseb-lab`;

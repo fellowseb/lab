@@ -13,6 +13,8 @@ const buildResponse = integrationResponse => {
 
 module.exports = {
     handler: async () => {
+        const isOffline = process.env.IS_OFFLINE;
+        const stage = process.env.STAGE;
         let response = {
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +23,7 @@ module.exports = {
             }
         };
         try {
-            let db = new FellowsebLabDB();
+            let db = new FellowsebLabDB({ isOffline, stage });
             let integrationResponse = await db.scanResourceTags();
             response.statusCode = 200;
             response.body = buildResponse(integrationResponse);
