@@ -201,7 +201,7 @@ plugins:
 custom:
   accountId: 414312231171
   output:
-      file: .build/stack.yml
+    file: .build/stack-${self:provider.stage}.yml
   dynamodb:
     seed:
       resources:
@@ -218,6 +218,11 @@ custom:
     types:
       - 'image/png'
       - 'image/webp'
+      - 'image/gif'
+      - 'image/x-icon'
+      - 'application/octet-stream'
+      - 'image/jpg'
+      - 'binary/octet-stream'
   domain:
     dev: api-dev.lab.fellowseb.me
     prod: api.lab.fellowseb.me
