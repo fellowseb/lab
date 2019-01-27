@@ -7,5 +7,6 @@ jspm_packages
 
 # Others
 .build
+.dynamodb
 
 data/s3
