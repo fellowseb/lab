@@ -45,6 +45,9 @@ package:
   exclude:
     - data/**/*
     - .build/**/*
+    - .serverless/**/*
+    - test/**/*
+    - .dynamodb/**/*
 
 functions:
   #
