@@ -34,6 +34,10 @@ provider:
         - dynamodb:Scan
         - dynamodb:PutItem
       Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resourceTags'
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+      Resource: 'arn:aws:s3:::fellowseb-lab-${self:provider.stage}/*'
 #
 # Files excluded from uploaded package
 #
@@ -175,6 +179,10 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 3
           WriteCapacityUnits: 1
+    fellowsebLabResourcesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: fellowseb-lab-${self:provider.stage}
 #
 # Plugins for offline dev
 #
