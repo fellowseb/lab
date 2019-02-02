@@ -17,7 +17,18 @@ module.exports = (apiUrl) => merge(common, {
     ],
     devtool: 'source-map',
     mode: 'production',
-    optimization: {
-        minimize: true
-    }
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors'
+        },
+      },
+    },
+  }
 });

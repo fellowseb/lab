@@ -1,9 +1,10 @@
 'use strict';
 
-import * as R from 'ramda';
+import prop from 'ramda/es/prop';
+import tap from 'ramda/es/tap';
 
 module.exports = {
-    eventCurrentTarget: R.prop('currentTarget'),
-    eventStopPropagation: R.tap(event => event.stopPropagation()),
-    eventPreventDefault: R.tap(event => event.preventDefault())
+    eventCurrentTarget: prop('currentTarget'),
+    eventStopPropagation: tap(event => event.stopPropagation()),
+    eventPreventDefault: tap(event => event.preventDefault())
 };
