@@ -1,6 +1,7 @@
 {
     "1": {
         "id": "1",
+        "collapsed": true,
         "title": "Build a static website for my code lab",
         "tasks": [
             "Flexbox layout, media-queries, RWD techniques",
@@ -61,6 +62,7 @@
     },
     "2": {
         "id": "2",
+        "collapsed": false,
         "title": "Display a selection of articles, talks and books that fuel my brain",
         "tasks": [
             "A NoSQL DB to store the data (DynamoDB)",
