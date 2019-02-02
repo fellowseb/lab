@@ -1,1 +1,16 @@
-{ "presets": ["react", "env", "stage-0"] }
+{
+  "plugins": [
+    "babel-plugin-styled-components",
+    "@babel/plugin-transform-parameters",
+    "@babel/plugin-transform-modules-commonjs"
+  ],
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        useBuiltIns: 'entry'
+      }
+    ]
+  ]
+}
