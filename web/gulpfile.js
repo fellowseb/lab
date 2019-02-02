@@ -68,35 +68,6 @@ function svgSpritesTask() {
 svgSpritesTask.description = 'Create SVG sprites';
 gulp.task('svgSprites', svgSpritesTask);
 
-// Gulp task to generate CSS from SCSS files
-function sassTask() {
-    return gulp.src(configuration.paths.src.scss)
-        .pipe(sass().on('error', sass.logError))
-        .pipe(autoprefixer({
-            cascade: false
-        }))
-        .pipe(uglifycss({ maxLineLen: 80, expandVars: true }))
-        .pipe(gulp.dest(configuration.paths.dist + '/css'));
-};
-sassTask.description = 'Preprocess scss files';
-gulp.task('sass', sassTask);
-
-// Gulp task to generate CSS from SCSS files
-function sassTaskDev() {
-    return gulp.src(configuration.paths.src.scss)
-        .pipe(sass().on('error', sass.logError))
-        .pipe(autoprefixer({
-            cascade: false
-        }))
-        .pipe(gulp.dest(configuration.paths.dist + '/css'));
-};
-sassTask.description = 'Preprocess scss files (dev)';
-gulp.task('sass-dev', sassTaskDev);
-
-gulp.task('sass:watch', function () {
-    gulp.watch('./sass/**/*.scss', ['sass']);
-});
-
 // Gulp clean task
 function cleanTask() {
     return del([configuration.paths.dist.slice(2)]);
@@ -130,5 +101,5 @@ const touchDev = () => {
 };
 
 // Gulp build task
-gulp.task('build', gulp.series('clean', 'svgSprites', 'html', 'sass', 'components'));
-gulp.task('build-dev', gulp.series('clean', touchDev, 'svgSprites', 'html', 'sass-dev', 'components-dev'));
+gulp.task('build', gulp.series('clean', 'svgSprites', 'html', 'components'));
+gulp.task('build-dev', gulp.series('clean', touchDev, 'svgSprites', 'html', 'components-dev'));

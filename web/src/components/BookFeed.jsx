@@ -1,8 +1,8 @@
 'use strict';
 
 import React from 'react';
-import BookCarousel from '../components/BookCarousel';
-import ResourceFeed from '../components/ResourceFeed';
+import BookCarousel from '../components/BookCarousel.jsx';
+import ResourceFeed from '../components/ResourceFeed.jsx';
 
 /**
  * Component displaying Fellowseb's lab books in a carousel.

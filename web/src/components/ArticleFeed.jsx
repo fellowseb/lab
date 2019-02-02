@@ -1,8 +1,8 @@
 'use strict';
 
 import React from 'react';
-import ResourceList from '../components/ResourceList';
-import ResourceFeed from '../components/ResourceFeed';
+import ResourceList from '../components/ResourceList.jsx';
+import ResourceFeed from '../components/ResourceFeed.jsx';
 
 /**
  * Component rendering a feed of Articles.

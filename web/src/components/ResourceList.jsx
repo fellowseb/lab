@@ -1,8 +1,47 @@
-import React from 'react';
-import ResourceItem from './ResourceItem';
 import PropTypes from 'prop-types';
-import Loader from './Loader';
-import ErrorDisplay from './ErrorDisplay';
+import React from 'react';
+import styled from 'styled-components';
+
+import ErrorDisplay from './ErrorDisplay.jsx';
+import { A, Ul } from '../components/BaseStyledComponents.jsx';
+import Loader from '../components/Loader.jsx';
+import ResourceItem from '../components/ResourceItem.jsx';
+
+const ResourceListContainer = styled.div `
+  position: relative;
+`
+
+const PageLink = styled(A) `
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const PrevPageLink = styled(PageLink) `
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 35px);
+  visibility: ${props => !!props.show ? 'visible' : 'hidden'};
+`
+
+const NextPageLink = styled(PageLink) `
+  visibility: ${props => !!props.show ? 'visible' : 'hidden'};
+`
+
+const ArrowSVG = styled.svg `
+  height: 20px;
+  width: 70px;
+  &:hover {
+    fill: #333;
+  }
+`
+
+const LoaderParent = styled.div `
+  position: relative;
+`
 
 /**
  * State-less component displaying a list of resources in a column.
@@ -24,32 +63,26 @@ const ResourceList = ({ resources = [],
     defaultThumbnailClass = 'fa-bookmark',
     error = null,
     loading = false }) => {
-    let prevPageClasses = ['articles-prevpage'];
-    if (!hasPrevPage || loading) prevPageClasses.push('hidden');
-    let nextPageClasses = ['articles-nextpage'];
-    if (!hasNextPage || loading) nextPageClasses.push('hidden');
-    const serializeClasses = (classList) =>
-        classList.reduce((strg, className) => `${strg} ${className}`, '');
     return (
-        <div className='resourcelist-container'>
-            <a className={serializeClasses(prevPageClasses)} onClick={onPrevPage}>
-                <svg className="icon-arrows">
+        <ResourceListContainer>
+            <PrevPageLink show={hasPrevPage && !loading} onClick={onPrevPage}>
+                <ArrowSVG>
                     <use href="#arrowup" />
-                </svg>
-            </a>
-            <div className='loader-parent'>
+                </ArrowSVG>
+            </PrevPageLink>
+            <LoaderParent>
                 <ResourceFeedContentSelect error={error} loading={loading}>
                     <Loader />
                     <ErrorDisplay error={error} />
                 </ResourceFeedContentSelect>
                 <ResourceListItems resources={resources} defaultThumbnailClass={defaultThumbnailClass} />
-            </div>
-            <a className={serializeClasses(nextPageClasses)} onClick={onNextPage}>
-                <svg className="icon-arrows">
+            </LoaderParent>
+            <NextPageLink show={hasNextPage && !loading} onClick={onNextPage}>
+                <ArrowSVG>
                     <use href="#arrowdown" />
-                </svg>
-            </a>
-        </div>
+                </ArrowSVG>
+            </NextPageLink>
+        </ResourceListContainer>
     );
 };
 
@@ -62,8 +95,20 @@ ResourceList.propTypes = {
     defaultThumbnailClass: PropTypes.string
 };
 
+const ArticlesList = styled(Ul) `
+  border-top: 1px solid #c1b79a;
+  border-bottom: 1px solid #c1b79a;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #c1b79a;
+  border: 1px solid #aba288;
+  display: flex;
+  flex-direction: column;
+`
+
 const ResourceListItems = ({ resources = [], defaultThumbnailClass = '' }) =>
-    <ul className='articles-list'>
+    <ArticlesList>
         {resources.map((resource) => {
             const thumbnailUrl = resource.thumbnail
                 ? resource.thumbnail.url
@@ -76,7 +121,7 @@ const ResourceListItems = ({ resources = [], defaultThumbnailClass = '' }) =>
                 thumbnailUrl={thumbnailUrl}
                 defaultThumbnailClass={defaultThumbnailClass} />;
         })}
-    </ul>;
+    </ArticlesList>;
 
 ResourceListItems.propTypes = {
     resources: PropTypes.array,

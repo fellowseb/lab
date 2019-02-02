@@ -1,13 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-fetch';
+import styled from 'styled-components';
+
+import { P } from '../components/BaseStyledComponents.jsx';
+
+const ArticlesContainer = styled.div `
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+`
+
+const ArticlesTitle = styled(P) `
+  margin: 0;
+  width: 100%;
+`
+
+const ArticlesTitleCount = styled.span `
+  font-size: 80%;
+`
 
 /**
  * React component listing articles from a Pocket account.
  * Possibility to filter the articles based on the tags.
- * @extends React.Component
+ * @extends React.PureComponent
  */
-class ResourceFeed extends React.Component {
+class ResourceFeed extends React.PureComponent {
     constructor(props) {
         super(props);
         this.resources = [];
@@ -22,32 +40,17 @@ class ResourceFeed extends React.Component {
         this.onNextPage = this.onNextPage.bind(this);
         this.extractOffset = this.extractOffset.bind(this);
     }
-    componentWillReceiveProps(nextProps) {
-        if (this.props.apiUrl != nextProps.apiUrl ||
-            this.props.apiEndpoint != nextProps.apiEndpoint ||
-            this.props.filteredTag != nextProps.filteredTag ||
-            this.props.count != nextProps.count) {
-            let { offset } = this.state;
-            offset = 0;
-            updateComponentState(this, nextProps, offset);
-        }
-
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextState.error !== this.state.error ||
-            nextState.loading !== this.state.loading ||
-            nextState.totalCount !== this.state.totalCount ||
-            nextState.filteredCount !== this.state.filteredCount ||
-            nextState.offset !== this.state.offset ||
-            nextProps.apiUrl !== this.props.apiUrl ||
-            nextProps.apiEndpoint !== this.props.apiEndpoint ||
-            nextProps.filteredTag !== this.props.filteredTag ||
-            nextProps.count !== this.props.count ||
-            nextProps.title !== this.props.title;
-    }
     componentDidMount() {
         const { offset } = this.state;
         updateComponentState(this, this.props, offset);
+    }
+    componentDidUpdate(prevProps) {
+      const { filteredTag, apiUrl, apiEndpoint } = this.props; 
+      if (apiUrl !== prevProps.apiUrl ||
+          apiEndpoint !== prevProps.apiEndpoint ||
+          filteredTag !== prevProps.filteredTag) {
+          updateComponentState(this, this.props, 0);
+      }
     }
     render() {
         const { resources,
@@ -62,9 +65,8 @@ class ResourceFeed extends React.Component {
         const { title, ResourceFeedDisplayComp, apiUrl } = this.props;
 
         return (
-            <div className='articles-container'>
-                <ResourceFeedHeader title={title} totalCount={totalCount} filteredCount={filteredCount} />
-                <div>
+            <ArticlesContainer>
+              <ResourceFeedHeader title={title} totalCount={totalCount} filteredCount={filteredCount} />
                     <ResourceFeedDisplayComp
                         resources={resources}
                         hasNextPage={!!next}
@@ -74,8 +76,7 @@ class ResourceFeed extends React.Component {
                         error={error}
                         loading={loading}
                         apiUrl={apiUrl} />
-                </div>
-            </div>
+            </ArticlesContainer>
         );
     }
     /**
@@ -126,7 +127,7 @@ const ResourceFeedHeader = ({ title = 'Resources',
     const totalStr = totalCount === filteredCount
         ? ` (${totalCount})`
         : ` (${filteredCount} of ${totalCount})`;
-    return <p className='articles-title'>{title}<span className='articles-title-count'>{totalStr}</span></p>;
+    return <ArticlesTitle>{title}<ArticlesTitleCount>{totalStr}</ArticlesTitleCount></ArticlesTitle>;
 };
 
 ResourceFeedHeader.propTypes = {
@@ -143,7 +144,6 @@ const updateComponentState = async (component, { filteredTag, count, apiUrl, api
         let resources = await retrieveResources(apiUrl, apiEndpoint, filteredTag, count, offset)
         component.resources = resources.resources;
         component.setState({
-            ...component.state,
             loading: false,
             error: null,
             totalCount: resources.totalCount,
@@ -155,7 +155,6 @@ const updateComponentState = async (component, { filteredTag, count, apiUrl, api
     } catch (err) {
         console.error(err);
         component.setState({
-            ...component.state,
             loading: false,
             error: err
         });

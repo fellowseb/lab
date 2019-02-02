@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-fetch';
+import styled from 'styled-components';
+
+import Select from '../components/Select.jsx';
 
 /**
  * Component displaying a combo enabling the filtering
@@ -11,30 +14,27 @@ import fetch from 'isomorphic-fetch';
  * - tags {string[]}
  * - filteringTag {string}
  */
-class ResourceFilters extends React.Component {
+class ResourceFilters extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             loading: false,
             error: null,
             tags: [],
-            filteredTag: null
         };
     }
-    async componentWillMount() {
+    async componentDidMount() {
         this.setState({ loading: true });
         try {
             const { apiUrl } = this.props;
             let tags = await retrieveFilterTags(apiUrl);
             this.setState({
-                ...this.state,
                 loading: false,
                 error: null,
                 tags
             });
         } catch (err) {
             this.setState({
-                ...this.state,
                 loading: false,
                 error: err,
                 tags: []
@@ -42,23 +42,25 @@ class ResourceFilters extends React.Component {
         }
     }
     render() {
-        const { tags, filteredTag } = this.state;
-        const nonFilteredTags = tags.filter(tagItem => tagItem.tag !== filteredTag);
+        const { tags } = this.state;
+        const { filteredTag } = this.props;
         let refs = {
             select: null
         };
 
         return (
-            <section className='articles-filters'>
+            <section>
                 <label>Filter by category : </label>
-                <select className='articles-filters-select'
-                    disabled={nonFilteredTags.length === 0}
+                <Select
+                    value={filteredTag || ''}
+                    disabled={tags.length === 0}
                     ref={input => (refs.select = input)}
                     onChange={this.changeFilter.bind(this, refs)}>
                     <option value=''>Show all</option>
-                    {nonFilteredTags.map((tagItem, i) =>
-                        <option value={tagItem.tag} key={i}>{tagItem.displayName ? tagItem.displayName.en : tagItem.tag}</option>)}
-                </select>
+                    {tags.map((tagItem, i) => {
+                        return <option value={tagItem.tag} key={i}>{tagItem.displayName ? tagItem.displayName.en : tagItem.tag}</option>
+                    })}
+                </Select>
             </section>
         );
     }
@@ -74,12 +76,14 @@ class ResourceFilters extends React.Component {
 
 ResourceFilters.propTypes = {
     onChangeFilter: PropTypes.func,
-    apiUrl: PropTypes.string.isRequired
+    apiUrl: PropTypes.string.isRequired,
+    filteredTag: PropTypes.string
 };
 
 ResourceFilters.defaultProps = {
     onChangeFilter: tag => tag,
-    apiUrl: ''
+    apiUrl: '',
+    filteredTag: null
 };
 
 /**
