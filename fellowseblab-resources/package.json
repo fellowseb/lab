@@ -20,8 +20,10 @@
     "serverless-stack-output": "^0.2.3"
   },
   "scripts": {
-    "dump": "AWS_PROFILE=fellowseb-lab-serverless node data/dump.js",
-    "syncLocalBucket": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncBucket.js",
+    "sync-db:prod": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncDB.js --source-offline=false --source-stage=prod --target-offline=true --target-stage=prod",
+    "sync-db:dev": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncDB.js --source-offline=false --source-stage=dev --target-offline=true --target-stage=dev",
+    "sync-s3:prod": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncBucket.js --source-region=eu-west-1 --target-region=localhost --target-endpoint=http://localhost:8001",
+    "sync-s3:dev": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncBucket.js",
     "start:dev:offline": "AWS_PROFILE=fellowseb-lab-serverless serverless offline start --stage=dev --dontPrintOutput --migrate --seed=resources --aws-profile=fellowseb-lab-serverless",
     "start:dev:offline:noseed": "serverless offline start --stage=dev --dontPrintOutput --migrate",
     "start:dev:offline:nomigrate": "serverless offline start --stage=dev --dontPrintOutput --migrate=0",

@@ -44,6 +44,7 @@ provider:
 package:
   exclude:
     - data/**/*
+    - meta/**/*
     - .build/**/*
     - .serverless/**/*
     - test/**/*
