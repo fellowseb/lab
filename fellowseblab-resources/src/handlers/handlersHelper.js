@@ -2,6 +2,13 @@
 
 const FellowsebLabDB = require('../../src/classes/FellowsebLabDB');
 
+// Temporary bandage
+// Handles both response types of DynamoDB, that are different
+// in dev and in prod
+const unwrapLists = listValue => {
+  return listValue instanceof Array ? listValue : listValue.values
+}
+
 function mapResourceItems(offset, count, integrationResponseItems) {
     let ret = [];
     for (var i = offset; i < offset + count; ++i) {
@@ -11,19 +18,12 @@ function mapResourceItems(offset, count, integrationResponseItems) {
                 "title": integrationResponseItem.title,
                 "url": integrationResponseItem.url,
                 "resourceId": integrationResponseItem.resourceId,
-                "tags": integrationResponseItem.tags ? integrationResponseItem.tags : [],
-                "authors": integrationResponseItem.authors ? integrationResponseItem.authors : [],
+                "tags": unwrapLists(integrationResponseItem.tags || []),
+                "authors": unwrapLists(integrationResponseItem.authors || []),
                 "thumbnailHREF": integrationResponseItem.hasThumbnail ? `/books/${integrationResponseItem.resourceId}/thumbnail` : null
             });
         }
     }
-    // if (integrationResponseItem.image) {
-    //     resourceItem["thumbnail"] = {
-    //         "width": integrationResponseItem.image.M.width.N,
-    //         "height": integrationResponseItem.image.M.height.N,
-    //         "url": integrationResponseItem.image.M.url.S
-    //     };
-    // }
     return ret;
 }
 
