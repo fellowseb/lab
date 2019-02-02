@@ -4,10 +4,12 @@
   "description": "FellowSeb's lab is a personal website that will serve as a code laboratory on which I, wauquier dot sebastien at gmail dot com, will publish my various tech projects. It may diverge and include other type of projects later on.",
   "main": "index.html",
   "scripts": {
+    "build:prod": "gulp build",
+    "build:dev": "gulp build-dev",
+    "build:dev:offline": "FELLOWSEB_LAB_APIURL='http://localhost:3000' gulp build-dev",
     "deploy": "bash deploy.sh dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "offline:start": "http-server dist",
-    "web:build:dev:offline": "export FELLOWSEB_LAB_APIURL='http://localhost:3000' && gulp build-dev"
+    "offline:start": "http-server dist"
   },
   "repository": {
     "type": "git",
@@ -23,11 +25,11 @@
   "maintainers": [
     "wauquier.sebastien@gmail.com"
   ],
-  "license": "ISC",
+  "license": "WTF",
   "bugs": {
-    "url": "https://github.com/fellowseb/a-modest-learning-journey/issues"
+    "url": "https://github.com/fellowseb/lab/issues"
   },
-  "homepage": "https://github.com/fellowseb/a-modest-learning-journey#readme",
+  "homepage": "https://github.com/fellowseb/lab#readme",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
@@ -42,28 +44,31 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-react": "^7.12.3",
     "eslint-plugin-standard": "^3.1.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^4.1.0",
-    "gulp-inject-string": "^1.1.1",
+    "gulp-inject-string": "^1.1.2",
     "gulp-sass": "^3.2.1",
-    "gulp-svg-sprite": "^1.4.0",
+    "gulp-svg-sprite": "^1.5.0",
     "gulp-uglify": "^3.0.1",
     "gulp-uglifycss": "^1.1.0",
     "http-server": "^0.11.1",
+    "styled-components": "^4.1.3",
     "touch": "^3.1.0",
-    "webpack": "^4.17.1",
-    "webpack-merge": "^4.1.4",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.1",
+    "webpack-merge": "^4.2.1",
     "webpack-stream": "^4.0.3"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.2",
-    "ramda": "^0.25.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "ramda": "^0.26.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "browserslist": [
     "> 1%",
