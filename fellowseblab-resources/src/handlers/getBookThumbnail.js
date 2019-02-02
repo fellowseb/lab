@@ -23,17 +23,17 @@ module.exports = {
             }
             const stage = process.env.STAGE || 'dev';
             const S3 = new AWS.S3(s3options);
-            let Key = `resources/${resourceId}/thumbnail${imageExtension}`;
-            let Bucket = `fellowseb-lab`;
-            let output = await S3.getObject({ Bucket, Key }).promise();
+            const Key = `resources/${resourceId}/thumbnail${imageExtension}`;
+            const Bucket = `fellowseb-lab-${stage}`;
+            const output = await S3.getObject({ Bucket, Key }).promise();
             response.statusCode = 200;
-            response.body = output.Body;
+            response.body = output.Body.toString('base64');
             response.headers['Content-Type'] = output.ContentType;
             response.isBase64Encoded = true;
         } catch (err) {
             response.statusCode = err.statusCode || 501;
             response.body = {
-                error: `Couldn't fetch the thumbnail. Err: ${error.toString()}`
+                error: `Couldn't fetch the thumbnail. Err: ${err.toString()}`
             };
             response.headers['Content-Type'] = 'application/json';
         }
