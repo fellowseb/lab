@@ -4,7 +4,8 @@ const uuid = require('uuid');
 
 class FellowsebLabResource {
     constructor({ id, type = 'article', title = '', url = '', tags = [],
-        authors = [], time_read = 0, time_added = 0 }) {
+        authors = [], time_read = 0, time_added = 0, isbn = '', editor = '',
+        hasThumbnail = false }) {
         this.id = id || uuid();
         this.type = type;
         this.title = title;
@@ -13,6 +14,9 @@ class FellowsebLabResource {
         this.time_added = time_added;
         this.tags = tags;
         this.authors = authors;
+        this.isbn = isbn;
+        this.editor = editor;
+        this.hasThumbnail = hasThumbnail;
     }
     toJSON() {
         var json = {
@@ -25,6 +29,9 @@ class FellowsebLabResource {
         if (this.url) json['url'] = this.url;
         if (this.tags) json['tags'] = [...this.tags];
         if (this.authors) json['authors'] = [...this.authors];
+        if (this.isbn) json['isbn'] = this.isbn;
+        if (this.editor) json['editor'] = this.editor;
+        if (this.hasThumbnail) json['hasThumbnail'] = this.hasThumbnail;
         return json;
     }
 };

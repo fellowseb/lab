@@ -1,12 +1,16 @@
 'use strict';
 
 class FellowsebLabResourceTag {
-    constructor({ tag }) {
+    constructor({ tag = [], displayName = '' }) {
         this.tag = tag;
+        this.displayName = displayName;
     }
     toJSON() {
         var json = {
-            'tag': this.tag
+            'tag': this.tag,
+            'displayName': {
+              'en': this.displayName
+            }
         };
         return json;
     }
