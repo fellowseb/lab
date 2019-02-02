@@ -110,8 +110,14 @@ class FellowsebLabDB {
         return this.dynamoDB.query(queryInput).promise();
     }
     async scanResourceTags() {
-        let scanInput = {
+        const scanInput = {
             'TableName': this.resourceTagsTable
+        };
+        return this.dynamoDB.scan(scanInput).promise();
+    }
+    async scanResources() {
+        const scanInput = {
+            'TableName': this.resourcesTable
         };
         return this.dynamoDB.scan(scanInput).promise();
     }
