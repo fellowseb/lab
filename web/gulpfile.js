@@ -1,8 +1,6 @@
 const gulp = require('gulp');
-const sass = require('gulp-sass');
 const del = require('del');
 const svgsprite = require('gulp-svg-sprite');
-const autoprefixer = require('gulp-autoprefixer');
 const uglifycss = require('gulp-uglifycss');
 const inject = require('gulp-inject-string');
 const webpack = require('webpack');
@@ -22,8 +20,6 @@ var configuration = {
                 './src/fonts/*.woff2'],
             images: './src/images/*.*',
             svgs: '.src/images/svg/*.svg',
-            scss: ['./src/sass/*.scss',
-                './src/sass/*css']
         },
         dist: './dist'
     }
