@@ -29,7 +29,11 @@ const BookCarouselList = styled(Ul) `
  */
 const BookCarousel = ({ resources = [], apiUrl = "" }) =>
     <BookCarouselContainer>
-        {renderBooks(resources, apiUrl)}
+        <BookCarouselList>
+        {
+          resources.map(book => <BookCarouselItem book={book} apiUrl={apiUrl} key={book.resourceId}/>)
+        }
+        </BookCarouselList>
     </BookCarouselContainer>;
 
 BookCarousel.propTypes = {
@@ -37,18 +41,11 @@ BookCarousel.propTypes = {
     apiUrl: PropTypes.string
 };
 
-const renderBooks = (books, apiUrl) =>
-  <BookCarouselList>
-    {
-      books.map(book => renderBook(book, apiUrl))
-    }
-  </BookCarouselList>;
-
 const BookCarouselItemAuthors = styled(P) `
     font-size: 60%;
 `
 
-const BookCarouselItem = styled.li `
+const StyledBookCarouselItem = styled.li `
     list-style: none;
     display: block;
     height: 180px;
@@ -72,9 +69,11 @@ const BookCarouselItemOverlay = styled(A) `
     width: 100%;
 `
 
-const BookCarouselItemDesc = styled.div `
+const BookCarouselItemDesc = styled.div.attrs(props => ({
+    show: !!props.show
+})) `
     height: 100%;
-    display:none;
+    display: ${props => props.show ? 'block' : 'none'};
 `
 
 const BookCarouselItemTitle = styled(P) `
@@ -84,58 +83,86 @@ const BookCarouselItemTitle = styled(P) `
     overflow: hidden;
 `
 
-const BookCarouselItemImg = styled.img `
-  width: 100%;
-  height: 100%;
+const BookCarouselItemImg = styled.img.attrs(props => ({
+    show: !!props.show
+})) `
+    width: 100%;
+    height: 100%;
+    display: ${props => props.show ? 'block' : 'none'};
 `
 
 const BookCarouselItemTags = styled(Ul) `
-  font-size: 70%;
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  margin: 3px 0;
-  padding: 0;
-  flex-wrap: wrap;
+    font-size: 70%;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 3px 0;
+    padding: 0;
+    flex-wrap: wrap;
 `
 
 const BookCarouselItemTag = styled.li `
-  margin: 0 0.5em 0 0;
-  padding: 0 4px 0 4px;
-  color: #333333;
-  background: #edc711;
+    margin: 0 0.5em 0 0;
+    padding: 0 4px 0 4px;
+    color: #333333;
+    background: #edc711;
 `
 
-const renderBook = (book, apiUrl) => {
-    const authorsStr = book.authors && book.authors.length
-        ? <BookCarouselItemAuthors>by {book.authors[0]}</BookCarouselItemAuthors>
-        : null;
-    const thumbnailURL = book.thumbnailHREF
-        ? apiUrl + book.thumbnailHREF
-        : '/images/nothumbnail';
-    let refs = {
-        contElem: null
-    };
-    return (
-        <BookCarouselItem key={book.resourceId}>
-            <BookCarouselItemOverlay href={book.url} target="_blank" rel="noopener"
-                ref={elem => { refs.contElem = elem; }}>
-                <BookCarouselItemDesc>
-                    <BookCarouselItemTitle>{book.title}</BookCarouselItemTitle>
-                    {authorsStr}
-                    <BookCarouselItemTags>
-                        {book.tags ? book.tags.map((tag, tagIndex) =>
-                          <BookCarouselItemTag key={tagIndex}>{tag}</BookCarouselItemTag>) : null}
-                    </BookCarouselItemTags>
-                </BookCarouselItemDesc>
-                <picture>
-                    <source srcSet={thumbnailURL + '?type=.webp'} type='image/webp' />
-                    <source srcSet={thumbnailURL + '?type=.jp2'} type='image/jp2' />
-                    <BookCarouselItemImg src={thumbnailURL + '?type=.png'} />
-                </picture>
-            </BookCarouselItemOverlay>
-        </BookCarouselItem>
-    );
+class BookCarouselItem extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hovered: false
+        };
+        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseLeave = this.onMouseLeave.bind(this);
+    }
+    onMouseEnter() {
+        this.setState({ hovered: true });
+    }
+    onMouseLeave() {
+        this.setState({ hovered: false });
+    }
+    render() { 
+        const { book, apiUrl } = this.props;
+        const { hovered } = this.state;
+        const authorsStr = book.authors && book.authors.length
+            ? <BookCarouselItemAuthors>by {book.authors[0]}</BookCarouselItemAuthors>
+            : null;
+        const thumbnailURL = book.thumbnailHREF
+            ? apiUrl + book.thumbnailHREF
+            : '/images/nothumbnail';
+        let refs = {
+            contElem: null
+        };
+
+        return (
+            <StyledBookCarouselItem>
+                <BookCarouselItemOverlay href={book.url} target="_blank" rel="noopener"
+                    ref={elem => { refs.contElem = elem; }}
+                    onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+                    <BookCarouselItemDesc show={hovered}>
+                        <BookCarouselItemTitle>{book.title}</BookCarouselItemTitle>
+                        {authorsStr}
+                        <BookCarouselItemTags>
+                            {book.tags ? book.tags.map((tag, tagIndex) =>
+                              <BookCarouselItemTag key={tagIndex}>{tag}</BookCarouselItemTag>) : null}
+                        </BookCarouselItemTags>
+                    </BookCarouselItemDesc>
+                    <picture>
+                        <source srcSet={thumbnailURL + '?type=.webp'} type='image/webp' />
+                        <source srcSet={thumbnailURL + '?type=.jp2'} type='image/jp2' />
+                        <BookCarouselItemImg src={thumbnailURL + '?type=.png'} show={!hovered}/>
+                    </picture>
+                </BookCarouselItemOverlay>
+            </StyledBookCarouselItem>
+        );
+    }
+}
+
+BookCarouselItem.propTypes = {
+    book: PropTypes.object,
+    apiUrl: PropTypes.string
 };
 
 module.exports = BookCarousel;
