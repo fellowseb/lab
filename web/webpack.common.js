@@ -1,4 +1,5 @@
 const path = require('path');
+const Visualizer = require('webpack-visualizer-plugin');
 
 const config = {
     entry: [path.resolve(__dirname, 'src/index.js')],
@@ -15,7 +16,12 @@ const config = {
                 loader: 'babel-loader'
             }
         ]
-    }
+    },
+    plugins: [
+        new Visualizer({
+            filename: '../build/statistics.html'
+        })
+    ],
 };
 
 module.exports = config;

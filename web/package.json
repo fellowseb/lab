@@ -9,7 +9,8 @@
     "build:dev:offline": "FELLOWSEB_LAB_APIURL='http://localhost:3000' gulp build-dev",
     "deploy": "bash deploy.sh dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "offline:start": "http-server dist"
+    "offline:start": "http-server dist",
+    "stats": "xdg-open build/statistics.html"
   },
   "repository": {
     "type": "git",
@@ -58,7 +59,8 @@
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.1",
     "webpack-merge": "^4.2.1",
-    "webpack-stream": "^4.0.3"
+    "webpack-stream": "^4.0.3",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
