@@ -12,11 +12,11 @@
     "mocha": "^5.2.0",
     "serverless": "^1.36.3",
     "serverless-apigw-binary": "^0.4.4",
-    "serverless-apigwy-binary": "^0.1.0",
+    "serverless-apigwy-binary": "^1.0.0",
     "serverless-domain-manager": "^2.6.11",
     "serverless-dynamodb-local": "0.2.30",
-    "serverless-offline": "^3.33.0",
-    "serverless-s3-local": "^0.3.21",
+    "serverless-offline": "^4.4.2",
+    "serverless-s3-local": "^0.3.22",
     "serverless-stack-output": "^0.2.3"
   },
   "scripts": {
