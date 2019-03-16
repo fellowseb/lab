@@ -1,8 +1,9 @@
 import React from 'react';
-import Menu from '../components/Menu.jsx';
 import PropTypes from 'prop-types';
 import partial from 'ramda/es/partial';
 import styled, { createGlobalStyle } from 'styled-components';
+
+import Menu from '../components/Menu.jsx';
 import AboutPage from '../components/AboutPage.jsx';
 import ResourcesPage from '../components/ResourcesPage.jsx';
 import LabPage from '../components/LabPage.jsx';
@@ -106,6 +107,7 @@ class App extends React.PureComponent {
             });
             pushWindowState(newSection);
             scrollTo(this.sectionAnchors[newSection]);
+            this.openMenu(false);
         };
     }
     componentDidMount() {
