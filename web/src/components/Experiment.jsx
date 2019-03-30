@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import { media } from '../components/MediaQueries.jsx';
 import { A, Ul, H1, P } from '../components/BaseStyledComponents.jsx';
 
-const ExperimentArticle = styled.article `
+const ExperimentArticle = styled.article`
   padding: 0;
   border-radius: 10px 10px 0 0;
   border: 1px solid #a39f9c;
@@ -17,11 +17,11 @@ const ExperimentArticle = styled.article `
   & > * {
     padding: 0;
   }
-`
+`;
 
 const ExperimentHeaderSection = styled.section.attrs(props => ({
-  collapsed: props.collapsed || false
-})) `
+    collapsed: props.collapsed || false
+}))`
   padding: 2px 12px;
   cursor: pointer;
   background: #333;
@@ -31,36 +31,36 @@ const ExperimentHeaderSection = styled.section.attrs(props => ({
   &:hover {
       color: #ddd;
   }
-`
+`;
 
 const ExperimentTitle = styled(H1).attrs(props => ({
-  collapsed: props.collapsed || false
-})) `
+    collapsed: props.collapsed || false
+}))`
   font-size: 1.2rem;
   font-weight: ${props => props.collapsed ? 'normal' : 'bold'};
   margin: 0;
-`
+`;
 
-const uncollapsebody = keyframes `
+const uncollapsebody = keyframes`
   from {
       max-height: 0;
   }
   to {
       max-height: 1000px;
   }
-`
-const collapsebody = keyframes `
+`;
+const collapsebody = keyframes`
   from {
     max-height: 1000px;
   }
   to {
     max-height: 0;
   }
-`
+`;
 
 const ExperimentBody = styled.div.attrs(props => ({
-  collapsed: props.collapsed || false
-})) `
+    collapsed: props.collapsed || false
+}))`
   flex-direction: row;
   flex-wrap: wrap;
   display: flex;
@@ -70,62 +70,62 @@ const ExperimentBody = styled.div.attrs(props => ({
   animation-iteration-count: 1;
   animation-direction: normal;
   ${props => props.collapsed ? 'max-height: 0' : ''};
-`
+`;
 
-const ExperimentBodyList = styled(Ul) `
+const ExperimentBodyList = styled(Ul)`
   padding: 0 0 0 1em;
-`
+`;
 
-const ExperimentResourcesUl = styled(ExperimentBodyList) `
+const ExperimentResourcesUl = styled(ExperimentBodyList)`
   list-style: none;
-`
+`;
 
-const ExperimentResultsUl = styled(ExperimentBodyList) `
+const ExperimentResultsUl = styled(ExperimentBodyList)`
   list-style: none;
   display: inline-flex;
   flex-direction: row;
   vertical-align: bottom;
-`
+`;
 
-const ExperimentContentSection = styled.section `
+const ExperimentContentSection = styled.section`
   padding: 0;
   flex: 2 2 100%;
-  ${media.large `
+  ${media.large`
       flex: 1 50%;
   `}
-`
+`;
 
-const ExperimentResourcesSection = styled.section `
+const ExperimentResourcesSection = styled.section`
   padding: 0;
   flex: 2 2 100%;
-  ${media.large `
+  ${media.large`
       flex: 1 50%;
   `}
-`
+`;
 
-const ExperimentResultsSection = styled.section `
+const ExperimentResultsSection = styled.section`
   display: flex;
   flex: 2 2 100%;
   flex-direction: column;
   padding: 0;
   margin: 0;
-`
+`;
 
-const ExperimentSectionTitle = styled.p `
+const ExperimentSectionTitle = styled.p`
   margin: 0;
   font-weight: bold;
   padding: 0.25em 0.5em;
   background: #b4aa8f;
-`
+`;
 
-const ExperimentSectionIcon = styled.span `
+const ExperimentSectionIcon = styled.span`
   margin-right: 0.25em;
-`
+`;
 
-const ExperimentTagsSection = styled.section `
+const ExperimentTagsSection = styled.section`
   background: #b4aa8f;
   padding: 0.25em 0.5em;
-`
+`;
 
 /**
  * Stateless component displaying a Fellowseb'lab Experiment.
@@ -134,37 +134,37 @@ const ExperimentTagsSection = styled.section `
 const Experiment = ({ tasks = [], resources = [], results = [], tags = [],
     collapsed = true, num = 0, title = '[Unknown experiment]', onToggleCollapse = null }) => {
     return (
-      <ExperimentArticle>
-        <ExperimentHeaderSection collapsed={collapsed} onClick={onToggleCollapse}>
-            <header>
-                <ExperimentTitle collapsed={collapsed}>{num} - {title}</ExperimentTitle>
-            </header>
-        </ExperimentHeaderSection>
-        <ExperimentBody collapsed={collapsed}>
-            <ExperimentContentSection>
-                <ExperimentSectionTitle>
-                    <ExperimentSectionIcon className="fas fa-tasks" title="Tasks" />I used...
-                </ExperimentSectionTitle>
-                {renderExperimentTasks(tasks)}
-            </ExperimentContentSection>
-            <ExperimentResourcesSection>
-                <ExperimentSectionTitle>
-                    <ExperimentSectionIcon className="fas fa-link" title="Resources" />Resources
-                </ExperimentSectionTitle>
-                {renderExperimentResources(resources)}
-            </ExperimentResourcesSection>
-            <ExperimentResultsSection>
-                <ExperimentSectionTitle>
-                    <ExperimentSectionIcon className="fas fa-chart-line" title="Results" />Results
-                </ExperimentSectionTitle>
-                {renderExperimentResults(results)}
-            </ExperimentResultsSection>
-        </ExperimentBody>
-        <ExperimentTagsSection>
-            <ExperimentSectionIcon className="fas fa-tags" title="Tags" />
-            {renderExperimentTags(tags)}
-        </ExperimentTagsSection>
-      </ExperimentArticle>
+        <ExperimentArticle>
+            <ExperimentHeaderSection collapsed={collapsed} onClick={onToggleCollapse}>
+                <header>
+                    <ExperimentTitle collapsed={collapsed}>{num} - {title}</ExperimentTitle>
+                </header>
+            </ExperimentHeaderSection>
+            <ExperimentBody collapsed={collapsed}>
+                <ExperimentContentSection>
+                    <ExperimentSectionTitle>
+                        <ExperimentSectionIcon className="fas fa-tasks" title="Tasks" />I used...
+                    </ExperimentSectionTitle>
+                    {renderExperimentTasks(tasks)}
+                </ExperimentContentSection>
+                <ExperimentResourcesSection>
+                    <ExperimentSectionTitle>
+                        <ExperimentSectionIcon className="fas fa-link" title="Resources" />Resources
+                    </ExperimentSectionTitle>
+                    {renderExperimentResources(resources)}
+                </ExperimentResourcesSection>
+                <ExperimentResultsSection>
+                    <ExperimentSectionTitle>
+                        <ExperimentSectionIcon className="fas fa-chart-line" title="Results" />Results
+                    </ExperimentSectionTitle>
+                    {renderExperimentResults(results)}
+                </ExperimentResultsSection>
+            </ExperimentBody>
+            <ExperimentTagsSection>
+                <ExperimentSectionIcon className="fas fa-tags" title="Tags" />
+                {renderExperimentTags(tags)}
+            </ExperimentTagsSection>
+        </ExperimentArticle>
     );
 };
 
@@ -175,7 +175,8 @@ Experiment.propTypes = {
     tasks: PropTypes.array,
     resources: PropTypes.array,
     results: PropTypes.array,
-    tags: PropTypes.array
+    tags: PropTypes.array,
+    onToggleCollapse: PropTypes.func
 };
 
 const renderExperimentTasks = tasks =>
@@ -218,7 +219,7 @@ const renderExperimentResources = resources =>
         })}
     </ExperimentResourcesUl>;
 
-const ExperimentResultsItem = styled.li `
+const ExperimentResultsItem = styled.li`
   margin-right: 2px;
   padding: 0 4px;
   text-decoration: underline;
@@ -226,26 +227,26 @@ const ExperimentResultsItem = styled.li `
   &:last-of-type {
     border-right: none;
   }
-`
+`;
 
 const renderExperimentResults = results =>
     <ExperimentResultsUl>
         {results.map((result, i) =>
-          <ExperimentResultsItem key={i}>
-            <A href={result.href} target="_blank" rel="noopener noreferrer">{result.text}</A>
-          </ExperimentResultsItem>
+            <ExperimentResultsItem key={i}>
+                <A href={result.href} target="_blank" rel="noopener noreferrer">{result.text}</A>
+            </ExperimentResultsItem>
         )}
     </ExperimentResultsUl>;
 
-const ExperimentTagsUl = styled(ExperimentBodyList) `
+const ExperimentTagsUl = styled(ExperimentBodyList)`
   list-style: none;
   padding: 0;
   margin: 0;
   display: inline-block;
   vertical-align: bottom;
-`
+`;
 
-const ExperimentTagsItem = styled.li `
+const ExperimentTagsItem = styled.li`
   background-color: #d7b61b;
   float: left;
   padding: 4px;
@@ -255,7 +256,7 @@ const ExperimentTagsItem = styled.li `
   font-size: 0.9em;
   color: #333;
   font-weight: bold;            
-`
+`;
 
 const renderExperimentTags = tags =>
     <ExperimentTagsUl>

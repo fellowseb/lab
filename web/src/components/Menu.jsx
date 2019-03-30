@@ -9,7 +9,7 @@ import domUtils from '../scripts/domutils';
 import { media } from '../components/MediaQueries.jsx';
 import { Ul } from '../components/BaseStyledComponents.jsx';
 
-const MastHead = styled.header `
+const MastHead = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -19,24 +19,24 @@ const MastHead = styled.header `
   z-index: 99999999999;
   background: #333;
   border-bottom: 1px solid #c1b79a;
-`
+`;
 
-const MenuContainer = styled.div `
+const MenuContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-`
+`;
 
-const Logo = styled.div `
+const Logo = styled.div`
   cursor: default;
   font-family: "alex_brushregular";
   font-size: 1.8em;
-  ${media.medium `
+  ${media.medium`
       font-size: 2em;
   `}
-  ${media.large `
+  ${media.large`
       font-size: 2.2em;
   `}
   text-align: left;
@@ -44,21 +44,21 @@ const Logo = styled.div `
   color: #FEFEFE;
   display: inline-block; 
   margin-left: -1em;
-`
+`;
 
-const UmbrellaSVG = styled.svg `
+const UmbrellaSVG = styled.svg`
   fill: #edc711;
   display: inline-block;  
   width: 1em;
   height: 1em;
   vertical-align: sub;
-`
+`;
 
-const Seb = styled.span `
+const Seb = styled.span`
   color: #edc712;
-`
+`;
 
-const MenuButton = styled.button `
+const MenuButton = styled.button`
   background: none;
   height: 3em;
   width: 3em;
@@ -66,16 +66,16 @@ const MenuButton = styled.button `
   border: none;
   outline: none;
   margin-left: 0.5em;
-  ${media.medium `
+  ${media.medium`
       visibility: hidden;
       width: 0;
       height: 0;
   `}
-`
+`;
 
 const MenuButtonSVG = styled.svg.attrs(props => ({
-  visible: !!props.show ? 'visible' : 'hidden'
-})) `
+    visible: props.show ? 'visible' : 'hidden'
+}))`
   fill: #c1b79a;
   visibility: ${props => props.visible};
   width: ${props => props.visible === 'visible' ? '100%' : '0'};
@@ -84,21 +84,21 @@ const MenuButtonSVG = styled.svg.attrs(props => ({
     fill: #5c5c5c;
     cursor: pointer;
   }
-`
+`;
 
-const slideFromLeft = keyframes `
+const slideFromLeft = keyframes`
   from {
     left: -100%;
   }
   to {
     left: 0;
   }
-`
+`;
 
 const Navigation = styled.nav.attrs(props => ({
-  visible: !!props.open ? 'visible' : 'hidden',
-  animationName: !!props.open ? slideFromLeft : ''
-})) `
+    visible: props.open ? 'visible' : 'hidden',
+    animationName: props.open ? slideFromLeft : ''
+}))`
   z-index: 99999999999;
   position: fixed;
   top: 2.4em;
@@ -108,7 +108,7 @@ const Navigation = styled.nav.attrs(props => ({
   background: rgba(51,51,51,0.95);
   visibility: hidden;
   padding-top: 5px;
-  ${media.medium `
+  ${media.medium`
     float: right;
     position: unset;
     top: unset;
@@ -122,13 +122,13 @@ const Navigation = styled.nav.attrs(props => ({
   animation-name: ${props => props.animationName};
   animation-iteration-count: 1;
   animation-direction: normal;
-`
+`;
 
-const NavigationList = styled(Ul) `
+const NavigationList = styled(Ul)`
   display: inline-flex;
   list-style: none;
   flex-direction: column;
-  ${media.medium `
+  ${media.medium`
       flex-direction: row;
   `}
   justify-content: flex-start;
@@ -136,16 +136,16 @@ const NavigationList = styled(Ul) `
   padding: 0;
   width: 100%;
   box-sizing: border-box;
-`
+`;
 
-const NavigationListItem = styled.li `
+const NavigationListItem = styled.li`
   margin: 0;
   padding: 0;
-`
+`;
 
 const NavigationLink = styled.a.attrs(props => ({
-  current: props.current || false
-})) `
+    current: props.current || false
+}))`
   text-decoration: none;
   margin: 0.25em;            
   padding: 0.25em 0.5em;
@@ -156,15 +156,15 @@ const NavigationLink = styled.a.attrs(props => ({
   &:hover {
     text-decoration: underline;       
   }
-`
+`;
 
-const NavigationLinkGitHub = styled(NavigationLink) `
+const NavigationLinkGitHub = styled(NavigationLink)`
   background: none;
-`
+`;
 
-const NavigationLinkLinkedIn = NavigationLinkGitHub
+const NavigationLinkLinkedIn = NavigationLinkGitHub;
 
-const NavLinkSVG = styled.svg `
+const NavLinkSVG = styled.svg`
   fill: #edc711;
   width: 22px;
   height: 21px;
@@ -172,7 +172,7 @@ const NavLinkSVG = styled.svg `
     fill: #5c5c5c;
     cursor: pointer;
   }
-`
+`;
 
 /**
 * Presentational component displaying the top menu.
@@ -273,7 +273,7 @@ const NavigationListItemSection = ({ label = '[Missing label]',
     return (
         <NavigationListItem>
             <NavigationLink current={isCurrent} href={href} data-section={sectionAnchor}
-              onClick={onNavItemClick} ref={partial(sectionNavLinkMounted, sectionAnchor)}>{label}</NavigationLink>
+                onClick={onNavItemClick} ref={partial(sectionNavLinkMounted, sectionAnchor)}>{label}</NavigationLink>
         </NavigationListItem>
     );
 };

@@ -5,20 +5,20 @@ import styled from 'styled-components';
 
 import { P } from '../components/BaseStyledComponents.jsx';
 
-const ArticlesContainer = styled.div `
+const ArticlesContainer = styled.div`
   min-width: 300px;
   display: flex;
   flex-direction: column;
-`
+`;
 
-const ArticlesTitle = styled(P) `
+const ArticlesTitle = styled(P)`
   margin: 0;
   width: 100%;
-`
+`;
 
-const ArticlesTitleCount = styled.span `
+const ArticlesTitleCount = styled.span`
   font-size: 80%;
-`
+`;
 
 /**
  * React component listing articles from a Pocket account.
@@ -45,12 +45,12 @@ class ResourceFeed extends React.PureComponent {
         updateComponentState(this, this.props, offset);
     }
     componentDidUpdate(prevProps) {
-      const { filteredTag, apiUrl, apiEndpoint } = this.props; 
-      if (apiUrl !== prevProps.apiUrl ||
+        const { filteredTag, apiUrl, apiEndpoint } = this.props;
+        if (apiUrl !== prevProps.apiUrl ||
           apiEndpoint !== prevProps.apiEndpoint ||
           filteredTag !== prevProps.filteredTag) {
-          updateComponentState(this, this.props, 0);
-      }
+            updateComponentState(this, this.props, 0);
+        }
     }
     render() {
         const { resources,
@@ -66,16 +66,16 @@ class ResourceFeed extends React.PureComponent {
 
         return (
             <ArticlesContainer>
-              <ResourceFeedHeader title={title} totalCount={totalCount} filteredCount={filteredCount} />
-                    <ResourceFeedDisplayComp
-                        resources={resources}
-                        hasNextPage={!!next}
-                        hasPrevPage={!!prev}
-                        onNextPage={onNextPage}
-                        onPrevPage={onPrevPage}
-                        error={error}
-                        loading={loading}
-                        apiUrl={apiUrl} />
+                <ResourceFeedHeader title={title} totalCount={totalCount} filteredCount={filteredCount} />
+                <ResourceFeedDisplayComp
+                    resources={resources}
+                    hasNextPage={!!next}
+                    hasPrevPage={!!prev}
+                    onNextPage={onNextPage}
+                    onPrevPage={onPrevPage}
+                    error={error}
+                    loading={loading}
+                    apiUrl={apiUrl} />
             </ArticlesContainer>
         );
     }
@@ -138,10 +138,10 @@ ResourceFeedHeader.propTypes = {
 
 // Helper functions
 
-const updateComponentState = async (component, { filteredTag, count, apiUrl, apiEndpoint }, offset) => {
+const updateComponentState = async(component, { filteredTag, count, apiUrl, apiEndpoint }, offset) => {
     component.setState({ ...component.state, loading: true });
     try {
-        let resources = await retrieveResources(apiUrl, apiEndpoint, filteredTag, count, offset)
+        let resources = await retrieveResources(apiUrl, apiEndpoint, filteredTag, count, offset);
         component.resources = resources.resources;
         component.setState({
             loading: false,
@@ -153,7 +153,6 @@ const updateComponentState = async (component, { filteredTag, count, apiUrl, api
             offset
         });
     } catch (err) {
-        console.error(err);
         component.setState({
             loading: false,
             error: err
@@ -164,14 +163,14 @@ const updateComponentState = async (component, { filteredTag, count, apiUrl, api
 /**
  * Fetch Pocket data
  */
-const retrieveResources = async (apiUrl, apiEndpoint, filteredTag, count, offset) => {
+const retrieveResources = async(apiUrl, apiEndpoint, filteredTag, count, offset) => {
     let url = apiUrl.substr(0);
     const paramString = json => Object.keys(json)
         .reduce((paramstr, key) =>
             (json[key]
                 ? paramstr.concat(key, '=', json[key], '&')
                 : paramstr),
-            '')
+        '')
         .slice(0, -1);
     const params = {
         'tag': filteredTag,

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-fetch';
-import styled from 'styled-components';
 
 import Select from '../components/Select.jsx';
 
@@ -20,7 +19,7 @@ class ResourceFilters extends React.PureComponent {
         this.state = {
             loading: false,
             error: null,
-            tags: [],
+            tags: []
         };
     }
     async componentDidMount() {
@@ -58,7 +57,7 @@ class ResourceFilters extends React.PureComponent {
                     onChange={this.changeFilter.bind(this, refs)}>
                     <option value=''>Show all</option>
                     {tags.map((tagItem, i) => {
-                        return <option value={tagItem.tag} key={i}>{tagItem.displayName ? tagItem.displayName.en : tagItem.tag}</option>
+                        return <option value={tagItem.tag} key={i}>{tagItem.displayName ? tagItem.displayName.en : tagItem.tag}</option>;
                     })}
                 </Select>
             </section>
@@ -71,7 +70,7 @@ class ResourceFilters extends React.PureComponent {
         const { onChangeFilter } = this.props;
         event.preventDefault();
         onChangeFilter(select.options[select.selectedIndex].value || null);
-    };
+    }
 }
 
 ResourceFilters.propTypes = {
@@ -89,7 +88,7 @@ ResourceFilters.defaultProps = {
 /**
  * Fetch Pocket data
  */
-const retrieveFilterTags = async (apiUrl) => {
+const retrieveFilterTags = async(apiUrl) => {
     let response = await fetch(apiUrl + '/resourcetags', {
         method: 'GET',
         headers: {
@@ -97,10 +96,10 @@ const retrieveFilterTags = async (apiUrl) => {
         },
         mode: 'cors'
     });
+    let json = await response.json();
     if (response.status < 200 || response.status >= 300) {
         throw new Error(`${json.error ? json.error : response.statusText}`);
     }
-    let json = await response.json();
     return json.tags;
 };
 

@@ -1,5 +1,6 @@
 {
   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended"
   ],
   "parserOptions": {
@@ -193,5 +194,11 @@
     "standard/computed-property-even-spacing": ["error", "even"],
     "standard/no-callback-literal": "error",
     "standard/object-curly-even-spacing": ["error", "either"]
+  },
+
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

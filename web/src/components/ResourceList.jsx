@@ -7,41 +7,41 @@ import { A, Ul } from '../components/BaseStyledComponents.jsx';
 import Loader from '../components/Loader.jsx';
 import ResourceItem from '../components/ResourceItem.jsx';
 
-const ResourceListContainer = styled.div `
+const ResourceListContainer = styled.div`
   position: relative;
-`
+`;
 
-const PageLink = styled(A) `
+const PageLink = styled(A)`
   display: flex;
   flex-direction: column;
   align-items: center;
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
-const PrevPageLink = styled(PageLink) `
+const PrevPageLink = styled(PageLink)`
   position: absolute;
   top: -20px;
   left: calc(50% - 35px);
-  visibility: ${props => !!props.show ? 'visible' : 'hidden'};
-`
+  visibility: ${props => props.show ? 'visible' : 'hidden'};
+`;
 
-const NextPageLink = styled(PageLink) `
-  visibility: ${props => !!props.show ? 'visible' : 'hidden'};
-`
+const NextPageLink = styled(PageLink)`
+  visibility: ${props => props.show ? 'visible' : 'hidden'};
+`;
 
-const ArrowSVG = styled.svg `
+const ArrowSVG = styled.svg`
   height: 20px;
   width: 70px;
   &:hover {
     fill: #333;
   }
-`
+`;
 
-const LoaderParent = styled.div `
+const LoaderParent = styled.div`
   position: relative;
-`
+`;
 
 /**
  * State-less component displaying a list of resources in a column.
@@ -92,10 +92,12 @@ ResourceList.propTypes = {
     hasPrevPage: PropTypes.bool,
     onPrevPage: PropTypes.func,
     onNextPage: PropTypes.func,
-    defaultThumbnailClass: PropTypes.string
+    defaultThumbnailClass: PropTypes.string,
+    error: PropTypes.object,
+    loading: PropTypes.bool
 };
 
-const ArticlesList = styled(Ul) `
+const ArticlesList = styled(Ul)`
   border-top: 1px solid #c1b79a;
   border-bottom: 1px solid #c1b79a;
   list-style: none;
@@ -105,7 +107,7 @@ const ArticlesList = styled(Ul) `
   border: 1px solid #aba288;
   display: flex;
   flex-direction: column;
-`
+`;
 
 const ResourceListItems = ({ resources = [], defaultThumbnailClass = '' }) =>
     <ArticlesList>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const LoaderContainer = styled.div `
+const LoaderContainer = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -12,25 +12,25 @@ const LoaderContainer = styled.div `
   justify-content: center;
   align-items: center;
   background: #c1b79a;
-`
+`;
 
-const Spinner = styled.div `
+const Spinner = styled.div`
   border-radius: 100%;
   display: flex;
   flex-direction: row;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-`
+`;
 
-const skbouncedelay = keyframes `
+const skbouncedelay = keyframes`
   0%, 80%, 100% { 
     transform: scale(0);
   }
   40% { 
     transform: scale(1.0);
   }
-`
+`;
 
-const Bounce = styled.div `
+const Bounce = styled.div`
   width: 18px;
   height: 18px;
   background-color: #333;
@@ -38,19 +38,19 @@ const Bounce = styled.div `
   border-radius: 100%;
   display: inline-block;
   animation: ${skbouncedelay} 1.4s infinite ease-in-out both;
-`
+`;
 
-const Bounce1 = styled(Bounce) `
+const Bounce1 = styled(Bounce)`
   animation-delay: -0.32s;
-`
+`;
 
-const Bounce2 = styled(Bounce) `
+const Bounce2 = styled(Bounce)`
   animation-delay: -0.16s;
-`
+`;
 
-const Bounce3 = styled(Bounce) `
+const Bounce3 = styled(Bounce)`
   animation-delay: -0.8;
-`
+`;
 
 /**
  * Presentational component displaying a loader.

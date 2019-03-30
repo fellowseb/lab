@@ -4,13 +4,13 @@ import styled from 'styled-components';
 
 import { A, P, Ul } from '../components/BaseStyledComponents.jsx';
 
-const BookCarouselContainer = styled.div `
+const BookCarouselContainer = styled.div`
     background: #c1b79a;
     border: 1px solid #b0a78c;
     padding: 10px;
-`
+`;
 
-const BookCarouselList = styled(Ul) `
+const BookCarouselList = styled(Ul)`
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -19,7 +19,7 @@ const BookCarouselList = styled(Ul) `
     overflow-y: hidden;
     margin: 0;
     padding: 0;
-`
+`;
 
 /**
  * Presentational component rendering books in a carousel.
@@ -27,12 +27,12 @@ const BookCarouselList = styled(Ul) `
  * @param {FellowsebLabResource[]} props.resources Book resources to display.
  * @param {string} props.apiUrl FellowsebLab api URL.
  */
-const BookCarousel = ({ resources = [], apiUrl = "" }) =>
+const BookCarousel = ({ resources = [], apiUrl = '' }) =>
     <BookCarouselContainer>
         <BookCarouselList>
-        {
-          resources.map(book => <BookCarouselItem book={book} apiUrl={apiUrl} key={book.resourceId}/>)
-        }
+            {
+                resources.map(book => <BookCarouselItem book={book} apiUrl={apiUrl} key={book.resourceId}/>)
+            }
         </BookCarouselList>
     </BookCarouselContainer>;
 
@@ -41,11 +41,11 @@ BookCarousel.propTypes = {
     apiUrl: PropTypes.string
 };
 
-const BookCarouselItemAuthors = styled(P) `
+const BookCarouselItemAuthors = styled(P)`
     font-size: 60%;
-`
+`;
 
-const StyledBookCarouselItem = styled.li `
+const StyledBookCarouselItem = styled.li`
     list-style: none;
     display: block;
     height: 180px;
@@ -57,9 +57,9 @@ const StyledBookCarouselItem = styled.li `
     margin-left: 2px;
     max-width: 140px;
     overflow: hidden;
-`
+`;
 
-const BookCarouselItemOverlay = styled(A) `
+const BookCarouselItemOverlay = styled(A)`
     text-decoration: none;
     display: flex;
     flex-direction: row;
@@ -67,31 +67,31 @@ const BookCarouselItemOverlay = styled(A) `
     justify-content: center;
     height: 100%;
     width: 100%;
-`
+`;
 
 const BookCarouselItemDesc = styled.div.attrs(props => ({
     show: !!props.show
-})) `
+}))`
     height: 100%;
     display: ${props => props.show ? 'block' : 'none'};
-`
+`;
 
-const BookCarouselItemTitle = styled(P) `
+const BookCarouselItemTitle = styled(P)`
     font-size: 80%;
     text-decoration: underline;
     max-height: 6em;
     overflow: hidden;
-`
+`;
 
 const BookCarouselItemImg = styled.img.attrs(props => ({
     show: !!props.show
-})) `
+}))`
     width: 100%;
     height: 100%;
     display: ${props => props.show ? 'block' : 'none'};
-`
+`;
 
-const BookCarouselItemTags = styled(Ul) `
+const BookCarouselItemTags = styled(Ul)`
     font-size: 70%;
     display: flex;
     flex-direction: row;
@@ -99,14 +99,14 @@ const BookCarouselItemTags = styled(Ul) `
     margin: 3px 0;
     padding: 0;
     flex-wrap: wrap;
-`
+`;
 
-const BookCarouselItemTag = styled.li `
+const BookCarouselItemTag = styled.li`
     margin: 0 0.5em 0 0;
     padding: 0 4px 0 4px;
     color: #333333;
     background: #edc711;
-`
+`;
 
 class BookCarouselItem extends React.PureComponent {
     constructor(props) {
@@ -123,7 +123,7 @@ class BookCarouselItem extends React.PureComponent {
     onMouseLeave() {
         this.setState({ hovered: false });
     }
-    render() { 
+    render() {
         const { book, apiUrl } = this.props;
         const { hovered } = this.state;
         const authorsStr = book.authors && book.authors.length
@@ -146,7 +146,7 @@ class BookCarouselItem extends React.PureComponent {
                         {authorsStr}
                         <BookCarouselItemTags>
                             {book.tags ? book.tags.map((tag, tagIndex) =>
-                              <BookCarouselItemTag key={tagIndex}>{tag}</BookCarouselItemTag>) : null}
+                                <BookCarouselItemTag key={tagIndex}>{tag}</BookCarouselItemTag>) : null}
                         </BookCarouselItemTags>
                     </BookCarouselItemDesc>
                     <picture>

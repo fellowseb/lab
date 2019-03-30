@@ -5,13 +5,13 @@ import styled from 'styled-components';
 import { P, Strong } from '../components/BaseStyledComponents.jsx';
 import Experiment from '../components/Experiment.jsx';
 
-const FilterExperimentsContainer = styled.div `
+const FilterExperimentsContainer = styled.div`
   max-width: 800px;
   width: 100%;
   text-align: center;
-`
+`;
 
-const ExperimentsContainer = styled.div `
+const ExperimentsContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -20,7 +20,7 @@ const ExperimentsContainer = styled.div `
   > * {
       flex: 1 1 50%;
   }
-`
+`;
 
 /**
  * Experiment list component
@@ -33,18 +33,18 @@ class Experiments extends React.Component {
     constructor() {
         super();
         this.state = {
-            experiments: require('../../data/experiments.json'),
-        }
-        this.onToggleCollapse = this.onToggleCollapse.bind(this)
-        this.renderExperiment = this.renderExperiment.bind(this)
-        this.renderExperimentList = this.renderExperimentList.bind(this)
+            experiments: require('../../data/experiments.json')
+        };
+        this.onToggleCollapse = this.onToggleCollapse.bind(this);
+        this.renderExperiment = this.renderExperiment.bind(this);
+        this.renderExperimentList = this.renderExperimentList.bind(this);
     }
     onToggleCollapse(experimentId) {
-      let experiments = this.state.experiments;
-      experiments[experimentId].collapsed = !(experiments[experimentId].collapsed);
-      this.setState({
-        experiments
-      });
+        let experiments = this.state.experiments;
+        experiments[experimentId].collapsed = !(experiments[experimentId].collapsed);
+        this.setState({
+            experiments
+        });
     }
     render() {
         const { experiments } = this.state;
@@ -61,17 +61,17 @@ class Experiments extends React.Component {
         );
     }
     renderExperimentList(experiments) {
-        const { renderExperiment } = this
+        const { renderExperiment } = this;
         return Object.keys(experiments).sort().reverse().map((experimentId, i) =>
-           renderExperiment(experiments, experimentId, i) 
+            renderExperiment(experiments, experimentId, i)
         );
     }
     renderExperiment(experiments, experimentId, index) {
-        const { onToggleCollapse } = this
+        const { onToggleCollapse } = this;
         const count = Object.keys(experiments).length;
-        return <Experiment key={experimentId} num={count - index} onToggleCollapse={onToggleCollapse.bind(null, experimentId)} {...(experiments[experimentId])} />
+        return <Experiment key={experimentId} num={count - index} onToggleCollapse={onToggleCollapse.bind(null, experimentId)} {...(experiments[experimentId])} />;
     }
-};
+}
 
 Experiments.propTypes = {
     experiments: PropTypes.object

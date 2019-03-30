@@ -10,7 +10,9 @@
     "deploy": "bash deploy.sh dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "offline:start": "http-server dist",
-    "stats": "xdg-open build/statistics.html"
+    "stats": "xdg-open build/statistics.html",
+    "lint": "eslint --ext .js,.jsx src/",
+    "lint:fix": "eslint --ext .js,.jsx --fix src/"
   },
   "repository": {
     "type": "git",

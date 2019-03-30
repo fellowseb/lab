@@ -7,7 +7,7 @@ import ResourceFeed from '../components/ResourceFeed.jsx';
 /**
  * Component displaying a feed of Talk resources.
  * Is basically a ResourceFeed using ResourceList as
- * a presentational component. 
+ * a presentational component.
  * @param {object} props Properties. See ResourceFeed.
  */
 const TalkFeed = props =>

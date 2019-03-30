@@ -9,7 +9,7 @@ import ResourcesPage from '../components/ResourcesPage.jsx';
 import LabPage from '../components/LabPage.jsx';
 import { media } from '../components/MediaQueries.jsx';
 
-const GlobalStyles = createGlobalStyle `
+const GlobalStyles = createGlobalStyle`
   @font-face {
       font-family: 'alex_brushregular';
       src: url('../fonts/alexbrush-regular.woff2?#iefix') format('woff2'),
@@ -26,26 +26,26 @@ const GlobalStyles = createGlobalStyle `
   body {
     margin: 0
   }
-`
+`;
 
-const PageAnchor = styled.a `
+const PageAnchor = styled.a`
     position: relative;
     top: -2.4em;
-    ${media.medium `
+    ${media.medium`
         top: -2.8em;
     `}
-    ${media.large `
+    ${media.large`
         top: -3em;
     `}
-`
+`;
 
 const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: stretch;
-`
+`;
 
-const StyledApp = styled.div `
+const StyledApp = styled.div`
     font-family: "Lato", arial, sans-serif;
     background: #dbd0b0;
     color: #333333;
@@ -53,10 +53,10 @@ const StyledApp = styled.div `
     font-feature-settings: "kern" 1;
     font-kerning: normal;
     font-size: 18px;
-    ${media.large `
+    ${media.large`
         font-size: 21px;
     `}
-`
+`;
 
 /**
  * Main component.
@@ -75,7 +75,7 @@ class App extends React.PureComponent {
         this.state = {
             menuIsOpen: false,
             currentSection: 'about',
-            filteredTag: null,
+            filteredTag: null
         };
         this.sectionAnchors = {};
         this.sectionLinks = {};
@@ -169,7 +169,7 @@ class App extends React.PureComponent {
         return (
             <React.StrictMode>
                 <StyledApp>
-                  <GlobalStyles />
+                    <GlobalStyles />
                     <Menu
                         menuIsOpen={menuIsOpen}
                         openMenu={openMenu}

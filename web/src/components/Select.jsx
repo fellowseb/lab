@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Select = styled.select `
+const Select = styled.select`
   background: #333;
   border: 1px solid #c1b79a;
   height: 2em;
@@ -8,6 +8,6 @@ const Select = styled.select `
   width: 150px;
   cursor: pointer;
   color: #DDDDDD;
-`
+`;
 
-export default Select
+export default Select;
