@@ -25,6 +25,8 @@
     "serverless-stack-output": "^0.2.3"
   },
   "scripts": {
+    "lint": "eslint --ext .js src/",
+    "lint:fix": "eslint --ext .js --fix src/",
     "sync-db:prod": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncDB.js --source-offline=false --source-stage=prod --target-offline=true --target-stage=prod",
     "sync-db:dev": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncDB.js --source-offline=false --source-stage=dev --target-offline=true --target-stage=dev",
     "sync-s3:prod": "AWS_PROFILE=fellowseb-lab-serverless node meta/syncBucket.js --source-region=eu-west-1 --target-region=localhost --target-endpoint=http://localhost:8001",
