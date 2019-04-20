@@ -1,22 +1,27 @@
 {
   "name": "fellowseblab-resources",
   "description": "FaaS serving fellowseb's lab resources (articles, talks, books)",
+  "license": "WTFPL",
   "version": "0.1.0",
   "dependencies": {
-    "aws-sdk": "^2.389.0",
+    "aws-sdk": "^2.432.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "serverless": "^1.36.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "serverless": "^1.40.0",
     "serverless-apigw-binary": "^0.4.4",
     "serverless-apigwy-binary": "^1.0.0",
-    "serverless-domain-manager": "^2.6.11",
+    "serverless-domain-manager": "^3.2.1",
     "serverless-dynamodb-local": "0.2.30",
-    "serverless-offline": "^4.4.2",
-    "serverless-s3-local": "^0.3.22",
+    "serverless-offline": "^4.9.3",
+    "serverless-s3-local": "^0.3.23",
     "serverless-stack-output": "^0.2.3"
   },
   "scripts": {
