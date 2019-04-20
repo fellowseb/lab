@@ -52,10 +52,10 @@ const extractFirst25Requests = (originaryBatchWriteInput) => {
     return {
         currentBatch,
         remaining
-    }
+    };
 };
 
-const batchWrite = async (dynamoDB, batchWriteInput) => {
+const batchWrite = async(dynamoDB, batchWriteInput) => {
     let remaining = { ...batchWriteInput };
     while (remaining && remaining.RequestItems && Object.getOwnPropertyNames(remaining.RequestItems).length) {
         let r = extractFirst25Requests(remaining);
@@ -65,7 +65,8 @@ const batchWrite = async (dynamoDB, batchWriteInput) => {
         if (responseData &&
             responseData.UnprocessedItems &&
             responseData.UnprocessedItems.length) {
-            remaining = mergeWriteInput(remaining, responseData.UnprocessedItems);
+            // remaining = mergeWriteInput(remaining, responseData.UnprocessedItems);
+            throw new Error('Not implemented');
         }
     }
 };
@@ -73,16 +74,16 @@ const batchWrite = async (dynamoDB, batchWriteInput) => {
 class FellowsebLabDB {
     constructor({ isOffline, stage, resourcesTable, resourceTagsTable }) {
         isOffline = isOffline || false;
-        stage = stage|| 'dev';
+        stage = stage || 'dev';
         const region = isOffline ? 'localhost' : 'eu-west-1';
 
         let options = {
-          apiVersion: 'latest',
-          region,
-          convertReponseTypes: true
-        }
+            apiVersion: 'latest',
+            region,
+            convertReponseTypes: true
+        };
         if (isOffline) {
-          options.endpoint = 'http://localhost:8000';
+            options.endpoint = 'http://localhost:8000';
         }
 
         this.dynamoDB = new AWS.DynamoDB.DocumentClient(options);
@@ -91,21 +92,21 @@ class FellowsebLabDB {
     }
     async queryResources({ resourceType = 'article', tag = null }) {
         let queryInput = {
-            "TableName": this.resourcesTable,
-            "IndexName": "resourceType-index",
-            "KeyConditionExpression": "#resourceType = :vresourceType",
-            "ScanIndexForward": false,
-            "ExpressionAttributeNames": {
-                "#resourceType": "resourceType"
+            'TableName': this.resourcesTable,
+            'IndexName': 'resourceType-index',
+            'KeyConditionExpression': '#resourceType = :vresourceType',
+            'ScanIndexForward': false,
+            'ExpressionAttributeNames': {
+                '#resourceType': 'resourceType'
             },
-            "ExpressionAttributeValues": {
-                ":vresourceType": resourceType
+            'ExpressionAttributeValues': {
+                ':vresourceType': resourceType
             }
         };
 
         if (tag) {
-            queryInput.ExpressionAttributeValues[":vtag"] = tag;
-            queryInput.FilterExpression = "contains(tags, :vtag)";
+            queryInput.ExpressionAttributeValues[':vtag'] = tag;
+            queryInput.FilterExpression = 'contains(tags, :vtag)';
         }
         return this.dynamoDB.query(queryInput).promise();
     }
@@ -132,7 +133,7 @@ class FellowsebLabDB {
                 'Item': resourceTag.toJSON(),
                 'ConditionExpression': 'attribute_not_exists(tag)'
             }).promise().then(() => true).catch(err => {
-                if (err.code = 'ConditionalCheckFailedException') {
+                if (err.code === 'ConditionalCheckFailedException') {
                     return false;
                 }
                 throw err;
@@ -140,6 +141,6 @@ class FellowsebLabDB {
         }));
         return resultArr.reduce((cnt, b) => b ? ++cnt : cnt, 0);
     }
-};
+}
 
 module.exports = FellowsebLabDB;

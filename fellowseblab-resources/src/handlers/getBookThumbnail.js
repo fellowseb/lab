@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 
 module.exports = {
-    handler: async (event) => {
+    handler: async(event) => {
         const resourceId = event.pathParameters.resourceId;
         const imageExtension = event.queryStringParameters &&
             event.queryStringParameters.type

@@ -9,11 +9,11 @@ class FellowsebLabResourceTag {
         var json = {
             'tag': this.tag,
             'displayName': {
-              'en': this.displayName
+                'en': this.displayName
             }
         };
         return json;
     }
-};
+}
 
 module.exports = FellowsebLabResourceTag;

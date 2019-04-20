@@ -45,29 +45,29 @@ const resourceFromPocketEntry = pocketEntry => {
     let tags = pocketEntry.tags
         ? Object.keys(pocketEntry.tags)
         : [];
-    let isTalk = tags.indexOf('talk') != -1 ||
-        pocketEntry.resolved_url.indexOf('youtube.com') != -1;
+    let isTalk = tags.indexOf('talk') !== -1 ||
+        pocketEntry.resolvedUrl.indexOf('youtube.com') !== -1;
 
     return new FellowsebLabResource({
-        pocket_id: pocketEntry.resolved_id,
+        pocketId: pocketEntry.resolvedId,
         type: isTalk
             ? 'talk'
             : 'article',
-        url: pocketEntry.resolved_url,
-        time_added: pocketEntry.time_added
-            ? parseInt(pocketEntry.time_added, 10)
+        url: pocketEntry.resolvedUrl,
+        timeAdded: pocketEntry.timeAdded
+            ? parseInt(pocketEntry.timeAdded, 10)
             : undefined,
-        time_read: pocketEntry.time_read
-            ? parseInt(pocketEntry.time_read, 10)
+        timeRead: pocketEntry.timeRead
+            ? parseInt(pocketEntry.timeRead, 10)
             : undefined,
-        title: pocketEntry.resolved_title,
+        title: pocketEntry.resolvedTitle,
         tags,
         authors: pocketEntry.authors
             ? Object.keys(pocketEntry.authors).map(authorId =>
                 pocketEntry.authors[authorId].name)
             : []
     });
-}
+};
 
 const resourceTagsFromPocketEntry = pocketEntry => {
     if (pocketEntry.tags) {
@@ -87,10 +87,10 @@ const createResourcesFromPocketEntries = pocketEntries =>
         obj.resourceTags = [
             ...obj.resourceTags,
             ...resourceTagsFromPocketEntry(entry)
-        ]
+        ];
         return obj;
     },
-        { resources: [], resourceTags: [] }
+    { resources: [], resourceTags: [] }
     );
 
 const prepareRetrieveOptions = ({ state, since, favorite }, queryStringParameters) => {
@@ -107,7 +107,7 @@ const prepareRetrieveOptions = ({ state, since, favorite }, queryStringParameter
         }
     }
     // Default values
-    if (since === undefined) since = parseInt(Date.now()/1000, 10) - 60 * 60 * 24;
+    if (since === undefined) since = parseInt(Date.now() / 1000, 10) - 60 * 60 * 24;
     if (state === undefined) state = 'archive';
     if (favorite === undefined) favorite = 0;
     return {
@@ -120,7 +120,7 @@ const prepareRetrieveOptions = ({ state, since, favorite }, queryStringParameter
 };
 
 module.exports = {
-    handler: async (event) => {
+    handler: async(event) => {
         const isOffline = process.env.IS_OFFLINE;
         const stage = process.env.STAGE;
         let response = {
@@ -155,4 +155,4 @@ module.exports = {
         }
         return response;
     }
-}
+};

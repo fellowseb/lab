@@ -8,7 +8,7 @@ const FellowsebLabResourceTag = require('../src/classes/FellowsebLabResourceTag.
 
 const mapToResource = (record) => {
  const { resourceId, resourceType, title, url, tags, authors, read_time, added_time, isbn, ISBN, editor, hasThumbnail } = record;
-  return new FellowsebLabResource({ id: resourceId, type: resourceType, title, url, tags: tags ? tags.values : [], authors: authors ? authors.values : [], time_read: read_time, time_added: added_time, isbn: isbn || ISBN, editor, hasThumbnail });
+  return new FellowsebLabResource({ id: resourceId, type: resourceType, title, url, tags: tags ? tags.values : [], authors: authors ? authors.values : [], timeRead: read_time, timeAdded: added_time, isbn: isbn || ISBN, editor, hasThumbnail });
 };
 
 const mapToTag = ({ tag }) => {

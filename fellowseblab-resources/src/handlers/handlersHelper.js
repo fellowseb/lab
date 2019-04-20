@@ -6,8 +6,8 @@ const FellowsebLabDB = require('../../src/classes/FellowsebLabDB');
 // Handles both response types of DynamoDB, that are different
 // in dev and in prod
 const unwrapLists = listValue => {
-  return listValue instanceof Array ? listValue : listValue.values
-}
+    return listValue instanceof Array ? listValue : listValue.values;
+};
 
 function mapResourceItems(offset, count, integrationResponseItems) {
     let ret = [];
@@ -15,12 +15,12 @@ function mapResourceItems(offset, count, integrationResponseItems) {
         if (i in integrationResponseItems) {
             let integrationResponseItem = integrationResponseItems[i];
             ret.push({
-                "title": integrationResponseItem.title,
-                "url": integrationResponseItem.url,
-                "resourceId": integrationResponseItem.resourceId,
-                "tags": unwrapLists(integrationResponseItem.tags || []),
-                "authors": unwrapLists(integrationResponseItem.authors || []),
-                "thumbnailHREF": integrationResponseItem.hasThumbnail ? `/books/${integrationResponseItem.resourceId}/thumbnail` : null
+                'title': integrationResponseItem.title,
+                'url': integrationResponseItem.url,
+                'resourceId': integrationResponseItem.resourceId,
+                'tags': unwrapLists(integrationResponseItem.tags || []),
+                'authors': unwrapLists(integrationResponseItem.authors || []),
+                'thumbnailHREF': integrationResponseItem.hasThumbnail ? `/books/${integrationResponseItem.resourceId}/thumbnail` : null
             });
         }
     }
@@ -48,25 +48,24 @@ function buildResponseBody(endpoint, requestEvent, integrationResponse) {
     if (integrationResponse.Count > offset + count) {
         nextOffset = offset + count;
     }
-    var i = 0;
 
     var response = {
-        "resources": mapResourceItems(offset, count, integrationResponse.Items),
-        "totalCount": integrationResponse.ScannedCount,
-        "filteredCount": integrationResponse.Count,
-        "count": count
+        'resources': mapResourceItems(offset, count, integrationResponse.Items),
+        'totalCount': integrationResponse.ScannedCount,
+        'filteredCount': integrationResponse.Count,
+        'count': count
     };
     if (nextOffset !== undefined) {
-        response["next"] = `${endpoint}?offset=${nextOffset}&count=${countParam}`
+        response['next'] = `${endpoint}?offset=${nextOffset}&count=${countParam}`;
     }
     if (prevOffset !== undefined) {
-        response["prev"] = `${endpoint}?offset=${prevOffset}&count=${countParam}`
+        response['prev'] = `${endpoint}?offset=${prevOffset}&count=${countParam}`;
     }
     return response;
-};
+}
 
 module.exports = {
-    getListHandler: (resourceType, endpoint) => async (event) => {
+    getListHandler: (resourceType, endpoint) => async(event) => {
         const isOffline = process.env.IS_OFFLINE || false;
         const stage = process.env.STAGE || 'dev';
         const tag = event.queryStringParameters
@@ -89,7 +88,7 @@ module.exports = {
             response.body = {
                 error: `Couldn't fetch the resources. \
                     (${err.toString()})`
-            }
+            };
         }
         response.body = JSON.stringify(response.body);
         return response;

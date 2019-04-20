@@ -21,7 +21,6 @@ function parseRetrieveResponse(responseBody) {
  * @desc https://getpocket.com/developer/docs/v3
  */
 class PocketClient {
-
     /**
      * @member {string} consumerKey Consumer Key.
      */
@@ -70,7 +69,7 @@ class PocketClient {
             },
             form: payload
         };
-        let response = await rp(requestOptions);
+        const response = await rp(requestOptions);
         return parseRetrieveResponse(response);
     }
     async modify(operations) {
@@ -79,6 +78,6 @@ class PocketClient {
     async add() {
 
     }
-};
+}
 
 module.exports = PocketClient;

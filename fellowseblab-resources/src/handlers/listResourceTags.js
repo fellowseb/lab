@@ -4,15 +4,15 @@ const FellowsebLabDB = require('../../src/classes/FellowsebLabDB');
 
 const buildResponse = integrationResponse => {
     var response = {
-        "tags": Object.keys(integrationResponse.Items).map(key => integrationResponse.Items[key]),
-        "totalCount": integrationResponse.ScannedCount,
-        "filteredCount": integrationResponse.Count
+        'tags': Object.keys(integrationResponse.Items).map(key => integrationResponse.Items[key]),
+        'totalCount': integrationResponse.ScannedCount,
+        'filteredCount': integrationResponse.Count
     };
     return response;
 };
 
 module.exports = {
-    handler: async () => {
+    handler: async() => {
         const isOffline = process.env.IS_OFFLINE;
         const stage = process.env.STAGE;
         let response = {
@@ -36,4 +36,4 @@ module.exports = {
         response.body = JSON.stringify(response.body);
         return response;
     }
-}
+};

@@ -2,6 +2,6 @@
 
 const helper = require('../../src/handlers/handlersHelper');
 
-module.exports = { 
+module.exports = {
     handler: helper.getListHandler('talk', '/talks')
-}
+};
