@@ -243,7 +243,7 @@ const Menu = ({ menuIsOpen = false,
                             </NavigationLinkGitHub>
                         </NavigationListItem>
                         <NavigationListItem>
-                            <NavigationLinkLinkedIn href="https://www.linkedin.com/in/sebastienwauquier" target="_blank" rel="noopener noreferrer">
+                            <NavigationLinkLinkedIn href="https://www.linkedin.com/in/swauquier" target="_blank" rel="noopener noreferrer">
                                 <NavLinkSVG>
                                     <use href="#linkedin" />
                                 </NavLinkSVG>
