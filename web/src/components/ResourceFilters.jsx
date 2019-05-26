@@ -26,7 +26,7 @@ class ResourceFilters extends React.PureComponent {
         this.setState({ loading: true });
         try {
             const { apiUrl } = this.props;
-            let tags = await retrieveFilterTags(apiUrl);
+            const tags = await retrieveFilterTags(apiUrl);
             this.setState({
                 loading: false,
                 error: null,
@@ -89,14 +89,14 @@ ResourceFilters.defaultProps = {
  * Fetch Pocket data
  */
 const retrieveFilterTags = async(apiUrl) => {
-    let response = await fetch(apiUrl + '/resourcetags', {
+    const response = await fetch(apiUrl + '/resourcetags', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
         mode: 'cors'
     });
-    let json = await response.json();
+    const json = await response.json();
     if (response.status < 200 || response.status >= 300) {
         throw new Error(`${json.error ? json.error : response.statusText}`);
     }

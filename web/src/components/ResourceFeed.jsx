@@ -181,14 +181,14 @@ const retrieveResources = async(apiUrl, apiEndpoint, filteredTag, count, offset)
     }
     url += apiEndpoint + '?' + paramString(params);
 
-    let response = await fetch(url, {
+    const response = await fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
         mode: 'cors'
     });
-    let json = await response.json();
+    const json = await response.json();
     if (response.status < 200 || response.status >= 300) {
         throw new Error(`${json.error ? json.error : response.statusText}`);
     }
