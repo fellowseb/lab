@@ -24,20 +24,20 @@ provider:
     - Effect: Allow
       Action:
         - dynamodb:Query
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resources/*'
+      Resource: "arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resources/*"
     - Effect: Allow
       Action:
         - dynamodb:BatchWriteItem
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resources'
+      Resource: "arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resources"
     - Effect: Allow
       Action:
         - dynamodb:Scan
         - dynamodb:PutItem
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resourceTags'
+      Resource: "arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:table/fellowseb-lab-${self:provider.stage}-resourceTags"
     - Effect: Allow
       Action:
         - s3:GetObject
-      Resource: 'arn:aws:s3:::fellowseb-lab-${self:provider.stage}/*'
+      Resource: "arn:aws:s3:::fellowseb-lab-${self:provider.stage}/*"
 #
 # Files excluded from uploaded package
 #
@@ -62,7 +62,7 @@ functions:
       POCKET_CONSUMER_KEY: ${ssm:/fellowseb-lab/POCKET_CONSUMER_KEY}
       POCKET_ACCESS_TOKEN: ${ssm:/fellowseb-lab/POCKET_ACCESS_TOKEN}
       POCKET_FAVORITE: 1
-      POCKET_STATE: 'archive'
+      POCKET_STATE: "archive"
     events:
       - schedule: cron(0 0 * * ? *) # Triggers the event everyday at midnight
       - http:
@@ -116,7 +116,7 @@ functions:
           path: books/{resourceId}/thumbnail
           method: get
           cors: true
-          
+
   #
   # Function: List Talk resources
   #
@@ -217,20 +217,20 @@ custom:
     directory: ./data/s3
   apigwBinary:
     types:
-      - 'image/png'
-      - 'image/webp'
-      - 'image/gif'
-      - 'image/x-icon'
-      - 'application/octet-stream'
-      - 'image/jpg'
-      - 'binary/octet-stream'
+      - "image/png"
+      - "image/webp"
+      - "image/gif"
+      - "image/x-icon"
+      - "application/octet-stream"
+      - "image/jpg"
+      - "binary/octet-stream"
   domain:
     dev: api-dev.lab.fellowseb.me
     prod: api.lab.fellowseb.me
   customDomain:
-    basePath: ''
+    basePath: ""
     createRoute53Record: false
-    domainName:  ${self:custom.domain.${self:provider.stage}}
+    domainName: ${self:custom.domain.${self:provider.stage}}
     stage: ${self:provider.stage}
-    endpointType: 'regional'
+    endpointType: "regional"
     enabled: true

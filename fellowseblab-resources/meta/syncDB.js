@@ -1,14 +1,39 @@
-'use strict';
+"use strict";
 
-const AWS = require('aws-sdk');
-const process = require('process');
-const FellowsebLabDB = require('../src/classes/FellowsebLabDB.js');
-const FellowsebLabResource = require('../src/classes/FellowsebLabResource.js');
-const FellowsebLabResourceTag = require('../src/classes/FellowsebLabResourceTag.js');
+const AWS = require("aws-sdk");
+const process = require("process");
+const FellowsebLabDB = require("../src/classes/FellowsebLabDB.js");
+const FellowsebLabResource = require("../src/classes/FellowsebLabResource.js");
+const FellowsebLabResourceTag = require("../src/classes/FellowsebLabResourceTag.js");
 
 const mapToResource = (record) => {
- const { resourceId, resourceType, title, url, tags, authors, read_time, added_time, isbn, ISBN, editor, hasThumbnail } = record;
-  return new FellowsebLabResource({ id: resourceId, type: resourceType, title, url, tags: tags ? tags.values : [], authors: authors ? authors.values : [], timeRead: read_time, timeAdded: added_time, isbn: isbn || ISBN, editor, hasThumbnail });
+  const {
+    resourceId,
+    resourceType,
+    title,
+    url,
+    tags,
+    authors,
+    read_time,
+    added_time,
+    isbn,
+    ISBN,
+    editor,
+    hasThumbnail,
+  } = record;
+  return new FellowsebLabResource({
+    id: resourceId,
+    type: resourceType,
+    title,
+    url,
+    tags: tags ? tags.values : [],
+    authors: authors ? authors.values : [],
+    timeRead: read_time,
+    timeAdded: added_time,
+    isbn: isbn || ISBN,
+    editor,
+    hasThumbnail,
+  });
 };
 
 const mapToTag = ({ tag }) => {
@@ -16,66 +41,74 @@ const mapToTag = ({ tag }) => {
 };
 
 const readOption = (argIdx) => {
-  if (process.argv.length < argIdx+1) {
+  if (process.argv.length < argIdx + 1) {
     return null;
   }
   const arg = process.argv[argIdx];
-  const eqlIdx = arg.indexOf('=');
-  if (eqlIdx === -1) throw new Error(`[readOption] Illformed argument (${arg})`);
-  if (arg.substr(0, 2) !== '--') throw new Error(`[readOption] Illformed argument (${arg})`);
-  const argName = arg.substr(2, eqlIdx-2);
-  const argValue = arg.substr(eqlIdx+1);
+  const eqlIdx = arg.indexOf("=");
+  if (eqlIdx === -1)
+    throw new Error(`[readOption] Illformed argument (${arg})`);
+  if (arg.substr(0, 2) !== "--")
+    throw new Error(`[readOption] Illformed argument (${arg})`);
+  const argName = arg.substr(2, eqlIdx - 2);
+  const argValue = arg.substr(eqlIdx + 1);
   let isSource = false;
-  if (argName.startsWith('source-')) {
+  if (argName.startsWith("source-")) {
     isSource = true;
-  } else if (!argName.startsWith('target-')) {
+  } else if (!argName.startsWith("target-")) {
     throw new Error(`[readOption] Unkown argument ${argName}`);
   }
   const argSubname = argName.substr(7);
-  let optionName = ''
-  if (argSubname === 'offline') {
-    optionName = 'isOffline';
+  let optionName = "";
+  if (argSubname === "offline") {
+    optionName = "isOffline";
     optionValue = Boolean(argValue);
-  } else if (argSubname === 'resources-table') {
-    optionName = 'resourcesTable';
+  } else if (argSubname === "resources-table") {
+    optionName = "resourcesTable";
     optionValue = argValue;
-  } else if (argSubname === 'resource-tags-table') {
-    optionName = 'resourceTagsTable';
+  } else if (argSubname === "resource-tags-table") {
+    optionName = "resourceTagsTable";
     optionValue = argValue;
-  } else if (argSubname === 'stage') {
-    optionName = 'stage';
+  } else if (argSubname === "stage") {
+    optionName = "stage";
     optionValue = argValue;
-    if (argValue !== 'prod' && argValue != 'dev') {
+    if (argValue !== "prod" && argValue != "dev") {
       throw new Error(`[readOption] Invalid argument value ${argValue}`);
     }
   } else {
     throw new Error(`[readOption] Unkown argument ${argName}`);
   }
-  return { [isSource ? 'sourceOptions' : 'targetOptions']: { [optionName]: optionValue } };
-}
+  return {
+    [isSource ? "sourceOptions" : "targetOptions"]: {
+      [optionName]: optionValue,
+    },
+  };
+};
 
 const readOptions = () => {
   let sourceOptions = {};
   let targetOptions = {};
   let optionIdx = 0;
-  while (const option = readOption(optionIdx)) {
+  let option = readOption(optionIdx);
+  while (option) {
     sourceOptions = Object.assign({}, sourceOptions, option.sourceOptions);
     targetOptions = Object.assign({}, targetOptions, option.targetOptions);
+    option = readOption(optionIdx);
   }
   return {
     sourceOptions,
-    targetOptions
+    targetOptions,
   };
-}
+};
 
 const makeDB = ({ isOffline, resourcesTable, resourceTagsTable, stage }) => {
   return new FellowsebLabDB({
     isOffline: isOffline || false,
-    stage: stage || 'prod'
+    stage: stage || "prod",
     resourcesTable,
     resourceTagsTable,
-  }
-}
+  });
+};
 
 const main = async () => {
   const { sourceOptions, targetOptions } = readOptions();
@@ -95,4 +128,3 @@ const main = async () => {
 };
 
 main();
-
