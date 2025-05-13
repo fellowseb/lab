@@ -1,85 +1,87 @@
 {
-  "name": "fellowseblab",
-  "version": "0.2.0",
-  "description": "FellowSeb's lab is a personal website that will serve as a code laboratory on which I, wauquier dot sebastien at gmail dot com, will publish my various tech projects. It may diverge and include other type of projects later on.",
-  "main": "index.html",
-  "scripts": {
-    "build:prod": "gulp build",
-    "build:dev": "gulp build-dev",
-    "build:dev:offline": "FELLOWSEB_LAB_APIURL='http://localhost:3000' gulp build-dev",
-    "deploy": "bash deploy.sh dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "offline:start": "http-server dist",
-    "stats": "xdg-open build/statistics.html",
-    "lint": "eslint --ext .js,.jsx src/",
-    "lint:fix": "eslint --ext .js,.jsx --fix src/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fellowseb/lab.git"
-  },
-  "keywords": [
-    "personal",
-    "website",
-    "codelab",
-    "portfolio"
-  ],
-  "author": "Sébastien Wauquier",
-  "maintainers": [
-    "wauquier.sebastien@gmail.com"
-  ],
-  "license": "WTFPL",
-  "engines": {
-    "node": "<=16",
-    "yarn": "<=1.22.22"
-  },
-  "bugs": {
-    "url": "https://github.com/fellowseb/lab/issues"
-  },
-  "homepage": "https://github.com/fellowseb/lab#readme",
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
-    "@babel/plugin-transform-parameters": "^7.4.4",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-styled-components": "^1.10.6",
-    "del": "^5.1.0",
-    "eslint": "^6.2.2",
-    "eslint-config-standard": "^14.0.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-standard": "^4.0.1",
-    "gulp": "^4.0.2",
-    "gulp-inject-string": "^1.1.2",
-    "gulp-svg-sprite": "^1.5.0",
-    "gulp-uglify": "^3.0.2",
-    "gulp-uglifycss": "^1.1.0",
-    "html-webpack-plugin": "^5.6.3",
-    "http-server": "^0.11.1",
-    "styled-components": "^4.3.2",
-    "touch": "^3.1.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.7",
-    "webpack-merge": "^4.2.1",
-    "webpack-stream": "^5.2.1",
-    "webpack-visualizer-plugin": "^0.1.11"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "core-js": "3.2.1",
-    "isomorphic-fetch": "^2.2.1",
-    "prop-types": "^15.6.2",
-    "ramda": "^0.26.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+    "name": "fellowseblab",
+    "version": "0.2.0",
+    "description": "FellowSeb's lab is a personal website that will serve as a code laboratory on which I, wauquier dot sebastien at gmail dot com, will publish my various tech projects. It may diverge and include other type of projects later on.",
+    "main": "index.html",
+    "scripts": {
+        "build:prod": "gulp build",
+        "build:dev": "gulp build-dev",
+        "build:dev:offline": "FELLOWSEB_LAB_APIURL='http://localhost:3000' gulp build-dev",
+        "deploy": "bash deploy.sh dist",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "offline:start": "http-server dist",
+        "stats": "xdg-open build/statistics.html",
+        "lint": "eslint --ext .js,.jsx src/",
+        "lint:fix": "eslint --ext .js,.jsx --fix src/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fellowseb/lab.git"
+    },
+    "keywords": [
+        "personal",
+        "website",
+        "codelab",
+        "portfolio"
+    ],
+    "author": "Sébastien Wauquier",
+    "maintainers": [
+        "wauquier.sebastien@gmail.com"
+    ],
+    "license": "WTFPL",
+    "engines": {
+        "node": "22",
+        "pnpm": "10.10"
+    },
+    "bugs": {
+        "url": "https://github.com/fellowseb/lab/issues"
+    },
+    "homepage": "https://github.com/fellowseb/lab#readme",
+    "devDependencies": {
+        "@babel/core": "^7.5.5",
+        "@babel/plugin-transform-modules-commonjs": "^7.5.0",
+        "@babel/plugin-transform-parameters": "^7.4.4",
+        "@babel/preset-env": "^7.5.5",
+        "@babel/preset-react": "^7.0.0",
+        "babel-loader": "^8.0.6",
+        "babel-plugin-styled-components": "^1.10.6",
+        "del": "^5.1.0",
+        "eslint": "^6.2.2",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-config-standard": "^14.0.1",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-node": "^9.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-react": "^7.14.3",
+        "eslint-plugin-standard": "^4.0.1",
+        "gulp": "^4.0.2",
+        "gulp-inject-string": "^1.1.2",
+        "gulp-svg-sprite": "^1.5.0",
+        "gulp-uglify": "^3.0.2",
+        "gulp-uglifycss": "^1.1.0",
+        "html-webpack-plugin": "^5.6.3",
+        "http-server": "^0.11.1",
+        "prettier": "^3.5.3",
+        "styled-components": "^4.3.2",
+        "touch": "^3.1.0",
+        "uglifyjs-webpack-plugin": "^2.2.0",
+        "webpack": "^4.39.2",
+        "webpack-cli": "^3.3.7",
+        "webpack-merge": "^4.2.1",
+        "webpack-stream": "^5.2.1",
+        "webpack-visualizer-plugin": "^0.1.11"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.4.4",
+        "core-js": "3.2.1",
+        "isomorphic-fetch": "^2.2.1",
+        "prop-types": "^15.6.2",
+        "ramda": "^0.26.1",
+        "react": "^16.9.0",
+        "react-dom": "^16.9.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions"
+    ]
 }

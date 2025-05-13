@@ -1,0 +1,6 @@
+# Ignore artifacts:
+.build/
+.dynamodb/
+.serverless/
+data/
+node_modules/
