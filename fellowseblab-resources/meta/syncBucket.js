@@ -70,9 +70,11 @@ const readOptions = () => {
   let sourceOptions = {};
   let targetOptions = {};
   let optionIdx = 0;
-  while (const option = readOption(optionIdx)) {
+  let option = readOption(optionIdx)
+  while (option) {
     sourceOptions = Object.assign({}, sourceOptions, option.sourceOptions);
     targetOptions = Object.assign({}, targetOptions, option.targetOptions);
+    option = readOption(optionIdx)
   }
   return {
     sourceOptions,
