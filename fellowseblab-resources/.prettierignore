@@ -1,6 +1,7 @@
 # Ignore artifacts:
-.build/
-.dynamodb/
-.serverless/
-data/
-node_modules/
+.build
+.dynamodb
+.serverless
+data
+node_modules
+pnpm-lock.yaml
