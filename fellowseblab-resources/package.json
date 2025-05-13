@@ -3,6 +3,10 @@
   "description": "FaaS serving fellowseb's lab resources (articles, talks, books)",
   "license": "WTFPL",
   "version": "0.1.0",
+  "engines": {
+    "node": "22",
+    "pnpm": "10.10"
+  },
   "dependencies": {
     "aws-sdk": "^2.517.0",
     "request": "^2.88.0",
