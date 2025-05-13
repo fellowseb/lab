@@ -1,6 +1,4 @@
-'use strict';
-
-const uuid = require('uuid');
+import uuid from 'uuid';
 
 class FellowsebLabResource {
     constructor({ id, type = 'article', title = '', url = '', tags = [],
@@ -36,4 +34,4 @@ class FellowsebLabResource {
     }
 }
 
-module.exports = FellowsebLabResource;
+export default FellowsebLabResource;

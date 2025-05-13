@@ -1,6 +1,6 @@
 'use strict';
 
-const FellowsebLabDB = require('../../src/classes/FellowsebLabDB');
+import FellowsebLabDB from '../../src/classes/FellowsebLabDB';
 
 // Temporary bandage
 // Handles both response types of DynamoDB, that are different
@@ -64,8 +64,8 @@ function buildResponseBody(endpoint, requestEvent, integrationResponse) {
     return response;
 }
 
-module.exports = {
-    getListHandler: (resourceType, endpoint) => async(event) => {
+export function getListHandler(resourceType, endpoint) {
+    return async(event) => {
         const isOffline = process.env.IS_OFFLINE || false;
         const stage = process.env.STAGE || 'dev';
         const tag = event.queryStringParameters
@@ -79,18 +79,17 @@ module.exports = {
             }
         };
         try {
-            let db = new FellowsebLabDB({ isOffline, stage });
-            let integrationResponse = await db.queryResources({ resourceType, tag });
+            let db = new FellowsebLabDB({isOffline, stage});
+            let integrationResponse = await db.queryResources({resourceType, tag});
             response.statusCode = 200;
             response.body = buildResponseBody(endpoint, event, integrationResponse);
         } catch (err) {
             response.statusCode = err.statusCode || 501;
             response.body = {
-                error: `Couldn't fetch the resources. \
-                    (${err.toString()})`
+                error: `Couldn't fetch the resources.                     (${err.toString()})`
             };
         }
         response.body = JSON.stringify(response.body);
         return response;
-    }
-};
+    };
+}

@@ -1,26 +1,28 @@
-const path = require('path');
-const Visualizer = require('webpack-visualizer-plugin');
+const path = require("path");
+const Visualizer = require("webpack-visualizer-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
-    entry: [path.resolve(__dirname, 'src/index.js')],
+    entry: [path.resolve(__dirname, "src/index.js")],
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        sourceMapFilename: '[name].map'
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].js",
+        sourceMapFilename: "[name].map",
     },
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules)/,
-                loader: 'babel-loader'
-            }
-        ]
+                loader: "babel-loader",
+            },
+        ],
     },
     plugins: [
         new Visualizer({
-            filename: '../build/statistics.html'
-        })
+            filename: "../build/statistics.html",
+        }),
+        // new HtmlWebpackPlugin(),
     ],
 };
 

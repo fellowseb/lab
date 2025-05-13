@@ -144,4 +144,10 @@ const ResourceFeedContentSelect = ({ error = null, loading = false, children }) 
                 : null
         );
 
+ResourceFeedContentSelect.propTypes = {
+    error: PropTypes.object,
+    loading: PropTypes.bool,
+    children: PropTypes.array
+};
+
 export default ResourceList;

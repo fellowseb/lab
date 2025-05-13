@@ -131,8 +131,16 @@ const ExperimentTagsSection = styled.section`
  * Stateless component displaying a Fellowseb'lab Experiment.
  * @param {object} props Properties.
  */
-const Experiment = ({ tasks = [], resources = [], results = [], tags = [],
-    collapsed = true, num = 0, title = '[Unknown experiment]', onToggleCollapse = null }) => {
+const Experiment = ({
+    tasks = [],
+    resources = [],
+    results = [],
+    tags = [],
+    collapsed = true,
+    num = 0,
+    title = '[Unknown experiment]',
+    onToggleCollapse = null
+}) => {
     return (
         <ExperimentArticle>
             <ExperimentHeaderSection collapsed={collapsed} onClick={onToggleCollapse}>

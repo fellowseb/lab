@@ -1,12 +1,9 @@
 const AWS = require('aws-sdk');
 
 module.exports = {
-    handler: async(event) => {
-        const resourceId = event.pathParameters.resourceId;
-        const imageExtension = event.queryStringParameters &&
-            event.queryStringParameters.type
-            ? event.queryStringParameters.type
-            : '';
+    handler: async({ pathParameters, queryStringParameters }) => {
+        const resourceId = pathParameters.resourceId;
+        const imageExtension = (queryStringParameters && queryStringParameters.type) || '';
         let response = {
             headers: {
                 'Access-Control-Allow-Origin': '*',
