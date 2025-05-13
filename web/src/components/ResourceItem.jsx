@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import { A, Ul } from '../components/BaseStyledComponents.jsx';
-import { media } from '../components/MediaQueries.jsx';
+import { A, Ul } from "../components/BaseStyledComponents.jsx";
+import { media } from "../components/MediaQueries.jsx";
 
 const ArticleItem = styled.li`
-  margin-top: .25em;
-  margin-bottom: .25em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
   padding: 0 4px;
   &:last-child {
     border-bottom: none;
@@ -67,47 +67,69 @@ const ArticleTagsItem = styled.li`
   background: #edc711;
 `;
 
-const ResourceItem = ({ title = '[untitled article]', url = '', tags = [], thumbnailUrl = '', authors = [], defaultThumbnailClass = 'fa-bookmark' }) => {
-    const defaultThumbnailClasses = 'fas fa-4x ' + defaultThumbnailClass;
-    const authorsStr = authors.length ? authors[0] : '';
-    return (
-        <ArticleItem>
-            <ArticleItemPicture className={defaultThumbnailClasses}></ArticleItemPicture>
-            <ArticleTitle href={url} target="_blank" rel="noopener">{title}</ArticleTitle>
-            <ArticleUrlAndAuthors><A href={url} target="_blank" rel="noopener">{domainFromURL(url)}</A>{authorsStr ? <ArticleAuthors> by {authors}</ArticleAuthors> : null }</ArticleUrlAndAuthors>
-            <ArticleTagsUl>
-                {tags.map((tag, tagIndex) => <ArticleTagsItem key={tagIndex}>{tag}</ArticleTagsItem>)}
-            </ArticleTagsUl>
-        </ArticleItem>);
+const ResourceItem = ({
+  title = "[untitled article]",
+  url = "",
+  tags = [],
+  thumbnailUrl = "",
+  authors = [],
+  defaultThumbnailClass = "fa-bookmark",
+}) => {
+  const defaultThumbnailClasses = "fas fa-4x " + defaultThumbnailClass;
+  const authorsStr = authors.length ? authors[0] : "";
+  return (
+    <ArticleItem>
+      <ArticleItemPicture
+        className={defaultThumbnailClasses}
+      ></ArticleItemPicture>
+      <ArticleTitle href={url} target="_blank" rel="noopener">
+        {title}
+      </ArticleTitle>
+      <ArticleUrlAndAuthors>
+        <A href={url} target="_blank" rel="noopener">
+          {domainFromURL(url)}
+        </A>
+        {authorsStr ? <ArticleAuthors> by {authors}</ArticleAuthors> : null}
+      </ArticleUrlAndAuthors>
+      <ArticleTagsUl>
+        {tags.map((tag, tagIndex) => (
+          <ArticleTagsItem key={tagIndex}>{tag}</ArticleTagsItem>
+        ))}
+      </ArticleTagsUl>
+    </ArticleItem>
+  );
 };
 
-const urlRegexp = /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
+const urlRegexp =
+  /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
 ResourceItem.propTypes = {
-    title: PropTypes.string.isRequired,
-    url: (props, propName) => (typeof props[propName] !== 'string'
-        ? new Error('An article url must be a string')
-        : urlRegexp.test(props[propName]) === false
-            ? new Error('url is not a valid URL')
-            : null
-    ),
-    tags: PropTypes.array,
-    thumbnailUrl: PropTypes.string,
-    defaultThumbnailClass: PropTypes.string,
-    authors: PropTypes.array
+  title: PropTypes.string.isRequired,
+  url: (props, propName) =>
+    typeof props[propName] !== "string"
+      ? new Error("An article url must be a string")
+      : urlRegexp.test(props[propName]) === false
+        ? new Error("url is not a valid URL")
+        : null,
+  tags: PropTypes.array,
+  thumbnailUrl: PropTypes.string,
+  defaultThumbnailClass: PropTypes.string,
+  authors: PropTypes.array,
 };
 
 function domainFromURL(url) {
-    let result;
-    let match = url.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?=]+)/im);
+  let result;
+  let match = url.match(
+    /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?=]+)/im,
+  );
+  if (match) {
+    result = match[1];
+    match = result.match(/^[^.]+\.(.+\..+)$/);
     if (match) {
-        result = match[1];
-        match = result.match(/^[^.]+\.(.+\..+)$/);
-        if (match) {
-            result = match[1];
-        }
+      result = match[1];
     }
-    return result;
+  }
+  return result;
 }
 
 export default ResourceItem;

@@ -14,13 +14,7 @@
     "node": true
   },
 
-  "plugins": [
-    "import",
-    "node",
-    "promise",
-    "standard",
-    "react"
-  ],
+  "plugins": ["import", "node", "promise", "standard", "react"],
 
   "globals": {
     "document": false,

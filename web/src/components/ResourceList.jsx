@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
 
-import ErrorDisplay from './ErrorDisplay.jsx';
-import { A, Ul } from '../components/BaseStyledComponents.jsx';
-import Loader from '../components/Loader.jsx';
-import ResourceItem from '../components/ResourceItem.jsx';
+import ErrorDisplay from "./ErrorDisplay.jsx";
+import { A, Ul } from "../components/BaseStyledComponents.jsx";
+import Loader from "../components/Loader.jsx";
+import ResourceItem from "../components/ResourceItem.jsx";
 
 const ResourceListContainer = styled.div`
   position: relative;
@@ -24,11 +24,11 @@ const PrevPageLink = styled(PageLink)`
   position: absolute;
   top: -20px;
   left: calc(50% - 35px);
-  visibility: ${props => props.show ? 'visible' : 'hidden'};
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
 
 const NextPageLink = styled(PageLink)`
-  visibility: ${props => props.show ? 'visible' : 'hidden'};
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
 
 const ArrowSVG = styled.svg`
@@ -55,46 +55,51 @@ const LoaderParent = styled.div`
  * @param {Error} [props.error=null] An error to display. Will appear in front of existing resources.
  * @param {bool} [props.loading=false] Set if the data is currently loading.
  */
-const ResourceList = ({ resources = [],
-    hasNextPage = false,
-    hasPrevPage = false,
-    onPrevPage = f => f,
-    onNextPage = f => f,
-    defaultThumbnailClass = 'fa-bookmark',
-    error = null,
-    loading = false }) => {
-    return (
-        <ResourceListContainer>
-            <PrevPageLink show={hasPrevPage && !loading} onClick={onPrevPage}>
-                <ArrowSVG>
-                    <use href="#arrowup" />
-                </ArrowSVG>
-            </PrevPageLink>
-            <LoaderParent>
-                <ResourceFeedContentSelect error={error} loading={loading}>
-                    <Loader />
-                    <ErrorDisplay error={error} />
-                </ResourceFeedContentSelect>
-                <ResourceListItems resources={resources} defaultThumbnailClass={defaultThumbnailClass} />
-            </LoaderParent>
-            <NextPageLink show={hasNextPage && !loading} onClick={onNextPage}>
-                <ArrowSVG>
-                    <use href="#arrowdown" />
-                </ArrowSVG>
-            </NextPageLink>
-        </ResourceListContainer>
-    );
+const ResourceList = ({
+  resources = [],
+  hasNextPage = false,
+  hasPrevPage = false,
+  onPrevPage = (f) => f,
+  onNextPage = (f) => f,
+  defaultThumbnailClass = "fa-bookmark",
+  error = null,
+  loading = false,
+}) => {
+  return (
+    <ResourceListContainer>
+      <PrevPageLink show={hasPrevPage && !loading} onClick={onPrevPage}>
+        <ArrowSVG>
+          <use href="#arrowup" />
+        </ArrowSVG>
+      </PrevPageLink>
+      <LoaderParent>
+        <ResourceFeedContentSelect error={error} loading={loading}>
+          <Loader />
+          <ErrorDisplay error={error} />
+        </ResourceFeedContentSelect>
+        <ResourceListItems
+          resources={resources}
+          defaultThumbnailClass={defaultThumbnailClass}
+        />
+      </LoaderParent>
+      <NextPageLink show={hasNextPage && !loading} onClick={onNextPage}>
+        <ArrowSVG>
+          <use href="#arrowdown" />
+        </ArrowSVG>
+      </NextPageLink>
+    </ResourceListContainer>
+  );
 };
 
 ResourceList.propTypes = {
-    resources: PropTypes.array,
-    hasNextPage: PropTypes.bool,
-    hasPrevPage: PropTypes.bool,
-    onPrevPage: PropTypes.func,
-    onNextPage: PropTypes.func,
-    defaultThumbnailClass: PropTypes.string,
-    error: PropTypes.object,
-    loading: PropTypes.bool
+  resources: PropTypes.array,
+  hasNextPage: PropTypes.bool,
+  hasPrevPage: PropTypes.bool,
+  onPrevPage: PropTypes.func,
+  onNextPage: PropTypes.func,
+  defaultThumbnailClass: PropTypes.string,
+  error: PropTypes.object,
+  loading: PropTypes.bool,
 };
 
 const ArticlesList = styled(Ul)`
@@ -109,45 +114,48 @@ const ArticlesList = styled(Ul)`
   flex-direction: column;
 `;
 
-const ResourceListItems = ({ resources = [], defaultThumbnailClass = '' }) =>
-    <ArticlesList>
-        {resources.map((resource) => {
-            const thumbnailUrl = resource.thumbnail
-                ? resource.thumbnail.url
-                : '';
-            return <ResourceItem key={resource.resourceId}
-                title={resource.title}
-                url={resource.url}
-                tags={resource.tags}
-                authors={resource.authors}
-                thumbnailUrl={thumbnailUrl}
-                defaultThumbnailClass={defaultThumbnailClass} />;
-        })}
-    </ArticlesList>;
+const ResourceListItems = ({ resources = [], defaultThumbnailClass = "" }) => (
+  <ArticlesList>
+    {resources.map((resource) => {
+      const thumbnailUrl = resource.thumbnail ? resource.thumbnail.url : "";
+      return (
+        <ResourceItem
+          key={resource.resourceId}
+          title={resource.title}
+          url={resource.url}
+          tags={resource.tags}
+          authors={resource.authors}
+          thumbnailUrl={thumbnailUrl}
+          defaultThumbnailClass={defaultThumbnailClass}
+        />
+      );
+    })}
+  </ArticlesList>
+);
 
 ResourceListItems.propTypes = {
-    resources: PropTypes.array,
-    defaultThumbnailClass: PropTypes.string
+  resources: PropTypes.array,
+  defaultThumbnailClass: PropTypes.string,
 };
 
 const findChild = (children, child) =>
-    React.Children
-        .toArray(children)
-        .filter(c => c.type === child)[0];
+  React.Children.toArray(children).filter((c) => c.type === child)[0];
 
-const ResourceFeedContentSelect = ({ error = null, loading = false, children }) =>
-    loading
-        ? findChild(children, Loader)
-        : (
-            error
-                ? findChild(children, ErrorDisplay)
-                : null
-        );
+const ResourceFeedContentSelect = ({
+  error = null,
+  loading = false,
+  children,
+}) =>
+  loading
+    ? findChild(children, Loader)
+    : error
+      ? findChild(children, ErrorDisplay)
+      : null;
 
 ResourceFeedContentSelect.propTypes = {
-    error: PropTypes.object,
-    loading: PropTypes.bool,
-    children: PropTypes.array
+  error: PropTypes.object,
+  loading: PropTypes.bool,
+  children: PropTypes.array,
 };
 
 export default ResourceList;

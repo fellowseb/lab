@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled, { keyframes } from "styled-components";
 
-import { media } from '../components/MediaQueries.jsx';
-import { A, Ul, H1, P } from '../components/BaseStyledComponents.jsx';
+import { media } from "../components/MediaQueries.jsx";
+import { A, Ul, H1, P } from "../components/BaseStyledComponents.jsx";
 
 const ExperimentArticle = styled.article`
   padding: 0;
@@ -19,25 +19,25 @@ const ExperimentArticle = styled.article`
   }
 `;
 
-const ExperimentHeaderSection = styled.section.attrs(props => ({
-    collapsed: props.collapsed || false
+const ExperimentHeaderSection = styled.section.attrs((props) => ({
+  collapsed: props.collapsed || false,
 }))`
   padding: 2px 12px;
   cursor: pointer;
   background: #333;
   border-radius: 10px 10px 0 0;
   line-height: 2;
-  color: ${props => props.collapsed ? '#c1b79a' : '#ddd'};
+  color: ${(props) => (props.collapsed ? "#c1b79a" : "#ddd")};
   &:hover {
-      color: #ddd;
+    color: #ddd;
   }
 `;
 
-const ExperimentTitle = styled(H1).attrs(props => ({
-    collapsed: props.collapsed || false
+const ExperimentTitle = styled(H1).attrs((props) => ({
+  collapsed: props.collapsed || false,
 }))`
   font-size: 1.2rem;
-  font-weight: ${props => props.collapsed ? 'normal' : 'bold'};
+  font-weight: ${(props) => (props.collapsed ? "normal" : "bold")};
   margin: 0;
 `;
 
@@ -58,18 +58,19 @@ const collapsebody = keyframes`
   }
 `;
 
-const ExperimentBody = styled.div.attrs(props => ({
-    collapsed: props.collapsed || false
+const ExperimentBody = styled.div.attrs((props) => ({
+  collapsed: props.collapsed || false,
 }))`
   flex-direction: row;
   flex-wrap: wrap;
   display: flex;
   overflow-y: hidden;
   animation-duration: 300ms;
-  animation-name: ${props => props.collapsed ? collapsebody : uncollapsebody};
+  animation-name: ${(props) =>
+    props.collapsed ? collapsebody : uncollapsebody};
   animation-iteration-count: 1;
   animation-direction: normal;
-  ${props => props.collapsed ? 'max-height: 0' : ''};
+  ${(props) => (props.collapsed ? "max-height: 0" : "")};
 `;
 
 const ExperimentBodyList = styled(Ul)`
@@ -132,100 +133,123 @@ const ExperimentTagsSection = styled.section`
  * @param {object} props Properties.
  */
 const Experiment = ({
-    tasks = [],
-    resources = [],
-    results = [],
-    tags = [],
-    collapsed = true,
-    num = 0,
-    title = '[Unknown experiment]',
-    onToggleCollapse = null
+  tasks = [],
+  resources = [],
+  results = [],
+  tags = [],
+  collapsed = true,
+  num = 0,
+  title = "[Unknown experiment]",
+  onToggleCollapse = null,
 }) => {
-    return (
-        <ExperimentArticle>
-            <ExperimentHeaderSection collapsed={collapsed} onClick={onToggleCollapse}>
-                <header>
-                    <ExperimentTitle collapsed={collapsed}>{num} - {title}</ExperimentTitle>
-                </header>
-            </ExperimentHeaderSection>
-            <ExperimentBody collapsed={collapsed}>
-                <ExperimentContentSection>
-                    <ExperimentSectionTitle>
-                        <ExperimentSectionIcon className="fas fa-tasks" title="Tasks" />I used...
-                    </ExperimentSectionTitle>
-                    {renderExperimentTasks(tasks)}
-                </ExperimentContentSection>
-                <ExperimentResourcesSection>
-                    <ExperimentSectionTitle>
-                        <ExperimentSectionIcon className="fas fa-link" title="Resources" />Resources
-                    </ExperimentSectionTitle>
-                    {renderExperimentResources(resources)}
-                </ExperimentResourcesSection>
-                <ExperimentResultsSection>
-                    <ExperimentSectionTitle>
-                        <ExperimentSectionIcon className="fas fa-chart-line" title="Results" />Results
-                    </ExperimentSectionTitle>
-                    {renderExperimentResults(results)}
-                </ExperimentResultsSection>
-            </ExperimentBody>
-            <ExperimentTagsSection>
-                <ExperimentSectionIcon className="fas fa-tags" title="Tags" />
-                {renderExperimentTags(tags)}
-            </ExperimentTagsSection>
-        </ExperimentArticle>
-    );
+  return (
+    <ExperimentArticle>
+      <ExperimentHeaderSection collapsed={collapsed} onClick={onToggleCollapse}>
+        <header>
+          <ExperimentTitle collapsed={collapsed}>
+            {num} - {title}
+          </ExperimentTitle>
+        </header>
+      </ExperimentHeaderSection>
+      <ExperimentBody collapsed={collapsed}>
+        <ExperimentContentSection>
+          <ExperimentSectionTitle>
+            <ExperimentSectionIcon className="fas fa-tasks" title="Tasks" />I
+            used...
+          </ExperimentSectionTitle>
+          {renderExperimentTasks(tasks)}
+        </ExperimentContentSection>
+        <ExperimentResourcesSection>
+          <ExperimentSectionTitle>
+            <ExperimentSectionIcon className="fas fa-link" title="Resources" />
+            Resources
+          </ExperimentSectionTitle>
+          {renderExperimentResources(resources)}
+        </ExperimentResourcesSection>
+        <ExperimentResultsSection>
+          <ExperimentSectionTitle>
+            <ExperimentSectionIcon
+              className="fas fa-chart-line"
+              title="Results"
+            />
+            Results
+          </ExperimentSectionTitle>
+          {renderExperimentResults(results)}
+        </ExperimentResultsSection>
+      </ExperimentBody>
+      <ExperimentTagsSection>
+        <ExperimentSectionIcon className="fas fa-tags" title="Tags" />
+        {renderExperimentTags(tags)}
+      </ExperimentTagsSection>
+    </ExperimentArticle>
+  );
 };
 
 Experiment.propTypes = {
-    num: PropTypes.number.isRequired,
-    collapsed: PropTypes.bool,
-    title: PropTypes.string,
-    tasks: PropTypes.array,
-    resources: PropTypes.array,
-    results: PropTypes.array,
-    tags: PropTypes.array,
-    onToggleCollapse: PropTypes.func
+  num: PropTypes.number.isRequired,
+  collapsed: PropTypes.bool,
+  title: PropTypes.string,
+  tasks: PropTypes.array,
+  resources: PropTypes.array,
+  results: PropTypes.array,
+  tags: PropTypes.array,
+  onToggleCollapse: PropTypes.func,
 };
 
-const renderExperimentTasks = tasks =>
-    <ExperimentBodyList>
-        {tasks.map((task, i) => <li key={i}>{task}</li>)}
-    </ExperimentBodyList>;
+const renderExperimentTasks = (tasks) => (
+  <ExperimentBodyList>
+    {tasks.map((task, i) => (
+      <li key={i}>{task}</li>
+    ))}
+  </ExperimentBodyList>
+);
 
 const renderBook = (book, index) => {
-    const authors = book.authors[0];
-    return <li key={index} className="experiment-resource experiment-resource-book">
-        <P>
-            <ExperimentSectionIcon className="fas fa-book" title="Book" />
-            <A target="_blank" rel="noopener noreferrer" href={book.href}>{book.title}</A>
-            <br />ed {book.editor}, ISBN{book.isbn}
-            <br />by {authors}
-        </P>
-    </li>;
+  const authors = book.authors[0];
+  return (
+    <li key={index} className="experiment-resource experiment-resource-book">
+      <P>
+        <ExperimentSectionIcon className="fas fa-book" title="Book" />
+        <A target="_blank" rel="noopener noreferrer" href={book.href}>
+          {book.title}
+        </A>
+        <br />
+        ed {book.editor}, ISBN{book.isbn}
+        <br />
+        by {authors}
+      </P>
+    </li>
+  );
 };
 
 const renderArticle = (article, index) => {
-    const authors = article.authors[0];
-    return <li key={index} className="experiment-resource experiment-resource-article">
-        <P>
-            <ExperimentSectionIcon className="fas fa-bookmark" title="Article" />
-            <A target="_blank" rel="noopener noreferrer" href={article.href}>{article.title}</A>
-            <br />by {authors}
-        </P>
-    </li>;
+  const authors = article.authors[0];
+  return (
+    <li key={index} className="experiment-resource experiment-resource-article">
+      <P>
+        <ExperimentSectionIcon className="fas fa-bookmark" title="Article" />
+        <A target="_blank" rel="noopener noreferrer" href={article.href}>
+          {article.title}
+        </A>
+        <br />
+        by {authors}
+      </P>
+    </li>
+  );
 };
 
-const renderExperimentResources = resources =>
-    <ExperimentResourcesUl>
-        {resources.map((resource, i) => {
-            switch (resource.type) {
-                case 'book':
-                    return renderBook(resource, i);
-                case 'article':
-                    return renderArticle(resource, i);
-            }
-        })}
-    </ExperimentResourcesUl>;
+const renderExperimentResources = (resources) => (
+  <ExperimentResourcesUl>
+    {resources.map((resource, i) => {
+      switch (resource.type) {
+        case "book":
+          return renderBook(resource, i);
+        case "article":
+          return renderArticle(resource, i);
+      }
+    })}
+  </ExperimentResourcesUl>
+);
 
 const ExperimentResultsItem = styled.li`
   margin-right: 2px;
@@ -237,14 +261,17 @@ const ExperimentResultsItem = styled.li`
   }
 `;
 
-const renderExperimentResults = results =>
-    <ExperimentResultsUl>
-        {results.map((result, i) =>
-            <ExperimentResultsItem key={i}>
-                <A href={result.href} target="_blank" rel="noopener noreferrer">{result.text}</A>
-            </ExperimentResultsItem>
-        )}
-    </ExperimentResultsUl>;
+const renderExperimentResults = (results) => (
+  <ExperimentResultsUl>
+    {results.map((result, i) => (
+      <ExperimentResultsItem key={i}>
+        <A href={result.href} target="_blank" rel="noopener noreferrer">
+          {result.text}
+        </A>
+      </ExperimentResultsItem>
+    ))}
+  </ExperimentResultsUl>
+);
 
 const ExperimentTagsUl = styled(ExperimentBodyList)`
   list-style: none;
@@ -263,12 +290,15 @@ const ExperimentTagsItem = styled.li`
   font-style: italic;
   font-size: 0.9em;
   color: #333;
-  font-weight: bold;            
+  font-weight: bold;
 `;
 
-const renderExperimentTags = tags =>
-    <ExperimentTagsUl>
-        {tags.map((tag, i) => <ExperimentTagsItem key={i}>{tag}</ExperimentTagsItem>)}
-    </ExperimentTagsUl>;
+const renderExperimentTags = (tags) => (
+  <ExperimentTagsUl>
+    {tags.map((tag, i) => (
+      <ExperimentTagsItem key={i}>{tag}</ExperimentTagsItem>
+    ))}
+  </ExperimentTagsUl>
+);
 
 module.exports = Experiment;

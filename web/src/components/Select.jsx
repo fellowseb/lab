@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Select = styled.select`
   background: #333;
@@ -7,7 +7,7 @@ const Select = styled.select`
   border-radius: 4px;
   width: 150px;
   cursor: pointer;
-  color: #DDDDDD;
+  color: #dddddd;
 `;
 
 export default Select;

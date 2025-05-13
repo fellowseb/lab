@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 const LoaderContainer = styled.div`
   width: 100%;
@@ -55,13 +55,14 @@ const Bounce3 = styled(Bounce)`
 /**
  * Presentational component displaying a loader.
  */
-const Loader = () =>
-    <LoaderContainer>
-        <Spinner>
-            <Bounce1 />
-            <Bounce2 />
-            <Bounce3 />
-        </Spinner>
-    </LoaderContainer>;
+const Loader = () => (
+  <LoaderContainer>
+    <Spinner>
+      <Bounce1 />
+      <Bounce2 />
+      <Bounce3 />
+    </Spinner>
+  </LoaderContainer>
+);
 
 module.exports = Loader;
