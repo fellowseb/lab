@@ -1,11 +1,8 @@
 import React from "react";
-// eslint-disable-next-line react/no-deprecated
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./components/App.jsx";
 
 const apiUrl = import.meta.env.VITE_FELLOWSEB_LAB_APIURL;
 
-render(
-  <App apiUrl={apiUrl} win={window} />,
-  document.getElementById("app-container"),
-);
+const root = createRoot(document.getElementById("app-container"));
+root.render(<App apiUrl={apiUrl} win={window} />);
