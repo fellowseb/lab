@@ -1,5 +1,3 @@
-"use strict";
-
 class PocketEntry {
   constructor() {
     this.itemId = null;
@@ -32,4 +30,4 @@ class PocketEntry {
   }
 }
 
-module.exports = PocketEntry;
+export default PocketEntry;

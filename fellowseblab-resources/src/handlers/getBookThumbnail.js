@@ -1,6 +1,6 @@
-const AWS = require("aws-sdk");
+import AWS from "aws-sdk";
 
-module.exports = {
+export default {
   handler: async ({ pathParameters, queryStringParameters }) => {
     const resourceId = pathParameters.resourceId;
     const imageExtension =

@@ -1,9 +1,7 @@
-"use strict";
-
-import { PocketClient } from "../../src/classes/PocketClient";
-import { FellowsebLabResource } from "../../src/classes/FellowsebLabResource";
-import { FellowsebLabResourceTag } from "../../src/classes/FellowsebLabResourceTag";
-import { FellowsebLabDB } from "../../src/classes/FellowsebLabDB";
+import { PocketClient } from "../classes/PocketClient.js";
+import { FellowsebLabResource } from "../classes/FellowsebLabResource.js";
+import { FellowsebLabResourceTag } from "../classes/FellowsebLabResourceTag.js";
+import { FellowsebLabDB } from "../classes/FellowsebLabDB.js";
 
 const readOptions = () => {
   let consumerKey = process.env.POCKET_CONSUMER_KEY;

@@ -1,5 +1,3 @@
-"use strict";
-
 class FellowsebLabResourceTag {
   constructor({ tag = [], displayName = "" }) {
     this.tag = tag;
@@ -16,4 +14,4 @@ class FellowsebLabResourceTag {
   }
 }
 
-module.exports = FellowsebLabResourceTag;
+export default FellowsebLabResourceTag;

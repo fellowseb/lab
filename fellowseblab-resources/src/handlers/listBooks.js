@@ -1,7 +1,3 @@
-"use strict";
+import { getListHandler } from "../handlers/handlersHelper.js";
 
-const helper = require("../../src/handlers/handlersHelper");
-
-module.exports = {
-  handler: helper.getListHandler("book", "/books"),
-};
+export const handler = getListHandler("book", "/books");

@@ -3,6 +3,7 @@
   "description": "FaaS serving fellowseb's lab resources (articles, talks, books)",
   "license": "WTFPL",
   "version": "0.1.0",
+  "type": "module",
   "engines": {
     "node": "22",
     "pnpm": "10.10"

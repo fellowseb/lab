@@ -1,7 +1,5 @@
-"use strict";
-
-const rp = require("request-promise-native");
-const PocketEntry = require("../../src/classes/PocketEntry");
+import rp from "request-promise-native";
+import PocketEntry from "../classes/PocketEntry.js";
 
 const POCKET_API_URL = "https://getpocket.com/v3";
 
@@ -76,4 +74,4 @@ class PocketClient {
   async add() {}
 }
 
-module.exports = PocketClient;
+export default PocketClient;

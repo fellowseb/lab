@@ -1,6 +1,4 @@
-"use strict";
-
-import FellowsebLabDB from "../../src/classes/FellowsebLabDB";
+import FellowsebLabDB from "../classes/FellowsebLabDB.js";
 
 const buildResponse = (integrationResponse) => {
   var response = {

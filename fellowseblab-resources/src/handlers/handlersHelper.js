@@ -1,6 +1,4 @@
-"use strict";
-
-import FellowsebLabDB from "../../src/classes/FellowsebLabDB";
+import FellowsebLabDB from "../classes/FellowsebLabDB.js";
 
 // Temporary bandage
 // Handles both response types of DynamoDB, that are different

@@ -1,6 +1,4 @@
-"use strict";
-
-const AWS = require("aws-sdk");
+import AWS from "aws-sdk";
 
 const batchWriteAddRequestItemsEntry = (batchWriteInput, tableName) => {
   let newBatchWriteInput = { ...batchWriteInput };
@@ -163,4 +161,4 @@ class FellowsebLabDB {
   }
 }
 
-module.exports = FellowsebLabDB;
+export default FellowsebLabDB;
