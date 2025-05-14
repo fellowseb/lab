@@ -2,7 +2,7 @@
   "name": "fellowseblab",
   "version": "0.2.0",
   "description": "FellowSeb's lab is a personal website that will serve as a code laboratory on which I, wauquier dot sebastien at gmail dot com, will publish my various tech projects. It may diverge and include other type of projects later on.",
-  "main": "index.html",
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "start": "vite",

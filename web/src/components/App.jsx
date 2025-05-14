@@ -255,4 +255,4 @@ const scrollTo = (elem) => {
   });
 };
 
-module.exports = App;
+export default App;

@@ -18,4 +18,4 @@ const BookFeed = (props) => (
   />
 );
 
-module.exports = BookFeed;
+export default BookFeed;

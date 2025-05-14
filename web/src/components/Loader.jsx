@@ -65,4 +65,4 @@ const Loader = () => (
   </LoaderContainer>
 );
 
-module.exports = Loader;
+export default Loader;

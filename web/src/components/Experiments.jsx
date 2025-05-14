@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { P, Strong } from "../components/BaseStyledComponents.jsx";
 import Experiment from "../components/Experiment.jsx";
 
+import EXPERIMENTS_DATA from "/data/experiments.json";
+
 const FilterExperimentsContainer = styled.div`
   max-width: 800px;
   width: 100%;
@@ -33,7 +35,7 @@ class Experiments extends React.Component {
   constructor() {
     super();
     this.state = {
-      experiments: require("../../data/experiments.json"),
+      experiments: EXPERIMENTS_DATA,
     };
     this.onToggleCollapse = this.onToggleCollapse.bind(this);
     this.renderExperiment = this.renderExperiment.bind(this);
@@ -89,4 +91,4 @@ Experiments.propTypes = {
   experiments: PropTypes.object,
 };
 
-module.exports = Experiments;
+export default Experiments;

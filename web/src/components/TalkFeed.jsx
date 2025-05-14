@@ -23,4 +23,4 @@ const TalkList = (props) => (
   <ResourceList {...props} defaultThumbnailClass="fa-headphones" />
 );
 
-module.exports = TalkFeed;
+export default TalkFeed;

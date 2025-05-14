@@ -22,4 +22,4 @@ const ArticleList = (props) => (
   <ResourceList {...props} defaultThumbnailClass="fa-bookmark" />
 );
 
-module.exports = ArticleFeed;
+export default ArticleFeed;

@@ -12,4 +12,4 @@ ErrorDisplay.propTypes = {
   error: PropTypes.object,
 };
 
-module.exports = ErrorDisplay;
+export default ErrorDisplay;

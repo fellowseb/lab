@@ -182,4 +182,4 @@ BookCarouselItem.propTypes = {
   apiUrl: PropTypes.string,
 };
 
-module.exports = BookCarousel;
+export default BookCarousel;

@@ -312,4 +312,4 @@ NavigationListItemSection.propTypes = {
   sectionNavLinkMounted: PropTypes.func,
 };
 
-module.exports = Menu;
+export default Menu;
