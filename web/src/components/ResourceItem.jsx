@@ -71,7 +71,6 @@ const ResourceItem = ({
   title = "[untitled article]",
   url = "",
   tags = [],
-  thumbnailUrl = "",
   authors = [],
   defaultThumbnailClass = "fa-bookmark",
 }) => {
@@ -112,7 +111,6 @@ ResourceItem.propTypes = {
         ? new Error("url is not a valid URL")
         : null,
   tags: PropTypes.array,
-  thumbnailUrl: PropTypes.string,
   defaultThumbnailClass: PropTypes.string,
   authors: PropTypes.array,
 };

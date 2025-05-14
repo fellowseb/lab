@@ -124,7 +124,7 @@ class App extends React.PureComponent {
       }
     };
     window.addEventListener("popstate", onPopState);
-    const onScroll = (event) => this.updateCurrentSection();
+    const onScroll = () => this.updateCurrentSection();
     window.addEventListener("scroll", onScroll, {
       passive: true,
     });
