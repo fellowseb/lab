@@ -212,6 +212,10 @@ custom:
             sources: [./data/resources.json]
           - table: fellowseb-lab-${self:provider.stage}-resourceTags
             sources: [./data/resourceTags.json]
+            dynamodb:
+    stages:
+      - dev
+      - prod
   s3:
     host: localhost
     port: 8001
