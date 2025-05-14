@@ -113,6 +113,8 @@ functions:
     description: FellowSeb's lab API, handle /books/resourceId/thumbnail GET requests
     events:
       - http:
+          response:
+            contentHandling: CONVERT_TO_BINARY
           path: books/{resourceId}/thumbnail
           method: get
           cors: true
@@ -193,7 +195,6 @@ resources:
 plugins:
   - serverless-dynamodb-local
   - serverless-apigw-binary
-  - serverless-apigwy-binary
   - serverless-s3-local
   - serverless-offline
   - serverless-stack-output
