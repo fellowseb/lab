@@ -43,7 +43,7 @@ jobs:
         run: pnpm install
         working-directory: ./web
       - name: Build
-        run: pnpm run build
+        run: pnpm run build --base=/lab
         working-directory: ./web
       - name: Setup Pages
         uses: actions/configure-pages@v5
