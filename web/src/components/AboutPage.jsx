@@ -1,9 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Page from "../components/Page.jsx";
 import { P, Strong } from "../components/BaseStyledComponents.jsx";
 import { media } from "../components/MediaQueries.jsx";
+import BooksSvg from "/src/assets/images/svg/books.svg";
+import CodeSvg from "/src/assets/images/svg/code.svg";
+import LabSvg from "/src/assets/images/svg/lab.svg";
 
 const PurposeContainer = styled.div`
   display: flex;
@@ -42,11 +45,23 @@ const PurposeHeader = styled.header`
   clear: both;
 `;
 
-const PurposeIcon = styled.svg`
+const PurposeIconCss = css`
   width: 100%;
   height: 100%;
   filter: drop-shadow(6px 6px 1px rgba(149, 133, 87, 1));
   fill: #333333;
+`;
+
+const StyledBooksSvg = styled(BooksSvg)`
+  ${PurposeIconCss}
+`;
+
+const StyledCodeSvg = styled(CodeSvg)`
+  ${PurposeIconCss}
+`;
+
+const StyledLabSvg = styled(LabSvg)`
+  ${PurposeIconCss}
 `;
 
 const PurposeFigure = styled.figure`
@@ -68,9 +83,7 @@ const AboutPage = () => (
           <PurposeTitle>Who am I ?</PurposeTitle>
         </PurposeHeader>
         <PurposeFigure>
-          <PurposeIcon>
-            <use href="#code" />
-          </PurposeIcon>
+          <StyledCodeSvg />
         </PurposeFigure>
         <P>
           My name is <Strong>S&eacute;bastien Wauquier</Strong>.<br />
@@ -83,9 +96,7 @@ const AboutPage = () => (
           <PurposeTitle>What is this ?</PurposeTitle>
         </PurposeHeader>
         <PurposeFigure>
-          <PurposeIcon>
-            <use href="#lab" />
-          </PurposeIcon>
+          <StyledLabSvg />
         </PurposeFigure>
         <P>
           This is my <Strong>virtual laboratory</Strong>.<br />I intend to
@@ -98,9 +109,7 @@ const AboutPage = () => (
           <PurposeTitle>What&apos;s the point ?</PurposeTitle>
         </PurposeHeader>
         <PurposeFigure>
-          <PurposeIcon>
-            <use href="#books" />
-          </PurposeIcon>
+          <StyledBooksSvg />
         </PurposeFigure>
         <P>
           I believe one should always <Strong>keep on learning</Strong>.<br />

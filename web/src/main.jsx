@@ -2,8 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import App from "./components/App.jsx";
 
-// eslint-disable-next-line no-undef
-const apiUrl = FELLOWSEBLAB_API_URL;
+const apiUrl = import.meta.env.VITE_FELLOWSEB_LAB_APIURL;
 
 render(
   <App apiUrl={apiUrl} win={window} />,
