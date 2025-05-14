@@ -1,6 +1,4 @@
 # NPM
 node_modules
 # Distributed files
-#dist
-#data
-
+dist
