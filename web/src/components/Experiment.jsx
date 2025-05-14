@@ -33,12 +33,29 @@ const ExperimentHeaderSection = styled.section.attrs((props) => ({
   }
 `;
 
+const ExperimentHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const ExperimentTitle = styled(H1).attrs((props) => ({
   collapsed: props.collapsed || false,
 }))`
   font-size: 1.2rem;
   font-weight: ${(props) => (props.collapsed ? "normal" : "bold")};
   margin: 0;
+`;
+
+const ExperimentStatus = styled.span.attrs((props) => ({
+  status: props.status || "planned",
+}))`
+  font-size: 1.2rem;
+  color: ${(props) =>
+    props.status === "done"
+      ? "green"
+      : props.status === "on-going"
+        ? "yellow"
+        : "grey"};
 `;
 
 const uncollapsebody = keyframes`
@@ -141,15 +158,19 @@ const Experiment = ({
   num = 0,
   title = "[Unknown experiment]",
   onToggleCollapse = null,
+  status = "planned",
 }) => {
   return (
     <ExperimentArticle>
       <ExperimentHeaderSection collapsed={collapsed} onClick={onToggleCollapse}>
-        <header>
+        <ExperimentHeader>
           <ExperimentTitle collapsed={collapsed}>
             {num} - {title}
           </ExperimentTitle>
-        </header>
+          <ExperimentStatus status={status}>
+            {renderExperimentStatus(status)}
+          </ExperimentStatus>
+        </ExperimentHeader>
       </ExperimentHeaderSection>
       <ExperimentBody collapsed={collapsed}>
         <ExperimentContentSection>
@@ -194,6 +215,7 @@ Experiment.propTypes = {
   results: PropTypes.array,
   tags: PropTypes.array,
   onToggleCollapse: PropTypes.func,
+  status: PropTypes.string,
 };
 
 const renderExperimentTasks = (tasks) => (
@@ -301,4 +323,15 @@ const renderExperimentTags = (tags) => (
   </ExperimentTagsUl>
 );
 
-module.exports = Experiment;
+const renderExperimentStatus = (status) => {
+  switch (status) {
+    case "done":
+      return "DONE";
+    case "ongoing":
+      return "ON-GOING";
+    case "planned":
+      return "PLANNED";
+  }
+};
+
+export default Experiment;

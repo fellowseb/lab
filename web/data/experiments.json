@@ -1,6 +1,7 @@
 {
   "1": {
     "id": "1",
+    "status": "done",
     "collapsed": true,
     "title": "Build a static website for my code lab",
     "tasks": [
@@ -49,6 +50,7 @@
   },
   "2": {
     "id": "2",
+    "status": "done",
     "collapsed": false,
     "title": "Display a selection of articles, talks and books that fuel my brain",
     "tasks": [
