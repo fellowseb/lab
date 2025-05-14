@@ -4,7 +4,7 @@ on:
   # Runs on pushes targeting the default branch and the "web" folder
   push:
     branches: ["master"]
-    paths: ["web"]
+    paths: ["**/web/**"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,7 +24,10 @@ concurrency:
 jobs:
   # Build job
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [22]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,18 +35,19 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 10
-          working-directory: ./web
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-          working-directory: ./web
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: ./web
       - name: Build
         run: pnpm run build
         working-directory: ./web
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
