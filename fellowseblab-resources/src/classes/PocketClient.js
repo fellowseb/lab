@@ -70,7 +70,7 @@ class PocketClient {
     const response = await rp(requestOptions);
     return parseRetrieveResponse(response);
   }
-  async modify(operations) {}
+  async modify() {}
   async add() {}
 }
 
