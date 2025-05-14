@@ -99,5 +99,61 @@
       "React Native",
       "Functional Programming"
     ]
+  },
+  "3": {
+    "id": "3",
+    "status": "planned",
+    "collapsed": true,
+    "title": "A set of tools to track on-going code migrations",
+    "tasks": ["N/A"],
+    "resources": [
+      {
+        "type": "book",
+        "title": "The Rust Programming Language",
+        "href": "https://nostarch.com/rust-programming-language-2nd-edition",
+        "editor": "No starch press",
+        "isbn": "978-1718503106",
+        "authors": ["Steve Klabnik", "Carol Nichols"]
+      }
+    ],
+    "results": ["N/A"],
+    "tags": ["Rust"]
+  },
+  "4": {
+    "id": "4",
+    "status": "planned",
+    "collapsed": true,
+    "title": "Tools for applying the 'Testing without mocks' pattern by James Shore",
+    "tasks": ["N/A"],
+    "resources": [
+      {
+        "type": "article",
+        "title": "Testing Without Mocks: A Pattern Language",
+        "href": "https://www.jamesshore.com/v2/projects/nullables/testing-without-mocks",
+        "authors": ["James Shore"]
+      }
+    ],
+    "results": ["N/A"],
+    "tags": ["Rust"]
+  },
+  "5": {
+    "id": "5",
+    "status": "planned",
+    "collapsed": true,
+    "title": "Web toolchain visualizer and optimizer",
+    "tasks": ["N/A"],
+    "resources": [],
+    "results": ["N/A"],
+    "tags": ["Web"]
+  },
+  "6": {
+    "id": "6",
+    "status": "planned",
+    "collapsed": true,
+    "title": "A platform to develop, test, publish and maintain a WebExtension",
+    "tasks": ["N/A"],
+    "resources": [],
+    "results": ["N/A"],
+    "tags": ["WebExtension", "PlatformEngineering"]
   }
 }
