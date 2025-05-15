@@ -12,9 +12,9 @@ import { media } from "../components/MediaQueries.jsx";
 const GlobalStyles = createGlobalStyle`
   @font-face {
       font-family: 'alex_brushregular';
-      src: url('/src/assets/fonts/alexbrush-regular.woff2?#iefix') format('woff2'),
-           url('/src/assets/fonts/alexbrush-regular.woff') format('woff'),
-           url('/src/assets/fonts/alexbrush-regular.ttf') format('truetype');
+      src: url('/fonts/alexbrush-regular.woff2?#iefix') format('woff2'),
+           url('/fonts/alexbrush-regular.woff') format('woff'),
+           url('/fonts/alexbrush-regular.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
   }
