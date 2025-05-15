@@ -52,7 +52,6 @@
     "vite-plugin-svg-sprite": "^0.6.2"
   },
   "dependencies": {
-    "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.2",
     "ramda": "^0.26.1",
     "react": "^19.1.0",
