@@ -1,4 +1,3 @@
-import rp from "request-promise-native";
 import PocketEntry from "../classes/PocketEntry.js";
 
 const POCKET_API_URL = "https://getpocket.com/v3";
@@ -56,18 +55,15 @@ class PocketClient {
       access_token: this.accessToken,
       ...retrieveParameters,
     };
-    const requestOptions = {
-      port: 443,
-      uri: `${POCKET_API_URL}/get`,
+    const response = await fetch(`${POCKET_API_URL}/get`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         Accept: "*",
         "X-Accept": "application/json",
       },
-      form: payload,
-    };
-    const response = await rp(requestOptions);
+      body: payload,
+    });
     return parseRetrieveResponse(response);
   }
   async modify() {}

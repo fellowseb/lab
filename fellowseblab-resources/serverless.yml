@@ -10,7 +10,7 @@ service: fellowseblab-resources
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs22.x
   stage: ${opt:stage, 'dev'}
   profile: fellowseb-lab-serverless
   region: eu-west-1
