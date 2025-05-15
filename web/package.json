@@ -8,9 +8,9 @@
     "start": "vite",
     "deploy": "bash deploy.sh dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "stats": "xdg-open build/statistics.html",
     "lint": "eslint --ext .js,.jsx src/",
-    "lint:fix": "eslint --ext .js,.jsx --fix src/"
+    "lint:fix": "eslint --ext .js,.jsx --fix src/",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
