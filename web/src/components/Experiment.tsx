@@ -1,14 +1,8 @@
 import styled, { keyframes } from "styled-components";
 
-import { media } from "../components/MediaQueries.tsx";
-import { A, Ul, H1, P } from "../components/BaseStyledComponents.tsx";
-import type {
-  ExperimentResourceArticleModel,
-  ExperimentResourceBookModel,
-  ExperimentResourceModel,
-  ExperimentResultModel,
-  ExperimentStatusModel,
-} from "./types.ts";
+import { Ul, H1 } from "../components/BaseStyledComponents.tsx";
+import type { ExperimentStatusModel } from "./types.ts";
+import { useCallback } from "react";
 
 const ExperimentArticle = styled.article`
   padding: 0;
@@ -40,12 +34,15 @@ const ExperimentHeaderSection = styled.section<{
 
 const ExperimentHeader = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const ExperimentTitle = styled(H1)<{
   $collapsed: boolean;
 }>`
+  display: flex;
+  align-items: center;
   font-size: 1.2rem;
   font-weight: ${(props) => (props.$collapsed ? "normal" : "bold")};
   margin: 0;
@@ -54,13 +51,19 @@ const ExperimentTitle = styled(H1)<{
 const ExperimentStatus = styled.span<{
   $status: ExperimentStatusModel;
 }>`
-  font-size: 1.2rem;
+  text-align: right;
+  font-size: 0.7rem;
   color: ${(props) =>
     props.$status === "done"
-      ? "green"
+      ? "#91d82d"
       : props.$status === "on-going"
-        ? "yellow"
+        ? "#14c0ff"
         : "grey"};
+`;
+
+const ExperimentDate = styled.span`
+  text-align: left;
+  font-size: 0.7rem;
 `;
 
 const uncollapsebody = keyframes`
@@ -85,7 +88,6 @@ const ExperimentBody = styled.div<{
 }>`
   flex-direction: row;
   flex-wrap: wrap;
-  display: flex;
   overflow-y: hidden;
   animation-duration: 300ms;
   animation-name: ${(props) =>
@@ -93,52 +95,20 @@ const ExperimentBody = styled.div<{
   animation-iteration-count: 1;
   animation-direction: normal;
   ${(props) => (props.$collapsed ? "max-height: 0" : "")};
+  padding: 0 8px 0 8px;
+
+  & h2 {
+    font-size: 1em;
+  }
+
+  & a {
+    color: black;
+    text-decoration: underline;
+  }
 `;
 
 const ExperimentBodyList = styled(Ul)`
   padding: 0 0 0 1em;
-`;
-
-const ExperimentResourcesUl = styled(ExperimentBodyList)`
-  list-style: none;
-`;
-
-const ExperimentResultsUl = styled(ExperimentBodyList)`
-  list-style: none;
-  display: inline-flex;
-  flex-direction: row;
-  vertical-align: bottom;
-`;
-
-const ExperimentContentSection = styled.section`
-  padding: 0;
-  flex: 2 2 100%;
-  ${media.large`
-      flex: 1 50%;
-  `}
-`;
-
-const ExperimentResourcesSection = styled.section`
-  padding: 0;
-  flex: 2 2 100%;
-  ${media.large`
-      flex: 1 50%;
-  `}
-`;
-
-const ExperimentResultsSection = styled.section`
-  display: flex;
-  flex: 2 2 100%;
-  flex-direction: column;
-  padding: 0;
-  margin: 0;
-`;
-
-const ExperimentSectionTitle = styled.p`
-  margin: 0;
-  font-weight: bold;
-  padding: 0.25em 0.5em;
-  background: #b4aa8f;
 `;
 
 const ExperimentSectionIcon = styled.span`
@@ -150,16 +120,31 @@ const ExperimentTagsSection = styled.section`
   padding: 0.25em 0.5em;
 `;
 
+const ExperimentMetadata = styled.div`
+  min-width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
 interface ExperimentProps {
-  num: number;
+  id: string;
+  content: string;
   collapsed?: boolean;
   title?: string;
-  tasks: string[];
-  resources: ExperimentResourceModel[];
-  results: ExperimentResultModel[];
   tags: string[];
-  onToggleCollapse?: () => void;
+  onToggleCollapse?: (experimentId: string) => void;
   status: ExperimentStatusModel;
+  date: string;
+}
+
+function unEscape(htmlStr: string) {
+  htmlStr = htmlStr.replace(/&lt;/g, "<");
+  htmlStr = htmlStr.replace(/&gt;/g, ">");
+  htmlStr = htmlStr.replace(/&quot;/g, '"');
+  htmlStr = htmlStr.replace(/&#39;/g, "'");
+  htmlStr = htmlStr.replace(/&amp;/g, "&");
+  return htmlStr;
 }
 
 /**
@@ -167,57 +152,38 @@ interface ExperimentProps {
  * @param {object} props Properties.
  */
 const Experiment = ({
-  tasks = [],
-  resources = [],
-  results = [],
+  id,
+  content = "",
   tags = [],
   collapsed = true,
-  num = 0,
   title = "[Unknown experiment]",
   onToggleCollapse = undefined,
   status = "planned",
+  date,
 }: ExperimentProps) => {
+  const onExperimentToggleCollapse = useCallback(() => {
+    onToggleCollapse?.(id);
+  }, [id, onToggleCollapse]);
   return (
     <ExperimentArticle>
       <ExperimentHeaderSection
         $collapsed={collapsed}
-        onClick={onToggleCollapse}
+        onClick={onExperimentToggleCollapse}
       >
         <ExperimentHeader>
-          <ExperimentTitle $collapsed={collapsed}>
-            {num} - {title}
-          </ExperimentTitle>
-          <ExperimentStatus $status={status}>
-            {renderExperimentStatus(status)}
-          </ExperimentStatus>
+          <ExperimentMetadata>
+            <ExperimentDate>{date}</ExperimentDate>
+            <ExperimentStatus $status={status}>
+              {renderExperimentStatus(status)}
+            </ExperimentStatus>
+          </ExperimentMetadata>
+          <ExperimentTitle $collapsed={collapsed}>{title}</ExperimentTitle>
         </ExperimentHeader>
       </ExperimentHeaderSection>
-      <ExperimentBody $collapsed={collapsed}>
-        <ExperimentContentSection>
-          <ExperimentSectionTitle>
-            <ExperimentSectionIcon className="fas fa-tasks" title="Tasks" />I
-            used...
-          </ExperimentSectionTitle>
-          {renderExperimentTasks(tasks)}
-        </ExperimentContentSection>
-        <ExperimentResourcesSection>
-          <ExperimentSectionTitle>
-            <ExperimentSectionIcon className="fas fa-link" title="Resources" />
-            Resources
-          </ExperimentSectionTitle>
-          {renderExperimentResources(resources)}
-        </ExperimentResourcesSection>
-        <ExperimentResultsSection>
-          <ExperimentSectionTitle>
-            <ExperimentSectionIcon
-              className="fas fa-chart-line"
-              title="Results"
-            />
-            Results
-          </ExperimentSectionTitle>
-          {renderExperimentResults(results)}
-        </ExperimentResultsSection>
-      </ExperimentBody>
+      <ExperimentBody
+        $collapsed={collapsed}
+        dangerouslySetInnerHTML={{ __html: unEscape(content) }}
+      ></ExperimentBody>
       <ExperimentTagsSection>
         <ExperimentSectionIcon className="fas fa-tags" title="Tags" />
         {renderExperimentTags(tags)}
@@ -225,86 +191,6 @@ const Experiment = ({
     </ExperimentArticle>
   );
 };
-
-const renderExperimentTasks = (tasks: string[]) => (
-  <ExperimentBodyList>
-    {tasks.map((task, i) => (
-      <li key={i}>{task}</li>
-    ))}
-  </ExperimentBodyList>
-);
-
-const renderBook = (book: ExperimentResourceBookModel, index: number) => {
-  const authors = book.authors[0];
-  return (
-    <li key={index} className="experiment-resource experiment-resource-book">
-      <P>
-        <ExperimentSectionIcon className="fas fa-book" title="Book" />
-        <A target="_blank" rel="noopener noreferrer" href={book.href}>
-          {book.title}
-        </A>
-        <br />
-        ed {book.editor}, ISBN{book.isbn}
-        <br />
-        by {authors}
-      </P>
-    </li>
-  );
-};
-
-const renderArticle = (
-  article: ExperimentResourceArticleModel,
-  index: number,
-) => {
-  const authors = article.authors[0];
-  return (
-    <li key={index} className="experiment-resource experiment-resource-article">
-      <P>
-        <ExperimentSectionIcon className="fas fa-bookmark" title="Article" />
-        <A target="_blank" rel="noopener noreferrer" href={article.href}>
-          {article.title}
-        </A>
-        <br />
-        by {authors}
-      </P>
-    </li>
-  );
-};
-
-const renderExperimentResources = (resources: ExperimentResourceModel[]) => (
-  <ExperimentResourcesUl>
-    {resources.map((resource, i) => {
-      switch (resource.type) {
-        case "book":
-          return renderBook(resource, i);
-        case "article":
-          return renderArticle(resource, i);
-      }
-    })}
-  </ExperimentResourcesUl>
-);
-
-const ExperimentResultsItem = styled.li`
-  margin-right: 2px;
-  padding: 0 4px;
-  text-decoration: underline;
-  border-right: 1px solid #ddd;
-  &:last-of-type {
-    border-right: none;
-  }
-`;
-
-const renderExperimentResults = (results: ExperimentResultModel[]) => (
-  <ExperimentResultsUl>
-    {results.map((result, i) => (
-      <ExperimentResultsItem key={i}>
-        <A href={result.href} target="_blank" rel="noopener noreferrer">
-          {result.text}
-        </A>
-      </ExperimentResultsItem>
-    ))}
-  </ExperimentResultsUl>
-);
 
 const ExperimentTagsUl = styled(ExperimentBodyList)`
   list-style: none;

@@ -1,0 +1,15 @@
+---
+permalink: experiments.json
+---
+{
+  {%- for experiment in collections.experiments -%}
+  "{{experiment.data.title | slugify }}": {
+    "slug": "{{experiment.data.title | slugify }}",
+    "status": "{{ experiment.data.status }}",
+    "tags": {{ experiment.data.resourceTags | jsonify }},
+    "title": "{{ experiment.data.title }}",
+    "content": "{{ experiment.content | normalize_whitespace | escape }}",
+    "date": "{{ experiment.data.date }}"
+  }{%- if forloop.last == false -%},{%- endif %}
+  {%- endfor -%}
+}

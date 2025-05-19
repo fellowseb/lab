@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { P, Strong } from "../components/BaseStyledComponents.tsx";
 import Experiment from "../components/Experiment.tsx";
 
-import EXPERIMENTS_DATA from "../../data/experiments.json";
+import EXPERIMENTS_DATA from "../../generated-content/experiments.json";
 import type { ExperimentsModel } from "./types.ts";
 
 const FilterExperimentsContainer = styled.div`
@@ -28,6 +28,11 @@ interface ExperimentsState {
   experiments: ExperimentsModel;
 }
 
+const sortExperimentByDate =
+  (experiments: ExperimentsModel) => (lhs: string, rhs: string) => {
+    return experiments[lhs].date < experiments[rhs].date ? -1 : 1;
+  };
+
 /**
  * Experiment list component
  * State:
@@ -42,8 +47,9 @@ const Experiments = () => {
   const { experiments } = state;
   const onToggleCollapse = useCallback(
     (experimentId: string) => {
-      experiments[experimentId].collapsed =
-        !experiments[experimentId].collapsed;
+      experiments[experimentId].collapsed = !(
+        experiments[experimentId].collapsed ?? true
+      );
       setState({
         experiments,
       });
@@ -53,23 +59,20 @@ const Experiments = () => {
   const renderExperiment = (
     experiments: ExperimentsModel,
     experimentId: string,
-    index: number,
-  ) => {
-    const count = Object.keys(experiments).length;
-    return (
-      <Experiment
-        key={experimentId}
-        num={count - index}
-        onToggleCollapse={onToggleCollapse.bind(null, experimentId)}
-        {...experiments[experimentId]}
-      />
-    );
-  };
+  ) => (
+    <Experiment
+      key={experimentId}
+      onToggleCollapse={onToggleCollapse}
+      id={experimentId}
+      {...experiments[experimentId]}
+    />
+  );
+
   const renderExperimentList = (experiments: ExperimentsModel) => {
     return Object.keys(experiments)
-      .sort()
+      .sort(sortExperimentByDate(experiments))
       .reverse()
-      .map((experimentId, i) => renderExperiment(experiments, experimentId, i));
+      .map((experimentId) => renderExperiment(experiments, experimentId));
   };
   return (
     <div>

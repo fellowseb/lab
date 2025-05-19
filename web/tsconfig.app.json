@@ -25,7 +25,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "types": [
-      "vite-plugin-svg-sprite/typings/react"
+      "vite-plugin-svg-sprite/typings/react",
+      "vite/client"
     ]
   },
   "include": [

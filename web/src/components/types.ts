@@ -29,14 +29,13 @@ export interface ExperimentResultModel {
 export type ExperimentStatusModel = "done" | "on-going" | "planned";
 
 export interface ExperimentModel {
-  id: string;
+  slug: string;
   status: ExperimentStatusModel;
   collapsed: boolean;
   title: string;
-  tasks: string[];
-  resources: ExperimentResourceModel[];
-  results: ExperimentResultModel[];
   tags: string[];
+  content: string;
+  date: string;
 }
 
 export type ExperimentsModel = { [id: string]: ExperimentModel };

@@ -1,4 +1,6 @@
 # NPM
 node_modules
+# Generated files
+generated-content
 # Distributed files
 dist

@@ -6,6 +6,7 @@ import { media } from "../components/MediaQueries.tsx";
 import BooksSvg from "/src/assets/images/svg/books.svg";
 import CodeSvg from "/src/assets/images/svg/code.svg";
 import LabSvg from "/src/assets/images/svg/lab.svg";
+import AboutIconSvg from "/src/assets/images/svg/about.svg";
 
 const PurposeContainer = styled.div`
   display: flex;
@@ -75,7 +76,7 @@ const PurposeFigure = styled.figure`
 `;
 
 const AboutPage = () => (
-  <Page id="page-about" title="About">
+  <Page id="page-about" title="About" icon={<AboutIconSvg />}>
     <PurposeContainer>
       <PurposeSubContainerLeft>
         <PurposeHeader>

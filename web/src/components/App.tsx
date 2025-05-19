@@ -9,6 +9,8 @@ import LabPage from "../components/LabPage.tsx";
 import { media } from "../components/MediaQueries.tsx";
 import type { AppSection } from "./types.ts";
 import Page from "./Page.tsx";
+import TechWatchIconSvg from "/src/assets/images/svg/target.svg";
+import BlogIconSvg from "/src/assets/images/svg/pen.svg";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -221,17 +223,21 @@ const App = () => {
         />
         <Main role="main">
           <PageAnchor id="labo" ref={sectionAnchorMountedLabo}></PageAnchor>
-          <LabPage></LabPage>
+          <LabPage />
           <PageAnchor
             id="brainfuel"
             ref={sectionAnchorMountedBrainfuel}
           ></PageAnchor>
-          <Page id="page-brainfuel" title="Tech Watch">
+          <Page
+            id="page-brainfuel"
+            title="Tech Watch"
+            icon={<TechWatchIconSvg />}
+          >
             Back soon
           </Page>
           <PageAnchor id="blog" ref={sectionAnchorMountedBlog}></PageAnchor>
-          <Page id="page-blog" title="Blog">
-            Soon !
+          <Page id="page-blog" title="Blog" icon={<BlogIconSvg />}>
+            Soon !<br />
           </Page>
           {
             // <ResourcesPage
