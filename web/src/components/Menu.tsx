@@ -1,13 +1,16 @@
+import type { SyntheticEvent } from "react";
 import compose from "ramda/es/compose";
 import prop from "ramda/es/prop";
 import partial from "ramda/es/partial";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import domUtils from "../scripts/domutils.ts";
 import { media } from "../components/MediaQueries.tsx";
 import { Ul } from "../components/BaseStyledComponents.tsx";
 import type { AppSection } from "./types.ts";
-import type { SyntheticEvent } from "react";
+import GitHubSvg from "/src/assets/images/svg/github.svg";
+import LinkedInSvg from "/src/assets/images/svg/linkedin.svg";
+import UmbrellaSVG from "/src/assets/images/svg/umbrella.svg";
 
 const MastHead = styled.header`
   display: flex;
@@ -46,7 +49,7 @@ const Logo = styled.div`
   margin-left: -1em;
 `;
 
-const UmbrellaSVG = styled.svg`
+const StyledUmbrellaSVG = styled(UmbrellaSVG)`
   fill: #edc711;
   display: inline-block;
   width: 1em;
@@ -166,7 +169,7 @@ const NavigationLinkGitHub = styled(NavigationLink)`
 
 const NavigationLinkLinkedIn = NavigationLinkGitHub;
 
-const NavLinkSVG = styled.svg`
+const NavLinkSVGCss = css`
   fill: #edc711;
   width: 22px;
   height: 21px;
@@ -174,6 +177,14 @@ const NavLinkSVG = styled.svg`
     fill: #5c5c5c;
     cursor: pointer;
   }
+`;
+
+const StyledGitHubSvg = styled(GitHubSvg)`
+  ${NavLinkSVGCss}
+`;
+
+const StyledLinkedInSvg = styled(LinkedInSvg)`
+  ${NavLinkSVGCss}
 `;
 
 interface MenuProps {
@@ -241,9 +252,7 @@ const Menu = ({
       </MenuButton>
       <MenuContainer>
         <Logo>
-          <UmbrellaSVG>
-            <use href="#umbrella" />
-          </UmbrellaSVG>
+          <StyledUmbrellaSVG />
           fellow<Seb>seb</Seb>
         </Logo>
         <Navigation
@@ -281,9 +290,7 @@ const Menu = ({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <NavLinkSVG>
-                  <use href="#github" />
-                </NavLinkSVG>
+                <StyledGitHubSvg />
               </NavigationLinkGitHub>
             </NavigationListItem>
             <NavigationListItem>
@@ -293,9 +300,7 @@ const Menu = ({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <NavLinkSVG>
-                  <use href="#linkedin" />
-                </NavLinkSVG>
+                <StyledLinkedInSvg />
               </NavigationLinkLinkedIn>
             </NavigationListItem>
           </NavigationList>
