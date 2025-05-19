@@ -57,7 +57,7 @@ const ResourcesPage = ({
   filteredTag,
 }: ResourcesPageProps) => {
   return (
-    <Page>
+    <Page title="Tech Watch" id="brainfuel-page">
       <ResourcesContainer>
         <ResourcesFiltersContainer>
           <ResourceFilters
