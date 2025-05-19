@@ -4,10 +4,11 @@ import styled, { createGlobalStyle } from "styled-components";
 
 import Menu from "../components/Menu.tsx";
 import AboutPage from "../components/AboutPage.tsx";
-import ResourcesPage from "../components/ResourcesPage.tsx";
+// import ResourcesPage from "../components/ResourcesPage.tsx";
 import LabPage from "../components/LabPage.tsx";
 import { media } from "../components/MediaQueries.tsx";
 import type { AppSection } from "./types.ts";
+import Page from "./Page.tsx";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -54,10 +55,6 @@ const StyledApp = styled.div`
     `}
 `;
 
-interface AppProps {
-  apiUrl: string;
-}
-
 interface AppState {
   menuIsOpen: boolean;
   currentSection: AppSection;
@@ -82,16 +79,13 @@ interface SectionAnchorData {
  * - currentSection {string}
  * - filteredTag {string}
  */
-const App = ({ apiUrl }: AppProps) => {
+const App = () => {
   const [state, setState] = useState<AppState>({
     menuIsOpen: false,
     currentSection: "about",
     sectionAnchors: {},
     sectionLinks: {},
   });
-  //
-  // Private callbacks
-  //
   const sectionAnchorMounted = useCallback(
     (section: AppSection, elem: HTMLElement | null) => {
       if (elem) {
@@ -113,12 +107,12 @@ const App = ({ apiUrl }: AppProps) => {
     },
     [state.sectionLinks],
   );
-  const filterEntries = useCallback((tag: string) => {
-    setState((prevState) => ({
-      ...prevState,
-      filteredTag: tag,
-    }));
-  }, []);
+  // const filterEntries = useCallback((tag: string) => {
+  //   setState((prevState) => ({
+  //     ...prevState,
+  //     filteredTag: tag,
+  //   }));
+  // }, []);
   const openMenu = useCallback(
     (open: boolean) => {
       setState({
@@ -208,7 +202,7 @@ const App = ({ apiUrl }: AppProps) => {
       updateCurrentSection();
     }
   }, [state, openMenu]);
-  const { menuIsOpen, currentSection, filteredTag } = state;
+  const { menuIsOpen, currentSection } = state;
   return (
     <React.StrictMode>
       <StyledApp>
@@ -227,11 +221,14 @@ const App = ({ apiUrl }: AppProps) => {
             id="brainfuel"
             ref={sectionAnchorMountedBrainfuel}
           ></PageAnchor>
-          <ResourcesPage
-            apiUrl={apiUrl}
-            filterEntries={filterEntries}
-            filteredTag={filteredTag}
-          />
+          <Page>Back soon</Page>
+          {
+            // <ResourcesPage
+            //   apiUrl={apiUrl}
+            //   filterEntries={filterEntries}
+            //   filteredTag={filteredTag}
+            // />
+          }
           <PageAnchor id="labo" ref={sectionAnchorMountedLabo}></PageAnchor>
           <LabPage></LabPage>
         </Main>

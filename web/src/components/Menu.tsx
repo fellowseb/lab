@@ -11,6 +11,8 @@ import type { AppSection } from "./types.ts";
 import GitHubSvg from "/src/assets/images/svg/github.svg";
 import LinkedInSvg from "/src/assets/images/svg/linkedin.svg";
 import UmbrellaSVG from "/src/assets/images/svg/umbrella.svg";
+import MenuSVG from "/src/assets/images/svg/menu.svg";
+import MenuCloseSVG from "/src/assets/images/svg/menuclose.svg";
 
 const MastHead = styled.header`
   display: flex;
@@ -76,11 +78,9 @@ const MenuButton = styled.button`
   `}
 `;
 
-const MenuButtonSVG = styled.svg.attrs<{
+const MenuButtonSVGCss = css<{
   $show: boolean;
-}>((props) => ({
-  visibility: props.$show ? "visible" : "hidden",
-}))`
+}>`
   fill: #c1b79a;
   width: ${(props) => (props.$show ? "100%" : "0")};
   height: ${(props) => (props.$show ? "100%" : "0")};
@@ -88,6 +88,22 @@ const MenuButtonSVG = styled.svg.attrs<{
     fill: #5c5c5c;
     cursor: pointer;
   }
+`;
+
+const StyledMenuButtonSVG = styled(MenuSVG).attrs<{
+  $show: boolean;
+}>((props) => ({
+  visibility: props.$show ? "visible" : "hidden",
+}))`
+  ${MenuButtonSVGCss}
+`;
+
+const StyledMenuCloseButtonSVG = styled(MenuCloseSVG).attrs<{
+  $show: boolean;
+}>((props) => ({
+  visibility: props.$show ? "visible" : "hidden",
+}))`
+  ${MenuButtonSVGCss}
 `;
 
 const slideFromLeft = keyframes`
@@ -243,12 +259,8 @@ const Menu = ({
   return (
     <MastHead role="banner">
       <MenuButton onClick={toggleMenu}>
-        <MenuButtonSVG $show={!menuIsOpen}>
-          <use href="#menu" />
-        </MenuButtonSVG>
-        <MenuButtonSVG $show={menuIsOpen}>
-          <use href="#menuclose" />
-        </MenuButtonSVG>
+        <StyledMenuButtonSVG $show={!menuIsOpen} />
+        <StyledMenuCloseButtonSVG $show={menuIsOpen} />
       </MenuButton>
       <MenuContainer>
         <Logo>

@@ -2,8 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./components/App.tsx";
 
-const apiUrl = import.meta.env.VITE_FELLOWSEB_LAB_APIURL;
-
 const containerElem = document.getElementById("app-container");
 
 if (!containerElem) {
@@ -13,6 +11,6 @@ if (!containerElem) {
 const root = createRoot(containerElem);
 root.render(
   <StrictMode>
-    <App apiUrl={apiUrl} />
+    <App />
   </StrictMode>,
 );
