@@ -86,13 +86,14 @@ const App = () => {
     sectionAnchors: {},
     sectionLinks: {},
   });
+  const { menuIsOpen, currentSection, sectionAnchors, sectionLinks } = state;
   const sectionAnchorMounted = useCallback(
     (section: AppSection, elem: HTMLElement | null) => {
       if (elem) {
-        state.sectionAnchors[section] = elem;
+        sectionAnchors[section] = elem;
       }
     },
-    [state.sectionAnchors],
+    [sectionAnchors],
   );
   const sectionAnchorMountedAbout = partial(sectionAnchorMounted, ["about"]);
   const sectionAnchorMountedBrainfuel = partial(sectionAnchorMounted, [
@@ -103,10 +104,10 @@ const App = () => {
   const sectionNavLinkMounted = useCallback(
     (section: AppSection, elem: HTMLElement | null) => {
       if (elem) {
-        state.sectionLinks[section] = elem;
+        sectionLinks[section] = elem;
       }
     },
-    [state.sectionLinks],
+    [sectionLinks],
   );
   // const filterEntries = useCallback((tag: string) => {
   //   setState((prevState) => ({
@@ -116,40 +117,40 @@ const App = () => {
   // }, []);
   const openMenu = useCallback(
     (open: boolean) => {
-      setState({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         menuIsOpen: !!open,
-      });
+      }));
     },
-    [state, setState],
+    [setState],
   );
   const changeSection = useCallback(
     (newSection: AppSection) => {
-      const anchorData = state.sectionAnchors[newSection];
+      const anchorData = sectionAnchors[newSection];
       if (!anchorData) {
         return;
       }
-      setState({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         currentSection: newSection,
-      });
+      }));
       pushWindowState(newSection);
       scrollTo(anchorData);
       openMenu(false);
     },
-    [state, openMenu],
+    [sectionAnchors, openMenu, setState],
   );
 
   useEffect(() => {
     const updateCurrentSection = () => {
-      const sectionArr = Object.keys(state.sectionAnchors) as AppSection[];
+      const sectionArr = Object.keys(sectionAnchors) as AppSection[];
       const sortedAnchorsData = sectionArr
         .map((section: AppSection, i: number) => {
-          const anchorElem = state.sectionAnchors[section];
+          const anchorElem = sectionAnchors[section];
           if (!anchorElem) return undefined;
           const pageBottom =
             i + 1 < sectionArr.length
-              ? (state.sectionAnchors[sectionArr[i + 1]]?.offsetTop ??
+              ? (sectionAnchors[sectionArr[i + 1]]?.offsetTop ??
                 document.documentElement.scrollHeight)
               : document.documentElement.scrollHeight;
           const visibleBottom = Math.min(
@@ -175,23 +176,27 @@ const App = () => {
       if (
         mostVisiblePage &&
         mostVisiblePage.section &&
-        state.currentSection !== mostVisiblePage.section
+        currentSection !== mostVisiblePage.section
       ) {
-        setState({
-          ...state,
+        setState((prevState) => ({
+          ...prevState,
           currentSection: mostVisiblePage.section,
-        });
+        }));
       }
     };
-    const onWindowResize = () => openMenu(false);
+    const onWindowResize = () => {
+      if (menuIsOpen) {
+        openMenu(false);
+      }
+    };
     window.addEventListener("resize", onWindowResize);
     const onPopState = () => {
       const currentState = window.history.state;
       if (currentState.currentSection) {
-        setState({
-          ...state,
+        setState((prevState) => ({
+          ...prevState,
           currentSection: currentState.currentSection,
-        });
+        }));
       }
     };
     window.addEventListener("popstate", onPopState);
@@ -202,8 +207,7 @@ const App = () => {
     if (window.pageYOffset === 0) {
       updateCurrentSection();
     }
-  }, [state, openMenu]);
-  const { menuIsOpen, currentSection } = state;
+  }, [currentSection, sectionAnchors, openMenu, menuIsOpen, setState]);
   return (
     <React.StrictMode>
       <StyledApp>
