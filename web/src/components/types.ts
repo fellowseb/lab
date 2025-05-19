@@ -1,4 +1,4 @@
-export type AppSection = "about" | "brainfuel" | "labo";
+export type AppSection = "about" | "brainfuel" | "labo" | "blog";
 
 export interface ExperimentResourceBookModel {
   type: "book";

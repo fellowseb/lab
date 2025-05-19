@@ -214,7 +214,7 @@ interface MenuProps {
   ) => void;
 }
 
-const APP_SECTIONS: AppSection[] = ["about", "brainfuel", "labo"];
+const APP_SECTIONS: AppSection[] = ["about", "brainfuel", "labo", "blog"];
 
 /**
  * Presentational component displaying the top menu.
@@ -285,6 +285,13 @@ const Menu = ({
               label="Tech Watch"
               sectionAnchor="brainfuel"
               isCurrent={isCurrentSection("brainfuel")}
+              onNavItemClick={onNavItemClick}
+              sectionNavLinkMounted={sectionNavLinkMounted}
+            />
+            <NavigationListItemSection
+              label="Blog"
+              sectionAnchor="blog"
+              isCurrent={isCurrentSection("blog")}
               onNavItemClick={onNavItemClick}
               sectionNavLinkMounted={sectionNavLinkMounted}
             />

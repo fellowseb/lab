@@ -98,6 +98,7 @@ const App = () => {
   const sectionAnchorMountedBrainfuel = partial(sectionAnchorMounted, [
     "brainfuel",
   ]);
+  const sectionAnchorMountedBlog = partial(sectionAnchorMounted, ["blog"]);
   const sectionAnchorMountedLabo = partial(sectionAnchorMounted, ["labo"]);
   const sectionNavLinkMounted = useCallback(
     (section: AppSection, elem: HTMLElement | null) => {
@@ -223,6 +224,10 @@ const App = () => {
           ></PageAnchor>
           <Page id="page-brainfuel" title="Tech Watch">
             Back soon
+          </Page>
+          <PageAnchor id="blog" ref={sectionAnchorMountedBlog}></PageAnchor>
+          <Page id="page-blog" title="Blog">
+            Soon !
           </Page>
           {
             // <ResourcesPage
