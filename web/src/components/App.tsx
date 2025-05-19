@@ -215,13 +215,15 @@ const App = () => {
           sectionNavLinkMounted={sectionNavLinkMounted}
         />
         <Main role="main">
-          <PageAnchor id="about" ref={sectionAnchorMountedAbout}></PageAnchor>
-          <AboutPage></AboutPage>
+          <PageAnchor id="labo" ref={sectionAnchorMountedLabo}></PageAnchor>
+          <LabPage></LabPage>
           <PageAnchor
             id="brainfuel"
             ref={sectionAnchorMountedBrainfuel}
           ></PageAnchor>
-          <Page title="Tech Watch">Back soon</Page>
+          <Page id="page-brainfuel" title="Tech Watch">
+            Back soon
+          </Page>
           {
             // <ResourcesPage
             //   apiUrl={apiUrl}
@@ -229,8 +231,8 @@ const App = () => {
             //   filteredTag={filteredTag}
             // />
           }
-          <PageAnchor id="labo" ref={sectionAnchorMountedLabo}></PageAnchor>
-          <LabPage></LabPage>
+          <PageAnchor id="about" ref={sectionAnchorMountedAbout}></PageAnchor>
+          <AboutPage></AboutPage>
         </Main>
       </StyledApp>
     </React.StrictMode>

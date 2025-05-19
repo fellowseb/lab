@@ -275,23 +275,23 @@ const Menu = ({
         >
           <NavigationList>
             <NavigationListItemSection
-              label="About"
-              sectionAnchor="about"
-              isCurrent={isCurrentSection("about")}
+              label="Code Lab"
+              sectionAnchor="labo"
+              isCurrent={isCurrentSection("labo")}
               onNavItemClick={onNavItemClick}
               sectionNavLinkMounted={sectionNavLinkMounted}
             />
             <NavigationListItemSection
-              label="Resources"
+              label="Tech Watch"
               sectionAnchor="brainfuel"
               isCurrent={isCurrentSection("brainfuel")}
               onNavItemClick={onNavItemClick}
               sectionNavLinkMounted={sectionNavLinkMounted}
             />
             <NavigationListItemSection
-              label="Experiments"
-              sectionAnchor="labo"
-              isCurrent={isCurrentSection("labo")}
+              label="About"
+              sectionAnchor="about"
+              isCurrent={isCurrentSection("about")}
               onNavItemClick={onNavItemClick}
               sectionNavLinkMounted={sectionNavLinkMounted}
             />
