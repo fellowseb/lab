@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { media } from "../components/MediaQueries.jsx";
+import { media } from "../components/MediaQueries.tsx";
 
 const Page = styled.section`
   border-bottom: 1px solid #c1b79a;

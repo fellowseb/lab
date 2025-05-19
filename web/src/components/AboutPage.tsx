@@ -1,9 +1,8 @@
-import React from "react";
 import styled, { css } from "styled-components";
 
-import Page from "../components/Page.jsx";
-import { P, Strong } from "../components/BaseStyledComponents.jsx";
-import { media } from "../components/MediaQueries.jsx";
+import Page from "../components/Page.tsx";
+import { P, Strong } from "../components/BaseStyledComponents.tsx";
+import { media } from "../components/MediaQueries.tsx";
 import BooksSvg from "/src/assets/images/svg/books.svg";
 import CodeSvg from "/src/assets/images/svg/code.svg";
 import LabSvg from "/src/assets/images/svg/lab.svg";

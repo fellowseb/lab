@@ -1,15 +1,17 @@
-"use strict";
+import BookCarousel from "../components/BookCarousel.tsx";
+import ResourceFeed from "../components/ResourceFeed.tsx";
 
-import React from "react";
-import BookCarousel from "../components/BookCarousel.jsx";
-import ResourceFeed from "../components/ResourceFeed.jsx";
+interface BookFeedProps {
+  apiUrl: string;
+  filteredTag?: string;
+  count: number;
+}
 
 /**
  * Component displaying Fellowseb's lab books in a carousel.
  * Is basically a ResourceFeed with a BookCarousel component for the presentation.
- * @param {object} props Properties. See ResourceFeed.
  */
-const BookFeed = (props) => (
+const BookFeed = (props: BookFeedProps) => (
   <ResourceFeed
     {...props}
     apiEndpoint="/books"

@@ -1,13 +1,11 @@
-import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
-import { media } from "../components/MediaQueries.jsx";
-import Page from "../components/Page.jsx";
-import ResourceFilters from "../components/ResourceFilters.jsx";
-import ArticleFeed from "../components/ArticleFeed.jsx";
-import TalkFeed from "../components/TalkFeed.jsx";
-import BookFeed from "../components/BookFeed.jsx";
+import { media } from "../components/MediaQueries.tsx";
+import Page from "../components/Page.tsx";
+import ResourceFilters from "../components/ResourceFilters.tsx";
+import ArticleFeed from "../components/ArticleFeed.tsx";
+import TalkFeed from "../components/TalkFeed.tsx";
+import BookFeed from "../components/BookFeed.tsx";
 
 const ResourcesContainer = styled.div`
   display: flex;
@@ -47,7 +45,17 @@ const ResourcesBooksContainer = styled.div`
   flex: 1 1 100%;
 `;
 
-const ResourcesPage = ({ apiUrl, filterEntries, filteredTag }) => {
+interface ResourcesPageProps {
+  apiUrl: string;
+  filterEntries: (tag: string) => void;
+  filteredTag?: string;
+}
+
+const ResourcesPage = ({
+  apiUrl,
+  filterEntries,
+  filteredTag,
+}: ResourcesPageProps) => {
   return (
     <Page>
       <ResourcesContainer>
@@ -70,12 +78,6 @@ const ResourcesPage = ({ apiUrl, filterEntries, filteredTag }) => {
       </ResourcesContainer>
     </Page>
   );
-};
-
-ResourcesPage.propTypes = {
-  apiUrl: PropTypes.string,
-  filterEntries: PropTypes.func,
-  filteredTag: PropTypes.string,
 };
 
 export default ResourcesPage;

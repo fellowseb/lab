@@ -1,9 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import styled, { keyframes } from "styled-components";
 
-import { media } from "../components/MediaQueries.jsx";
-import { A, Ul, H1, P } from "../components/BaseStyledComponents.jsx";
+import { media } from "../components/MediaQueries.tsx";
+import { A, Ul, H1, P } from "../components/BaseStyledComponents.tsx";
+import type {
+  ExperimentResourceArticleModel,
+  ExperimentResourceBookModel,
+  ExperimentResourceModel,
+  ExperimentResultModel,
+  ExperimentStatusModel,
+} from "./types.ts";
 
 const ExperimentArticle = styled.article`
   padding: 0;
@@ -19,15 +24,15 @@ const ExperimentArticle = styled.article`
   }
 `;
 
-const ExperimentHeaderSection = styled.section.attrs((props) => ({
-  collapsed: props.collapsed || false,
-}))`
+const ExperimentHeaderSection = styled.section<{
+  $collapsed: boolean;
+}>`
   padding: 2px 12px;
   cursor: pointer;
   background: #333;
   border-radius: 10px 10px 0 0;
   line-height: 2;
-  color: ${(props) => (props.collapsed ? "#c1b79a" : "#ddd")};
+  color: ${(props) => (props.$collapsed ? "#c1b79a" : "#ddd")};
   &:hover {
     color: #ddd;
   }
@@ -38,22 +43,22 @@ const ExperimentHeader = styled.header`
   justify-content: space-between;
 `;
 
-const ExperimentTitle = styled(H1).attrs((props) => ({
-  collapsed: props.collapsed || false,
-}))`
+const ExperimentTitle = styled(H1)<{
+  $collapsed: boolean;
+}>`
   font-size: 1.2rem;
-  font-weight: ${(props) => (props.collapsed ? "normal" : "bold")};
+  font-weight: ${(props) => (props.$collapsed ? "normal" : "bold")};
   margin: 0;
 `;
 
-const ExperimentStatus = styled.span.attrs((props) => ({
-  status: props.status || "planned",
-}))`
+const ExperimentStatus = styled.span<{
+  $status: ExperimentStatusModel;
+}>`
   font-size: 1.2rem;
   color: ${(props) =>
-    props.status === "done"
+    props.$status === "done"
       ? "green"
-      : props.status === "on-going"
+      : props.$status === "on-going"
         ? "yellow"
         : "grey"};
 `;
@@ -75,19 +80,19 @@ const collapsebody = keyframes`
   }
 `;
 
-const ExperimentBody = styled.div.attrs((props) => ({
-  collapsed: props.collapsed || false,
-}))`
+const ExperimentBody = styled.div<{
+  $collapsed: boolean;
+}>`
   flex-direction: row;
   flex-wrap: wrap;
   display: flex;
   overflow-y: hidden;
   animation-duration: 300ms;
   animation-name: ${(props) =>
-    props.collapsed ? collapsebody : uncollapsebody};
+    props.$collapsed ? collapsebody : uncollapsebody};
   animation-iteration-count: 1;
   animation-direction: normal;
-  ${(props) => (props.collapsed ? "max-height: 0" : "")};
+  ${(props) => (props.$collapsed ? "max-height: 0" : "")};
 `;
 
 const ExperimentBodyList = styled(Ul)`
@@ -145,6 +150,18 @@ const ExperimentTagsSection = styled.section`
   padding: 0.25em 0.5em;
 `;
 
+interface ExperimentProps {
+  num: number;
+  collapsed?: boolean;
+  title?: string;
+  tasks: string[];
+  resources: ExperimentResourceModel[];
+  results: ExperimentResultModel[];
+  tags: string[];
+  onToggleCollapse?: () => void;
+  status: ExperimentStatusModel;
+}
+
 /**
  * Stateless component displaying a Fellowseb'lab Experiment.
  * @param {object} props Properties.
@@ -157,22 +174,25 @@ const Experiment = ({
   collapsed = true,
   num = 0,
   title = "[Unknown experiment]",
-  onToggleCollapse = null,
+  onToggleCollapse = undefined,
   status = "planned",
-}) => {
+}: ExperimentProps) => {
   return (
     <ExperimentArticle>
-      <ExperimentHeaderSection collapsed={collapsed} onClick={onToggleCollapse}>
+      <ExperimentHeaderSection
+        $collapsed={collapsed}
+        onClick={onToggleCollapse}
+      >
         <ExperimentHeader>
-          <ExperimentTitle collapsed={collapsed}>
+          <ExperimentTitle $collapsed={collapsed}>
             {num} - {title}
           </ExperimentTitle>
-          <ExperimentStatus status={status}>
+          <ExperimentStatus $status={status}>
             {renderExperimentStatus(status)}
           </ExperimentStatus>
         </ExperimentHeader>
       </ExperimentHeaderSection>
-      <ExperimentBody collapsed={collapsed}>
+      <ExperimentBody $collapsed={collapsed}>
         <ExperimentContentSection>
           <ExperimentSectionTitle>
             <ExperimentSectionIcon className="fas fa-tasks" title="Tasks" />I
@@ -206,19 +226,7 @@ const Experiment = ({
   );
 };
 
-Experiment.propTypes = {
-  num: PropTypes.number.isRequired,
-  collapsed: PropTypes.bool,
-  title: PropTypes.string,
-  tasks: PropTypes.array,
-  resources: PropTypes.array,
-  results: PropTypes.array,
-  tags: PropTypes.array,
-  onToggleCollapse: PropTypes.func,
-  status: PropTypes.string,
-};
-
-const renderExperimentTasks = (tasks) => (
+const renderExperimentTasks = (tasks: string[]) => (
   <ExperimentBodyList>
     {tasks.map((task, i) => (
       <li key={i}>{task}</li>
@@ -226,7 +234,7 @@ const renderExperimentTasks = (tasks) => (
   </ExperimentBodyList>
 );
 
-const renderBook = (book, index) => {
+const renderBook = (book: ExperimentResourceBookModel, index: number) => {
   const authors = book.authors[0];
   return (
     <li key={index} className="experiment-resource experiment-resource-book">
@@ -244,7 +252,10 @@ const renderBook = (book, index) => {
   );
 };
 
-const renderArticle = (article, index) => {
+const renderArticle = (
+  article: ExperimentResourceArticleModel,
+  index: number,
+) => {
   const authors = article.authors[0];
   return (
     <li key={index} className="experiment-resource experiment-resource-article">
@@ -260,7 +271,7 @@ const renderArticle = (article, index) => {
   );
 };
 
-const renderExperimentResources = (resources) => (
+const renderExperimentResources = (resources: ExperimentResourceModel[]) => (
   <ExperimentResourcesUl>
     {resources.map((resource, i) => {
       switch (resource.type) {
@@ -283,7 +294,7 @@ const ExperimentResultsItem = styled.li`
   }
 `;
 
-const renderExperimentResults = (results) => (
+const renderExperimentResults = (results: ExperimentResultModel[]) => (
   <ExperimentResultsUl>
     {results.map((result, i) => (
       <ExperimentResultsItem key={i}>
@@ -315,7 +326,7 @@ const ExperimentTagsItem = styled.li`
   font-weight: bold;
 `;
 
-const renderExperimentTags = (tags) => (
+const renderExperimentTags = (tags: string[]) => (
   <ExperimentTagsUl>
     {tags.map((tag, i) => (
       <ExperimentTagsItem key={i}>{tag}</ExperimentTagsItem>
@@ -323,11 +334,11 @@ const renderExperimentTags = (tags) => (
   </ExperimentTagsUl>
 );
 
-const renderExperimentStatus = (status) => {
+const renderExperimentStatus = (status: ExperimentStatusModel) => {
   switch (status) {
     case "done":
       return "DONE";
-    case "ongoing":
+    case "on-going":
       return "ON-GOING";
     case "planned":
       return "PLANNED";

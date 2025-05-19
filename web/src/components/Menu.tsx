@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
 import compose from "ramda/es/compose";
 import prop from "ramda/es/prop";
 import partial from "ramda/es/partial";
 import styled, { keyframes } from "styled-components";
 
-import domUtils from "../scripts/domutils";
-import { media } from "../components/MediaQueries.jsx";
-import { Ul } from "../components/BaseStyledComponents.jsx";
+import domUtils from "../scripts/domutils.ts";
+import { media } from "../components/MediaQueries.tsx";
+import { Ul } from "../components/BaseStyledComponents.tsx";
+import type { AppSection } from "./types.ts";
+import type { SyntheticEvent } from "react";
 
 const MastHead = styled.header`
   display: flex;
@@ -73,13 +73,14 @@ const MenuButton = styled.button`
   `}
 `;
 
-const MenuButtonSVG = styled.svg.attrs((props) => ({
-  visible: props.show ? "visible" : "hidden",
+const MenuButtonSVG = styled.svg.attrs<{
+  $show: boolean;
+}>((props) => ({
+  visibility: props.$show ? "visible" : "hidden",
 }))`
   fill: #c1b79a;
-  visibility: ${(props) => props.visible};
-  width: ${(props) => (props.visible === "visible" ? "100%" : "0")};
-  height: ${(props) => (props.visible === "visible" ? "100%" : "0")};
+  width: ${(props) => (props.$show ? "100%" : "0")};
+  height: ${(props) => (props.$show ? "100%" : "0")};
   &:hover {
     fill: #5c5c5c;
     cursor: pointer;
@@ -95,10 +96,9 @@ const slideFromLeft = keyframes`
   }
 `;
 
-const Navigation = styled.nav.attrs((props) => ({
-  visible: props.open ? "visible" : "hidden",
-  animationName: props.open ? slideFromLeft : "",
-}))`
+const Navigation = styled.nav<{
+  $open: boolean;
+}>`
   z-index: 99999999999;
   position: fixed;
   top: 2.4em;
@@ -117,9 +117,9 @@ const Navigation = styled.nav.attrs((props) => ({
     visibility: visible;
     padding-top: 0;
   `}
-  visibility: ${(props) => props.visible};
+  visibility: ${(props) => (props.$open ? "visible" : "hidden")};
+  animation-name: ${(props) => (props.$open ? slideFromLeft : "")};
   animation-duration: 300ms;
-  animation-name: ${(props) => props.animationName};
   animation-iteration-count: 1;
   animation-direction: normal;
 `;
@@ -143,13 +143,15 @@ const NavigationListItem = styled.li`
   padding: 0;
 `;
 
-const NavigationLink = styled.a.attrs((props) => ({
-  current: props.current || false,
+const NavigationLink = styled.a.attrs<{
+  $current: boolean;
+}>((props) => ({
+  $current: props.$current || false,
 }))`
   text-decoration: none;
   margin: 0.25em;
   padding: 0.25em 0.5em;
-  color: ${(props) => (props.current ? "#ddd" : "#c1b79a")};
+  color: ${(props) => (props.$current ? "#ddd" : "#c1b79a")};
   display: inline-block;
   width: 93%;
   box-sizing: border-box;
@@ -174,6 +176,19 @@ const NavLinkSVG = styled.svg`
   }
 `;
 
+interface MenuProps {
+  menuIsOpen: boolean;
+  openMenu: (isOpen: boolean) => void;
+  currentSection: string;
+  changeSection: (newSection: AppSection) => void;
+  sectionNavLinkMounted: (
+    section: AppSection,
+    elem: HTMLElement | null,
+  ) => void;
+}
+
+const APP_SECTIONS: AppSection[] = ["about", "brainfuel", "labo"];
+
 /**
  * Presentational component displaying the top menu.
  * Becomes a closable overlay when viewing mobile version.
@@ -181,31 +196,46 @@ const NavLinkSVG = styled.svg`
  */
 const Menu = ({
   menuIsOpen = false,
-  openMenu = (v) => v,
-  currentSection = "",
-  changeSection = (v) => v,
-  sectionNavLinkMounted = (v) => v,
-}) => {
-  const changeMenuState = (newMenuState) =>
+  openMenu = () => {},
+  currentSection = "about",
+  changeSection = (newSection: AppSection) => newSection,
+  sectionNavLinkMounted = () => {},
+}: MenuProps) => {
+  const changeMenuState = (newMenuState: boolean) =>
     compose(partial(openMenu, [newMenuState]), domUtils.eventStopPropagation);
   const closeMenu = changeMenuState(false);
   const toggleMenu = changeMenuState(!menuIsOpen);
-  const extractSection = compose(prop("section"), prop("dataset"));
+  const checkSection = (maybeSection: unknown): AppSection => {
+    if (typeof maybeSection !== "string") {
+      throw new Error("Invalid app section type: " + typeof maybeSection);
+    }
+    if (!APP_SECTIONS.includes(maybeSection as AppSection)) {
+      throw new Error("Invalid app section: " + maybeSection);
+    }
+    return maybeSection as AppSection;
+  };
+  const extractSection = (data: { section?: string }): unknown =>
+    prop("section")(data);
+  const extractDataSet = (
+    obj: EventTarget & HTMLElement,
+  ): { section?: string } => prop("dataset")(obj);
   const onNavItemClick = compose(
     changeSection,
+    checkSection,
     extractSection,
+    extractDataSet,
     domUtils.eventCurrentTarget,
     domUtils.eventStopPropagation,
     domUtils.eventPreventDefault,
   );
-  const isCurrentSection = (section) => section === currentSection;
+  const isCurrentSection = (section: AppSection) => section === currentSection;
   return (
     <MastHead role="banner">
       <MenuButton onClick={toggleMenu}>
-        <MenuButtonSVG show={!menuIsOpen}>
+        <MenuButtonSVG $show={!menuIsOpen}>
           <use href="#menu" />
         </MenuButtonSVG>
-        <MenuButtonSVG show={menuIsOpen}>
+        <MenuButtonSVG $show={menuIsOpen}>
           <use href="#menuclose" />
         </MenuButtonSVG>
       </MenuButton>
@@ -218,7 +248,7 @@ const Menu = ({
         </Logo>
         <Navigation
           role="navigation"
-          open={menuIsOpen}
+          $open={menuIsOpen}
           onClick={closeMenu}
           onTouchMove={domUtils.eventPreventDefault}
         >
@@ -246,6 +276,7 @@ const Menu = ({
             />
             <NavigationListItem>
               <NavigationLinkGitHub
+                $current={false}
                 href="https://github.com/fellowseb"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -257,6 +288,7 @@ const Menu = ({
             </NavigationListItem>
             <NavigationListItem>
               <NavigationLinkLinkedIn
+                $current={false}
                 href="https://www.linkedin.com/in/swauquier"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -273,43 +305,38 @@ const Menu = ({
   );
 };
 
-Menu.propTypes = {
-  menuIsOpen: PropTypes.bool,
-  openMenu: PropTypes.func,
-  currentSection: PropTypes.string,
-  changeSection: PropTypes.func,
-  sectionNavLinkMounted: PropTypes.func,
-};
+interface NavigationListItemSectionProps {
+  label: string;
+  sectionAnchor: AppSection;
+  onNavItemClick: (target: SyntheticEvent<HTMLElement>) => void;
+  isCurrent: boolean;
+  sectionNavLinkMounted: (
+    section: AppSection,
+    elem: HTMLElement | null,
+  ) => void;
+}
 
 const NavigationListItemSection = ({
   label = "[Missing label]",
-  sectionAnchor = "",
-  onNavItemClick = (v) => v,
+  sectionAnchor = "about",
+  onNavItemClick,
   isCurrent = false,
-  sectionNavLinkMounted = (v) => v,
-}) => {
+  sectionNavLinkMounted = () => {},
+}: NavigationListItemSectionProps) => {
   const href = "#" + sectionAnchor;
   return (
     <NavigationListItem>
       <NavigationLink
-        current={isCurrent}
+        $current={isCurrent}
         href={href}
         data-section={sectionAnchor}
         onClick={onNavItemClick}
-        ref={partial(sectionNavLinkMounted, sectionAnchor)}
+        ref={partial(sectionNavLinkMounted, [sectionAnchor])}
       >
         {label}
       </NavigationLink>
     </NavigationListItem>
   );
-};
-
-NavigationListItemSection.propTypes = {
-  label: PropTypes.string,
-  sectionAnchor: PropTypes.string,
-  onNavItemClick: PropTypes.func,
-  isCurrent: PropTypes.bool,
-  sectionNavLinkMounted: PropTypes.func,
 };
 
 export default Menu;

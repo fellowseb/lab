@@ -6,7 +6,7 @@
   "type": "module",
   "engines": {
     "node": "22",
-    "pnpm": "10.10.0"
+    "pnpm": "10"
   },
   "dependencies": {
     "aws-sdk": "^2.1692.0",

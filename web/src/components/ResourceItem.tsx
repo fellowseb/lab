@@ -1,9 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { A, Ul } from "../components/BaseStyledComponents.jsx";
-import { media } from "../components/MediaQueries.jsx";
+import { A, Ul } from "../components/BaseStyledComponents.tsx";
+import { media } from "../components/MediaQueries.tsx";
 
 const ArticleItem = styled.li`
   margin-top: 0.25em;
@@ -67,13 +65,22 @@ const ArticleTagsItem = styled.li`
   background: #edc711;
 `;
 
+interface ResourceItemProps {
+  title: string;
+  url: string;
+  tags: string[];
+  authors: string[];
+  defaultThumbnailClass: string;
+  thumbnailUrl: string;
+}
+
 const ResourceItem = ({
   title = "[untitled article]",
   url = "",
   tags = [],
   authors = [],
   defaultThumbnailClass = "fa-bookmark",
-}) => {
+}: ResourceItemProps) => {
   const defaultThumbnailClasses = "fas fa-4x " + defaultThumbnailClass;
   const authorsStr = authors.length ? authors[0] : "";
   return (
@@ -99,23 +106,7 @@ const ResourceItem = ({
   );
 };
 
-const urlRegexp =
-  /[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
-
-ResourceItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  url: (props, propName) =>
-    typeof props[propName] !== "string"
-      ? new Error("An article url must be a string")
-      : urlRegexp.test(props[propName]) === false
-        ? new Error("url is not a valid URL")
-        : null,
-  tags: PropTypes.array,
-  defaultThumbnailClass: PropTypes.string,
-  authors: PropTypes.array,
-};
-
-function domainFromURL(url) {
+function domainFromURL(url: string) {
   let result;
   let match = url.match(
     /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?=]+)/im,
