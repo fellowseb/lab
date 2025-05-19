@@ -221,7 +221,7 @@ const App = () => {
             id="brainfuel"
             ref={sectionAnchorMountedBrainfuel}
           ></PageAnchor>
-          <Page>Back soon</Page>
+          <Page title="Tech Watch">Back soon</Page>
           {
             // <ResourcesPage
             //   apiUrl={apiUrl}

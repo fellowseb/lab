@@ -75,7 +75,7 @@ const PurposeFigure = styled.figure`
 `;
 
 const AboutPage = () => (
-  <Page>
+  <Page title="About">
     <PurposeContainer>
       <PurposeSubContainerLeft>
         <PurposeHeader>
