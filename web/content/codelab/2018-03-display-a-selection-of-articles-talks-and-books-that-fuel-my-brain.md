@@ -19,14 +19,14 @@ date: 2018-03
 
 ## Resources
 
-- [Learning React: Functional Web Development with React and Redux](https://www.amazon.com/Learning-React-Functional-Development-Redux/dp/1491954620)
-  Ed.: O'Reilly
-  ISBN: 978-1491954621
+- [Learning React: Functional Web Development with React and Redux](https://www.amazon.com/Learning-React-Functional-Development-Redux/dp/1491954620)<br/>
+  Ed.: O'Reilly<br/>
+  ISBN: 978-1491954621<br/>
   By Alex Banks and Eve Porcello
 
-- [Functional-Light JavaScript](https://www.amazon.com/Functional-Light-JavaScript-Balanced-Pragmatic-FP/dp/1981672346)
-  Ed.: CreateSpace Independent Publishing Platform
-  ISBN: 978-1981672349
+- [Functional-Light JavaScript](https://www.amazon.com/Functional-Light-JavaScript-Balanced-Pragmatic-FP/dp/1981672346)<br/>
+  Ed.: CreateSpace Independent Publishing Platform<br/>
+  ISBN: 978-1981672349<br/>
   By Kyle Simpson
 
 ## Results

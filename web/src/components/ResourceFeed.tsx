@@ -33,14 +33,11 @@ interface ResourceFeedDIsplayCompProps {
   onPrevPage: (event: SyntheticEvent) => void;
   error: unknown | null;
   loading: boolean;
-  apiUrl: string;
 }
 
 interface ResourceFeedProps {
-  apiUrl: string;
-  apiEndpoint: string;
+  resourcesUrl: string;
   filteredTag?: string;
-  count: number;
   ResourceFeedDisplayComp: ComponentType<ResourceFeedDIsplayCompProps>;
   title: string;
 }
@@ -62,10 +59,8 @@ interface ResourceFeedState {
  * @extends React.PureComponent
  */
 const ResourceFeed = ({
-  apiUrl = "",
-  apiEndpoint = "",
-  filteredTag = "",
-  count = 5,
+  resourcesUrl,
+  // filteredTag = "",
   title = "Resources",
   ResourceFeedDisplayComp,
 }: ResourceFeedProps) => {
@@ -87,68 +82,59 @@ const ResourceFeed = ({
     next,
     prev,
     resources,
-    offset,
+    // offset,
   } = state;
 
-  const updateComponentState = useCallback(
-    (offset: number | null) => {
-      const refresh = async () => {
-        setState((prevState) => ({ ...prevState, loading: true }));
-        try {
-          const result = await retrieveResources(
-            apiUrl,
-            apiEndpoint,
-            filteredTag,
-            count,
-            offset,
-          );
-          setState((prevState) => ({
-            resources: result.resources,
-            loading: false,
-            error: null,
-            totalCount: result.totalCount,
-            filteredCount: result.filteredCount,
-            next: result.next,
-            prev: result.prev,
-            offset: prevState.offset,
-          }));
-        } catch (err) {
-          setState((prevState) => ({
-            ...prevState,
-            loading: false,
-            error: err,
-          }));
-        }
-      };
-      refresh();
-    },
-    [apiEndpoint, apiUrl, filteredTag, count],
-  );
-  const extractOffset = (href: string | null): number | null => {
-    if (!href) {
-      return null;
-    }
-    const regexResults = /offset=([0-9]+)/.exec(href);
-    return regexResults ? Number.parseInt(regexResults[1], 10) : 0;
-  };
+  const updateComponentState = useCallback(() => {
+    const refresh = async () => {
+      setState((prevState) => ({ ...prevState, loading: true }));
+      try {
+        const result = await retrieveResources(resourcesUrl);
+        setState((prevState) => ({
+          resources: result.resources,
+          loading: false,
+          error: null,
+          totalCount: result.totalCount,
+          filteredCount: result.filteredCount,
+          next: result.next,
+          prev: result.prev,
+          offset: prevState.offset,
+        }));
+      } catch (err) {
+        setState((prevState) => ({
+          ...prevState,
+          loading: false,
+          error: err,
+        }));
+      }
+    };
+    refresh();
+  }, [resourcesUrl]);
+  // const extractOffset = (href: string | null): number | null => {
+  //   if (!href) {
+  //     return null;
+  //   }
+  //   const regexResults = /offset=([0-9]+)/.exec(href);
+  //   return regexResults ? Number.parseInt(regexResults[1], 10) : 0;
+  // };
   const onPrevPage = useCallback(
     (event: SyntheticEvent) => {
       event.preventDefault();
-      updateComponentState(extractOffset(prev));
+      updateComponentState();
     },
-    [prev, updateComponentState],
+    [updateComponentState],
   );
   const onNextPage = useCallback(
     (event: SyntheticEvent) => {
       event.preventDefault();
-      updateComponentState(extractOffset(next));
+      updateComponentState();
     },
-    [next, updateComponentState],
+    [updateComponentState],
   );
 
   useEffect(() => {
-    updateComponentState(offset);
-  }, [updateComponentState, offset]);
+    updateComponentState();
+  }, [updateComponentState]);
 
   return (
     <ArticlesContainer>
@@ -165,7 +151,6 @@ const ResourceFeed = ({
         onPrevPage={onPrevPage}
         error={error}
         loading={loading}
-        apiUrl={apiUrl}
       />
     </ArticlesContainer>
   );
@@ -196,35 +181,12 @@ const ResourceFeedHeader = ({
 
 // Helper functions
 
-/**
- * Fetch Pocket data
- */
-const retrieveResources = async (
-  apiUrl: string,
-  apiEndpoint: string,
-  filteredTag: string,
-  count: number,
-  offset: number | null,
-) => {
-  let url = apiUrl.substr(0);
-  const paramString = (json: { [key: string]: string | number | null }) =>
-    Object.keys(json)
-      .reduce(
-        (paramstr, key) =>
-          json[key]
-            ? paramstr.concat(key, "=", String(json[key]), "&")
-            : paramstr,
-        "",
-      )
-      .slice(0, -1);
-  const params = {
-    tag: filteredTag,
-    count: count,
-    offset: offset ?? null,
-  };
-  url += apiEndpoint + "?" + paramString(params);
+const sortResourceByDate = (lhs: ResourceModel, rhs: ResourceModel) => {
+  return Date.parse(lhs.date) < Date.parse(rhs.date) ? -1 : 1;
+};
 
-  const response = await fetch(url, {
+const retrieveResources = async (resourcesUrl: string) => {
+  const response = await fetch(resourcesUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -235,7 +197,13 @@ const retrieveResources = async (
   if (response.status < 200 || response.status >= 300) {
     throw new Error(`${json.error ? json.error : response.statusText}`);
   }
-  return json;
+  return {
+    resources: json.sort(sortResourceByDate).reverse(),
+    totalCount: json.length,
+    filteredCount: json.length,
+    next: null,
+    prev: null,
+  };
 };
 
 export default ResourceFeed;

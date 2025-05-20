@@ -1,10 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { P, Strong } from "../components/BaseStyledComponents.tsx";
 import Experiment from "../components/Experiment.tsx";
 
-import EXPERIMENTS_DATA from "../../generated-content/experiments.json";
 import type { ExperimentsModel } from "./types.ts";
 
 const FilterExperimentsContainer = styled.div`
@@ -35,15 +34,21 @@ const sortExperimentByDate =
 
 /**
  * Experiment list component
- * State:
- * - experiments
- * @todo Create an API to store & retrieve experiments data.
- * @extends React.PureComponent
  */
 const Experiments = () => {
   const [state, setState] = useState<ExperimentsState>({
-    experiments: EXPERIMENTS_DATA as unknown as ExperimentsModel,
+    experiments: {},
   });
+  useEffect(() => {
+    const fetchExperiments = async () => {
+      const result = await fetch("/content/experiments.json");
+      const refreshedExperiments = await result.json();
+      setState({
+        experiments: refreshedExperiments as unknown as ExperimentsModel,
+      });
+    };
+    fetchExperiments();
+  }, [setState]);
   const { experiments } = state;
   const onToggleCollapse = useCallback(
     (experimentId: string) => {

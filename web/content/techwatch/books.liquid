@@ -1,0 +1,17 @@
+---
+permalink: books.json
+---
+[
+  {%- for book in collections.books -%}
+  {
+    "resourceId": "{{ book.inputPath | split: "/" | last | split: "." | first }}",
+    "slug": "{{ book.data.title | slugify }}",
+    "tags": {{ book.data.resourceTags | jsonify }},
+    "title": "{{ book.data.title }}",
+    "content": "{{ book.content | normalize_whitespace | escape }}",
+    "thumbnailHREF": "{{ book.data.thumbnailHREF }}",
+    "url": "{{ book.data.url }}",
+    "date": "{{ book.data.date }}"
+  }{%- if forloop.last == false -%},{%- endif %}
+  {%- endfor -%}
+]

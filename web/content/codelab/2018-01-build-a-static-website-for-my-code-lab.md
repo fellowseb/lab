@@ -19,14 +19,15 @@ date: 2018-01
 
 ## Resources
 
-- [Mastering Responsive Web Design](https://lire.amazon.fr/kp/embed?asin=B012GGB7OI&preview=newtab&linkCode=kpe&ref_=cm_sw_r_kb_dp_azgEAbST4WP3A)
-  ed Packt Publishing, ISBN978-1783550234
+- [Mastering Responsive Web Design](https://lire.amazon.fr/kp/embed?asin=B012GGB7OI&preview=newtab&linkCode=kpe&ref_=cm_sw_r_kb_dp_azgEAbST4WP3A)<br/>
+  Ed.: Packt Publishing<br/>
+  ISBN: 978-1783550234<br/>
   by Ricardo Zea
 
-- [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)<br/>
   by Chris Coyier
 
-- [An Overview of SVG Sprite Creation Techniques](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/)
+- [An Overview of SVG Sprite Creation Techniques](https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/)<br/>
   by Sara Soueidan
 
 ## Results

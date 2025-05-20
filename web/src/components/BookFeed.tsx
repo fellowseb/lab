@@ -2,9 +2,7 @@ import BookCarousel from "../components/BookCarousel.tsx";
 import ResourceFeed from "../components/ResourceFeed.tsx";
 
 interface BookFeedProps {
-  apiUrl: string;
   filteredTag?: string;
-  count: number;
 }
 
 /**
@@ -14,7 +12,7 @@ interface BookFeedProps {
 const BookFeed = (props: BookFeedProps) => (
   <ResourceFeed
     {...props}
-    apiEndpoint="/books"
+    resourcesUrl="/content/books.json"
     title="Books"
     ResourceFeedDisplayComp={BookCarousel}
   />

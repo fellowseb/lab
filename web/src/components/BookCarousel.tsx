@@ -20,6 +20,9 @@ const BookCarouselList = styled(Ul)`
   overflow-y: hidden;
   margin: 0;
   padding: 0;
+  align-items: flex-start;
+  contain: inline-size;
+  scrollbar-color: #5d5a52 #c1b79a;
 `;
 
 type BookCarouselProps = Omit<ResourceListProps, "defaultThumbnailClass">;
@@ -27,11 +30,11 @@ type BookCarouselProps = Omit<ResourceListProps, "defaultThumbnailClass">;
 /**
  * Presentational component rendering books in a carousel.
  */
-const BookCarousel = ({ resources = [], apiUrl }: BookCarouselProps) => (
+const BookCarousel = ({ resources = [] }: BookCarouselProps) => (
   <BookCarouselContainer>
     <BookCarouselList>
       {resources.map((book) => (
-        <BookCarouselItem book={book} apiUrl={apiUrl} key={book.resourceId} />
+        <BookCarouselItem book={book} key={book.resourceId} />
       ))}
     </BookCarouselList>
   </BookCarouselContainer>
@@ -110,7 +113,6 @@ interface BookCarouselItemState {
 
 interface BookCarouselItemProps {
   book: ResourceModel;
-  apiUrl: string;
 }
 
 const BookCarouselItem = (props: BookCarouselItemProps) => {
@@ -123,15 +125,13 @@ const BookCarouselItem = (props: BookCarouselItemProps) => {
   const onMouseLeave = useCallback(() => {
     setState({ hovered: false });
   }, []);
-  const { book, apiUrl } = props;
+  const { book } = props;
   const { hovered } = state;
   const authorsStr =
     book.authors && book.authors.length ? (
       <BookCarouselItemAuthors>by {book.authors[0]}</BookCarouselItemAuthors>
     ) : null;
-  const thumbnailURL = book.thumbnailHREF
-    ? apiUrl + book.thumbnailHREF
-    : "/images/nothumbnail";
+  const thumbnailURL = book.thumbnailHREF ?? "/images/nothumbnail";
   const containerRef = useRef(null);
   return (
     <StyledBookCarouselItem>
@@ -157,12 +157,7 @@ const BookCarouselItem = (props: BookCarouselItemProps) => {
           </BookCarouselItemTags>
         </BookCarouselItemDesc>
         <picture>
-          <source srcSet={thumbnailURL + "?type=.webp"} type="image/webp" />
-          <source srcSet={thumbnailURL + "?type=.jp2"} type="image/jp2" />
-          <BookCarouselItemImg
-            src={thumbnailURL + "?type=.png"}
-            $show={!hovered}
-          />
+          <BookCarouselItemImg src={thumbnailURL} $show={!hovered} />
         </picture>
       </BookCarouselItemOverlay>
     </StyledBookCarouselItem>

@@ -50,4 +50,5 @@ export interface ResourceModel {
     url: string;
   };
   thumbnailHREF?: string;
+  date: string;
 }

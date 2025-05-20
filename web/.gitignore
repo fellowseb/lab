@@ -1,6 +1,6 @@
 # NPM
 node_modules
 # Generated files
-generated-content
+public/content
 # Distributed files
 dist

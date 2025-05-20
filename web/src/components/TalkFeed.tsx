@@ -2,7 +2,6 @@ import ResourceList, { type ResourceListProps } from "./ResourceList.tsx";
 import ResourceFeed from "./ResourceFeed.tsx";
 
 interface TalkFeedProps {
-  apiUrl: string;
   filteredTag?: string;
   count: number;
 }
@@ -15,7 +14,7 @@ interface TalkFeedProps {
 const TalkFeed = (props: TalkFeedProps) => (
   <ResourceFeed
     {...props}
-    apiEndpoint="/talks"
+    resourcesUrl="/generated-content/talks.json"
     title="Talks"
     ResourceFeedDisplayComp={TalkList}
   />

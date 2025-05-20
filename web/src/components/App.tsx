@@ -4,12 +4,11 @@ import styled, { createGlobalStyle } from "styled-components";
 
 import Menu from "../components/Menu.tsx";
 import AboutPage from "../components/AboutPage.tsx";
-// import ResourcesPage from "../components/ResourcesPage.tsx";
+import ResourcesPage from "../components/ResourcesPage.tsx";
 import LabPage from "../components/LabPage.tsx";
 import { media } from "../components/MediaQueries.tsx";
 import type { AppSection } from "./types.ts";
 import Page from "./Page.tsx";
-import TechWatchIconSvg from "/src/assets/images/svg/target.svg";
 import BlogIconSvg from "/src/assets/images/svg/pen.svg";
 
 const GlobalStyles = createGlobalStyle`
@@ -111,12 +110,12 @@ const App = () => {
     },
     [sectionLinks],
   );
-  // const filterEntries = useCallback((tag: string) => {
-  //   setState((prevState) => ({
-  //     ...prevState,
-  //     filteredTag: tag,
-  //   }));
-  // }, []);
+  const filterEntries = useCallback((tag: string) => {
+    setState((prevState) => ({
+      ...prevState,
+      filteredTag: tag,
+    }));
+  }, []);
   const openMenu = useCallback(
     (open: boolean) => {
       setState((prevState) => ({
@@ -210,6 +209,7 @@ const App = () => {
       updateCurrentSection();
     }
   }, [currentSection, sectionAnchors, openMenu, menuIsOpen, setState]);
+  const { filteredTag } = state;
   return (
     <React.StrictMode>
       <StyledApp>
@@ -228,24 +228,14 @@ const App = () => {
             id="brainfuel"
             ref={sectionAnchorMountedBrainfuel}
           ></PageAnchor>
-          <Page
-            id="page-brainfuel"
-            title="Tech Watch"
-            icon={<TechWatchIconSvg />}
-          >
-            Back soon
-          </Page>
+          <ResourcesPage
+            filterEntries={filterEntries}
+            filteredTag={filteredTag}
+          />
           <PageAnchor id="blog" ref={sectionAnchorMountedBlog}></PageAnchor>
           <Page id="page-blog" title="Blog" icon={<BlogIconSvg />}>
             Soon !<br />
           </Page>
-          {
-            // <ResourcesPage
-            //   apiUrl={apiUrl}
-            //   filterEntries={filterEntries}
-            //   filteredTag={filteredTag}
-            // />
-          }
           <PageAnchor id="about" ref={sectionAnchorMountedAbout}></PageAnchor>
           <AboutPage></AboutPage>
         </Main>

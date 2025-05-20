@@ -56,7 +56,6 @@ export interface ResourceListProps {
   defaultThumbnailClass: string;
   error: unknown | null;
   loading: boolean;
-  apiUrl: string;
 }
 
 /**

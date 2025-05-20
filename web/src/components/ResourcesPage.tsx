@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-import { media } from "../components/MediaQueries.tsx";
+// import { media } from "../components/MediaQueries.tsx";
 import Page from "../components/Page.tsx";
 import ResourceFilters from "../components/ResourceFilters.tsx";
-import ArticleFeed from "../components/ArticleFeed.tsx";
-import TalkFeed from "../components/TalkFeed.tsx";
+// import ArticleFeed from "../components/ArticleFeed.tsx";
+// import TalkFeed from "../components/TalkFeed.tsx";
 import BookFeed from "../components/BookFeed.tsx";
+import TechWatchIconSvg from "/src/assets/images/svg/target.svg";
 
 const ResourcesContainer = styled.div`
   display: flex;
@@ -25,55 +26,51 @@ const ResourcesFiltersContainer = styled.div`
   border-radius: 10px;
 `;
 
-const ResourcesArticlesContainer = styled.div`
-  margin: 0;
-  ${media.medium`
-      margin-right: 4px;
-  `}
-  flex: 1 1 40%;
-`;
-
-const ResourcesTalksContainer = styled.div`
-  margin: 0;
-  ${media.medium`
-      margin-left: 4px;
-  `}
-  flex: 1 1 40%;
-`;
+// const ResourcesArticlesContainer = styled.div`
+//   margin: 0;
+//   ${media.medium`
+//       margin-right: 4px;
+//   `}
+//   flex: 1 1 40%;
+// `;
+//
+// const ResourcesTalksContainer = styled.div`
+//   margin: 0;
+//   ${media.medium`
+//       margin-left: 4px;
+//   `}
+//   flex: 1 1 40%;
+// `;
 
 const ResourcesBooksContainer = styled.div`
   flex: 1 1 100%;
 `;
 
 interface ResourcesPageProps {
-  apiUrl: string;
   filterEntries: (tag: string) => void;
   filteredTag?: string;
 }
 
-const ResourcesPage = ({
-  apiUrl,
-  filterEntries,
-  filteredTag,
-}: ResourcesPageProps) => {
+const ResourcesPage = ({ filterEntries, filteredTag }: ResourcesPageProps) => {
   return (
-    <Page title="Tech Watch" id="brainfuel-page">
+    <Page title="Tech Watch" id="brainfuel-page" icon={<TechWatchIconSvg />}>
       <ResourcesContainer>
         <ResourcesFiltersContainer>
           <ResourceFilters
             onChangeFilter={filterEntries}
-            apiUrl={apiUrl}
             filteredTag={filteredTag}
           />
         </ResourcesFiltersContainer>
-        <ResourcesArticlesContainer>
-          <ArticleFeed filteredTag={filteredTag} apiUrl={apiUrl} count={3} />
-        </ResourcesArticlesContainer>
-        <ResourcesTalksContainer>
-          <TalkFeed filteredTag={filteredTag} apiUrl={apiUrl} count={3} />
-        </ResourcesTalksContainer>
+        {
+          // <ResourcesArticlesContainer>
+          //   <ArticleFeed filteredTag={filteredTag} apiUrl={apiUrl} count={3} />
+          // </ResourcesArticlesContainer>
+          // <ResourcesTalksContainer>
+          //   <TalkFeed filteredTag={filteredTag} apiUrl={apiUrl} count={3} />
+          // </ResourcesTalksContainer>
+        }
         <ResourcesBooksContainer>
-          <BookFeed filteredTag={filteredTag} apiUrl={apiUrl} count={30} />
+          <BookFeed filteredTag={filteredTag} />
         </ResourcesBooksContainer>
       </ResourcesContainer>
     </Page>

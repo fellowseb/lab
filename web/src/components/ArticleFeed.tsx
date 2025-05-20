@@ -4,7 +4,6 @@ import ResourceList, {
 import ResourceFeed from "../components/ResourceFeed.tsx";
 
 interface ArticleFeedProps {
-  apiUrl: string;
   filteredTag?: string;
   count: number;
 }
@@ -17,7 +16,7 @@ interface ArticleFeedProps {
 const ArticleFeed = (props: ArticleFeedProps) => (
   <ResourceFeed
     {...props}
-    apiEndpoint="/articles"
+    resourcesUrl="/generated-content/articles.json"
     title="Articles"
     ResourceFeedDisplayComp={ArticleList}
   />

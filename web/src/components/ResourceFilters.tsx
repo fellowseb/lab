@@ -23,7 +23,6 @@ interface ResourceFiltersState {
 
 interface ResourceFiltersProps {
   onChangeFilter?: (tag: string) => void;
-  apiUrl: string;
   filteredTag?: string;
 }
 
@@ -32,7 +31,6 @@ interface ResourceFiltersProps {
  * of resources.
  */
 const ResourceFilters = ({
-  apiUrl,
   filteredTag,
   onChangeFilter,
 }: ResourceFiltersProps) => {
@@ -56,7 +54,7 @@ const ResourceFilters = ({
     const refresh = async () => {
       setState((prevState) => ({ ...prevState, loading: true }));
       try {
-        const tags = await retrieveFilterTags(apiUrl);
+        const tags = await retrieveFilterTags("");
         setState({
           loading: false,
           error: null,
@@ -71,7 +69,7 @@ const ResourceFilters = ({
       }
     };
     refresh();
-  }, [apiUrl]);
+  }, []);
   const { tags } = state;
   return (
     <section>

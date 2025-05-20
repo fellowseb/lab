@@ -1508,33 +1508,6 @@
         "title": "Short story:"
     },
     {
-        "resourceType": "book",
-        "resourceId": "249a089a-44a2-11e8-b5e3-5f36e35bdf71",
-        "hasThumbnail": true,
-        "ISBN": "978-2212117257",
-        "added_time": 1265972400,
-        "editor": "Eyrolles",
-        "url": "https://www.amazon.fr/gp/product/2212117256",
-        "read_time": 1265972400,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "data",
-                "french",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "UML",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Pascal Roques"
-            ],
-            "type": "String"
-        }
-    },
-    {
         "updated_time": 1521284699,
         "resourceType": "article",
         "resourceId": "2107174694",
@@ -1789,34 +1762,6 @@
             "type": "String"
         },
         "title": "Async iterators and generators"
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "32baa044-42f2-11e8-9866-9b4d5a01de8b",
-        "hasThumbnail": true,
-        "isbn": "978-0262033848",
-        "added_time": 1295956800,
-        "url": "https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844",
-        "editor": "MIT Press",
-        "read_time": 1295956800,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "algorithms"
-            ],
-            "type": "String"
-        },
-        "title": "Introduction to Algorithms, 3rd Edition",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Charles E. Leiserson",
-                "Clifford Stein",
-                "Ronald L. Rivest",
-                "Thomas H. Cormen"
-            ],
-            "type": "String"
-        }
     },
     {
         "updated_time": 1512912630,
@@ -2209,32 +2154,6 @@
         }
     },
     {
-        "resourceType": "book",
-        "resourceId": "fd4c4c5a-44a4-11e8-b3d8-7bc5e02ed0d2",
-        "hasThumbnail": true,
-        "ISBN": "978-0201749625",
-        "added_time": 1269514800,
-        "editor": "Addison Wesley",
-        "url": "https://www.amazon.com/Effective-STL-Specific-Standard-Template/dp/0201749629",
-        "read_time": 1269514800,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "Effective STL: 50 Specific Ways to Improve Your Use of the Standard Template Library",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Scott Meyers"
-            ],
-            "type": "String"
-        }
-    },
-    {
         "updated_time": 1513348417,
         "resourceType": "article",
         "resourceId": "1290827496",
@@ -2457,33 +2376,6 @@
             "wrapperName": "Set",
             "values": [
                 "David Gilbertson"
-            ],
-            "type": "String"
-        }
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "70258e70-44a6-11e8-95b5-4747ec602263",
-        "hasThumbnail": true,
-        "ISBN": "978-0321227256",
-        "added_time": 1270548000,
-        "editor": "Addison Wesley",
-        "url": "https://www.amazon.com/Template-Metaprogramming-Concepts-Techniques-Beyond/dp/0321227255",
-        "read_time": 1270548000,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "C++ Template Metaprogramming: Concepts, Tools, and Techniques from Boost and Beyond",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Aleksey Gurtovoy",
-                "David Abrahams"
             ],
             "type": "String"
         }
@@ -3916,32 +3808,6 @@
         "title": "Chrome, the Background Sync API and exponential backoff"
     },
     {
-        "resourceType": "book",
-        "resourceId": "aa649632-44a4-11e8-9662-6397b20fe2e0",
-        "hasThumbnail": true,
-        "ISBN": "978-0201633719",
-        "added_time": 1269514800,
-        "editor": "Addison Wesley",
-        "url": "https://www.amazon.com/More-Effective-Improve-Programs-Designs/dp/020163371X",
-        "read_time": 1269514800,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "More Effective C++: 35 New Ways to Improve Your Programs and Designs",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Scott Meyers"
-            ],
-            "type": "String"
-        }
-    },
-    {
         "updated_time": 1512947010,
         "resourceType": "article",
         "resourceId": "1587533403",
@@ -4077,32 +3943,6 @@
         "url": "https://helloanselm.com/2018/whats-behind-ethical-design/",
         "read_time": 0,
         "title": "Ethical Design And Sustainability On The Web"
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "0f407790-44a7-11e8-8269-8f7e1ee15906",
-        "hasThumbnail": true,
-        "ISBN": "978-0201704310",
-        "added_time": 1295866800,
-        "editor": "Addison Wesley",
-        "url": "https://www.amazon.com/Modern-Design-Generic-Programming-Patterns/dp/0201704315",
-        "read_time": 1295866800,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "Modern C++ Design: Generic Programming and Design Patterns Applied",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Andrei Alexandrescu"
-            ],
-            "type": "String"
-        }
     },
     {
         "updated_time": 1512951665,
@@ -4966,32 +4806,6 @@
         }
     },
     {
-        "resourceType": "book",
-        "resourceId": "f9c9b512-44aa-11e8-8253-db07df813408",
-        "hasThumbnail": true,
-        "ISBN": "978-1449373320",
-        "added_time": 1522231200,
-        "editor": "O′Reilly",
-        "url": "https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321",
-        "read_time": 1522231200,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "data",
-                "systemdesign"
-            ],
-            "type": "String"
-        },
-        "title": "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Martin Kleppmann"
-            ],
-            "type": "String"
-        }
-    },
-    {
         "updated_time": 1521284784,
         "resourceType": "article",
         "resourceId": "2093810006",
@@ -5037,34 +4851,6 @@
             "wrapperName": "Set",
             "values": [
                 "John Wilander"
-            ],
-            "type": "String"
-        }
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "749d0aa4-44a7-11e8-b84a-afd0657847f5",
-        "hasThumbnail": true,
-        "ISBN": "978-1568814247",
-        "added_time": 1295866800,
-        "editor": "A K Peters",
-        "url": "https://www.amazon.com/Real-Time-Rendering-Third-Tomas-Akenine-Moller/dp/1568814240",
-        "read_time": 1295866800,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "3d",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "Real-Time Rendering, Third Edition",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Eric Haines",
-                "Naty Hoffman",
-                "Tomas Akenine-Moller"
             ],
             "type": "String"
         }
@@ -5145,32 +4931,6 @@
         }
     },
     {
-        "resourceType": "book",
-        "resourceId": "513c898e-44a9-11e8-8f63-731c459855a6",
-        "hasThumbnail": true,
-        "ISBN": "978-1491904244",
-        "added_time": 1515150000,
-        "editor": "O′Reilly",
-        "url": "https://www.amazon.com/You-Dont-Know-JS-Beyond/dp/1491904240",
-        "read_time": 1515150000,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "javascript",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "You Don't Know JS (Series)",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Kyle Simpson"
-            ],
-            "type": "String"
-        }
-    },
-    {
         "updated_time": 1513699735,
         "resourceType": "article",
         "resourceId": "1987835468",
@@ -5209,87 +4969,6 @@
             "type": "String"
         },
         "title": "Automating Web Performance Regression Alerts"
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "84fea8d8-449f-11e8-8ffb-2f67ede0e2dc",
-        "hasThumbnail": true,
-        "isbn": "978-0201703535",
-        "added_time": 1265972400,
-        "url": "https://www.amazon.com/Accelerated-C-Practical-Programming-Example/dp/020170353X",
-        "editor": "Addison Wesley",
-        "read_time": 1265972400,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "Accelerated C++: Practical Programming by Example",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Andrew Koenig"
-            ],
-            "type": "String"
-        }
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "b8b9dcb8-44a1-11e8-8945-a3d75fbdda70",
-        "hasThumbnail": true,
-        "ISBN": "978-2100073481",
-        "added_time": 1265972400,
-        "editor": "Dunod - 01 Informatique",
-        "url": "https://www.amazon.fr/gp/product/2100073486",
-        "read_time": 1265972400,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "french",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "Pour mieux développer avec C++ : Design patterns, STL, RTTI et smart pointers",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Aurélien Géron",
-                "Fatmé Tawbi"
-            ],
-            "type": "String"
-        }
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "eb7d9492-44a5-11e8-bd95-ebb6e7815183",
-        "hasThumbnail": true,
-        "ISBN": "978-0132354165",
-        "added_time": 1270548000,
-        "editor": "Prentice Hall",
-        "url": "https://www.amazon.com/Programming-Prentice-Source-Software-Development/dp/0132354160",
-        "read_time": 1270548000,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "C++ GUI Programming with Qt4",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Jasmin Blanchette",
-                "Mark Summerfield"
-            ],
-            "type": "String"
-        }
     },
     {
         "updated_time": 1513898842,
@@ -5340,32 +5019,6 @@
             "wrapperName": "Set",
             "values": [
                 "Ohans Emmanuel"
-            ],
-            "type": "String"
-        }
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "727070d8-44a5-11e8-bc67-63e1e0908bea",
-        "hasThumbnail": true,
-        "ISBN": "978-0321334879",
-        "added_time": 1269514800,
-        "editor": "Addison Wesley",
-        "url": "https://www.amazon.com/Effective-Specific-Improve-Programs-Designs/dp/0321334876",
-        "read_time": 1269514800,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "Effective C++: 55 Specific Ways to Improve Your Programs and Designs",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Scott Meyers"
             ],
             "type": "String"
         }
@@ -5632,33 +5285,6 @@
             "wrapperName": "Set",
             "values": [
                 "WTTJ"
-            ],
-            "type": "String"
-        }
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "d13b4a0e-44a8-11e8-a0d4-d3ae01a184a7",
-        "hasThumbnail": true,
-        "ISBN": "978-1491954621",
-        "added_time": 1515150000,
-        "editor": "O'Reilly Media, Inc, USA",
-        "url": "https://www.amazon.com/Learning-React-Functional-Development-Redux/dp/1491954620",
-        "read_time": 1515150000,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "React",
-                "web"
-            ],
-            "type": "String"
-        },
-        "title": "Learning React: Functional Web Development with React and Redux",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Alex Banks",
-                "Eve Porcello"
             ],
             "type": "String"
         }
@@ -5960,32 +5586,6 @@
         "title": "How to Scope Work"
     },
     {
-        "resourceType": "book",
-        "resourceId": "6861de92-44aa-11e8-903c-d3f15baa871b",
-        "hasThumbnail": true,
-        "ISBN": "978-0984782857",
-        "added_time": 1516878000,
-        "editor": "CareerCup",
-        "url": "https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850",
-        "read_time": 1516878000,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "jobs",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "Cracking the Coding Interview: 189 Programming Questions and Solutions",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Gayle Laakmann McDowell"
-            ],
-            "type": "String"
-        }
-    },
-    {
         "updated_time": 1516611998,
         "resourceType": "article",
         "image": {
@@ -6016,33 +5616,6 @@
         "url": "https://www.youtube.com/watch?v=yahjdULhtlc",
         "read_time": 0,
         "title": "Bitcoin Q&A: Net Neutrality and open blockchains"
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "bae1e926-44a2-11e8-a5d1-c395d2af2395",
-        "hasThumbnail": true,
-        "ISBN": "978-2841772605",
-        "added_time": 1265972400,
-        "editor": "O'Reilly",
-        "url": "https://www.amazon.fr/gp/product/2841772608",
-        "read_time": 1265972400,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "cpp",
-                "french",
-                "programming"
-            ],
-            "type": "String"
-        },
-        "title": "STL: Précis et concis",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Ray Lischner"
-            ],
-            "type": "String"
-        }
     },
     {
         "updated_time": 1521493099,
@@ -6152,32 +5725,6 @@
         "url": "https://www.theglobeandmail.com/globe-investor/investment-ideas/cobalt-the-heart-of-darkness-in-the-shiny-electric-vehicle-story/article37109931/",
         "read_time": 0,
         "title": "Cobalt, the heart of darkness in the shiny electric vehicle story"
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "c7ccbfba-44a9-11e8-879d-8fcc0b361fe9",
-        "hasThumbnail": true,
-        "ISBN": "978-1981672349",
-        "added_time": 1516878000,
-        "editor": "CreateSpace Independent Publishing Platform",
-        "url": "https://www.amazon.com/Functional-Light-JavaScript-Balanced-Pragmatic-FP/dp/1981672346",
-        "read_time": 1516878000,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "functional",
-                "javascript"
-            ],
-            "type": "String"
-        },
-        "title": "Functional-Light JavaScript: Pragmatic, Balanced FP in JavaScript",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Kyle Simpson"
-            ],
-            "type": "String"
-        }
     },
     {
         "updated_time": 1513539840,
@@ -6347,32 +5894,6 @@
             "wrapperName": "Set",
             "values": [
                 "WTTJ"
-            ],
-            "type": "String"
-        }
-    },
-    {
-        "resourceType": "book",
-        "resourceId": "4031f3b4-44a8-11e8-94f5-9fbcf397b6cf",
-        "hasThumbnail": true,
-        "ISBN": "978-1783550234",
-        "added_time": 1515150000,
-        "editor": "Packt Publishing Limited",
-        "url": "https://www.amazon.com/Mastering-Responsive-Web-Design-Ricardo/dp/1783550236",
-        "read_time": 1515150000,
-        "tags": {
-            "wrapperName": "Set",
-            "values": [
-                "RWD",
-                "web"
-            ],
-            "type": "String"
-        },
-        "title": "Mastering Responsive Web Design",
-        "authors": {
-            "wrapperName": "Set",
-            "values": [
-                "Ricardo Zea"
             ],
             "type": "String"
         }

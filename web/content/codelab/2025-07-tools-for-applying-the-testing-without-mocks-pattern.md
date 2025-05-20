@@ -12,7 +12,7 @@ TBD
 
 ## Resources
 
-- [Testing Without Mocks: A Pattern Language](https://www.jamesshore.com/v2/projects/nullables/testing-without-mocks)
+- [Testing Without Mocks: A Pattern Language](https://www.jamesshore.com/v2/projects/nullables/testing-without-mocks)<br/>
   By James Shore
 
 ## Results

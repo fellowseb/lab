@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "eleventy && tsc -b && vite build",
-    "start": "vite",
+    "start": "eleventy --watch & vite",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.jsx src/",
     "lint:fix": "eslint --ext .js,.jsx --fix src/",
