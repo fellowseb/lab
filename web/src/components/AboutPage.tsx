@@ -19,7 +19,7 @@ const PurposeContainer = styled.div`
 `;
 
 const PurposeSubContainer = styled.div`
-  max-width: 500px;
+  max-width: 700px;
 `;
 
 const PurposeSubContainerLeft = styled(PurposeSubContainer)`
@@ -87,8 +87,12 @@ const AboutPage = () => (
         </PurposeFigure>
         <P>
           My name is <Strong>S&eacute;bastien Wauquier</Strong>.<br />
-          I&apos;m a Software Engineer. In the past years I&apos;ve dealt with
-          real-time 3D apps on desktop (in C++) or in the browser (JavaScript).
+          I&apos;m a seasoned <Strong>Staff Software Engineer</Strong>, based in
+          Paris, France. While I'm specialized in the frontend I have strong
+          appetite for topics that span across the entire stack (Architecture,
+          Distributed Systems, Cryptography, DDD, LLMs...) and that affect the
+          whole development cycle (DX tooling, Platform Engineering, CI, testing
+          practices...).
         </P>
       </PurposeSubContainerLeft>
       <PurposeSubContainerRight>
@@ -99,9 +103,13 @@ const AboutPage = () => (
           <StyledLabSvg />
         </PurposeFigure>
         <P>
-          This is my <Strong>virtual laboratory</Strong>.<br />I intend to
-          experiment cool tech stuff and maybe later extend it to art and life
-          in general.
+          This is <Strong>my personal space on the interwebs</Strong>, the front
+          page of my very own code lab, a place where I can hold myself
+          accountable for completing my projects, review books, articles &
+          talks, and where I can showcase and share my findings.
+          <br />
+          It's also a page where you'll find traditional blog posts about other
+          non-tech topics (music, acting, sports...).
         </P>
       </PurposeSubContainerRight>
       <PurposeSubContainerLeft>
@@ -112,8 +120,13 @@ const AboutPage = () => (
           <StyledBooksSvg />
         </PurposeFigure>
         <P>
-          I believe one should always <Strong>keep on learning</Strong>.<br />
-          There are so many things to discover, to read, to share!
+          I believe one should always keep on learning.
+          <br />
+          There are so many things{" "}
+          <Strong>to discover, to read, to share</Strong>! The problem is it's
+          not always possible (nor reasonable) to apply new tech at work.
+          <br />
+          Side projects deserve their own front page !
         </P>
       </PurposeSubContainerLeft>
     </PurposeContainer>
