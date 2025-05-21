@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "Pour mieux développer avec C++ : Design patterns, STL, RTTI et smart pointers"
 url: https://www.amazon.fr/gp/product/2100073486
-date: 2010-02-12
+date: 2010-02
 editor: "Dunod - 01 Informatique"
 resourceTags: ["c++"]
 authors: ["Aurélien Géron", "Fatmé Tawbi"]

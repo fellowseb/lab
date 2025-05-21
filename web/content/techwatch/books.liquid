@@ -11,7 +11,8 @@ permalink: books.json
     "content": "{{ book.content | normalize_whitespace | escape }}",
     "thumbnailHREF": "{{ book.data.thumbnailHREF }}",
     "url": "{{ book.data.url }}",
-    "date": "{{ book.data.date }}"
+    "date": "{{ book.data.date }}",
+    "status": "{{ book.data.status }}"
   }{%- if forloop.last == false -%},{%- endif %}
   {%- endfor -%}
 ]

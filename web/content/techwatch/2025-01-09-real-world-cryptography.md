@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "Real-World Cryptography"
 url: https://www.manning.com/books/real-world-cryptography
-date: 2025-01-09
+date: 2025-01
 editor: Manning
 resourceTags: ["crypto"]
 authors: ["David Wong"]

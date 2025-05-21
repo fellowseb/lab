@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "Accelerated C++: Practical Programming by Example"
 url: https://www.amazon.com/Accelerated-C-Practical-Programming-Example/dp/020170353X
-date: 2010-02-12
+date: 2010-02
 editor: Addison Wesley
 resourceTags: ["c++"]
 authors: ["Andrew Koenig"]

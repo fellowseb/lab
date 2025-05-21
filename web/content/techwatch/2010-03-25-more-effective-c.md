@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "More Effective C++: 35 New Ways to Improve Your Programs and Designs"
 url: https://www.amazon.com/More-Effective-Improve-Programs-Designs/dp/020163371X
-date: 2010-03-25
+date: 2010-03
 editor: Addison Wesley
 resourceTags: ["c++"]
 authors: ["Scott Meyers"]

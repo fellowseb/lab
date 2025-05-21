@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "Real-Time Rendering, Third Edition"
 url: https://www.amazon.com/Real-Time-Rendering-Third-Tomas-Akenine-Moller/dp/1568814240
-date: 2011-01-24
+date: 2011-01
 editor: Eyrolles
 resourceTags: ["3d"]
 authors: ["Eric Haines", "Naty Hoffman", "Tomas Akenine-Moller"]

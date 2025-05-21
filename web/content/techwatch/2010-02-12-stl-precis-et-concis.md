@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "STL: Précis et concis"
 url: https://www.amazon.fr/gp/product/2841772608
-date: 2010-02-12
+date: 2010-02
 editor: "O'Reilly"
 resourceTags: ["c++"]
 authors: ["Ray Lischner"]

@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "Modern C++ Design: Generic Programming and Design Patterns Applied"
 url: https://www.amazon.com/Modern-Design-Generic-Programming-Patterns/dp/0201704315
-date: 2011-01-24
+date: 2011-01
 editor: Addison Wesley
 resourceTags: ["c++"]
 authors: ["Andrei Alexandrescu"]

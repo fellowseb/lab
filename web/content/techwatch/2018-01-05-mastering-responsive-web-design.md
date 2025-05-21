@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "Mastering Responsive Web Design"
 url: https://www.amazon.com/Mastering-Responsive-Web-Design-Ricardo/dp/1783550236
-date: 2018-03-18
+date: 2018-03
 editor: Packt Publishing Limited
 resourceTags: ["web", "frontend", "responsive"]
 authors: ["Ricardo Zea"]

@@ -2,7 +2,7 @@
 tags: ["books"]
 title: "Cracking the Coding Interview: 189 Programming Questions and Solutions"
 url: https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850
-date: 2018-01-25
+date: 2018-01
 editor: CareerCup
 resourceTags: ["career", "algorithms"]
 authors: ["Gayle Laakmann McDowell"]
