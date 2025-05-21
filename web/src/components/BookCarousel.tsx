@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { A, P, Ul } from "../components/BaseStyledComponents.tsx";
 import type { ResourceListProps } from "./ResourceList.tsx";
-import type { ResourceModel } from "./types.ts";
+import type { ResourceModel, ResourceStatusModel } from "./types.ts";
 
 const BookCarouselContainer = styled.div`
   background: #c1b79a;
@@ -44,6 +44,32 @@ const BookCarouselItemAuthors = styled(P)`
   font-size: 60%;
 `;
 
+const BookMetadata = styled.div`
+  min-width: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 16px;
+`;
+
+const BookStatus = styled.span<{
+  $status: ResourceStatusModel;
+}>`
+  text-align: right;
+  font-size: 0.7rem;
+  color: ${(props) =>
+    props.$status === "done"
+      ? "#91d82d"
+      : props.$status === "on-going"
+        ? "#14c0ff"
+        : "grey"};
+`;
+
+const BookDate = styled.span`
+  text-align: left;
+  font-size: 0.7rem;
+`;
+
 const StyledBookCarouselItem = styled.li`
   list-style: none;
   display: block;
@@ -64,7 +90,7 @@ const BookCarouselItemOverlay = styled(A)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 164px;
   width: 100%;
 `;
 
@@ -115,6 +141,17 @@ interface BookCarouselItemProps {
   book: ResourceModel;
 }
 
+const renderBookStatus = (status: ResourceStatusModel) => {
+  switch (status) {
+    case "done":
+      return "DONE";
+    case "on-going":
+      return "ON-GOING";
+    case "planned":
+      return "PLANNED";
+  }
+};
+
 const BookCarouselItem = (props: BookCarouselItemProps) => {
   const [state, setState] = useState<BookCarouselItemState>({
     hovered: false,
@@ -133,8 +170,13 @@ const BookCarouselItem = (props: BookCarouselItemProps) => {
     ) : null;
   const thumbnailURL = book.thumbnailHREF ?? "/images/nothumbnail";
   const containerRef = useRef(null);
+  const { date, status } = book;
   return (
     <StyledBookCarouselItem>
+      <BookMetadata>
+        <BookDate>{date}</BookDate>
+        <BookStatus $status={status}>{renderBookStatus(status)}</BookStatus>
+      </BookMetadata>
       <BookCarouselItemOverlay
         href={book.url}
         target="_blank"

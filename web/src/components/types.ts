@@ -40,6 +40,8 @@ export interface ExperimentModel {
 
 export type ExperimentsModel = { [id: string]: ExperimentModel };
 
+export type ResourceStatusModel = "done" | "on-going" | "planned";
+
 export interface ResourceModel {
   resourceId: string;
   title: string;
@@ -51,4 +53,5 @@ export interface ResourceModel {
   };
   thumbnailHREF?: string;
   date: string;
+  status: ResourceStatusModel;
 }
